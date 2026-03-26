@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Key & Authentication Errors - 8,500+ Solutions | AI Coding Academy</title>
+    <meta name="description" content="Fix API key errors, authentication failures, and permission issues. 8,500+ solutions for OpenAI, Claude, Gemini, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                AI Coding Academy
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link active">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-ghost search-trigger">
+                    <span>⌘K</span>
+                </button>
+                <a href="../tutorials/beginner.html" class="btn btn-primary">Start Learning</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="debug-hero">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Debugging Hub</a>
+                <span>/</span>
+                <span>API Key Errors</span>
+            </nav>
+            
+            <div class="debug-hero-content">
+                <div class="debug-icon-large">🔑</div>
+                <h1>API Key & Authentication Errors</h1>
+                <p class="debug-tagline">Fix authentication failures, invalid API keys, permission errors, and access issues across all AI platforms.</p>
+                <div class="debug-stats">
+                    <span class="stat"><strong>8,500+</strong> Solutions</span>
+                    <span class="stat"><strong>45+</strong> Error Types</span>
+                    <span class="stat"><strong>12</strong> Platforms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search -->
+    <section class="debug-search-section">
+        <div class="container">
+            <div class="search-box large">
+                <input type="text" placeholder="Paste your error message here..." class="search-input" id="error-search">
+                <button class="btn btn-primary">Find Solution</button>
+            </div>
+            <div class="search-suggestions">
+                <span>Common:</span>
+                <button class="suggestion-tag">Invalid API key</button>
+                <button class="suggestion-tag">401 Unauthorized</button>
+                <button class="suggestion-tag">Permission denied</button>
+                <button class="suggestion-tag">Rate limit exceeded</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Diagnosis -->
+    <section class="diagnosis-section">
+        <div class="container">
+            <h2 class="section-title">Quick Diagnosis</h2>
+            <p class="section-subtitle">Answer these questions to identify your issue</p>
+            
+            <div class="diagnosis-flow">
+                <div class="diagnosis-step">
+                    <h3>1. Which API are you using?</h3>
+                    <div class="diagnosis-options">
+                        <button class="diagnosis-btn" data-api="openai">OpenAI</button>
+                        <button class="diagnosis-btn" data-api="anthropic">Anthropic/Claude</button>
+                        <button class="diagnosis-btn" data-api="google">Google/Gemini</button>
+                        <button class="diagnosis-btn" data-api="azure">Azure OpenAI</button>
+                        <button class="diagnosis-btn" data-api="other">Other</button>
+                    </div>
+                </div>
+                
+                <div class="diagnosis-step">
+                    <h3>2. What's the error code?</h3>
+                    <div class="diagnosis-options">
+                        <button class="diagnosis-btn" data-code="401">401 Unauthorized</button>
+                        <button class="diagnosis-btn" data-code="403">403 Forbidden</button>
+                        <button class="diagnosis-btn" data-code="429">429 Rate Limit</button>
+                        <button class="diagnosis-btn" data-code="invalid">Invalid API Key</button>
+                        <button class="diagnosis-btn" data-code="expired">Key Expired</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Most Common Errors -->
+    <section class="common-errors-section">
+        <div class="container">
+            <h2 class="section-title">Most Common API Key Errors</h2>
+            
+            <div class="errors-list">
+                <!-- Error 1 -->
+                <div class="error-item" id="invalid-api-key">
+                    <div class="error-header">
+                        <div class="error-badge">
+                            <span class="error-code">401</span>
+                            <span class="error-platform">OpenAI</span>
+                        </div>
+                        <h3>Incorrect API key provided</h3>
+                        <span class="error-frequency">~35% of issues</span>
+                    </div>
+                    
+                    <div class="error-message">
+                        <code>openai.AuthenticationError: Incorrect API key provided: sk-xxxx. You can find your API key at https://platform.openai.com/account/api-keys.</code>
+                    </div>
+                    
+                    <div class="error-causes">
+                        <h4>Common Causes</h4>
+                        <ul>
+                            <li>API key has extra whitespace or newline characters</li>
+                            <li>Using an old/revoked API key</li>
+                            <li>Copying key incorrectly (missing characters)</li>
+                            <li>Environment variable not set correctly</li>
+                            <li>Using wrong API key for different organization</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-solution">
+                        <h4>Solution</h4>
+                        <div class="solution-steps">
+                            <div class="step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <p>Verify your API key format (should start with <code>sk-</code> for OpenAI):</p>
+                                    <div class="code-block">
+                                        <pre><code>import os
+api_key = os.getenv("OPENAI_API_KEY")
+print(f"Key starts with: {api_key[:7] if api_key else 'NOT SET'}")
+print(f"Key length: {len(api_key) if api_key else 0}")</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <p>Strip whitespace when loading the key:</p>
+                                    <div class="code-block">
+                                        <pre><code>api_key = os.getenv("OPENAI_API_KEY", "").strip()
+client = OpenAI(api_key=api_key)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <p>Generate a new API key from the dashboard and update your environment:</p>
+                                    <div class="code-block">
+                                        <pre><code># .env file
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Load with python-dotenv
+from dotenv import load_dotenv
+load_dotenv()</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error 2 -->
+                <div class="error-item" id="no-api-key">
+                    <div class="error-header">
+                        <div class="error-badge">
+                            <span class="error-code">401</span>
+                            <span class="error-platform">All</span>
+                        </div>
+                        <h3>No API key provided</h3>
+                        <span class="error-frequency">~25% of issues</span>
+                    </div>
+                    
+                    <div class="error-message">
+                        <code>openai.AuthenticationError: No API key provided. You can set your API key in code using 'openai.api_key = <API-KEY>', or you can set the environment variable OPENAI_API_KEY.</code>
+                    </div>
+                    
+                    <div class="error-causes">
+                        <h4>Common Causes</h4>
+                        <ul>
+                            <li>Environment variable not exported/set</li>
+                            <li>.env file not loaded</li>
+                            <li>Running in different shell/environment</li>
+                            <li>API key set after client initialization</li>
+                            <li>Docker container missing env vars</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-solution">
+                        <h4>Solution</h4>
+                        <div class="solution-steps">
+                            <div class="step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <p>Check if environment variable is set:</p>
+                                    <div class="code-block">
+                                        <pre><code># Terminal
+echo $OPENAI_API_KEY
+
+# Python
+import os
+print(os.environ.get("OPENAI_API_KEY", "NOT SET"))</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <p>Set the environment variable properly:</p>
+                                    <div class="code-block">
+                                        <pre><code># Linux/Mac - add to ~/.bashrc or ~/.zshrc
+export OPENAI_API_KEY="sk-xxxx"
+
+# Windows PowerShell
+$env:OPENAI_API_KEY="sk-xxxx"
+
+# Windows CMD
+set OPENAI_API_KEY=sk-xxxx</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <p>For Docker, pass env vars explicitly:</p>
+                                    <div class="code-block">
+                                        <pre><code># docker-compose.yml
+services:
+  app:
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    
+# Or with docker run
+docker run -e OPENAI_API_KEY=$OPENAI_API_KEY myapp</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error 3 -->
+                <div class="error-item" id="rate-limit">
+                    <div class="error-header">
+                        <div class="error-badge">
+                            <span class="error-code">429</span>
+                            <span class="error-platform">All</span>
+                        </div>
+                        <h3>Rate limit exceeded</h3>
+                        <span class="error-frequency">~20% of issues</span>
+                    </div>
+                    
+                    <div class="error-message">
+                        <code>openai.RateLimitError: Rate limit reached for gpt-4 in organization org-xxxx on requests per min (RPM): Limit 500, Used 500, Requested 1.</code>
+                    </div>
+                    
+                    <div class="error-causes">
+                        <h4>Common Causes</h4>
+                        <ul>
+                            <li>Sending too many requests per minute</li>
+                            <li>Exceeding token limits per minute</li>
+                            <li>New account with lower limits</li>
+                            <li>Free tier restrictions</li>
+                            <li>No retry logic with exponential backoff</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-solution">
+                        <h4>Solution</h4>
+                        <div class="solution-steps">
+                            <div class="step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <p>Implement exponential backoff with retries:</p>
+                                    <div class="code-block">
+                                        <pre><code>import time
+from openai import OpenAI, RateLimitError
+
+client = OpenAI()
+
+def call_with_retry(messages, max_retries=5):
+    for attempt in range(max_retries):
+        try:
+            return client.chat.completions.create(
+                model="gpt-4",
+                messages=messages
+            )
+        except RateLimitError as e:
+            if attempt == max_retries - 1:
+                raise
+            wait_time = (2 ** attempt) + random.random()
+            print(f"Rate limited. Waiting {wait_time:.2f}s...")
+            time.sleep(wait_time)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <p>Use the tenacity library for cleaner retry logic:</p>
+                                    <div class="code-block">
+                                        <pre><code>from tenacity import retry, wait_exponential, stop_after_attempt
+from openai import RateLimitError
+
+@retry(
+    wait=wait_exponential(min=1, max=60),
+    stop=stop_after_attempt(6),
+    retry=retry_if_exception_type(RateLimitError)
+)
+def make_request(messages):
+    return client.chat.completions.create(
+        model="gpt-4",
+        messages=messages
+    )</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <p>Request a rate limit increase from the provider's dashboard, or implement request queuing for high-volume applications.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error 4 -->
+                <div class="error-item" id="permission-denied">
+                    <div class="error-header">
+                        <div class="error-badge">
+                            <span class="error-code">403</span>
+                            <span class="error-platform">All</span>
+                        </div>
+                        <h3>Permission denied / Insufficient quota</h3>
+                        <span class="error-frequency">~12% of issues</span>
+                    </div>
+                    
+                    <div class="error-message">
+                        <code>openai.PermissionDeniedError: You exceeded your current quota, please check your plan and billing details.</code>
+                    </div>
+                    
+                    <div class="error-causes">
+                        <h4>Common Causes</h4>
+                        <ul>
+                            <li>No payment method on file</li>
+                            <li>Billing limit reached</li>
+                            <li>Account suspended</li>
+                            <li>Model access not granted (e.g., GPT-4 access)</li>
+                            <li>Organization-level restrictions</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-solution">
+                        <h4>Solution</h4>
+                        <div class="solution-steps">
+                            <div class="step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <p>Check your billing status and add a payment method in the API provider's dashboard.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <p>Verify model access—some models require approval:</p>
+                                    <div class="code-block">
+                                        <pre><code># Check available models
+models = client.models.list()
+for model in models.data:
+    print(model.id)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <p>If using an organization, verify you have the correct org ID set:</p>
+                                    <div class="code-block">
+                                        <pre><code>client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    organization=os.getenv("OPENAI_ORG_ID")  # If required
+)</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Error 5 -->
+                <div class="error-item" id="anthropic-auth">
+                    <div class="error-header">
+                        <div class="error-badge">
+                            <span class="error-code">401</span>
+                            <span class="error-platform">Anthropic</span>
+                        </div>
+                        <h3>Anthropic authentication failed</h3>
+                        <span class="error-frequency">~8% of issues</span>
+                    </div>
+                    
+                    <div class="error-message">
+                        <code>anthropic.AuthenticationError: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}</code>
+                    </div>
+                    
+                    <div class="error-causes">
+                        <h4>Common Causes</h4>
+                        <ul>
+                            <li>Using OpenAI key format with Anthropic</li>
+                            <li>Key not prefixed correctly (should start with <code>sk-ant-</code>)</li>
+                            <li>Wrong environment variable name</li>
+                            <li>Header format incorrect in raw API calls</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="error-solution">
+                        <h4>Solution</h4>
+                        <div class="solution-steps">
+                            <div class="step">
+                                <span class="step-num">1</span>
+                                <div class="step-content">
+                                    <p>Verify Anthropic key format:</p>
+                                    <div class="code-block">
+                                        <pre><code>import os
+key = os.getenv("ANTHROPIC_API_KEY", "")
+print(f"Starts with sk-ant-: {key.startswith('sk-ant-')}")
+print(f"Length: {len(key)}")  # Should be ~100+ chars</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">2</span>
+                                <div class="step-content">
+                                    <p>Correct SDK initialization:</p>
+                                    <div class="code-block">
+                                        <pre><code>from anthropic import Anthropic
+
+client = Anthropic(
+    api_key=os.getenv("ANTHROPIC_API_KEY")
+)
+
+# Or set env var ANTHROPIC_API_KEY and it auto-loads
+client = Anthropic()</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <span class="step-num">3</span>
+                                <div class="step-content">
+                                    <p>For raw API calls, use the correct header:</p>
+                                    <div class="code-block">
+                                        <pre><code>headers = {
+    "x-api-key": os.getenv("ANTHROPIC_API_KEY"),
+    "content-type": "application/json",
+    "anthropic-version": "2024-01-01"
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform-Specific Section -->
+    <section class="platforms-section">
+        <div class="container">
+            <h2 class="section-title">Platform-Specific Auth Guides</h2>
+            
+            <div class="platforms-grid">
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">🟢</div>
+                    <h3>OpenAI</h3>
+                    <p>API keys, organization IDs, project-based keys</p>
+                    <span class="solution-count">2,800+ solutions</span>
+                </a>
+                
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">🟠</div>
+                    <h3>Anthropic/Claude</h3>
+                    <p>API keys, workspace access, rate limits</p>
+                    <span class="solution-count">1,900+ solutions</span>
+                </a>
+                
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">🔵</div>
+                    <h3>Google/Gemini</h3>
+                    <p>API keys, service accounts, OAuth</p>
+                    <span class="solution-count">1,600+ solutions</span>
+                </a>
+                
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">⚡</div>
+                    <h3>Azure OpenAI</h3>
+                    <p>Resource keys, endpoints, deployments</p>
+                    <span class="solution-count">1,200+ solutions</span>
+                </a>
+                
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">🦙</div>
+                    <h3>Hugging Face</h3>
+                    <p>Access tokens, gated models, spaces</p>
+                    <span class="solution-count">650+ solutions</span>
+                </a>
+                
+                <a href="#" class="platform-card">
+                    <div class="platform-icon">🌲</div>
+                    <h3>Pinecone</h3>
+                    <p>API keys, environment configuration</p>
+                    <span class="solution-count">350+ solutions</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Practices -->
+    <section class="best-practices-section">
+        <div class="container">
+            <h2 class="section-title">API Key Best Practices</h2>
+            
+            <div class="practices-grid">
+                <div class="practice-card">
+                    <div class="practice-icon">🔒</div>
+                    <h3>Never Commit Keys</h3>
+                    <p>Use .gitignore for .env files. Consider using git-secrets or pre-commit hooks to prevent accidental commits.</p>
+                </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">🔄</div>
+                    <h3>Rotate Regularly</h3>
+                    <p>Rotate API keys every 90 days. Immediately rotate if you suspect compromise.</p>
+                </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">🏷️</div>
+                    <h3>Use Project Keys</h3>
+                    <p>Create separate API keys for each project/environment. Makes rotation and revocation easier.</p>
+                </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">💰</div>
+                    <h3>Set Spending Limits</h3>
+                    <p>Configure billing alerts and hard limits in provider dashboards to prevent unexpected charges.</p>
+                </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">📊</div>
+                    <h3>Monitor Usage</h3>
+                    <p>Track API usage patterns. Unusual spikes may indicate key compromise or application issues.</p>
+                </div>
+                
+                <div class="practice-card">
+                    <div class="practice-icon">🔐</div>
+                    <h3>Use Secret Managers</h3>
+                    <p>For production, use AWS Secrets Manager, HashiCorp Vault, or similar services instead of env vars.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="related-section">
+        <div class="container">
+            <h2 class="section-title">Related Error Categories</h2>
+            
+            <div class="related-grid">
+                <a href="network.html" class="related-card">
+                    <span class="related-icon">🌐</span>
+                    <h3>Network & Connection</h3>
+                    <p>Timeouts, SSL errors, proxy issues</p>
+                </a>
+                
+                <a href="configuration.html" class="related-card">
+                    <span class="related-icon">⚙️</span>
+                    <h3>Configuration</h3>
+                    <p>Model settings, endpoints, parameters</p>
+                </a>
+                
+                <a href="deployment.html" class="related-card">
+                    <span class="related-icon">🚀</span>
+                    <h3>Deployment</h3>
+                    <p>Production env issues, scaling problems</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Can't Find Your Error?</h2>
+                <p>Search our database of 50,000+ debugging solutions or browse by category.</p>
+                <div class="cta-buttons">
+                    <a href="index.html" class="btn btn-primary btn-lg">Browse All Errors</a>
+                    <a href="../tutorials/index.html" class="btn btn-outline btn-lg">Learn Best Practices</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        AI Coding Academy
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, 50,000+ debugging solutions, and 500+ hands-on projects.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Learning Paths</h4>
+                    <ul>
+                        <li><a href="../tutorials/beginner.html">Beginner</a></li>
+                        <li><a href="../tutorials/intermediate.html">Intermediate</a></li>
+                        <li><a href="../tutorials/advanced.html">Advanced</a></li>
+                        <li><a href="../tutorials/expert.html">Expert</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Debugging</h4>
+                    <ul>
+                        <li><a href="api-keys.html">API Key Errors</a></li>
+                        <li><a href="network.html">Network Issues</a></li>
+                        <li><a href="memory.html">Memory Errors</a></li>
+                        <li><a href="data.html">Data Format</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI API Mastery | 12,500+ Lessons | AI Coding Academy</title>
+    <meta name="description" content="Master the OpenAI API: GPT-4o, Assistants, Function Calling, Vision, and more. Complete course from beginner to expert.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .course-hero {
+            padding: calc(100px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            background: linear-gradient(180deg, rgba(0, 255, 170, 0.05) 0%, transparent 100%);
+        }
+        .course-hero-content { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: var(--space-4xl); align-items: start; }
+        .course-icon { font-size: 4rem; margin-bottom: var(--space-lg); }
+        .course-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: var(--space-md); }
+        .course-hero p { color: var(--text-secondary); font-size: 1.2rem; margin-bottom: var(--space-xl); line-height: 1.7; }
+        .course-meta { display: flex; flex-wrap: wrap; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+        .course-meta-item { display: flex; flex-direction: column; }
+        .course-meta-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .course-meta-value { font-family: var(--font-mono); font-size: 1.5rem; color: var(--accent-primary); }
+        .course-sidebar {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: sticky;
+            top: 100px;
+        }
+        .course-sidebar h3 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: var(--space-lg); }
+        .course-sidebar .btn { width: 100%; margin-bottom: var(--space-md); }
+        .sidebar-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-lg); border-top: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-stat { text-align: center; }
+        .sidebar-stat-value { font-family: var(--font-mono); font-size: 1.2rem; color: var(--accent-primary); }
+        .sidebar-stat-label { font-size: 0.8rem; color: var(--text-muted); }
+        .course-content { padding: var(--space-4xl) var(--space-xl); }
+        .course-container { max-width: 1440px; margin: 0 auto; }
+        .module-section { margin-bottom: var(--space-4xl); }
+        .module-section h2 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: var(--space-xl); display: flex; align-items: center; gap: var(--space-md); }
+        .module-section h2 .count { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); background: rgba(0,255,170,0.1); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); }
+        .module-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-lg); }
+        .module-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: var(--transition-base);
+        }
+        .module-card:hover { border-color: rgba(0,255,170,0.3); transform: translateY(-3px); }
+        .module-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-md); }
+        .module-number { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-primary); }
+        .module-card h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-primary); margin-bottom: var(--space-sm); }
+        .module-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: var(--space-md); }
+        .module-lessons { list-style: none; border-top: 1px solid rgba(255,255,255,0.05); padding-top: var(--space-md); }
+        .module-lessons li { font-size: 0.85rem; color: var(--text-secondary); padding: var(--space-xs) 0; display: flex; align-items: center; gap: var(--space-sm); }
+        .module-lessons li::before { content: '📄'; font-size: 0.8rem; }
+        .module-meta { display: flex; gap: var(--space-lg); margin-top: var(--space-md); font-size: 0.8rem; color: var(--text-muted); }
+        @media (max-width: 1000px) { .course-hero-content { grid-template-columns: 1fr; } .course-sidebar { position: static; } .module-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="index.html" class="nav-link active">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="course-hero">
+        <div class="course-hero-content">
+            <div>
+                <div class="breadcrumb" style="padding-top: 0;">
+                    <a href="../index.html">Home</a>
+                    <span class="separator">/</span>
+                    <a href="index.html">Courses</a>
+                    <span class="separator">/</span>
+                    <span>OpenAI API</span>
+                </div>
+                <div class="course-icon">🤖</div>
+                <h1>OpenAI API Complete Mastery</h1>
+                <p>Master everything about the OpenAI API: from your first API call to building production AI systems. Covers GPT-4o, GPT-4, Assistants API, Function Calling, Vision, Audio, Embeddings, Fine-tuning, and deployment best practices.</p>
+                <div class="course-meta">
+                    <div class="course-meta-item"><span class="course-meta-label">Lessons</span><span class="course-meta-value">12,500+</span></div>
+                    <div class="course-meta-item"><span class="course-meta-label">Projects</span><span class="course-meta-value">150+</span></div>
+                    <div class="course-meta-item"><span class="course-meta-label">Levels</span><span class="course-meta-value">All</span></div>
+                    <div class="course-meta-item"><span class="course-meta-label">Updated</span><span class="course-meta-value">Daily</span></div>
+                </div>
+                <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                    <span class="badge badge-beginner">Beginner</span>
+                    <span class="badge badge-intermediate">Intermediate</span>
+                    <span class="badge badge-advanced">Advanced</span>
+                    <span class="badge badge-expert">Expert</span>
+                </div>
+            </div>
+            <div class="course-sidebar">
+                <h3>Start Learning</h3>
+                <a href="#" class="btn btn-primary btn-lg">🚀 Start Course Free</a>
+                <a href="#" class="btn btn-outline btn-lg">📚 Browse Modules</a>
+                <div class="sidebar-stats">
+                    <div class="sidebar-stat"><div class="sidebar-stat-value">12,500+</div><div class="sidebar-stat-label">Lessons</div></div>
+                    <div class="sidebar-stat"><div class="sidebar-stat-value">150+</div><div class="sidebar-stat-label">Projects</div></div>
+                    <div class="sidebar-stat"><div class="sidebar-stat-value">Free</div><div class="sidebar-stat-label">Access</div></div>
+                    <div class="sidebar-stat"><div class="sidebar-stat-value">Daily</div><div class="sidebar-stat-label">Updates</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="course-content">
+        <div class="course-container">
+            
+            <!-- Beginner Modules -->
+            <div class="module-section">
+                <h2>🌱 Beginner Modules <span class="count">3,500+ lessons</span></h2>
+                <div class="module-grid">
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 1</span>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Getting Started with OpenAI</h3>
+                        <p>Set up your environment, get API keys, and make your first successful API call.</p>
+                        <ul class="module-lessons">
+                            <li>Creating an OpenAI Account</li>
+                            <li>Understanding API Keys & Security</li>
+                            <li>Setting Up Python Environment</li>
+                            <li>Your First API Call</li>
+                            <li>Understanding Responses</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 450+ lessons</span><span>⏱️ 8-12 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 2</span>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Chat Completions API</h3>
+                        <p>Master the core Chat Completions endpoint that powers ChatGPT.</p>
+                        <ul class="module-lessons">
+                            <li>Messages Array Structure</li>
+                            <li>System, User, and Assistant Roles</li>
+                            <li>Temperature & Top-P Parameters</li>
+                            <li>Building Conversation History</li>
+                            <li>Response Handling</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 800+ lessons</span><span>⏱️ 15-20 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 3</span>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Tokens, Pricing & Optimization</h3>
+                        <p>Understand how tokens work and optimize your API usage for cost efficiency.</p>
+                        <ul class="module-lessons">
+                            <li>What Are Tokens?</li>
+                            <li>Counting Tokens with tiktoken</li>
+                            <li>Pricing Model Explained</li>
+                            <li>Cost Estimation Techniques</li>
+                            <li>Optimization Strategies</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 350+ lessons</span><span>⏱️ 6-8 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 4</span>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Models Overview</h3>
+                        <p>Understand all available models and when to use each one.</p>
+                        <ul class="module-lessons">
+                            <li>GPT-4o vs GPT-4 vs GPT-3.5</li>
+                            <li>Model Capabilities Comparison</li>
+                            <li>Choosing the Right Model</li>
+                            <li>Cost vs Performance Tradeoffs</li>
+                            <li>Model Updates & Deprecation</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 400+ lessons</span><span>⏱️ 5-7 hours</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intermediate Modules -->
+            <div class="module-section">
+                <h2>📈 Intermediate Modules <span class="count">4,500+ lessons</span></h2>
+                <div class="module-grid">
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 5</span>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <h3>Streaming Responses</h3>
+                        <p>Implement real-time token streaming for better user experience.</p>
+                        <ul class="module-lessons">
+                            <li>Understanding Streaming</li>
+                            <li>Server-Sent Events</li>
+                            <li>Handling Stream Chunks</li>
+                            <li>Error Recovery</li>
+                            <li>UI Integration Patterns</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 600+ lessons</span><span>⏱️ 10-12 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 6</span>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <h3>Function Calling / Tools</h3>
+                        <p>Let GPT call your functions to interact with external systems.</p>
+                        <ul class="module-lessons">
+                            <li>Function Schema Definition</li>
+                            <li>Tool Choice Options</li>
+                            <li>Handling Function Calls</li>
+                            <li>Multi-Step Function Chains</li>
+                            <li>Error Handling Strategies</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 900+ lessons</span><span>⏱️ 15-20 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 7</span>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <h3>GPT-4 Vision</h3>
+                        <p>Analyze images with GPT-4o and GPT-4 Vision capabilities.</p>
+                        <ul class="module-lessons">
+                            <li>Image Input Formats</li>
+                            <li>URL vs Base64 Encoding</li>
+                            <li>Multi-Image Analysis</li>
+                            <li>Vision Use Cases</li>
+                            <li>Cost Optimization for Images</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 750+ lessons</span><span>⏱️ 12-15 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 8</span>
+                            <span class="badge badge-intermediate">Intermediate</span>
+                        </div>
+                        <h3>Assistants API</h3>
+                        <p>Build persistent AI assistants with memory, tools, and file handling.</p>
+                        <ul class="module-lessons">
+                            <li>Creating Assistants</li>
+                            <li>Threads & Messages</li>
+                            <li>Code Interpreter Tool</li>
+                            <li>File Search & Retrieval</li>
+                            <li>Managing Assistant State</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 1,200+ lessons</span><span>⏱️ 20-25 hours</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Modules -->
+            <div class="module-section">
+                <h2>⚡ Advanced Modules <span class="count">3,200+ lessons</span></h2>
+                <div class="module-grid">
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 9</span>
+                            <span class="badge badge-advanced">Advanced</span>
+                        </div>
+                        <h3>Embeddings & Vector Search</h3>
+                        <p>Create and use text embeddings for semantic search and RAG.</p>
+                        <ul class="module-lessons">
+                            <li>Understanding Embeddings</li>
+                            <li>text-embedding-3 Models</li>
+                            <li>Dimensionality Reduction</li>
+                            <li>Similarity Search</li>
+                            <li>Batch Processing</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 850+ lessons</span><span>⏱️ 15-18 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 10</span>
+                            <span class="badge badge-advanced">Advanced</span>
+                        </div>
+                        <h3>Fine-Tuning</h3>
+                        <p>Train custom models on your specific data and use cases.</p>
+                        <ul class="module-lessons">
+                            <li>When to Fine-Tune</li>
+                            <li>Data Preparation (JSONL)</li>
+                            <li>Training Jobs</li>
+                            <li>Evaluation & Testing</li>
+                            <li>Deployment Best Practices</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 700+ lessons</span><span>⏱️ 12-15 hours</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Modules -->
+            <div class="module-section">
+                <h2>👑 Expert Modules <span class="count">1,300+ lessons</span></h2>
+                <div class="module-grid">
+                    <div class="module-card reveal">
+                        <div class="module-header">
+                            <span class="module-number">Module 11</span>
+                            <span class="badge badge-expert">Expert</span>
+                        </div>
+                        <h3>Production Architecture</h3>
+                        <p>Design and deploy production-grade OpenAI applications.</p>
+                        <ul class="module-lessons">
+                            <li>Rate Limiting Strategies</li>
+                            <li>Caching & Optimization</li>
+                            <li>Error Handling at Scale</li>
+                            <li>Monitoring & Observability</li>
+                            <li>Security Best Practices</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 650+ lessons</span><span>⏱️ 12-15 hours</span></div>
+                    </div>
+                    
+                    <div class="module-card reveal reveal-delay-1">
+                        <div class="module-header">
+                            <span class="module-number">Module 12</span>
+                            <span class="badge badge-expert">Expert</span>
+                        </div>
+                        <h3>Enterprise Integration</h3>
+                        <p>Integrate OpenAI into enterprise systems with compliance and governance.</p>
+                        <ul class="module-lessons">
+                            <li>Azure OpenAI Service</li>
+                            <li>Data Privacy & Compliance</li>
+                            <li>Cost Management at Scale</li>
+                            <li>Multi-Region Deployment</li>
+                            <li>Audit & Governance</li>
+                        </ul>
+                        <div class="module-meta"><span>📚 650+ lessons</span><span>⏱️ 10-12 hours</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>Master OpenAI API with 12,500+ lessons.</p>
+                </div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="index.html">Courses</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>Topics</h4><ul><li><a href="openai.html">OpenAI API</a></li><li><a href="claude.html">Claude API</a></li><li><a href="langchain.html">LangChain</a></li><li><a href="rag.html">RAG Systems</a></li></ul></div>
+                <div class="footer-column"><h4>Levels</h4><ul><li><a href="../tutorials/beginner.html">Beginner</a></li><li><a href="../tutorials/intermediate.html">Intermediate</a></li><li><a href="../tutorials/advanced.html">Advanced</a></li><li><a href="../tutorials/expert.html">Expert</a></li></ul></div>
+                <div class="footer-column"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by MYRQAI.</p>
+                <div class="footer-social"><a href="#">GH</a><a href="#">X</a><a href="#">DC</a><a href="#">YT</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

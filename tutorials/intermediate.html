@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intermediate Tutorials | 35,000+ Lessons | AI Coding Academy</title>
+    <meta name="description" content="Master streaming, function calling, RAG systems, and production AI patterns with 35,000+ intermediate tutorials.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .level-hero {
+            padding: calc(100px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            text-align: center;
+            background: linear-gradient(180deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%);
+            border-bottom: 3px solid var(--level-intermediate);
+            position: relative;
+        }
+        .level-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .level-hero .hero-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--level-intermediate), #60a5fa);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin: 0 auto var(--space-xl);
+            box-shadow: 0 20px 60px rgba(59, 130, 246, 0.4);
+        }
+        .level-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: var(--space-md);
+            font-weight: 800;
+        }
+        .level-hero h1 span {
+            background: linear-gradient(135deg, var(--level-intermediate), #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .level-hero .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto var(--space-xl);
+            line-height: 1.7;
+        }
+        .level-stats {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-3xl);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+        }
+        .level-stat {
+            text-align: center;
+            background: rgba(59, 130, 246, 0.1);
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .level-stat-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--level-intermediate);
+        }
+        .level-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: var(--space-xs);
+        }
+        .prereq-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-xl);
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: var(--radius-lg);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .prereq-banner span { color: var(--text-secondary); font-size: 0.95rem; }
+        .prereq-banner a { color: var(--level-beginner); text-decoration: underline; }
+        .breadcrumb { padding: var(--space-lg) var(--space-xl); max-width: 1440px; margin: 0 auto; }
+        .breadcrumb-list { display: flex; align-items: center; gap: var(--space-sm); list-style: none; font-size: 0.9rem; }
+        .breadcrumb-list li { display: flex; align-items: center; gap: var(--space-sm); }
+        .breadcrumb-list a { color: var(--text-muted); text-decoration: none; transition: var(--transition-base); }
+        .breadcrumb-list a:hover { color: var(--level-intermediate); }
+        .breadcrumb-list .separator { color: var(--text-muted); opacity: 0.5; }
+        .breadcrumb-list .current { color: var(--level-intermediate); }
+        .content-section { padding: var(--space-4xl) var(--space-xl); max-width: 1440px; margin: 0 auto; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .section-title { font-family: var(--font-heading); font-size: 1.8rem; display: flex; align-items: center; gap: var(--space-md); }
+        .section-title .icon { font-size: 1.5rem; }
+        .section-count { font-size: 0.9rem; color: var(--text-muted); background: var(--bg-card); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); }
+        .tutorials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: var(--space-lg); }
+        .tutorial-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); transition: var(--transition-base); text-decoration: none; display: flex; flex-direction: column; }
+        .tutorial-card:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.3); box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15); }
+        .tutorial-card-header { display: flex; align-items: flex-start; gap: var(--space-md); margin-bottom: var(--space-md); }
+        .tutorial-card-icon { width: 50px; height: 50px; background: rgba(59, 130, 246, 0.15); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .tutorial-card h3 { font-family: var(--font-heading); font-size: 1.15rem; color: var(--text-primary); margin-bottom: var(--space-xs); line-height: 1.4; }
+        .tutorial-card .lesson-count { font-size: 0.8rem; color: var(--level-intermediate); font-family: var(--font-mono); }
+        .tutorial-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1; }
+        .tutorial-card-meta { display: flex; flex-wrap: wrap; gap: var(--space-md); font-size: 0.8rem; color: var(--text-muted); padding-top: var(--space-md); border-top: 1px solid rgba(255,255,255,0.05); }
+        .tutorial-card-meta span { display: flex; align-items: center; gap: var(--space-xs); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-lg); }
+        .skill-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; }
+        .skill-card .skill-icon { font-size: 2.5rem; margin-bottom: var(--space-md); }
+        .skill-card h4 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-primary); margin-bottom: var(--space-sm); }
+        .skill-card p { font-size: 0.85rem; color: var(--text-muted); }
+        .progress-path { display: flex; align-items: center; justify-content: center; gap: var(--space-lg); padding: var(--space-3xl) var(--space-xl); background: var(--bg-secondary); flex-wrap: wrap; }
+        .path-step { display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md) var(--space-lg); background: var(--bg-card); border-radius: var(--radius-lg); border: 2px solid transparent; text-decoration: none; transition: var(--transition-base); }
+        .path-step.completed { border-color: var(--level-beginner); opacity: 0.7; }
+        .path-step.current { border-color: var(--level-intermediate); box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .path-step.locked { opacity: 0.5; }
+        .path-step .step-icon { font-size: 1.5rem; }
+        .path-step .step-label { font-size: 0.9rem; color: var(--text-primary); }
+        .path-arrow { color: var(--text-muted); font-size: 1.5rem; }
+        .paths-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: var(--space-xl); }
+        .path-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-xl); padding: var(--space-2xl); transition: var(--transition-base); }
+        .path-card:hover { border-color: rgba(59, 130, 246, 0.3); }
+        .path-card-header { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg); }
+        .path-card-icon { width: 60px; height: 60px; background: rgba(59, 130, 246, 0.15); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
+        .path-card h3 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--text-primary); }
+        .path-card .path-meta { font-size: 0.85rem; color: var(--text-muted); }
+        .path-card p { color: var(--text-secondary); margin-bottom: var(--space-lg); line-height: 1.6; }
+        .path-topics { display: flex; flex-wrap: wrap; gap: var(--space-sm); margin-bottom: var(--space-lg); }
+        .path-topic { font-size: 0.8rem; padding: var(--space-xs) var(--space-sm); background: rgba(59, 130, 246, 0.1); border-radius: var(--radius-sm); color: var(--level-intermediate); }
+        .path-card .btn { width: 100%; justify-content: center; }
+        .cta-section { padding: var(--space-4xl) var(--space-xl); text-align: center; background: linear-gradient(180deg, transparent 0%, rgba(59, 130, 246, 0.1) 100%); }
+        .cta-section h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-md); }
+        .cta-section p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto var(--space-xl); }
+        .cta-buttons { display: flex; gap: var(--space-md); justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 900px) { .level-stats { gap: var(--space-lg); } .tutorials-grid, .paths-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .progress-path { flex-direction: column; } .path-arrow { transform: rotate(90deg); } }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions"><a href="#" class="btn btn-primary">Start Free</a></div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="level-hero">
+        <div class="hero-icon">📈</div>
+        <h1><span>Intermediate</span> Tutorials</h1>
+        <p class="subtitle">Build production-ready AI applications. Master streaming responses, function calling, RAG systems, and professional development patterns.</p>
+        <div class="level-stats">
+            <div class="level-stat"><div class="level-stat-value">35,000+</div><div class="level-stat-label">Tutorials</div></div>
+            <div class="level-stat"><div class="level-stat-value">200+</div><div class="level-stat-label">Hands-on Projects</div></div>
+            <div class="level-stat"><div class="level-stat-value">8</div><div class="level-stat-label">Learning Tracks</div></div>
+            <div class="level-stat"><div class="level-stat-value">~120hrs</div><div class="level-stat-label">Total Content</div></div>
+        </div>
+        <div class="prereq-banner">
+            <span>✓</span>
+            <span>Prerequisite: Complete <a href="beginner.html">Beginner Tutorials</a> or equivalent experience</span>
+        </div>
+    </section>
+
+    <nav class="breadcrumb">
+        <ol class="breadcrumb-list">
+            <li><a href="../index.html">Home</a></li>
+            <li class="separator">→</li>
+            <li><a href="index.html">Tutorials</a></li>
+            <li class="separator">→</li>
+            <li class="current">Intermediate</li>
+        </ol>
+    </nav>
+
+    <div class="progress-path">
+        <a href="beginner.html" class="path-step completed"><span class="step-icon">🌱</span><span class="step-label">Beginner ✓</span></a>
+        <span class="path-arrow">→</span>
+        <div class="path-step current"><span class="step-icon">📈</span><span class="step-label">Intermediate (You are here)</span></div>
+        <span class="path-arrow">→</span>
+        <a href="advanced.html" class="path-step locked"><span class="step-icon">🚀</span><span class="step-label">Advanced</span></a>
+        <span class="path-arrow">→</span>
+        <a href="expert.html" class="path-step locked"><span class="step-icon">👑</span><span class="step-label">Expert</span></a>
+    </div>
+
+    <section class="content-section" style="background: var(--bg-secondary);">
+        <div class="section-header"><h2 class="section-title"><span class="icon">🎯</span> Skills You'll Master</h2></div>
+        <div class="skills-grid">
+            <div class="skill-card"><div class="skill-icon">🌊</div><h4>Streaming Responses</h4><p>Real-time token streaming for responsive UX</p></div>
+            <div class="skill-card"><div class="skill-icon">🛠️</div><h4>Function Calling</h4><p>Build AI that uses tools and external APIs</p></div>
+            <div class="skill-card"><div class="skill-icon">📚</div><h4>RAG Fundamentals</h4><p>Retrieval-Augmented Generation basics</p></div>
+            <div class="skill-card"><div class="skill-icon">🗄️</div><h4>Vector Databases</h4><p>Store and query embeddings efficiently</p></div>
+            <div class="skill-card"><div class="skill-icon">👁️</div><h4>Vision APIs</h4><p>Process and analyze images with AI</p></div>
+            <div class="skill-card"><div class="skill-icon">🔗</div><h4>LangChain Basics</h4><p>Build chains and orchestrate operations</p></div>
+            <div class="skill-card"><div class="skill-icon">⚡</div><h4>Async Patterns</h4><p>Concurrent API calls and optimization</p></div>
+            <div class="skill-card"><div class="skill-icon">🧪</div><h4>Testing & Eval</h4><p>Test AI outputs systematically</p></div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header"><h2 class="section-title"><span class="icon">🔌</span> Core API Mastery</h2><span class="section-count">12,500+ tutorials</span></div>
+        <div class="tutorials-grid">
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🟢</div><div><h3>OpenAI Streaming Implementation</h3><span class="lesson-count">850+ lessons</span></div></div>
+                <p>Build real-time chat interfaces with Server-Sent Events. Handle partial responses, manage stream state, and create smooth typing animations.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 45 min</span><span>💰 ~$0.02</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🟠</div><div><h3>Claude Tool Use & Functions</h3><span class="lesson-count">720+ lessons</span></div></div>
+                <p>Define tools Claude can call. Handle tool results, chain multiple tools, and build powerful AI assistants that interact with external systems.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 60 min</span><span>💰 ~$0.05</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🔵</div><div><h3>Gemini Multimodal Processing</h3><span class="lesson-count">680+ lessons</span></div></div>
+                <p>Process images, video, and audio with Gemini. Build applications that understand multiple input types and generate contextual responses.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 55 min</span><span>💰 ~$0.08</span><span>📁 5 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🟢</div><div><h3>GPT-4 Vision Deep Dive</h3><span class="lesson-count">540+ lessons</span></div></div>
+                <p>Analyze images, extract text from screenshots, understand diagrams, and build visual AI applications with GPT-4 Vision capabilities.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 50 min</span><span>💰 ~$0.10</span><span>📁 6 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🟠</div><div><h3>Anthropic Message Batching</h3><span class="lesson-count">380+ lessons</span></div></div>
+                <p>Process multiple requests efficiently with Claude's batch API. Reduce costs by 50% for non-time-sensitive workloads.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 30 min</span><span>💰 ~$0.01</span><span>📁 2 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">⚡</div><div><h3>API Rate Limiting & Retries</h3><span class="lesson-count">420+ lessons</span></div></div>
+                <p>Handle rate limits gracefully with exponential backoff. Build resilient applications that never crash from API throttling.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 35 min</span><span>💰 ~$0.02</span><span>📁 2 projects</span></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--bg-secondary);">
+        <div class="section-header"><h2 class="section-title"><span class="icon">📚</span> RAG & Vector Databases</h2><span class="section-count">8,200+ tutorials</span></div>
+        <div class="tutorials-grid">
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🔮</div><div><h3>Text Embeddings Fundamentals</h3><span class="lesson-count">620+ lessons</span></div></div>
+                <p>Understand embedding models, dimensionality, and semantic similarity. Choose the right embedding model for your use case.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 40 min</span><span>💰 ~$0.01</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🌲</div><div><h3>Pinecone Integration</h3><span class="lesson-count">580+ lessons</span></div></div>
+                <p>Set up Pinecone, create indexes, upsert vectors, and query with metadata filtering. Build scalable semantic search.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 55 min</span><span>💰 ~$0.05</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🎨</div><div><h3>Chroma DB Local Setup</h3><span class="lesson-count">490+ lessons</span></div></div>
+                <p>Run vector search locally with Chroma. Perfect for development, prototyping, and privacy-sensitive applications.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 35 min</span><span>💰 Free</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">📄</div><div><h3>Document Chunking Strategies</h3><span class="lesson-count">720+ lessons</span></div></div>
+                <p>Split documents intelligently. Compare fixed-size, semantic, and recursive chunking. Optimize chunk overlap for context.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 45 min</span><span>💰 ~$0.02</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🔍</div><div><h3>Hybrid Search Implementation</h3><span class="lesson-count">550+ lessons</span></div></div>
+                <p>Combine vector similarity with keyword search. Implement BM25 + embeddings for superior retrieval accuracy.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 50 min</span><span>💰 ~$0.03</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🏗️</div><div><h3>Basic RAG Pipeline</h3><span class="lesson-count">890+ lessons</span></div></div>
+                <p>Build end-to-end RAG: ingest documents, create embeddings, store vectors, retrieve context, and generate answers.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 90 min</span><span>💰 ~$0.15</span><span>📁 5 projects</span></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header"><h2 class="section-title"><span class="icon">🔗</span> LangChain Fundamentals</h2><span class="section-count">6,800+ tutorials</span></div>
+        <div class="tutorials-grid">
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">📝</div><div><h3>Prompt Templates & Variables</h3><span class="lesson-count">480+ lessons</span></div></div>
+                <p>Create reusable prompt templates with dynamic variables. Use partial prompts and template composition for complex workflows.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 25 min</span><span>💰 ~$0.01</span><span>📁 2 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">⛓️</div><div><h3>Building Simple Chains</h3><span class="lesson-count">620+ lessons</span></div></div>
+                <p>Connect LLM calls sequentially. Pass outputs as inputs, use LCEL (LangChain Expression Language) for clean chain composition.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 40 min</span><span>💰 ~$0.03</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">📊</div><div><h3>Output Parsers</h3><span class="lesson-count">380+ lessons</span></div></div>
+                <p>Parse LLM outputs into structured data. JSON, Pydantic, and custom parsers for reliable data extraction.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 30 min</span><span>💰 ~$0.02</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">📁</div><div><h3>Document Loaders</h3><span class="lesson-count">520+ lessons</span></div></div>
+                <p>Load PDFs, Word docs, web pages, CSVs, and more. Handle different file formats and extract clean text.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 35 min</span><span>💰 Free</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">💾</div><div><h3>Conversation Memory</h3><span class="lesson-count">590+ lessons</span></div></div>
+                <p>Add memory to chatbots. Buffer, summary, and token-based memory types for context-aware conversations.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 45 min</span><span>💰 ~$0.05</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🛠️</div><div><h3>Basic Tool Integration</h3><span class="lesson-count">680+ lessons</span></div></div>
+                <p>Connect LangChain to external tools. Web search, calculators, and custom API integrations.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 50 min</span><span>💰 ~$0.04</span><span>📁 4 projects</span></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: var(--bg-secondary);">
+        <div class="section-header"><h2 class="section-title"><span class="icon">🏭</span> Production Patterns</h2><span class="section-count">5,200+ tutorials</span></div>
+        <div class="tutorials-grid">
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">⚡</div><div><h3>Async API Calls</h3><span class="lesson-count">420+ lessons</span></div></div>
+                <p>Make concurrent API requests with asyncio. Batch process efficiently and handle multiple conversations simultaneously.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 40 min</span><span>💰 ~$0.02</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">💾</div><div><h3>Response Caching</h3><span class="lesson-count">380+ lessons</span></div></div>
+                <p>Cache API responses to reduce costs and latency. Implement semantic caching for similar queries.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 35 min</span><span>💰 Saves $$$</span><span>📁 2 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">📊</div><div><h3>Usage Tracking & Analytics</h3><span class="lesson-count">340+ lessons</span></div></div>
+                <p>Track tokens, costs, and latency. Build dashboards to monitor AI application performance and spending.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 45 min</span><span>💰 ~$0.01</span><span>📁 2 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🛡️</div><div><h3>Input Validation & Safety</h3><span class="lesson-count">450+ lessons</span></div></div>
+                <p>Validate user inputs, prevent prompt injection, and implement content moderation for safe AI applications.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 50 min</span><span>💰 ~$0.02</span><span>📁 3 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🧪</div><div><h3>Testing AI Outputs</h3><span class="lesson-count">520+ lessons</span></div></div>
+                <p>Write tests for non-deterministic outputs. Evaluate accuracy, relevance, and safety systematically.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 55 min</span><span>💰 ~$0.10</span><span>📁 4 projects</span></div>
+            </a>
+            <a href="#" class="tutorial-card">
+                <div class="tutorial-card-header"><div class="tutorial-card-icon">🔐</div><div><h3>API Key Management</h3><span class="lesson-count">280+ lessons</span></div></div>
+                <p>Store keys securely, rotate credentials, and implement proper secrets management in production.</p>
+                <div class="tutorial-card-meta"><span>⏱️ 25 min</span><span>💰 Free</span><span>📁 2 projects</span></div>
+            </a>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-header"><h2 class="section-title"><span class="icon">🗺️</span> Recommended Learning Paths</h2></div>
+        <div class="paths-grid">
+            <div class="path-card">
+                <div class="path-card-header"><div class="path-card-icon">💬</div><div><h3>Chatbot Developer</h3><div class="path-meta">~25 hours • 45 tutorials</div></div></div>
+                <p>Build production chatbots with streaming, memory, and context management. Perfect for customer service and support applications.</p>
+                <div class="path-topics"><span class="path-topic">Streaming</span><span class="path-topic">Memory</span><span class="path-topic">Context</span><span class="path-topic">Caching</span></div>
+                <a href="#" class="btn btn-secondary">Start Path →</a>
+            </div>
+            <div class="path-card">
+                <div class="path-card-header"><div class="path-card-icon">📚</div><div><h3>RAG Engineer</h3><div class="path-meta">~35 hours • 60 tutorials</div></div></div>
+                <p>Master document processing, embeddings, and vector databases. Build knowledge bases that power intelligent search and Q&A.</p>
+                <div class="path-topics"><span class="path-topic">Embeddings</span><span class="path-topic">Chunking</span><span class="path-topic">Vector DBs</span><span class="path-topic">Retrieval</span></div>
+                <a href="#" class="btn btn-secondary">Start Path →</a>
+            </div>
+            <div class="path-card">
+                <div class="path-card-header"><div class="path-card-icon">👁️</div><div><h3>Vision AI Developer</h3><div class="path-meta">~20 hours • 35 tutorials</div></div></div>
+                <p>Process images and visual content with AI. Build applications that understand screenshots, diagrams, and visual data.</p>
+                <div class="path-topics"><span class="path-topic">GPT-4V</span><span class="path-topic">Gemini Vision</span><span class="path-topic">OCR</span><span class="path-topic">Analysis</span></div>
+                <a href="#" class="btn btn-secondary">Start Path →</a>
+            </div>
+            <div class="path-card">
+                <div class="path-card-header"><div class="path-card-icon">🔗</div><div><h3>LangChain Developer</h3><div class="path-meta">~30 hours • 50 tutorials</div></div></div>
+                <p>Master the LangChain ecosystem. Build complex AI workflows with chains, tools, and structured outputs.</p>
+                <div class="path-topics"><span class="path-topic">LCEL</span><span class="path-topic">Chains</span><span class="path-topic">Memory</span><span class="path-topic">Tools</span></div>
+                <a href="#" class="btn btn-secondary">Start Path →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Level Up?</h2>
+        <p>Start building production AI applications today. Choose a learning path or dive into specific tutorials.</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary btn-lg">Start First Tutorial</a>
+            <a href="advanced.html" class="btn btn-secondary btn-lg">Preview Advanced →</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section"><h4>Tutorials</h4><ul><li><a href="beginner.html">Beginner</a></li><li><a href="intermediate.html">Intermediate</a></li><li><a href="advanced.html">Advanced</a></li><li><a href="expert.html">Expert</a></li></ul></div>
+                <div class="footer-section"><h4>Courses</h4><ul><li><a href="../courses/openai.html">OpenAI API</a></li><li><a href="../courses/claude.html">Claude API</a></li><li><a href="../courses/langchain.html">LangChain</a></li><li><a href="../courses/rag.html">RAG Systems</a></li></ul></div>
+                <div class="footer-section"><h4>Resources</h4><ul><li><a href="../debugging/index.html">Debugging Hub</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="#">Community</a></li><li><a href="#">Blog</a></li></ul></div>
+                <div class="footer-section"><h4>Company</h4><ul><li><a href="#">About MYRQAI</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 AI Coding Academy by MYRQAI. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

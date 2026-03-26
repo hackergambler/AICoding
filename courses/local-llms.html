@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local LLMs Mastery - 9,500+ Lessons | AI Coding Academy</title>
+    <meta name="description" content="Master local LLM deployment with Ollama, llama.cpp, vLLM, and more. 9,500+ lessons from setup to production optimization.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                AI Coding Academy
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link active">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-ghost search-trigger">
+                    <span>⌘K</span>
+                </button>
+                <a href="../tutorials/beginner.html" class="btn btn-primary">Start Learning</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Courses</a>
+                <span>/</span>
+                <span>Local LLMs</span>
+            </nav>
+            
+            <div class="course-hero-content">
+                <div class="course-hero-text">
+                    <div class="course-badge">
+                        <span class="badge badge-advanced">Advanced Track</span>
+                        <span class="badge badge-outline">9,500+ Lessons</span>
+                    </div>
+                    <h1>Local LLMs Mastery</h1>
+                    <p class="course-tagline">Run powerful AI models on your own hardware. From Ollama basics to enterprise-scale GPU clusters with complete privacy and control.</p>
+                    
+                    <div class="course-stats-row">
+                        <div class="stat-item">
+                            <span class="stat-number">9,500+</span>
+                            <span class="stat-label">Lessons</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">85+</span>
+                            <span class="stat-label">Hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">180+</span>
+                            <span class="stat-label">Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">45+</span>
+                            <span class="stat-label">Model Configs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="course-cta-group">
+                        <a href="#curriculum" class="btn btn-primary btn-lg">View Curriculum</a>
+                        <a href="#quick-start" class="btn btn-outline btn-lg">Quick Start Guide</a>
+                    </div>
+                </div>
+                
+                <div class="course-hero-visual">
+                    <div class="code-preview">
+                        <div class="code-header">
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                            <span class="code-title">local_inference.py</span>
+                        </div>
+                        <pre><code><span class="code-keyword">from</span> ollama <span class="code-keyword">import</span> Client
+
+<span class="code-comment"># Connect to local Ollama instance</span>
+client = Client(host=<span class="code-string">'http://localhost:11434'</span>)
+
+<span class="code-comment"># Run inference on local model</span>
+response = client.chat(
+    model=<span class="code-string">'llama3.2:70b'</span>,
+    messages=[{
+        <span class="code-string">'role'</span>: <span class="code-string">'user'</span>,
+        <span class="code-string">'content'</span>: <span class="code-string">'Explain quantum computing'</span>
+    }],
+    options={
+        <span class="code-string">'temperature'</span>: <span class="code-number">0.7</span>,
+        <span class="code-string">'num_ctx'</span>: <span class="code-number">8192</span>,
+        <span class="code-string">'num_gpu'</span>: <span class="code-number">2</span>  <span class="code-comment"># Multi-GPU</span>
+    }
+)
+
+<span class="code-keyword">print</span>(response[<span class="code-string">'message'</span>][<span class="code-string">'content'</span>])</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Local LLMs -->
+    <section class="course-why" id="why-local">
+        <div class="container">
+            <h2 class="section-title">Why Run LLMs Locally?</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🔒</div>
+                    <h3>Complete Privacy</h3>
+                    <p>Your data never leaves your infrastructure. Perfect for healthcare, legal, finance, and sensitive applications.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h3>Cost Control</h3>
+                    <p>No per-token fees. Pay once for hardware, run unlimited inference. ROI improves with scale.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⚡</div>
+                    <h3>Low Latency</h3>
+                    <p>No network round-trips. Get responses in milliseconds for real-time applications.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🎛️</div>
+                    <h3>Full Control</h3>
+                    <p>Fine-tune models, customize prompts, and optimize for your specific use case without restrictions.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">📴</div>
+                    <h3>Offline Operation</h3>
+                    <p>Run AI anywhere—air-gapped networks, remote locations, or embedded systems.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🔧</div>
+                    <h3>Customization</h3>
+                    <p>Quantize, merge, fine-tune, and create specialized models for your domain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="quick-start-section" id="quick-start">
+        <div class="container">
+            <h2 class="section-title">Quick Start: Your First Local LLM</h2>
+            <p class="section-subtitle">Get up and running in under 5 minutes</p>
+            
+            <div class="quick-start-steps">
+                <div class="qs-step">
+                    <div class="qs-step-number">1</div>
+                    <div class="qs-step-content">
+                        <h3>Install Ollama</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">bash</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre><code># macOS / Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Windows - Download from ollama.com
+# Or use Docker
+docker run -d -v ollama:/root/.ollama -p 11434:11434 ollama/ollama</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="qs-step">
+                    <div class="qs-step-number">2</div>
+                    <div class="qs-step-content">
+                        <h3>Pull a Model</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">bash</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre><code># Pull Llama 3.2 (recommended for most use cases)
+ollama pull llama3.2
+
+# Or try smaller models for limited hardware
+ollama pull phi3:mini      # 3.8B params, ~2GB
+ollama pull gemma2:2b      # 2B params, ~1.5GB
+
+# Check available models
+ollama list</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="qs-step">
+                    <div class="qs-step-number">3</div>
+                    <div class="qs-step-content">
+                        <h3>Run Inference</h3>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">python</span>
+                                <button class="copy-btn">Copy</button>
+                            </div>
+                            <pre><code>import ollama
+
+# Simple chat completion
+response = ollama.chat(
+    model='llama3.2',
+    messages=[{
+        'role': 'user',
+        'content': 'Write a haiku about coding'
+    }]
+)
+
+print(response['message']['content'])
+
+# Streaming response
+for chunk in ollama.chat(
+    model='llama3.2',
+    messages=[{'role': 'user', 'content': 'Tell me a story'}],
+    stream=True
+):
+    print(chunk['message']['content'], end='', flush=True)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum -->
+    <section class="curriculum-section" id="curriculum">
+        <div class="container">
+            <h2 class="section-title">Complete Curriculum</h2>
+            <p class="section-subtitle">9,500+ lessons organized into 12 comprehensive modules</p>
+            
+            <div class="curriculum-grid">
+                <!-- Module 1 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">01</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Local LLM Foundations</h3>
+                    <p>Understanding local deployment, hardware requirements, and ecosystem overview.</p>
+                    <ul class="module-topics">
+                        <li>CPU vs GPU inference comparison</li>
+                        <li>Memory requirements and VRAM planning</li>
+                        <li>Model formats: GGUF, GGML, SafeTensors</li>
+                        <li>Quantization basics: 4-bit, 8-bit, 16-bit</li>
+                        <li>Tool landscape: Ollama, llama.cpp, vLLM</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 650 lessons</span>
+                        <span>⏱️ 6 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 2 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">02</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Ollama Mastery</h3>
+                    <p>Complete guide to the most popular local LLM tool for developers.</p>
+                    <ul class="module-topics">
+                        <li>Installation on all platforms</li>
+                        <li>Model management and customization</li>
+                        <li>Modelfile creation and modification</li>
+                        <li>REST API and SDK usage</li>
+                        <li>Integration with LangChain, LlamaIndex</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 850 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 3 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">03</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>llama.cpp Deep Dive</h3>
+                    <p>The foundational C++ inference engine powering most local LLM tools.</p>
+                    <ul class="module-topics">
+                        <li>Building from source with optimizations</li>
+                        <li>CUDA, Metal, OpenCL backends</li>
+                        <li>Server mode and API endpoints</li>
+                        <li>Quantization with llama-quantize</li>
+                        <li>Performance tuning and benchmarking</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 780 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 4 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">04</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Model Selection & Comparison</h3>
+                    <p>Navigate the landscape of open-source LLMs and choose the right model.</p>
+                    <ul class="module-topics">
+                        <li>Llama 3.2, Mistral, Mixtral analysis</li>
+                        <li>Code models: CodeLlama, DeepSeek Coder</li>
+                        <li>Small models: Phi-3, Gemma 2, Qwen</li>
+                        <li>Benchmark interpretation and testing</li>
+                        <li>Model merging with mergekit</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 920 lessons</span>
+                        <span>⏱️ 9 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 5 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">05</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Quantization Techniques</h3>
+                    <p>Reduce model size while maintaining quality for efficient deployment.</p>
+                    <ul class="module-topics">
+                        <li>GPTQ, AWQ, GGUF quantization</li>
+                        <li>Quality vs size tradeoffs</li>
+                        <li>Creating custom quantized models</li>
+                        <li>Mixed-precision inference</li>
+                        <li>Perplexity testing and validation</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 680 lessons</span>
+                        <span>⏱️ 6 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 6 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">06</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>vLLM Production Deployment</h3>
+                    <p>High-throughput inference server for production workloads.</p>
+                    <ul class="module-topics">
+                        <li>PagedAttention and continuous batching</li>
+                        <li>Multi-GPU tensor parallelism</li>
+                        <li>OpenAI-compatible API serving</li>
+                        <li>Kubernetes deployment patterns</li>
+                        <li>Load balancing and auto-scaling</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 950 lessons</span>
+                        <span>⏱️ 9 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 7 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">07</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Text Generation Inference</h3>
+                    <p>Hugging Face's production-ready inference server with advanced features.</p>
+                    <ul class="module-topics">
+                        <li>TGI architecture and capabilities</li>
+                        <li>Flash Attention and optimization</li>
+                        <li>Speculative decoding setup</li>
+                        <li>Token streaming and batching</li>
+                        <li>Docker and Kubernetes deployment</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 720 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 8 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">08</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Fine-Tuning Local Models</h3>
+                    <p>Customize models for your specific domain and use case.</p>
+                    <ul class="module-topics">
+                        <li>LoRA and QLoRA fine-tuning</li>
+                        <li>Dataset preparation and formatting</li>
+                        <li>Training with limited GPU memory</li>
+                        <li>Merging adapters and exporting</li>
+                        <li>Evaluation and quality testing</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 880 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 9 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">09</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>GPU Optimization</h3>
+                    <p>Maximize performance with hardware-specific optimizations.</p>
+                    <ul class="module-topics">
+                        <li>CUDA optimization techniques</li>
+                        <li>Multi-GPU configurations</li>
+                        <li>Memory management and offloading</li>
+                        <li>Flash Attention implementation</li>
+                        <li>Profiling and bottleneck analysis</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 750 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 10 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">10</span>
+                        <span class="badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Enterprise Architecture</h3>
+                    <p>Design scalable local LLM infrastructure for organizations.</p>
+                    <ul class="module-topics">
+                        <li>Multi-tenant deployment patterns</li>
+                        <li>GPU cluster orchestration</li>
+                        <li>Request routing and load balancing</li>
+                        <li>Cost optimization strategies</li>
+                        <li>Compliance and audit logging</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 820 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 11 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">11</span>
+                        <span class="badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Edge & Embedded Deployment</h3>
+                    <p>Run LLMs on mobile devices, Raspberry Pi, and edge hardware.</p>
+                    <ul class="module-topics">
+                        <li>Mobile deployment with MLC LLM</li>
+                        <li>Raspberry Pi and ARM optimization</li>
+                        <li>ONNX Runtime and TensorRT</li>
+                        <li>WebAssembly inference</li>
+                        <li>IoT and offline applications</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 680 lessons</span>
+                        <span>⏱️ 6 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 12 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">12</span>
+                        <span class="badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Hybrid Cloud-Local Systems</h3>
+                    <p>Design systems that intelligently route between local and cloud LLMs.</p>
+                    <ul class="module-topics">
+                        <li>Smart routing based on query complexity</li>
+                        <li>Fallback and failover patterns</li>
+                        <li>Cost-optimized hybrid architectures</li>
+                        <li>Privacy-first design patterns</li>
+                        <li>Monitoring and observability</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 720 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hardware Guide -->
+    <section class="hardware-section" id="hardware">
+        <div class="container">
+            <h2 class="section-title">Hardware Recommendations</h2>
+            <p class="section-subtitle">Choose the right setup for your use case and budget</p>
+            
+            <div class="hardware-grid">
+                <div class="hardware-card">
+                    <div class="hardware-tier">Starter</div>
+                    <h3>CPU-Only / Light GPU</h3>
+                    <div class="hardware-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">RAM</span>
+                            <span class="spec-value">16-32GB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">GPU</span>
+                            <span class="spec-value">Optional / RTX 3060 12GB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Models</span>
+                            <span class="spec-value">Up to 7B params</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Budget</span>
+                            <span class="spec-value">$0-500</span>
+                        </div>
+                    </div>
+                    <ul class="hardware-use-cases">
+                        <li>Learning and experimentation</li>
+                        <li>Light development work</li>
+                        <li>Small models (Phi-3, Gemma 2B)</li>
+                    </ul>
+                </div>
+                
+                <div class="hardware-card featured">
+                    <div class="hardware-tier">Recommended</div>
+                    <h3>Single GPU Workstation</h3>
+                    <div class="hardware-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">RAM</span>
+                            <span class="spec-value">64GB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">GPU</span>
+                            <span class="spec-value">RTX 4090 24GB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Models</span>
+                            <span class="spec-value">Up to 70B quantized</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Budget</span>
+                            <span class="spec-value">$2,000-4,000</span>
+                        </div>
+                    </div>
+                    <ul class="hardware-use-cases">
+                        <li>Production development</li>
+                        <li>Fine-tuning with LoRA</li>
+                        <li>Most open-source models</li>
+                    </ul>
+                </div>
+                
+                <div class="hardware-card">
+                    <div class="hardware-tier">Professional</div>
+                    <h3>Multi-GPU / Enterprise</h3>
+                    <div class="hardware-specs">
+                        <div class="spec-row">
+                            <span class="spec-label">RAM</span>
+                            <span class="spec-value">128GB+</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">GPU</span>
+                            <span class="spec-value">2-8x A100/H100 80GB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Models</span>
+                            <span class="spec-value">Any size, full precision</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="spec-label">Budget</span>
+                            <span class="spec-value">$20,000+</span>
+                        </div>
+                    </div>
+                    <ul class="hardware-use-cases">
+                        <li>Enterprise deployment</li>
+                        <li>Full fine-tuning</li>
+                        <li>High-throughput serving</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Comparison -->
+    <section class="models-section" id="models">
+        <div class="container">
+            <h2 class="section-title">Popular Open-Source Models</h2>
+            
+            <div class="models-table-wrapper">
+                <table class="models-table">
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Parameters</th>
+                            <th>VRAM (Q4)</th>
+                            <th>Best For</th>
+                            <th>License</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Llama 3.2</strong></td>
+                            <td>1B / 3B / 8B / 70B</td>
+                            <td>1GB - 40GB</td>
+                            <td>General purpose, coding</td>
+                            <td>Llama 3.2 License</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mistral</strong></td>
+                            <td>7B</td>
+                            <td>4GB</td>
+                            <td>Fast, efficient inference</td>
+                            <td>Apache 2.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mixtral</strong></td>
+                            <td>8x7B MoE</td>
+                            <td>24GB</td>
+                            <td>High quality, efficient</td>
+                            <td>Apache 2.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phi-3</strong></td>
+                            <td>3.8B / 14B</td>
+                            <td>2GB - 8GB</td>
+                            <td>Small device deployment</td>
+                            <td>MIT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gemma 2</strong></td>
+                            <td>2B / 9B / 27B</td>
+                            <td>1.5GB - 16GB</td>
+                            <td>Efficient, multilingual</td>
+                            <td>Gemma License</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Qwen 2.5</strong></td>
+                            <td>0.5B - 72B</td>
+                            <td>0.5GB - 42GB</td>
+                            <td>Multilingual, coding</td>
+                            <td>Apache 2.0 / Qwen</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DeepSeek Coder</strong></td>
+                            <td>1.3B / 6.7B / 33B</td>
+                            <td>1GB - 20GB</td>
+                            <td>Code generation</td>
+                            <td>DeepSeek License</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CodeLlama</strong></td>
+                            <td>7B / 13B / 34B</td>
+                            <td>4GB - 20GB</td>
+                            <td>Code, long context</td>
+                            <td>Llama 2 License</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sample Tutorials -->
+    <section class="tutorials-preview" id="tutorials">
+        <div class="container">
+            <h2 class="section-title">Featured Tutorials</h2>
+            
+            <div class="tutorials-grid">
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-beginner">Beginner</span>
+                        <span class="tutorial-time">15 min</span>
+                    </div>
+                    <h3>Installing Ollama on Any Platform</h3>
+                    <p>Step-by-step guide to installing Ollama on macOS, Linux, and Windows with Docker.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 12 lessons</span>
+                        <span>🎯 Practical</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-beginner">Beginner</span>
+                        <span class="tutorial-time">20 min</span>
+                    </div>
+                    <h3>Your First Local Chatbot</h3>
+                    <p>Build a simple chatbot with Ollama and Python that runs entirely on your machine.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 18 lessons</span>
+                        <span>🎯 Project-based</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-intermediate">Intermediate</span>
+                        <span class="tutorial-time">35 min</span>
+                    </div>
+                    <h3>Quantizing Models with llama.cpp</h3>
+                    <p>Learn to create custom quantized models for optimal performance on your hardware.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 24 lessons</span>
+                        <span>🎯 Technical</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-intermediate">Intermediate</span>
+                        <span class="tutorial-time">40 min</span>
+                    </div>
+                    <h3>OpenAI-Compatible API with Ollama</h3>
+                    <p>Set up a drop-in replacement for OpenAI API using local models.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 22 lessons</span>
+                        <span>🎯 Integration</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-advanced">Advanced</span>
+                        <span class="tutorial-time">60 min</span>
+                    </div>
+                    <h3>vLLM Production Deployment</h3>
+                    <p>Deploy high-throughput inference server with auto-scaling on Kubernetes.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 45 lessons</span>
+                        <span>🎯 Production</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-advanced">Advanced</span>
+                        <span class="tutorial-time">50 min</span>
+                    </div>
+                    <h3>Fine-Tuning with QLoRA</h3>
+                    <p>Fine-tune large models on consumer GPUs using quantized LoRA techniques.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 38 lessons</span>
+                        <span>🎯 ML Engineering</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Run AI Locally?</h2>
+                <p>Start with Ollama basics and progress to enterprise GPU clusters with our structured curriculum.</p>
+                <div class="cta-buttons">
+                    <a href="../tutorials/beginner.html" class="btn btn-primary btn-lg">Start Learning Free</a>
+                    <a href="index.html" class="btn btn-outline btn-lg">Explore All Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        AI Coding Academy
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, 50,000+ debugging solutions, and 500+ hands-on projects.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Learning Paths</h4>
+                    <ul>
+                        <li><a href="../tutorials/beginner.html">Beginner</a></li>
+                        <li><a href="../tutorials/intermediate.html">Intermediate</a></li>
+                        <li><a href="../tutorials/advanced.html">Advanced</a></li>
+                        <li><a href="../tutorials/expert.html">Expert</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="openai.html">OpenAI API</a></li>
+                        <li><a href="claude.html">Claude API</a></li>
+                        <li><a href="langchain.html">LangChain</a></li>
+                        <li><a href="rag.html">RAG Systems</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../debugging/index.html">Debugging Hub</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

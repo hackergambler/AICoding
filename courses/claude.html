@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude API Mastery - AI Coding Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                <span>AI Coding Academy</span>
+            </a>
+            <div class="nav-links">
+                <a href="../tutorials/index.html" class="nav-link">Tutorials</a>
+                <a href="../courses/index.html" class="nav-link active">Courses</a>
+                <a href="../debugging/index.html" class="nav-link">Debugging</a>
+                <a href="../projects/index.html" class="nav-link">Projects</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-ghost">Sign In</button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Courses</a>
+                <span>/</span>
+                <span>Claude API</span>
+            </div>
+            <div class="course-hero-content">
+                <div class="course-hero-text">
+                    <div class="course-badge">
+                        <span class="badge-icon">🟣</span>
+                        <span>API Mastery Course</span>
+                    </div>
+                    <h1>Claude API Complete Guide</h1>
+                    <p class="course-tagline">Master Anthropic's Claude API - from basic completions to advanced multi-turn conversations, tool use, and production deployments.</p>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📚</span>
+                            <span>8,200+ Lessons</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>180+ Hours</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎯</span>
+                            <span>All Levels</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🏆</span>
+                            <span>Certificate</span>
+                        </div>
+                    </div>
+                    <div class="course-actions">
+                        <button class="btn btn-primary btn-lg">Start Learning</button>
+                        <button class="btn btn-outline btn-lg">View Curriculum</button>
+                    </div>
+                </div>
+                <div class="course-hero-visual">
+                    <div class="code-preview">
+                        <div class="code-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="filename">claude_example.py</span>
+                        </div>
+                        <pre class="code-content"><code><span class="keyword">import</span> anthropic
+
+client = anthropic.Anthropic()
+
+message = client.messages.create(
+    model=<span class="string">"claude-sonnet-4-20250514"</span>,
+    max_tokens=<span class="number">1024</span>,
+    messages=[
+        {<span class="string">"role"</span>: <span class="string">"user"</span>, 
+         <span class="string">"content"</span>: <span class="string">"Explain quantum computing"</span>}
+    ]
+)
+
+<span class="keyword">print</span>(message.content[<span class="number">0</span>].text)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Stats -->
+    <section class="course-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">8,200+</span>
+                    <span class="stat-label">Total Lessons</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">45</span>
+                    <span class="stat-label">Modules</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">120+</span>
+                    <span class="stat-label">Hands-on Projects</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">850+</span>
+                    <span class="stat-label">Code Examples</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section class="course-outcomes">
+        <div class="container">
+            <h2 class="section-title">What You'll Learn</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <span class="outcome-icon">🚀</span>
+                    <h3>API Fundamentals</h3>
+                    <p>Master authentication, request/response handling, and the complete Messages API structure.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">💬</span>
+                    <h3>Multi-Turn Conversations</h3>
+                    <p>Build sophisticated chatbots with context management, system prompts, and conversation history.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">🔧</span>
+                    <h3>Tool Use & Functions</h3>
+                    <p>Implement function calling, tool definitions, and agentic workflows with Claude.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">📷</span>
+                    <h3>Vision Capabilities</h3>
+                    <p>Process images, analyze visual content, and build multimodal applications.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">📊</span>
+                    <h3>Streaming Responses</h3>
+                    <p>Implement real-time streaming for responsive UIs and live applications.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">⚡</span>
+                    <h3>Production Deployment</h3>
+                    <p>Deploy scalable Claude applications with proper error handling, rate limiting, and monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Curriculum -->
+    <section class="course-curriculum">
+        <div class="container">
+            <h2 class="section-title">Course Curriculum</h2>
+            <p class="section-subtitle">45 comprehensive modules covering everything from basics to production</p>
+
+            <!-- Module 1: Getting Started -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">🎯</span>
+                    <div>
+                        <h3>Part 1: Getting Started</h3>
+                        <p>1,200+ lessons • Beginner friendly</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">01</span>
+                            <div>
+                                <h4>Introduction to Claude API</h4>
+                                <span class="module-meta">180 lessons • 4 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">What is Claude? Understanding Anthropic's AI</span>
+                                <span class="lesson-duration">8 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">Claude Model Family: Opus, Sonnet, and Haiku</span>
+                                <span class="lesson-duration">12 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Setting Up Your Development Environment</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Getting Your API Key</span>
+                                <span class="lesson-duration">5 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">🔧</span>
+                                <span class="lesson-title">Installing the Anthropic SDK</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Your First API Call</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 174 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">02</span>
+                            <div>
+                                <h4>Messages API Deep Dive</h4>
+                                <span class="module-meta">220 lessons • 5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">Understanding the Messages API Structure</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Request Parameters Explained</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Working with System Prompts</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">Response Objects and Content Blocks</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 216 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">03</span>
+                            <div>
+                                <h4>Authentication & Security</h4>
+                                <span class="module-meta">150 lessons • 3.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🔐</span>
+                                <span class="lesson-title">API Key Best Practices</span>
+                                <span class="lesson-duration">12 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Environment Variables Setup</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">🔐</span>
+                                <span class="lesson-title">Secure Key Storage in Production</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 147 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 2: Core Features -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">⚙️</span>
+                    <div>
+                        <h3>Part 2: Core Features</h3>
+                        <p>2,400+ lessons • Intermediate</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">04</span>
+                            <div>
+                                <h4>Multi-Turn Conversations</h4>
+                                <span class="module-meta">280 lessons • 6 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">💬</span>
+                                <span class="lesson-title">Building Conversation History</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Managing Context Windows</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Context Compression Strategies</span>
+                                <span class="lesson-duration">22 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 277 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">05</span>
+                            <div>
+                                <h4>Streaming Responses</h4>
+                                <span class="module-meta">200 lessons • 4.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📊</span>
+                                <span class="lesson-title">Why Use Streaming?</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Implementing Stream Handlers</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Server-Sent Events (SSE)</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 197 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">06</span>
+                            <div>
+                                <h4>Vision & Multimodal</h4>
+                                <span class="module-meta">320 lessons • 7 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📷</span>
+                                <span class="lesson-title">Image Input Fundamentals</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Base64 Encoding Images</span>
+                                <span class="lesson-duration">12 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">URL-Based Image Input</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">🎯</span>
+                                <span class="lesson-title">Image Analysis Techniques</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 316 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">07</span>
+                            <div>
+                                <h4>Tool Use & Function Calling</h4>
+                                <span class="module-meta">400 lessons • 9 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🔧</span>
+                                <span class="lesson-title">Introduction to Tool Use</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Defining Tool Schemas</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Handling Tool Calls</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Tool Results and Continuations</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 396 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Advanced Topics -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">🚀</span>
+                    <div>
+                        <h3>Part 3: Advanced Topics</h3>
+                        <p>2,800+ lessons • Advanced</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">08</span>
+                            <div>
+                                <h4>Building AI Agents with Claude</h4>
+                                <span class="module-meta">450 lessons • 10 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🤖</span>
+                                <span class="lesson-title">Agent Architecture Patterns</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Tool Orchestration</span>
+                                <span class="lesson-duration">35 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Multi-Step Reasoning</span>
+                                <span class="lesson-duration">40 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 447 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">09</span>
+                            <div>
+                                <h4>Prompt Engineering for Claude</h4>
+                                <span class="module-meta">380 lessons • 8 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">✍️</span>
+                                <span class="lesson-title">Claude-Specific Prompting Techniques</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">XML Tags for Structure</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Chain of Thought Prompting</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 377 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">10</span>
+                            <div>
+                                <h4>Claude + RAG Systems</h4>
+                                <span class="module-meta">420 lessons • 9 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🔍</span>
+                                <span class="lesson-title">RAG Architecture with Claude</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Context Injection Strategies</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Citation and Attribution</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 417 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Production -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">🏭</span>
+                    <div>
+                        <h3>Part 4: Production & Scale</h3>
+                        <p>1,800+ lessons • Expert</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">11</span>
+                            <div>
+                                <h4>Error Handling & Reliability</h4>
+                                <span class="module-meta">250 lessons • 5.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">⚠️</span>
+                                <span class="lesson-title">Understanding API Errors</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Retry Strategies with Exponential Backoff</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Circuit Breaker Patterns</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 247 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">12</span>
+                            <div>
+                                <h4>Rate Limiting & Optimization</h4>
+                                <span class="module-meta">220 lessons • 5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📊</span>
+                                <span class="lesson-title">Understanding Rate Limits</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Token Counting Strategies</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Request Batching</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 217 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">13</span>
+                            <div>
+                                <h4>Production Deployment</h4>
+                                <span class="module-meta">300 lessons • 7 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🚀</span>
+                                <span class="lesson-title">Deployment Architecture</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Monitoring & Observability</span>
+                                <span class="lesson-duration">35 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Cost Optimization</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 297 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-footer">
+                <p>+ 32 more modules covering advanced patterns, integrations, and specialized applications</p>
+                <button class="btn btn-outline">View Full Curriculum</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="course-projects">
+        <div class="container">
+            <h2 class="section-title">Hands-On Projects</h2>
+            <p class="section-subtitle">Build real applications as you learn</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>CLI Chatbot</h3>
+                    <p>Build a command-line chatbot with conversation history and personality customization.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Messages API</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Document Analyzer</h3>
+                    <p>Create a tool that analyzes PDFs and images using Claude's vision capabilities.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Vision API</span>
+                        <span>PyPDF</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Streaming Chat UI</h3>
+                    <p>Build a web interface with real-time streaming responses using SSE.</p>
+                    <div class="project-tech">
+                        <span>FastAPI</span>
+                        <span>React</span>
+                        <span>Streaming</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>AI Research Assistant</h3>
+                    <p>Build an agent that searches the web, analyzes data, and generates reports.</p>
+                    <div class="project-tech">
+                        <span>Tool Use</span>
+                        <span>Web Search</span>
+                        <span>RAG</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Code Review Bot</h3>
+                    <p>Create a GitHub bot that reviews PRs and suggests improvements using Claude.</p>
+                    <div class="project-tech">
+                        <span>GitHub API</span>
+                        <span>Webhooks</span>
+                        <span>Tool Use</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Multi-Agent System</h3>
+                    <p>Design an orchestrated system with specialized Claude agents working together.</p>
+                    <div class="project-tech">
+                        <span>Agents</span>
+                        <span>Orchestration</span>
+                        <span>Production</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Courses -->
+    <section class="related-courses">
+        <div class="container">
+            <h2 class="section-title">Continue Your Learning</h2>
+            <div class="related-grid">
+                <a href="openai.html" class="related-card">
+                    <span class="related-icon">🟢</span>
+                    <div>
+                        <h3>OpenAI API Mastery</h3>
+                        <p>12,500+ lessons</p>
+                    </div>
+                </a>
+                <a href="langchain.html" class="related-card">
+                    <span class="related-icon">🦜</span>
+                    <div>
+                        <h3>LangChain Framework</h3>
+                        <p>15,000+ lessons</p>
+                    </div>
+                </a>
+                <a href="agents.html" class="related-card">
+                    <span class="related-icon">🤖</span>
+                    <div>
+                        <h3>AI Agents Deep Dive</h3>
+                        <p>14,000+ lessons</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        <span>AI Coding Academy</span>
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, hands-on projects, and expert guidance.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Learning</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">All Tutorials</a></li>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
