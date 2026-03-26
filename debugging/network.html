@@ -10,84 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -1264,6 +1187,138 @@ asyncio.create_task(monitor.start_monitoring({
             </div>
         </section>
 
+
+        <!-- Structured Bug Examples -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Common Network Bugs — With Fixes</h2>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 1: SSL Certificate Verification Error</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">SSL verification fails when calling internal APIs. The wrong fix (<code>verify=False</code>) is a serious security risk.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Error: SSLCertVerificationError: certificate verify failed</span>
+<span class="cm"># WRONG: disabling verification is a critical security risk</span>
+<span class="kw">import</span> httpx
+resp = httpx.get(<span class="st">"https://internal-api.corp.com"</span>, verify=<span class="kw">False</span>)  <span class="cm"># NEVER do this!</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — provide the correct CA bundle or fix the certificate</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Option 1: provide custom CA bundle</span>
+resp = httpx.get(<span class="st">"https://internal-api.corp.com"</span>, verify=<span class="st">"/etc/ssl/company-ca.crt"</span>)
+
+<span class="cm"># Option 2: set env var for all requests</span>
+<span class="cm"># export REQUESTS_CA_BUNDLE=/etc/ssl/company-ca.crt</span>
+
+<span class="cm"># Option 3: permanent fix — add to system trust store</span>
+<span class="cm"># sudo cp company-ca.crt /usr/local/share/ca-certificates/</span>
+<span class="cm"># sudo update-ca-certificates</span></pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 2: Connection Pool Exhaustion Under Load</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">Unlimited concurrent requests exhaust the HTTP connection pool, causing timeouts under normal production load.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Error: httpcore.PoolTimeout: timed out waiting for connection</span>
+<span class="cm"># WRONG: 500 concurrent tasks exhaust the default pool of 10</span>
+<span class="kw">async def</span> <span class="fn">process_all</span>(items: list):
+    tasks = [process(item) <span class="kw">for</span> item <span class="kw">in</span> items]  <span class="cm"># 500 concurrent requests!</span>
+    <span class="kw">return await</span> asyncio.gather(*tasks)</pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — configure pool limits and throttle with a semaphore</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> httpx, asyncio
+
+limits = httpx.Limits(max_connections=<span class="nu">50</span>, max_keepalive_connections=<span class="nu">20</span>)
+sem = asyncio.Semaphore(<span class="nu">20</span>)  <span class="cm"># max 20 concurrent API calls</span>
+
+<span class="kw">async def</span> <span class="fn">process_all</span>(items: list):
+    <span class="kw">async with</span> httpx.AsyncClient(limits=limits) <span class="kw">as</span> client:
+        <span class="kw">async def</span> <span class="fn">bounded</span>(item):
+            <span class="kw">async with</span> sem:
+                <span class="kw">return await</span> process(item, client=client)
+        <span class="kw">return await</span> asyncio.gather(*[bounded(i) <span class="kw">for</span> i <span class="kw">in</span> items])</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 3: Timeout Too Short for Long LLM Calls</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">Default HTTP timeout (5 seconds) kills in-progress LLM generation. GPT-4o can take 30–120 seconds for long outputs.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Error: httpx.ReadTimeout: timed out reading response</span>
+<span class="cm"># Default timeout is 5 seconds — GPT-4o can take 2 minutes</span>
+<span class="kw">import</span> httpx
+resp = httpx.post(<span class="st">"https://api.openai.com/v1/chat/completions"</span>, json={...})
+<span class="cm"># Crashes halfway through long responses</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — set per-operation timeouts appropriate for LLM latency</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+<span class="cm"># OpenAI SDK: set generous timeout</span>
+client = OpenAI(timeout=<span class="nu">120.0</span>)  <span class="cm"># 2 minutes for long completions</span>
+
+<span class="cm"># httpx: fine-grained per-phase timeouts</span>
+timeout = httpx.Timeout(
+    connect=<span class="nu">5.0</span>,    <span class="cm"># fast fail if server unreachable</span>
+    read=<span class="nu">120.0</span>,     <span class="cm"># generous read timeout for streaming</span>
+    write=<span class="nu">10.0</span>,
+    pool=<span class="nu">5.0</span>
+)</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 4: Proxy Blocks HTTPS API Calls in Corporate Environments</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">Works locally but fails in corporate environments where a proxy intercepts HTTPS traffic. The SDK does not automatically read proxy env vars.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Works at home, breaks at the office</span>
+<span class="cm"># HTTPS_PROXY is set in the environment but SDK ignores it</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+client = OpenAI()  <span class="cm"># does not auto-read HTTPS_PROXY!</span>
+<span class="cm"># Error: SSLError or ConnectionRefused</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — pass proxy explicitly via http_client</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> httpx, os
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+proxy = os.environ.get(<span class="st">"HTTPS_PROXY"</span>) <span class="kw">or</span> os.environ.get(<span class="st">"https_proxy"</span>)
+http_client = httpx.Client(proxy=proxy) <span class="kw">if</span> proxy <span class="kw">else None</span>
+client = OpenAI(http_client=http_client)
+
+<span class="cm"># Test connection</span>
+<span class="kw">try</span>:
+    client.models.list()
+    print(<span class="st">f"Connected (proxy: {proxy or 'none'})"</span>)
+<span class="kw">except Exception</span> <span class="kw">as</span> e:
+    print(<span class="st">f"Failed: {e}"</span>)</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 5: Streaming Response Cuts Off Mid-Token</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">The stream ends abruptly because <code>max_tokens</code> was reached. The response is truncated without warning, causing downstream JSON parse errors.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: max_tokens too low + not checking stop_reason</span>
+<span class="kw">with</span> client.chat.completions.stream(
+    model=<span class="st">"gpt-4o"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Generate a 500-item JSON list"</span>}],
+    max_tokens=<span class="nu">256</span>  <span class="cm"># too low — cuts off the JSON mid-way!</span>
+) <span class="kw">as</span> stream:
+    text = <span class="st">""</span>.join(c <span class="kw">for</span> c <span class="kw">in</span> stream.text_stream)
+data = json.loads(text)  <span class="cm"># JSONDecodeError — incomplete JSON</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — set adequate max_tokens and check stop_reason</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">with</span> client.chat.completions.stream(
+    model=<span class="st">"gpt-4o"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Generate a 500-item JSON list"</span>}],
+    max_tokens=<span class="nu">8192</span>  <span class="cm"># sufficient headroom</span>
+) <span class="kw">as</span> stream:
+    text = <span class="st">""</span>.join(c <span class="kw">for</span> c <span class="kw">in</span> stream.text_stream)
+
+final = stream.get_final_message()
+<span class="kw">if</span> final.stop_reason == <span class="st">"max_tokens"</span>:
+    <span class="kw">raise</span> ValueError(<span class="st">f"Response truncated! Used {final.usage.output_tokens} tokens."</span>)
+data = json.loads(text)  <span class="cm"># safe to parse now</span></pre></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- Related Categories -->
         <section class="section section-alt">
             <div class="container">
@@ -1314,16 +1369,16 @@ asyncio.create_task(monitor.start_monitoring({
                     <h4>Resources</h4>
                     <ul>
                         <li><a href="index.html">Debugging Hub</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Community</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">About</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Blog</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Contact</a></li>
                     </ul>
                 </div>
             </div>

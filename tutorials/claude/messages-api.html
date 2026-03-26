@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Messages API | Claude API | AI Coding Academy</title>
-    <meta name="description" content="Deep dive into the Messages API structure, system prompts, and conversation handling.">
+    <title>Claude Messages API — System Prompts, Multi-turn & Streaming | AI Coding Academy</title>
+    <meta name="description" content="Master the Claude Messages API: system prompts, multi-turn conversations, streaming, prefill, chain-of-thought, and production patterns.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,29 +20,49 @@
         .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
         .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
         .lesson-content h2:first-child { margin-top: 0; }
-        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); color: var(--accent-secondary); }
+        .lesson-content h4 { font-family: var(--font-heading); font-size: 1rem; margin: var(--space-lg) 0 var(--space-sm); color: var(--text-primary); }
         .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
         .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
         .lesson-content li { margin-bottom: var(--space-sm); }
-        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
-        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; color: #e6edf3; }
-        .code-block .comment { color: #8b949e; }
-        .code-block .keyword { color: #ff7b72; }
-        .code-block .string { color: #a5d6ff; }
-        .code-block .function { color: #d2a8ff; }
-        .tip-box { background: rgba(0, 255, 170, 0.1); border: 1px solid rgba(0, 255, 170, 0.2); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .lesson-content code { background: rgba(0,255,170,0.1); color: var(--accent-primary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; position: relative; }
+        .code-block-label { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: var(--space-sm); display: flex; justify-content: space-between; align-items: center; }
+        .code-block-label .copy-btn { cursor: pointer; color: var(--accent-primary); border: 1px solid var(--accent-primary); background: transparent; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.65; color: #e6edf3; white-space: pre; }
+        .cm { color: #8b949e; }  /* comment */
+        .kw { color: #ff7b72; }  /* keyword */
+        .st { color: #a5d6ff; }  /* string */
+        .fn { color: #d2a8ff; }  /* function */
+        .nu { color: #79c0ff; }  /* number */
+        .cl { color: #ffa657; }  /* class */
+        .op { color: #ff7b72; }  /* operator */
+        .tip-box { background: rgba(0, 255, 170, 0.08); border: 1px solid rgba(0, 255, 170, 0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
         .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
-        .tip-box p { margin: 0; color: var(--text-secondary); }
+        .warn-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .warn-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-warning); margin-bottom: var(--space-sm); }
+        .info-box { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .info-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .tip-box p, .warn-box p, .info-box p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+        .toc { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-2xl); }
+        .toc h3 { font-family: var(--font-heading); color: var(--accent-primary); margin-bottom: var(--space-md); }
+        .toc ol { padding-left: var(--space-xl); color: var(--text-secondary); }
+        .toc li { margin-bottom: var(--space-xs); }
+        .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--accent-primary); }
         .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
         .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
         .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
         .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
         .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
         .lesson-nav .next { text-align: right; }
-        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+        .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-lg) 0; }
+        .example-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); padding: var(--space-lg); }
+        .example-card h4 { color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
-</head>
-<body>
+</head><body>
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
@@ -53,94 +73,425 @@
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
     </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-
-    <nav class="nav">
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
         <div class="nav-container">
             <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
             <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
                 <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
                 <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
                 <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../index.html" class="btn btn-primary">Start Free</a>
+                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
-
     <div class="lesson-container">
         <div class="breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="separator">/</span>
-            <a href="../index.html">Tutorials</a>
-            <span class="separator">/</span>
-            <a href="../../courses/claude.html">Claude API</a>
-            <span class="separator">/</span>
-            <span>Claude Messages API</span>
+            <a href="../../index.html">Home</a><span class="separator">/</span>
+            <a href="../index.html">Tutorials</a><span class="separator">/</span>
+            <a href="../../courses/claude.html">Claude API</a><span class="separator">/</span>
+            <span>Messages API</span>
         </div>
-
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 20 min</span>
-                <span class="lesson-meta-item">📚 Module 1, Lesson 2</span>
+                <span class="lesson-meta-item">⏱️ 30 min</span>
+                <span class="lesson-meta-item">📚 Module 1 · Lesson 2</span>
             </div>
             <h1 class="lesson-title">Claude Messages API</h1>
-            <p class="lesson-description">Deep dive into the Messages API structure, system prompts, and conversation handling.</p>
+            <p class="lesson-description">Deep dive into the Messages API: system prompts, multi-turn conversations, streaming responses, prefill tricks, and chain-of-thought patterns.</p>
         </header>
 
-        <div class="lesson-content">
-            <h2>Message Structure</h2>
-            <p>Claude's Messages API uses a simple but powerful structure:</p>
+        <div class="toc">
+            <h3>📋 Table of Contents</h3>
+            <ol>
+                <li><a href="#anatomy">Anatomy of a Message</a></li>
+                <li><a href="#system">System Prompts</a></li>
+                <li><a href="#multiturn">Multi-turn Conversations</a></li>
+                <li><a href="#streaming">Streaming Responses</a></li>
+                <li><a href="#prefill">Prefill (Assistant Turn Injection)</a></li>
+                <li><a href="#cot">Chain-of-Thought Prompting</a></li>
+                <li><a href="#fewshot">Few-Shot Examples</a></li>
+                <li><a href="#params">Key Parameters Reference</a></li>
+                <li><a href="#patterns">Production Patterns</a></li>
+            </ol>
+        </div>
 
-            <div class="code-block">
-<pre>message = client.messages.<span class="function">create</span>(
-    model=<span class="string">"claude-3-5-sonnet-20241022"</span>,
-    max_tokens=<span class="variable">1024</span>,
-    system=<span class="string">"You are a helpful coding assistant."</span>,  <span class="comment"># System prompt</span>
+        <div class="lesson-content" id="anatomy">
+            <h2>1. Anatomy of a Message</h2>
+            <p>Every call to the Claude Messages API has the same skeleton. Understanding each field is the foundation for everything else.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — minimal call</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> anthropic
+
+client = anthropic.Anthropic(api_key=<span class="st">"sk-ant-..."</span>)
+
+response = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,          <span class="cm"># model ID</span>
+    max_tokens=<span class="nu">1024</span>,                  <span class="cm"># required upper bound on tokens</span>
     messages=[
-        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"How do I read a file in Python?"</span>}
+        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Explain async/await in Python in 3 lines."</span>}
     ]
-)</pre>
-            </div>
+)
 
-            <h2>Multi-turn Conversations</h2>
-            <div class="code-block">
-<pre>messages = [
-    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"What is Python?"</span>},
-    {<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: <span class="string">"Python is a programming language..."</span>},
-    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Show me an example"</span>}
+<span class="kw">print</span>(response.content[<span class="nu">0</span>].text)     <span class="cm"># text of the first content block</span>
+<span class="kw">print</span>(response.usage)               <span class="cm"># input_tokens, output_tokens</span>
+<span class="kw">print</span>(response.stop_reason)         <span class="cm"># "end_turn" | "max_tokens" | "stop_sequence"</span></pre>
+</div>
+            <h3>Response Object Fields</h3>
+            <ul>
+                <li><code>response.id</code> — unique message ID (for logging)</li>
+                <li><code>response.model</code> — model that responded</li>
+                <li><code>response.role</code> — always <code>"assistant"</code></li>
+                <li><code>response.content</code> — list of content blocks (text / tool_use)</li>
+                <li><code>response.stop_reason</code> — why generation stopped</li>
+                <li><code>response.usage.input_tokens</code> — tokens in your prompt</li>
+                <li><code>response.usage.output_tokens</code> — tokens in the response</li>
+            </ul>
+<div class="code-block">
+<div class="code-block-label"><span>Python — inspect full response</span><button class="copy-btn">Copy</button></div>
+<pre>response = client.messages.create(
+    model=<span class="st">"claude-haiku-4-5-20251001"</span>,
+    max_tokens=<span class="nu">256</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is 2+2?"</span>}]
+)
+
+<span class="kw">print</span>(<span class="st">f"ID: </span>{response.id}<span class="st">"</span>)
+<span class="kw">print</span>(<span class="st">f"Model: </span>{response.model}<span class="st">"</span>)
+<span class="kw">print</span>(<span class="st">f"Stop: </span>{response.stop_reason}<span class="st">"</span>)
+<span class="kw">print</span>(<span class="st">f"In: </span>{response.usage.input_tokens}<span class="st"> Out: </span>{response.usage.output_tokens}<span class="st">"</span>)
+<span class="kw">for</span> block <span class="kw">in</span> response.content:
+    <span class="kw">if</span> block.type == <span class="st">"text"</span>:
+        <span class="kw">print</span>(<span class="st">"Text:"</span>, block.text)</pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="system">
+            <h2>2. System Prompts</h2>
+            <p>The <code>system</code> parameter sets Claude's persona, constraints, and context <em>before</em> the user speaks. Unlike OpenAI's system message inside the array, Claude uses a dedicated top-level parameter — cleaner and more explicit.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — role-specific system prompts</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># 1. Coding assistant persona</span>
+coding_bot = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    system=<span class="st">&#34;&#34;&#34;You are an expert Python engineer. Always include: type annotations, docstrings, and a usage example.&#34;&#34;&#34;</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Write a function to flatten a nested list."</span>}]
+)
+
+<span class="cm"># 2. JSON-only API persona</span>
+json_bot = client.messages.create(
+    model=<span class="st">"claude-haiku-4-5-20251001"</span>,
+    max_tokens=<span class="nu">256</span>,
+    system=<span class="st">&#34;&#34;&#34;You are a data extraction API. Always respond with valid JSON only.&#34;&#34;&#34;</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Extract: name=Alice, age=30, city=London"</span>}]
+)
+<span class="kw">import</span> json
+data = json.loads(json_bot.content[<span class="nu">0</span>].text)
+<span class="kw">print</span>(data)  <span class="cm"># {'name': 'Alice', 'age': 30, 'city': 'London'}</span>
+
+<span class="cm"># 3. Customer support persona with guardrails</span>
+support_bot = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    system=<span class="st">&#34;&#34;&#34;You are a support agent for AcmeSaaS. Only discuss AcmeSaaS products. Never reveal internal pricing. Always end with a follow-up offer.&#34;&#34;&#34;</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"How does your product compare to Competitor X?"</span>}]
+)</pre>
+</div><div class="tip-box"><div class="tip-box-title">💡 System Prompt Length</div><p>System prompts can be thousands of tokens. Use them to encode detailed instructions, examples, and business rules. This is much cheaper than including instructions in every user message.</p></div>
+        </div>
+
+        <div class="lesson-content" id="multiturn">
+            <h2>3. Multi-turn Conversations</h2>
+            <p>Claude has no built-in memory. You are responsible for sending the entire conversation history on every request. The messages array alternates <code>user</code> / <code>assistant</code> and must start with <code>user</code>.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — stateful chat class</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> anthropic <span class="kw">import</span> Anthropic
+
+<span class="kw">class</span> <span class="cl">ChatSession</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, system: str = <span class="st">""</span>):
+        self.client = Anthropic()
+        self.system = system
+        self.history: list[dict] = []
+
+    <span class="kw">def</span> <span class="fn">chat</span>(self, user_message: str) -> str:
+        self.history.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user_message})
+        kwargs = {
+            <span class="st">"model"</span>: <span class="st">"claude-opus-4-5"</span>,
+            <span class="st">"max_tokens"</span>: <span class="nu">1024</span>,
+            <span class="st">"messages"</span>: self.history,
+        }
+        <span class="kw">if</span> self.system:
+            kwargs[<span class="st">"system"</span>] = self.system
+        response = self.client.messages.create(**kwargs)
+        assistant_text = response.content[<span class="nu">0</span>].text
+        self.history.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: assistant_text})
+        <span class="kw">return</span> assistant_text
+
+    <span class="kw">def</span> <span class="fn">reset</span>(self):
+        self.history = []
+
+<span class="cm"># Usage</span>
+session = <span class="cl">ChatSession</span>(system=<span class="st">"You are a Python tutor."</span>)
+<span class="kw">print</span>(session.chat(<span class="st">"What is a generator?"</span>))
+<span class="kw">print</span>(session.chat(<span class="st">"Show me a real-world example."</span>))   <span class="cm"># remembers context</span>
+<span class="kw">print</span>(session.chat(<span class="st">"How is it different from a list?"</span>))  <span class="cm"># still in context</span></pre>
+</div><div class="code-block">
+<div class="code-block-label"><span>Python — trimming history to stay in budget</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">def</span> <span class="fn">trim_history</span>(history: list[dict], max_turns: int = <span class="nu">20</span>) -> list[dict]:
+    <span class="st">&#34;&#34;&#34;Keep only the last N user+assistant pairs.&#34;&#34;&#34;</span>
+    <span class="kw">if</span> len(history) <= max_turns * <span class="nu">2</span>:
+        <span class="kw">return</span> history
+    <span class="cm"># Always keep first message for context, trim the middle</span>
+    <span class="kw">return</span> [history[<span class="nu">0</span>]] + history[-(max_turns * <span class="nu">2</span> - <span class="nu">1</span>):]
+
+<span class="cm"># Or trim by token estimate</span>
+<span class="kw">def</span> <span class="fn">trim_by_tokens</span>(history: list[dict], max_tokens: int = <span class="nu">50_000</span>) -> list[dict]:
+    trimmed = []
+    total = <span class="nu">0</span>
+    <span class="kw">for</span> msg <span class="kw">in</span> reversed(history):
+        tokens = len(msg[<span class="st">"content"</span>].split()) * <span class="nu">4</span> // <span class="nu">3</span>  <span class="cm"># rough estimate</span>
+        <span class="kw">if</span> total + tokens > max_tokens:
+            <span class="kw">break</span>
+        trimmed.insert(<span class="nu">0</span>, msg)
+        total += tokens
+    <span class="kw">return</span> trimmed</pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="streaming">
+            <h2>4. Streaming Responses</h2>
+            <p>For long responses or real-time UIs, streaming lets you process tokens as they arrive instead of waiting for the full response. Use the <code>stream=True</code> flag or the <code>stream()</code> context manager.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — basic streaming</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> anthropic
+
+client = anthropic.Anthropic()
+
+<span class="kw">with</span> client.messages.stream(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">1024</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Write a 200-word story about a robot."</span>}]
+) <span class="kw">as</span> stream:
+    <span class="kw">for</span> text <span class="kw">in</span> stream.text_stream:
+        <span class="kw">print</span>(text, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
+
+<span class="cm"># Access final message after streaming</span>
+final = stream.get_final_message()
+<span class="kw">print</span>(<span class="st">f"\nTokens used: {final.usage.input_tokens} in / {final.usage.output_tokens} out"</span>)</pre>
+</div><div class="code-block">
+<div class="code-block-label"><span>Python — async streaming for web apps</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> asyncio
+<span class="kw">import</span> anthropic
+
+<span class="kw">async def</span> <span class="fn">stream_response</span>(prompt: str):
+    client = anthropic.AsyncAnthropic()
+    <span class="kw">async with</span> client.messages.stream(
+        model=<span class="st">"claude-opus-4-5"</span>,
+        max_tokens=<span class="nu">1024</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]
+    ) <span class="kw">as</span> stream:
+        <span class="kw">async for</span> text <span class="kw">in</span> stream.text_stream:
+            <span class="kw">yield</span> text  <span class="cm"># async generator for FastAPI / websockets</span>
+
+<span class="cm"># FastAPI streaming endpoint</span>
+<span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI
+<span class="kw">from</span> fastapi.responses <span class="kw">import</span> StreamingResponse
+
+app = FastAPI()
+
+@app.get(<span class="st">"/stream"</span>)
+<span class="kw">async def</span> <span class="fn">stream_endpoint</span>(q: str):
+    <span class="kw">return</span> StreamingResponse(
+        stream_response(q),
+        media_type=<span class="st">"text/event-stream"</span>
+    )</pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="prefill">
+            <h2>5. Prefill (Assistant Turn Injection)</h2>
+            <p>You can start Claude's response by providing an incomplete <code>assistant</code> turn as the last message. Claude will continue from exactly where you left off — useful for forcing output format, skipping preambles, or filling templates.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — prefill to force JSON output</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Without prefill: Claude might say "Sure! Here's the JSON:"</span>
+<span class="cm"># With prefill: Claude starts directly with {</span>
+
+response = client.messages.create(
+    model=<span class="st">"claude-haiku-4-5-20251001"</span>,
+    max_tokens=<span class="nu">256</span>,
+    messages=[
+        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Extract name and age from: 'My name is Bob and I am 25 years old.'"</span>},
+        {<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: <span class="st">"{"</span>}  <span class="cm"># ← prefill: forces JSON from char 1</span>
+    ]
+)
+<span class="cm"># response.content[0].text will be the rest of the JSON after "{"</span>
+raw = <span class="st">"{"</span> + response.content[<span class="nu">0</span>].text
+<span class="kw">import</span> json
+data = json.loads(raw)
+<span class="kw">print</span>(data)</pre>
+</div><div class="code-block">
+<div class="code-block-label"><span>Python — prefill to skip disclaimer preambles</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Skip "Certainly! I'd be happy to help..." preambles</span>
+response = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    messages=[
+        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"List 5 Python best practices."</span>},
+        {<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: <span class="st">"Here are 5 Python best practices:\n1."</span>}
+    ]
+)
+<span class="cm"># Claude continues from "1." directly</span></pre>
+</div><div class="tip-box"><div class="tip-box-title">💡 Prefill + JSON</div><p>The most reliable way to get pure JSON: set system='Respond in JSON only', AND prefill with '{'. This double-locks the format.</p></div>
+        </div>
+
+        <div class="lesson-content" id="cot">
+            <h2>6. Chain-of-Thought Prompting</h2>
+            <p>Force Claude to reason step-by-step before answering. This dramatically improves accuracy on math, logic, and multi-step problems. Use XML tags to separate reasoning from the final answer.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — CoT with XML tags</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">def</span> <span class="fn">solve_with_cot</span>(problem: str) -> dict:
+    response = client.messages.create(
+        model=<span class="st">"claude-opus-4-5"</span>,
+        max_tokens=<span class="nu">1024</span>,
+    system=<span class="st">&#34;&#34;&#34;Solve problems step-by-step. Use: &lt;thinking&gt;[reasoning]&lt;/thinking&gt;&lt;answer&gt;[answer]&lt;/answer&gt;&#34;&#34;&#34;</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: problem}]
+    )
+    text = response.content[<span class="nu">0</span>].text
+
+    <span class="cm"># Parse thinking and answer from XML</span>
+    <span class="kw">import</span> re
+    thinking = re.search(<span class="st">r"&lt;thinking&gt;(.*?)&lt;/thinking&gt;"</span>, text, re.DOTALL)
+    answer = re.search(<span class="st">r"&lt;answer&gt;(.*?)&lt;/answer&gt;"</span>, text, re.DOTALL)
+    <span class="kw">return</span> {
+        <span class="st">"thinking"</span>: thinking.group(<span class="nu">1</span>).strip() <span class="kw">if</span> thinking <span class="kw">else</span> <span class="st">""</span>,
+        <span class="st">"answer"</span>: answer.group(<span class="nu">1</span>).strip() <span class="kw">if</span> answer <span class="kw">else</span> text,
+    }
+
+result = solve_with_cot(<span class="st">"A train leaves at 9am going 60mph. Another at 11am going 80mph from the same station. When does the second catch the first?"</span>)
+<span class="kw">print</span>(<span class="st">"Thinking:"</span>, result[<span class="st">"thinking"</span>])
+<span class="kw">print</span>(<span class="st">"Answer:"</span>, result[<span class="st">"answer"</span>])</pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="fewshot">
+            <h2>7. Few-Shot Examples</h2>
+            <p>Provide 2–5 example input/output pairs in the messages array to teach Claude exactly the format you want. Far more reliable than describing the format in words.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — few-shot sentiment classifier</span><button class="copy-btn">Copy</button></div>
+<pre>examples = [
+    (<span class="st">"I love this product!"</span>, <span class="st">"positive"</span>),
+    (<span class="st">"Terrible experience, avoid."</span>, <span class="st">"negative"</span>),
+    (<span class="st">"It arrived on time."</span>, <span class="st">"neutral"</span>),
+    (<span class="st">"Best purchase I ever made."</span>, <span class="st">"positive"</span>),
+    (<span class="st">"The packaging was broken."</span>, <span class="st">"negative"</span>),
 ]
 
-response = client.messages.<span class="function">create</span>(
-    model=<span class="string">"claude-3-5-sonnet-20241022"</span>,
-    max_tokens=<span class="variable">1024</span>,
-    messages=messages
-)</pre>
-            </div>
+<span class="kw">def</span> <span class="fn">build_few_shot_messages</span>(text: str) -> list[dict]:
+    messages = []
+    <span class="kw">for</span> inp, out <span class="kw">in</span> examples:
+        messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: inp})
+        messages.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: out})
+    messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: text})
+    <span class="kw">return</span> messages
 
-            <div class="tip-box">
-                <div class="tip-box-title">💡 System Prompts</div>
-                <p>Unlike OpenAI, Claude uses a separate <code>system</code> parameter instead of a system message in the messages array. This is cleaner and more explicit.</p>
-            </div>
+response = client.messages.create(
+    model=<span class="st">"claude-haiku-4-5-20251001"</span>,
+    max_tokens=<span class="nu">10</span>,
+    system=<span class="st">"Classify sentiment. Reply with only: positive, negative, or neutral."</span>,
+    messages=build_few_shot_messages(<span class="st">"Shipping was delayed but product is fine."</span>)
+)
+<span class="kw">print</span>(response.content[<span class="nu">0</span>].text)  <span class="cm"># neutral</span></pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="params">
+            <h2>8. Key Parameters Reference</h2>
+            <ul>
+                <li><code>model</code> (required) — model ID: <code>claude-opus-4-5</code>, <code>claude-sonnet-4-6</code>, <code>claude-haiku-4-5-20251001</code></li>
+                <li><code>max_tokens</code> (required) — hard ceiling on output tokens (1–8192+)</li>
+                <li><code>messages</code> (required) — alternating user/assistant array</li>
+                <li><code>system</code> (optional) — system prompt string</li>
+                <li><code>temperature</code> (optional) — 0.0–1.0, default 1.0; lower = more deterministic</li>
+                <li><code>top_p</code> (optional) — nucleus sampling threshold</li>
+                <li><code>top_k</code> (optional) — limit token candidates (lower = more focused)</li>
+                <li><code>stop_sequences</code> (optional) — list of strings to halt generation</li>
+                <li><code>stream</code> (optional) — boolean, enable SSE streaming</li>
+                <li><code>metadata.user_id</code> (optional) — for safety monitoring</li>
+            </ul>
+<div class="code-block">
+<div class="code-block-label"><span>Python — all parameters together</span><button class="copy-btn">Copy</button></div>
+<pre>response = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    temperature=<span class="nu">0.3</span>,          <span class="cm"># focused, deterministic</span>
+    top_p=<span class="nu">0.9</span>,
+    top_k=<span class="nu">50</span>,
+    stop_sequences=[<span class="st">"</s>"</span>, <span class="st">"###"</span>],
+    system=<span class="st">"You are a concise technical writer."</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Explain recursion."</span>}],
+    metadata={<span class="st">"user_id"</span>: <span class="st">"user_abc123"</span>}
+)</pre>
+</div>
+        </div>
+
+        <div class="lesson-content" id="patterns">
+            <h2>9. Production Patterns</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — retry with exponential backoff</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> time, random
+<span class="kw">from</span> anthropic <span class="kw">import</span> Anthropic, RateLimitError, APIStatusError
+
+<span class="kw">def</span> <span class="fn">call_with_retry</span>(client, max_retries=<span class="nu">5</span>, **kwargs):
+    <span class="kw">for</span> attempt <span class="kw">in</span> range(max_retries):
+        <span class="kw">try</span>:
+            <span class="kw">return</span> client.messages.create(**kwargs)
+        <span class="kw">except</span> RateLimitError:
+            wait = (<span class="nu">2</span> ** attempt) + random.random()
+            <span class="kw">print</span>(<span class="st">f"Rate limited. Waiting {wait:.1f}s..."</span>)
+            time.sleep(wait)
+        <span class="kw">except</span> APIStatusError <span class="kw">as</span> e:
+            <span class="kw">if</span> e.status_code >= <span class="nu">500</span>:
+                time.sleep(<span class="nu">2</span> ** attempt)
+            <span class="kw">else</span>:
+                <span class="kw">raise</span>  <span class="cm"># 4xx errors: don't retry</span>
+    <span class="kw">raise</span> Exception(<span class="st">"Max retries exceeded"</span>)</pre>
+</div><div class="code-block">
+<div class="code-block-label"><span>Python — cost estimation before calling</span><button class="copy-btn">Copy</button></div>
+<pre>COST_PER_MTK = {
+    <span class="st">"claude-opus-4-5"</span>:        {<span class="st">"in"</span>: <span class="nu">15.0</span>, <span class="st">"out"</span>: <span class="nu">75.0</span>},
+    <span class="st">"claude-sonnet-4-6"</span>:      {<span class="st">"in"</span>: <span class="nu">3.0</span>,  <span class="st">"out"</span>: <span class="nu">15.0</span>},
+    <span class="st">"claude-haiku-4-5-20251001"</span>: {<span class="st">"in"</span>: <span class="nu">0.25</span>, <span class="st">"out"</span>: <span class="nu">1.25</span>},
+}
+
+<span class="kw">def</span> <span class="fn">estimate_cost</span>(model: str, input_tokens: int, output_tokens: int) -> float:
+    rates = COST_PER_MTK.get(model, COST_PER_MTK[<span class="st">"claude-haiku-4-5-20251001"</span>])
+    <span class="kw">return</span> (input_tokens * rates[<span class="st">"in"</span>] + output_tokens * rates[<span class="st">"out"</span>]) / <span class="nu">1_000_000</span>
+
+<span class="cm"># After a call</span>
+cost = estimate_cost(
+    <span class="st">"claude-opus-4-5"</span>,
+    response.usage.input_tokens,
+    response.usage.output_tokens
+)
+<span class="kw">print</span>(<span class="st">f"This call cost ~${cost:.6f}"</span>)</pre>
+</div>
         </div>
 
         <nav class="lesson-nav">
             <a href="getting-started.html" class="prev">
                 <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Getting Started</div>
+                <div class="lesson-nav-title">Getting Started with Claude</div>
             </a>
             <a href="tool-use.html" class="next">
                 <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Tool Use</div>
+                <div class="lesson-nav-title">Tool Use & Function Calling</div>
             </a>
         </nav>
     </div>
-
     <footer>
         <div class="footer-container">
             <div class="footer-grid">
@@ -148,7 +499,7 @@ response = client.messages.<span class="function">create</span>(
                     <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
                     <p>The most comprehensive AI coding learning platform.</p>
                 </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
                 <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
                 <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
             </div>
@@ -159,5 +510,16 @@ response = client.messages.<span class="function">create</span>(
     </footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.closest('.code-block').querySelector('pre');
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                this.textContent = '✓ Copied';
+                setTimeout(() => this.textContent = 'Copy', 1500);
+            });
+        });
+    });
+    </script>
 </body>
 </html>

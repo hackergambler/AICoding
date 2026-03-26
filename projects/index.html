@@ -109,84 +109,7 @@
         @media (max-width: 1200px) { .featured-grid, .projects-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .featured-grid, .projects-grid { grid-template-columns: 1fr; } .stats-bar { grid-template-columns: repeat(2, 1fr); } }
     </style>
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -223,7 +146,7 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search projects..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-primary">Start Free</a>
+                <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
@@ -281,7 +204,7 @@
             <div class="featured-projects">
                 <h2 class="section-title">⭐ Featured Projects</h2>
                 <div class="featured-grid">
-                    <a href="#" class="project-card reveal">
+                    <a href="../tutorials/index.html" class="project-card reveal">
                         <div class="project-image">🤖</div>
                         <div class="project-content">
                             <div class="project-header">
@@ -302,7 +225,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="project-card reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card reveal reveal-delay-1">
                         <div class="project-image">📚</div>
                         <div class="project-content">
                             <div class="project-header">
@@ -323,7 +246,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="project-card reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card reveal reveal-delay-2">
                         <div class="project-image">🤖</div>
                         <div class="project-content">
                             <div class="project-header">
@@ -350,10 +273,10 @@
             <div class="category-section">
                 <div class="category-header">
                     <h2 class="section-title">🌱 Beginner Projects (150+)</h2>
-                    <a href="#" class="btn btn-sm btn-outline">View All →</a>
+                    <a href="../tutorials/index.html" class="btn btn-sm btn-outline">View All →</a>
                 </div>
                 <div class="projects-grid">
-                    <a href="#" class="project-card-mini reveal">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
                             <div class="icon">💬</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -364,7 +287,7 @@
                             <span>⏱️ 30 min</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
                             <div class="icon">📝</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -375,7 +298,7 @@
                             <span>⏱️ 45 min</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
                             <div class="icon">🌐</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -386,7 +309,7 @@
                             <span>⏱️ 1 hour</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
                             <div class="icon">😊</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -397,7 +320,7 @@
                             <span>⏱️ 45 min</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
                             <div class="icon">🎨</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -408,7 +331,7 @@
                             <span>⏱️ 1 hour</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
                             <div class="icon">📧</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -426,10 +349,10 @@
             <div class="category-section">
                 <div class="category-header">
                     <h2 class="section-title">📈 Intermediate Projects (200+)</h2>
-                    <a href="#" class="btn btn-sm btn-outline">View All →</a>
+                    <a href="../tutorials/index.html" class="btn btn-sm btn-outline">View All →</a>
                 </div>
                 <div class="projects-grid">
-                    <a href="#" class="project-card-mini reveal">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
                             <div class="icon">📄</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -440,7 +363,7 @@
                             <span>⏱️ 3 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
                             <div class="icon">🔍</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -451,7 +374,7 @@
                             <span>⏱️ 4 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
                             <div class="icon">🎙️</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -462,7 +385,7 @@
                             <span>⏱️ 3 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
                             <div class="icon">📊</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -473,7 +396,7 @@
                             <span>⏱️ 4 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
                             <div class="icon">🛒</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -484,7 +407,7 @@
                             <span>⏱️ 5 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
                             <div class="icon">💻</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -502,10 +425,10 @@
             <div class="category-section">
                 <div class="category-header">
                     <h2 class="section-title">⚡ Advanced & Expert Projects (150+)</h2>
-                    <a href="#" class="btn btn-sm btn-outline">View All →</a>
+                    <a href="../tutorials/index.html" class="btn btn-sm btn-outline">View All →</a>
                 </div>
                 <div class="projects-grid">
-                    <a href="#" class="project-card-mini reveal">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
                             <div class="icon">🏢</div>
                             <span class="badge badge-advanced">Advanced</span>
@@ -516,7 +439,7 @@
                             <span>⏱️ 12 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-1">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
                             <div class="icon">🤖</div>
                             <span class="badge badge-expert">Expert</span>
@@ -527,7 +450,7 @@
                             <span>⏱️ 20 hours</span>
                             </div>
                     </a>
-                    <a href="#" class="project-card-mini reveal reveal-delay-2">
+                    <a href="../tutorials/index.html" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
                             <div class="icon">🔄</div>
                             <span class="badge badge-expert">Expert</span>

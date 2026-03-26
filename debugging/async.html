@@ -154,7 +154,112 @@ messages = [{"role": "system", "content": "You are helpful."}]
     resp = <span class="kw">await</span> async_client.chat.completions.create(
         model=<span class="st">"gpt-4o-mini"</span>, messages=local_messages
     )
-    <span class="kw">return</span> resp.choices[0].message.content</pre></div></div></div>
+    <span class="kw">return</span> resp.choices[0].message.content</pre></div></div>
+        <h2>Bug 5: httpx AsyncClient Not Closed — Resource Leak</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — new client created per call, never closed</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: creates a new connection pool on every call — memory leak</span>
+<span class="kw">async def</span> <span class="fn">fetch_data</span>(url: str) -> str:
+    <span class="kw">import</span> httpx
+    client = httpx.AsyncClient()           <span class="cm"># new pool every time!</span>
+    resp = <span class="kw">await</span> client.get(url)
+    <span class="kw">return</span> resp.text                       <span class="cm"># client never closed!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use context manager or module-level client</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> httpx
+
+<span class="cm"># Option 1: context manager (closes automatically)</span>
+<span class="kw">async def</span> <span class="fn">fetch_data</span>(url: str) -> str:
+    <span class="kw">async with</span> httpx.AsyncClient() <span class="kw">as</span> client:
+        resp = <span class="kw">await</span> client.get(url, timeout=<span class="nu">10.0</span>)
+        <span class="kw">return</span> resp.text
+
+<span class="cm"># Option 2: module-level client reused across calls (more efficient)</span>
+_client: httpx.AsyncClient | None = <span class="kw">None</span>
+
+<span class="kw">async def</span> <span class="fn">get_client</span>() -> httpx.AsyncClient:
+    <span class="kw">global</span> _client
+    <span class="kw">if</span> _client <span class="kw">is None</span>:
+        _client = httpx.AsyncClient(timeout=<span class="nu">10.0</span>, limits=httpx.Limits(max_connections=<span class="nu">100</span>))
+    <span class="kw">return</span> _client</pre></div>
+        </div>
+
+        <h2>Bug 6: Semaphore Deadlock With Nested Async Calls</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — deadlock when semaphore scope wraps another semaphore call</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> asyncio
+sem = asyncio.Semaphore(<span class="nu">2</span>)
+
+<span class="kw">async def</span> <span class="fn">inner_call</span>():
+    <span class="kw">async with</span> sem:  <span class="cm"># tries to acquire same semaphore!</span>
+        <span class="kw">return await</span> llm.complete(<span class="st">"inner"</span>)
+
+<span class="kw">async def</span> <span class="fn">outer_call</span>():
+    <span class="kw">async with</span> sem:  <span class="cm"># holds the semaphore...</span>
+        <span class="kw">return await</span> inner_call()  <span class="cm"># ...then tries to acquire it again: DEADLOCK!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — separate semaphores per level, or don't nest</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Use separate semaphores for different call levels</span>
+outer_sem = asyncio.Semaphore(<span class="nu">5</span>)   <span class="cm"># for outer orchestration calls</span>
+inner_sem = asyncio.Semaphore(<span class="nu">10</span>)  <span class="cm"># for inner tool calls</span>
+
+<span class="kw">async def</span> <span class="fn">inner_call</span>():
+    <span class="kw">async with</span> inner_sem:
+        <span class="kw">return await</span> llm.complete(<span class="st">"inner"</span>)
+
+<span class="kw">async def</span> <span class="fn">outer_call</span>():
+    <span class="kw">async with</span> outer_sem:  <span class="cm"># different semaphore — no deadlock</span>
+        <span class="kw">return await</span> inner_call()</pre></div>
+        </div>
+
+        <h2>Bug 7: asyncio.gather() Silently Swallows Exceptions</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — one task failure is hidden from the caller</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: if one task raises, gather re-raises but other results are LOST</span>
+results = <span class="kw">await</span> asyncio.gather(task1(), task2(), task3())
+<span class="cm"># If task2 raises ValueError, you get the error but task1/task3 results vanish</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use return_exceptions=True to handle partial failures</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre>results = <span class="kw">await</span> asyncio.gather(
+    task1(), task2(), task3(),
+    return_exceptions=<span class="kw">True</span>  <span class="cm"># exceptions become values, not raised</span>
+)
+
+<span class="cm"># Handle each result individually</span>
+<span class="kw">for</span> i, result <span class="kw">in</span> enumerate(results):
+    <span class="kw">if isinstance</span>(result, Exception):
+        print(<span class="st">f"Task {i} failed: {result}"</span>)
+    <span class="kw">else</span>:
+        print(<span class="st">f"Task {i} result: {result}"</span>)</pre></div>
+        </div>
+
+        <h2>Bug 8: Background Task Exception Silently Swallowed</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — asyncio.create_task() exceptions are silently lost</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">async def</span> <span class="fn">broken</span>():
+    task = asyncio.create_task(some_job())  <span class="cm"># fire and forget</span>
+    <span class="kw">await</span> asyncio.sleep(<span class="nu">5</span>)
+    <span class="cm"># If some_job() raises, exception is silently discarded!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — add done callback to surface exceptions</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> asyncio, logging
+
+<span class="kw">def</span> <span class="fn">log_task_errors</span>(task: asyncio.Task) -> <span class="kw">None</span>:
+    <span class="kw">try</span>:
+        task.result()  <span class="cm"># re-raises stored exception</span>
+    <span class="kw">except</span> asyncio.CancelledError:
+        <span class="kw">pass</span>
+    <span class="kw">except Exception</span> <span class="kw">as</span> e:
+        logging.error(f"Background task failed: {e}", exc_info=<span class="kw">True</span>)
+
+task = asyncio.create_task(some_job())
+task.add_done_callback(log_task_errors)  <span class="cm"># always log failures</span></pre></div>
+        </div>
+</div>
         <nav class="lesson-nav">
             <a href="network.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Network Errors</div></a>
             <a href="configuration.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Configuration Errors</div></a>

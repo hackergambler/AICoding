@@ -11,84 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -180,7 +103,7 @@
         <!-- Quick Diagnosis -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Quick Diagnosis</h2>
+                <h2 id="start" class="section-title">Quick Diagnosis</h2>
                 <p class="section-subtitle">Select the symptom that best describes your issue</p>
                 
                 <div class="diagnosis-grid">
@@ -2056,7 +1979,133 @@ def markdown_to_plain_text(md_text):
         <!-- Related Pages -->
         <section class="section">
             <div class="container">
-                <h2 class="section-title">Related Debugging Categories</h2>
+                
+        <h2>Bug: json.loads() on Already-Decoded Dict</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — double-decoding JSON causes TypeError</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: response.json() already returns a dict</span>
+<span class="kw">import</span> json, requests
+resp = requests.post(<span class="st">"https://api.openai.com/v1/chat/completions"</span>, ...)
+data = json.loads(resp.json())  <span class="cm"># TypeError: the JSON object must be str, not dict</span>
+<span class="cm"># resp.json() already decoded it — don't call json.loads() again</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use .json() OR json.loads(resp.text), not both</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Correct option 1: use .json() (recommended)</span>
+data = resp.json()
+
+<span class="cm"># Correct option 2: decode the raw text string</span>
+data = json.loads(resp.text)
+
+<span class="cm"># Both give you the same dict — never combine them</span></pre></div>
+        </div>
+
+        <h2>Bug: Pandas NaN in LLM Input Causes Confusing Outputs</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — NaN values sent to LLM as "nan" string</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+df = pd.read_csv(<span class="st">"customers.csv"</span>)
+<span class="cm"># WRONG: NaN cells become the string "nan" in the prompt</span>
+<span class="kw">for</span> _, row <span class="kw">in</span> df.iterrows():
+    prompt = <span class="st">f"Customer: {row['name']}, Email: {row['email']}, Phone: {row['phone']}"</span>
+    <span class="cm"># Sends: "Customer: Alice, Email: nan, Phone: nan"</span>
+    result = llm_call(prompt)</pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — replace NaN before using in prompts</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> pandas <span class="kw">as</span> pd
+
+df = pd.read_csv(<span class="st">"customers.csv"</span>).fillna(<span class="st">""</span>)  <span class="cm"># replace NaN with empty string</span>
+
+<span class="kw">for</span> _, row <span class="kw">in</span> df.iterrows():
+    parts = []
+    <span class="kw">if</span> row[<span class="st">'name'</span>]: parts.append(<span class="st">f"Name: {row['name']}"</span>)
+    <span class="kw">if</span> row[<span class="st">'email'</span>]: parts.append(<span class="st">f"Email: {row['email']}"</span>)
+    <span class="kw">if</span> row[<span class="st">'phone'</span>]: parts.append(<span class="st">f"Phone: {row['phone']}"</span>)
+    prompt = <span class="st">f"Customer: {', '.join(parts)}"</span>
+    result = llm_call(prompt)</pre></div>
+        </div>
+
+        <h2>Bug: Token Limit Exceeded — Output Silently Truncated</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — no check if response was cut short</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: trusts that response is complete</span>
+resp = client.chat.completions.create(
+    model=<span class="st">"gpt-4o-mini"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"List 500 Python libraries as JSON"</span>}],
+    max_tokens=<span class="nu">256</span>  <span class="cm"># far too low for 500 items</span>
+)
+data = json.loads(resp.choices[<span class="nu">0</span>].message.content)  <span class="cm"># JSONDecodeError — truncated!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — check stop_reason before parsing</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre>resp = client.chat.completions.create(
+    model=<span class="st">"gpt-4o-mini"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"List 500 Python libraries as JSON"</span>}],
+    max_tokens=<span class="nu">8192</span>  <span class="cm"># adequate headroom</span>
+)
+msg = resp.choices[<span class="nu">0</span>]
+<span class="kw">if</span> msg.finish_reason == <span class="st">"max_tokens"</span>:
+    <span class="kw">raise</span> ValueError(<span class="st">f"Response truncated at {resp.usage.completion_tokens} tokens"</span>)
+data = json.loads(msg.message.content)  <span class="cm"># safe to parse</span></pre></div>
+        </div>
+
+        <h2>Bug: Pydantic Validation Fails on Optional Fields With None</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — Optional field receives None, strict validator rejects it</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel
+
+<span class="kw">class</span> <span class="cl">UserProfile</span>(BaseModel):
+    name: str
+    email: str
+    phone: str   <span class="cm"># NOT Optional — crashes when LLM returns null</span>
+
+data = json.loads(llm_response)  <span class="cm"># {"name": "Alice", "email": "a@b.com", "phone": null}</span>
+profile = UserProfile(**data)    <span class="cm"># ValidationError: phone is not a valid str!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use Optional with default None for nullable fields</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel
+<span class="kw">from</span> typing <span class="kw">import</span> Optional
+
+<span class="kw">class</span> <span class="cl">UserProfile</span>(BaseModel):
+    name: str
+    email: str
+    phone: Optional[str] = <span class="kw">None</span>  <span class="cm"># accepts null from LLM output</span>
+    age: Optional[int] = <span class="kw">None</span>
+
+data = json.loads(llm_response)
+profile = UserProfile(**data)     <span class="cm"># now works with null phone</span>
+print(<span class="st">f"Phone: {profile.phone or 'not provided'}"</span>)</pre></div>
+        </div>
+
+        <h2>Bug: Streaming JSON Parsed Before Complete</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — parsing each streamed chunk as JSON (always fails)</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: stream chunks are partial fragments: "{", '"name":', '"Alice"'</span>
+<span class="kw">with</span> client.chat.completions.stream(...) <span class="kw">as</span> s:
+    <span class="kw">for</span> event <span class="kw">in</span> s:
+        chunk = event.choices[<span class="nu">0</span>].delta.content
+        <span class="kw">if</span> chunk:
+            obj = json.loads(chunk)  <span class="cm"># JSONDecodeError on every chunk!</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — accumulate all chunks, parse after stream ends</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre>buffer = <span class="st">""</span>
+<span class="kw">with</span> client.chat.completions.stream(
+    ...,
+    response_format={<span class="st">"type"</span>: <span class="st">"json_object"</span>}  <span class="cm"># force valid JSON output</span>
+) <span class="kw">as</span> s:
+    <span class="kw">for</span> event <span class="kw">in</span> s:
+        chunk = event.choices[<span class="nu">0</span>].delta.content <span class="kw">or</span> <span class="st">""</span>
+        buffer += chunk
+        print(chunk, end=<span class="st">""</span>, flush=<span class="kw">True</span>)  <span class="cm"># live output</span>
+
+obj = json.loads(buffer)  <span class="cm"># parse once, after stream completes</span></pre></div>
+        </div>
+
+<h2 class="section-title">Related Debugging Categories</h2>
                 <div class="related-grid">
                     <a href="api-keys.html" class="related-card">
                         <span class="related-icon">🔑</span>
@@ -2135,8 +2184,8 @@ def markdown_to_plain_text(md_text):
                         <ul>
                             <li><a href="../debugging/index.html">Debugging Hub</a></li>
                             <li><a href="../projects/index.html">Projects</a></li>
-                            <li><a href="#">API Reference</a></li>
-                            <li><a href="#">Community</a></li>
+                            <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                            <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
                         </ul>
                     </div>
                 </div>

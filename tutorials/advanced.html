@@ -12,82 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
 <style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
     }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
+        @media (min-width: 769px) and (max-width: 1100px) {
+            .tutorials-grid,
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -127,7 +56,7 @@
                 <button class="btn btn-ghost btn-sm" id="searchBtn">
                     <span>⌘K</span>
                 </button>
-                <a href="#" class="btn btn-primary btn-sm">Start Learning</a>
+                <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Learning</a>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <span></span>
@@ -340,7 +269,7 @@
                                 <span class="meta-item">🎯 Multi-Agent</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -354,7 +283,7 @@
                                 <span class="meta-item">🔗 Protocols</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -368,7 +297,7 @@
                                 <span class="meta-item">🏛️ Architecture</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -382,7 +311,7 @@
                                 <span class="meta-item">🧠 Memory</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -396,7 +325,7 @@
                                 <span class="meta-item">🔧 Frameworks</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -410,23 +339,23 @@
                                 <span class="meta-item">🎮 MARL</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Multi-Agent Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">Agent Orchestration (620+)</a>
-                            <a href="#" class="tag">Swarm Intelligence (380+)</a>
-                            <a href="#" class="tag">Agent Communication (540+)</a>
-                            <a href="#" class="tag">Hierarchical Agents (420+)</a>
-                            <a href="#" class="tag">Memory Systems (350+)</a>
-                            <a href="#" class="tag">AutoGPT Patterns (290+)</a>
-                            <a href="#" class="tag">CrewAI Framework (480+)</a>
-                            <a href="#" class="tag">Agent Debugging (310+)</a>
-                            <a href="#" class="tag">Tool Integration (560+)</a>
-                            <a href="#" class="tag">Planning Algorithms (400+)</a>
+                            <a href="../tutorials/index.html" class="tag">Agent Orchestration (620+)</a>
+                            <a href="../tutorials/index.html" class="tag">Swarm Intelligence (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">Agent Communication (540+)</a>
+                            <a href="../tutorials/index.html" class="tag">Hierarchical Agents (420+)</a>
+                            <a href="../tutorials/index.html" class="tag">Memory Systems (350+)</a>
+                            <a href="../tutorials/index.html" class="tag">AutoGPT Patterns (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">CrewAI Framework (480+)</a>
+                            <a href="../tutorials/index.html" class="tag">Agent Debugging (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">Tool Integration (560+)</a>
+                            <a href="../tutorials/index.html" class="tag">Planning Algorithms (400+)</a>
                         </div>
                     </div>
                 </div>
@@ -456,7 +385,7 @@
                                 <span class="meta-item">🔧 Microservices</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -470,7 +399,7 @@
                                 <span class="meta-item">📨 Events</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -484,7 +413,7 @@
                                 <span class="meta-item">⚡ Scaling</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -498,7 +427,7 @@
                                 <span class="meta-item">🛡️ HA</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -512,7 +441,7 @@
                                 <span class="meta-item">☸️ K8s</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -526,23 +455,23 @@
                                 <span class="meta-item">🌍 Global</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Architecture Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">Microservices (520+)</a>
-                            <a href="#" class="tag">Event-Driven (380+)</a>
-                            <a href="#" class="tag">Load Balancing (290+)</a>
-                            <a href="#" class="tag">Kubernetes (450+)</a>
-                            <a href="#" class="tag">Service Mesh (210+)</a>
-                            <a href="#" class="tag">API Gateway (340+)</a>
-                            <a href="#" class="tag">Caching Layers (260+)</a>
-                            <a href="#" class="tag">Message Queues (320+)</a>
-                            <a href="#" class="tag">Database Scaling (280+)</a>
-                            <a href="#" class="tag">Multi-Region (180+)</a>
+                            <a href="../tutorials/index.html" class="tag">Microservices (520+)</a>
+                            <a href="../tutorials/index.html" class="tag">Event-Driven (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">Load Balancing (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Kubernetes (450+)</a>
+                            <a href="../tutorials/index.html" class="tag">Service Mesh (210+)</a>
+                            <a href="../tutorials/index.html" class="tag">API Gateway (340+)</a>
+                            <a href="../tutorials/index.html" class="tag">Caching Layers (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Message Queues (320+)</a>
+                            <a href="../tutorials/index.html" class="tag">Database Scaling (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Multi-Region (180+)</a>
                         </div>
                     </div>
                 </div>
@@ -572,7 +501,7 @@
                                 <span class="meta-item">🚀 Speed</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -586,7 +515,7 @@
                                 <span class="meta-item">📦 Batching</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -600,7 +529,7 @@
                                 <span class="meta-item">💾 Caching</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -614,7 +543,7 @@
                                 
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -628,7 +557,7 @@
                                 <span class="meta-item">🎮 GPU</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -642,23 +571,23 @@
                                 <span class="meta-item">🌊 Streaming</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Performance Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">Inference Speed (420+)</a>
-                            <a href="#" class="tag">Batching (280+)</a>
-                            <a href="#" class="tag">Semantic Cache (350+)</a>
-                            <a href="#" class="tag">Cost Reduction (310+)</a>
-                            <a href="#" class="tag">GPU Optimization (260+)</a>
-                            <a href="#" class="tag">Memory Management (220+)</a>
-                            <a href="#" class="tag">Profiling Tools (180+)</a>
-                            <a href="#" class="tag">Quantization (290+)</a>
-                            <a href="#" class="tag">Model Compression (240+)</a>
-                            <a href="#" class="tag">Benchmarking (200+)</a>
+                            <a href="../tutorials/index.html" class="tag">Inference Speed (420+)</a>
+                            <a href="../tutorials/index.html" class="tag">Batching (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Semantic Cache (350+)</a>
+                            <a href="../tutorials/index.html" class="tag">Cost Reduction (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">GPU Optimization (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Memory Management (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">Profiling Tools (180+)</a>
+                            <a href="../tutorials/index.html" class="tag">Quantization (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Model Compression (240+)</a>
+                            <a href="../tutorials/index.html" class="tag">Benchmarking (200+)</a>
                         </div>
                     </div>
                 </div>
@@ -688,7 +617,7 @@
                                 <span class="meta-item">🛡️ Security</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -702,7 +631,7 @@
                                 <span class="meta-item">🔐 Encryption</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -716,7 +645,7 @@
                                 <span class="meta-item">📜 GDPR</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -730,7 +659,7 @@
                                 <span class="meta-item">🏥 HIPAA</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -744,7 +673,7 @@
                                 <span class="meta-item">📊 Audit</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -758,23 +687,23 @@
                                 <span class="meta-item">👤 Privacy</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Security Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">Prompt Injection (380+)</a>
-                            <a href="#" class="tag">Data Encryption (310+)</a>
-                            <a href="#" class="tag">GDPR Compliance (290+)</a>
-                            <a href="#" class="tag">HIPAA (240+)</a>
-                            <a href="#" class="tag">SOC 2 (220+)</a>
-                            <a href="#" class="tag">Audit Logging (280+)</a>
-                            <a href="#" class="tag">Access Control (350+)</a>
-                            <a href="#" class="tag">PII Handling (260+)</a>
-                            <a href="#" class="tag">Model Security (320+)</a>
-                            <a href="#" class="tag">API Security (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Prompt Injection (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">Data Encryption (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">GDPR Compliance (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">HIPAA (240+)</a>
+                            <a href="../tutorials/index.html" class="tag">SOC 2 (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">Audit Logging (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Access Control (350+)</a>
+                            <a href="../tutorials/index.html" class="tag">PII Handling (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Model Security (320+)</a>
+                            <a href="../tutorials/index.html" class="tag">API Security (290+)</a>
                         </div>
                     </div>
                 </div>
@@ -804,7 +733,7 @@
                                 <span class="meta-item">🔧 CI/CD</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -818,7 +747,7 @@
                                 <span class="meta-item">📦 Versioning</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -832,7 +761,7 @@
                                 <span class="meta-item">🧪 Testing</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -846,7 +775,7 @@
                                 <span class="meta-item">🔄 Retraining</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -860,7 +789,7 @@
                                 <span class="meta-item">🗄️ Features</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -874,23 +803,23 @@
                                 <span class="meta-item">📈 Monitoring</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All MLOps Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">CI/CD Pipelines (520+)</a>
-                            <a href="#" class="tag">Model Versioning (380+)</a>
-                            <a href="#" class="tag">A/B Testing (290+)</a>
-                            <a href="#" class="tag">Auto Retraining (340+)</a>
-                            <a href="#" class="tag">Feature Stores (260+)</a>
-                            <a href="#" class="tag">Model Monitoring (420+)</a>
-                            <a href="#" class="tag">Data Pipelines (380+)</a>
-                            <a href="#" class="tag">Kubeflow (310+)</a>
-                            <a href="#" class="tag">Airflow (280+)</a>
-                            <a href="#" class="tag">Model Registry (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">CI/CD Pipelines (520+)</a>
+                            <a href="../tutorials/index.html" class="tag">Model Versioning (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">A/B Testing (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Auto Retraining (340+)</a>
+                            <a href="../tutorials/index.html" class="tag">Feature Stores (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Model Monitoring (420+)</a>
+                            <a href="../tutorials/index.html" class="tag">Data Pipelines (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">Kubeflow (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">Airflow (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Model Registry (220+)</a>
                         </div>
                     </div>
                 </div>
@@ -920,7 +849,7 @@
                                 <span class="meta-item">🎯 LoRA</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -934,7 +863,7 @@
                                 <span class="meta-item">⚡ QLoRA</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -948,7 +877,7 @@
                                 <span class="meta-item">🎮 RLHF</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -962,7 +891,7 @@
                                 <span class="meta-item">📊 Data</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -976,7 +905,7 @@
                                 <span class="meta-item">📈 Eval</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -990,23 +919,23 @@
                                 <span class="meta-item">🏢 Domain</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Fine-Tuning Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">LoRA Techniques (420+)</a>
-                            <a href="#" class="tag">QLoRA (310+)</a>
-                            <a href="#" class="tag">RLHF (280+)</a>
-                            <a href="#" class="tag">DPO Training (240+)</a>
-                            <a href="#" class="tag">Dataset Curation (380+)</a>
-                            <a href="#" class="tag">Evaluation (350+)</a>
-                            <a href="#" class="tag">Instruction Tuning (290+)</a>
-                            <a href="#" class="tag">Multi-Task Training (220+)</a>
-                            <a href="#" class="tag">Domain Adaptation (260+)</a>
-                            <a href="#" class="tag">Synthetic Data (180+)</a>
+                            <a href="../tutorials/index.html" class="tag">LoRA Techniques (420+)</a>
+                            <a href="../tutorials/index.html" class="tag">QLoRA (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">RLHF (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">DPO Training (240+)</a>
+                            <a href="../tutorials/index.html" class="tag">Dataset Curation (380+)</a>
+                            <a href="../tutorials/index.html" class="tag">Evaluation (350+)</a>
+                            <a href="../tutorials/index.html" class="tag">Instruction Tuning (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Multi-Task Training (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">Domain Adaptation (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Synthetic Data (180+)</a>
                         </div>
                     </div>
                 </div>
@@ -1036,7 +965,7 @@
                                 <span class="meta-item">☁️ Salesforce</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1050,7 +979,7 @@
                                 <span class="meta-item">🔷 SAP</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1064,7 +993,7 @@
                                 <span class="meta-item">🪟 M365</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1078,7 +1007,7 @@
                                 <span class="meta-item">🎫 ServiceNow</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1092,7 +1021,7 @@
                                 <span class="meta-item">💬 Slack</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1106,23 +1035,23 @@
                                 <span class="meta-item">❄️ Snowflake</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Enterprise Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">Salesforce (340+)</a>
-                            <a href="#" class="tag">SAP (280+)</a>
-                            <a href="#" class="tag">Microsoft 365 (320+)</a>
-                            <a href="#" class="tag">ServiceNow (240+)</a>
-                            <a href="#" class="tag">Slack (290+)</a>
-                            <a href="#" class="tag">Snowflake (260+)</a>
-                            <a href="#" class="tag">Databricks (310+)</a>
-                            <a href="#" class="tag">Workday (180+)</a>
-                            <a href="#" class="tag">HubSpot (220+)</a>
-                            <a href="#" class="tag">Zendesk (190+)</a>
+                            <a href="../tutorials/index.html" class="tag">Salesforce (340+)</a>
+                            <a href="../tutorials/index.html" class="tag">SAP (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Microsoft 365 (320+)</a>
+                            <a href="../tutorials/index.html" class="tag">ServiceNow (240+)</a>
+                            <a href="../tutorials/index.html" class="tag">Slack (290+)</a>
+                            <a href="../tutorials/index.html" class="tag">Snowflake (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Databricks (310+)</a>
+                            <a href="../tutorials/index.html" class="tag">Workday (180+)</a>
+                            <a href="../tutorials/index.html" class="tag">HubSpot (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">Zendesk (190+)</a>
                         </div>
                     </div>
                 </div>
@@ -1152,7 +1081,7 @@
                                 <span class="meta-item">🔍 Tracing</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1166,7 +1095,7 @@
                                 <span class="meta-item">🌐 Distributed</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1180,7 +1109,7 @@
                                 <span class="meta-item">📈 Metrics</span>
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1194,7 +1123,7 @@
                                 <span class="meta-item">🚨 Alerts</span>
                                 <span class="meta-item">⭐ 4.7</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1208,7 +1137,7 @@
                                 
                                 <span class="meta-item">⭐ 4.8</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
 
                         <article class="tutorial-card">
@@ -1222,23 +1151,23 @@
                                 <span class="meta-item">📝 Logs</span>
                                 <span class="meta-item">⭐ 4.9</span>
                             </div>
-                            <a href="#" class="card-link">Start Tutorial →</a>
+                            <a href="../tutorials/index.html" class="card-link">Start Tutorial →</a>
                         </article>
                     </div>
                     
                     <div class="category-subcategories">
                         <h5>Explore All Observability Topics:</h5>
                         <div class="subcategory-tags">
-                            <a href="#" class="tag">LangSmith (320+)</a>
-                            <a href="#" class="tag">OpenTelemetry (260+)</a>
-                            <a href="#" class="tag">Grafana (280+)</a>
-                            <a href="#" class="tag">Datadog (240+)</a>
-                            <a href="#" class="tag">Alerting (210+)</a>
-                            <a href="#" class="tag">Cost Tracking (190+)</a>
-                            <a href="#" class="tag">Log Analysis (220+)</a>
-                            <a href="#" class="tag">Performance Profiling (180+)</a>
-                            <a href="#" class="tag">Anomaly Detection (160+)</a>
-                            <a href="#" class="tag">SLO/SLA (140+)</a>
+                            <a href="../tutorials/index.html" class="tag">LangSmith (320+)</a>
+                            <a href="../tutorials/index.html" class="tag">OpenTelemetry (260+)</a>
+                            <a href="../tutorials/index.html" class="tag">Grafana (280+)</a>
+                            <a href="../tutorials/index.html" class="tag">Datadog (240+)</a>
+                            <a href="../tutorials/index.html" class="tag">Alerting (210+)</a>
+                            <a href="../tutorials/index.html" class="tag">Cost Tracking (190+)</a>
+                            <a href="../tutorials/index.html" class="tag">Log Analysis (220+)</a>
+                            <a href="../tutorials/index.html" class="tag">Performance Profiling (180+)</a>
+                            <a href="../tutorials/index.html" class="tag">Anomaly Detection (160+)</a>
+                            <a href="../tutorials/index.html" class="tag">SLO/SLA (140+)</a>
                         </div>
                     </div>
                 </div>
@@ -1272,7 +1201,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> Build production-ready multi-agent systems
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
 
@@ -1296,7 +1225,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> Operate AI systems at massive scale
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
 
@@ -1320,7 +1249,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> Build enterprise-secure AI systems
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
 
@@ -1344,7 +1273,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> Automate the entire ML lifecycle
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
 
@@ -1368,7 +1297,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> Customize models for any domain
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
 
@@ -1392,7 +1321,7 @@
                             <div class="path-outcome">
                                 <strong>Outcome:</strong> AI-enable enterprise workflows
                             </div>
-                            <a href="#" class="btn btn-primary btn-sm">Start Path</a>
+                            <a href="../tutorials/index.html" class="btn btn-primary btn-sm">Start Path</a>
                         </div>
                     </div>
                 </div>
@@ -1478,8 +1407,8 @@
                     <ul>
                         <li><a href="../debugging/index.html">Debugging Hub</a></li>
                         <li><a href="../projects/index.html">Projects</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="../tutorials/index.html">Community</a></li>
+                        <li><a href="../tutorials/index.html">Blog</a></li>
                     </ul>
                 </div>
             </div>

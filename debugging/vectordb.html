@@ -135,7 +135,94 @@ vectorstore = FAISS.from_documents(docs, embeddings)
 
 <span class="cm"># Add new docs incrementally</span>
 vectorstore.add_documents(new_docs)
-vectorstore.save_local(<span class="st">"./faiss_index"</span>)</pre></div></div><div class="tip-box"><div class="tip-box-title">💡 Retrieval score threshold</div><p>Always set a minimum similarity threshold. If the best score is below 0.5, the document is likely irrelevant - return a 'not found' answer rather than hallucinating.</p></div></div>
+vectorstore.save_local(<span class="st">"./faiss_index"</span>)</pre></div></div><div class="tip-box"><div class="tip-box-title">💡 Retrieval score threshold</div><p>Always set a minimum similarity threshold. If the best score is below 0.5, the document is likely irrelevant - return a 'not found' answer rather than hallucinating.</p></div>
+        <h2>Bug 4: Chroma Collection Persists Stale Data</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — re-adding documents creates duplicates</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> chromadb
+
+client = chromadb.PersistentClient(path=<span class="st">"./chroma_db"</span>)
+collection = client.get_or_create_collection(<span class="st">"docs"</span>)
+
+<span class="cm"># WRONG: run this twice and you get duplicate documents!</span>
+collection.add(
+    documents=[<span class="st">"Python is great"</span>, <span class="st">"LLMs are transforming software"</span>],
+    ids=[<span class="st">"doc1"</span>, <span class="st">"doc2"</span>]
+)
+<span class="cm"># Second run raises: "IDs must be unique"</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — upsert instead of add, or check before inserting</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Option 1: upsert (add or update if ID exists)</span>
+collection.upsert(
+    documents=[<span class="st">"Python is great"</span>, <span class="st">"LLMs are transforming software"</span>],
+    ids=[<span class="st">"doc1"</span>, <span class="st">"doc2"</span>]
+)
+
+<span class="cm"># Option 2: delete and rebuild collection when refreshing</span>
+<span class="kw">try</span>:
+    client.delete_collection(<span class="st">"docs"</span>)
+<span class="kw">except Exception</span>:
+    <span class="kw">pass</span>  <span class="cm"># doesn't exist yet</span>
+collection = client.create_collection(<span class="st">"docs"</span>)
+collection.add(documents=[...], ids=[...])</pre></div>
+        </div>
+
+        <h2>Bug 5: Metadata Filter Syntax Error in Chroma</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — incorrect where clause syntax crashes query</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: direct key=value in where is invalid syntax</span>
+results = collection.query(
+    query_texts=[<span class="st">"Python tutorial"</span>],
+    where={"category": "python"},    <span class="cm"># wrong syntax!</span>
+    n_results=<span class="nu">5</span>
+)
+<span class="cm"># ValueError: Expected where operator, got: python</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use Chroma's operator syntax</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># CORRECT: use explicit operator</span>
+results = collection.query(
+    query_texts=[<span class="st">"Python tutorial"</span>],
+    where={"category": {"$eq": "python"}},   <span class="cm"># explicit $eq operator</span>
+    n_results=<span class="nu">5</span>
+)
+
+<span class="cm"># Other operators: $ne, $gt, $gte, $lt, $lte, $in, $nin, $and, $or</span>
+results = collection.query(
+    query_texts=[<span class="st">"advanced topics"</span>],
+    where={"$and": [
+        {"category": {"$eq": "python"}},
+        {"difficulty": {"$in": ["intermediate", "advanced"]}}
+    ]},
+    n_results=<span class="nu">5</span>
+)</pre></div>
+        </div>
+
+        <h2>Bug 6: LangChain FAISS Score Threshold Ignored</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — score_threshold silently not applied</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: score_threshold only works with similarity_search_with_relevance_scores</span>
+retriever = vectorstore.as_retriever(
+    search_type=<span class="st">"similarity"</span>,
+    search_kwargs={"score_threshold": 0.7}  <span class="cm"># silently ignored!</span>
+)
+docs = retriever.invoke(<span class="st">"my query"</span>)  <span class="cm"># returns ALL docs regardless of score</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — use correct search_type for threshold to take effect</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># CORRECT: set search_type to "similarity_score_threshold"</span>
+retriever = vectorstore.as_retriever(
+    search_type=<span class="st">"similarity_score_threshold"</span>,
+    search_kwargs={
+        "score_threshold": <span class="nu">0.7</span>,  <span class="cm"># now actually applied</span>
+        "k": <span class="nu">5</span>
+    }
+)
+docs = retriever.invoke(<span class="st">"my query"</span>)
+print(<span class="st">f"Retrieved {len(docs)} docs above 0.7 threshold"</span>)</pre></div>
+        </div>
+</div>
         <nav class="lesson-nav">
             <a href="memory.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Memory Errors</div></a>
             <a href="index.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Debugging Home</div></a>

@@ -120,84 +120,7 @@
         @media (max-width: 1200px) { .category-grid { grid-template-columns: repeat(2, 1fr); } .api-section { grid-template-columns: 1fr; } }
         @media (max-width: 600px) { .category-grid { grid-template-columns: 1fr; } }
     </style>
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -234,7 +157,7 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search errors..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-primary">Start Free</a>
+                <a href="https://www.myrqai.com" target="_blank" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
@@ -254,7 +177,9 @@
                 <span class="search-example">ChromaDB connection</span>
             </div>
         </div>
-    </section>
+    
+<a href="lab.html" class="category-card" style="border-color:rgba(0,255,170,0.2);background:linear-gradient(135deg,rgba(0,255,170,0.05),rgba(0,212,255,0.05));display:block;padding:var(--space-xl);border-radius:var(--radius-lg);text-decoration:none;margin-top:var(--space-lg)"><div style="font-size:2.5rem;margin-bottom:var(--space-md)">🔬</div><h3 style="font-family:var(--font-heading);font-size:1.2rem;color:var(--accent-primary);margin-bottom:var(--space-sm)">Debugging Lab</h3><p style="color:var(--text-secondary);font-size:.95rem">10 real broken AI code examples with complete fixes. Infinite loops, async bugs, context overflow, race conditions, rate limits, and more.</p></a>
+</section>
 
     <div class="ad-container ad-container-horizontal">
                 <div class="ad-label">Advertisement</div>
@@ -272,49 +197,49 @@
             
             <!-- Error Categories -->
             <div class="category-grid">
-                <a href="#" class="category-card reveal">
+                <a href="api-keys.html" class="category-card reveal">
                     <div class="icon">🔑</div>
                     <h3>API Key Errors</h3>
                     <div class="count">8,500+</div>
                     <p>Authentication, invalid keys, permissions</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-1">
+                <a href="network.html" class="category-card reveal reveal-delay-1">
                     <div class="icon">🧠</div>
                     <h3>Memory & Context</h3>
                     <div class="count">6,200+</div>
                     <p>Token limits, context overflow, memory leaks</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-2">
+                <a href="memory.html" class="category-card reveal reveal-delay-2">
                     <div class="icon">🌐</div>
                     <h3>Network Errors</h3>
                     <div class="count">5,800+</div>
                     <p>Timeouts, connection, rate limits</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-3">
+                <a href="data.html" class="category-card reveal reveal-delay-3">
                     <div class="icon">📊</div>
                     <h3>Data & Format</h3>
                     <div class="count">9,400+</div>
                     <p>JSON parsing, encoding, validation</p>
                 </a>
-                <a href="#" class="category-card reveal">
+                <a href="https://www.myrqai.com" target="_blank" class="category-card reveal">
                     <div class="icon">⚙️</div>
                     <h3>Configuration</h3>
                     <div class="count">7,100+</div>
                     <p>Environment, dependencies, setup</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-1">
+                <a href="https://www.myrqai.com" target="_blank" class="category-card reveal reveal-delay-1">
                     <div class="icon">⚡</div>
                     <h3>Async & Streaming</h3>
                     <div class="count">5,500+</div>
                     <p>Async errors, streaming issues, callbacks</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-2">
+                <a href="https://www.myrqai.com" target="_blank" class="category-card reveal reveal-delay-2">
                     <div class="icon">🗄️</div>
                     <h3>Vector DB Errors</h3>
                     <div class="count">4,800+</div>
                     <p>Pinecone, Chroma, Weaviate issues</p>
                 </a>
-                <a href="#" class="category-card reveal reveal-delay-3">
+                <a href="https://www.myrqai.com" target="_blank" class="category-card reveal reveal-delay-3">
                     <div class="icon">🚀</div>
                     <h3>Deployment</h3>
                     <div class="count">3,700+</div>
@@ -326,7 +251,7 @@
             <div class="popular-section">
                 <h2 class="section-title">🔥 Most Common Errors This Week</h2>
                 <div class="error-list">
-                    <a href="#" class="error-card reveal" data-searchable>
+                    <a href="api-keys.html" class="error-card reveal" data-searchable>
                         <div class="error-card-header">
                             <div class="error-code">openai.RateLimitError</div>
                             <span class="badge badge-beginner">Easy Fix</span>
@@ -340,7 +265,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="error-card reveal reveal-delay-1" data-searchable>
+                    <a href="api-keys.html" class="error-card reveal reveal-delay-1" data-searchable>
                         <div class="error-card-header">
                             <div class="error-code">AuthenticationError</div>
                             <span class="badge badge-beginner">Easy Fix</span>
@@ -354,7 +279,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="error-card reveal reveal-delay-2" data-searchable>
+                    <a href="api-keys.html" class="error-card reveal reveal-delay-2" data-searchable>
                         <div class="error-card-header">
                             <div class="error-code">context_length_exceeded</div>
                             <span class="badge badge-intermediate">Moderate</span>
@@ -368,7 +293,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="error-card reveal" data-searchable>
+                    <a href="api-keys.html" class="error-card reveal" data-searchable>
                         <div class="error-card-header">
                             <div class="error-code">JSONDecodeError</div>
                             <span class="badge badge-intermediate">Moderate</span>
@@ -382,7 +307,7 @@
                         </div>
                     </a>
                     
-                    <a href="#" class="error-card reveal reveal-delay-1" data-searchable>
+                    <a href="api-keys.html" class="error-card reveal reveal-delay-1" data-searchable>
                         <div class="error-card-header">
                             <div class="error-code">chromadb.errors.InvalidCollectionException</div>
                             <span class="badge badge-intermediate">Moderate</span>
@@ -407,13 +332,13 @@
                         <h3>OpenAI API Errors</h3>
                     </div>
                     <ul class="api-errors">
-                        <li><a href="#">RateLimitError <span class="count">2,400+ solutions</span></a></li>
-                        <li><a href="#">AuthenticationError <span class="count">1,800+ solutions</span></a></li>
-                        <li><a href="#">InvalidRequestError <span class="count">3,200+ solutions</span></a></li>
-                        <li><a href="#">APIConnectionError <span class="count">1,500+ solutions</span></a></li>
-                        <li><a href="#">context_length_exceeded <span class="count">1,200+ solutions</span></a></li>
-                        <li><a href="#">Timeout errors <span class="count">900+ solutions</span></a></li>
-                        <li><a href="#">View all OpenAI errors → <span class="count">12,500+</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">RateLimitError <span class="count">2,400+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">AuthenticationError <span class="count">1,800+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">InvalidRequestError <span class="count">3,200+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">APIConnectionError <span class="count">1,500+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">context_length_exceeded <span class="count">1,200+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Timeout errors <span class="count">900+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">View all OpenAI errors → <span class="count">12,500+</span></a></li>
                     </ul>
                 </div>
                 
@@ -423,12 +348,12 @@
                         <h3>Claude API Errors</h3>
                     </div>
                     <ul class="api-errors">
-                        <li><a href="#">authentication_error <span class="count">1,200+ solutions</span></a></li>
-                        <li><a href="#">rate_limit_error <span class="count">1,500+ solutions</span></a></li>
-                        <li><a href="#">invalid_request_error <span class="count">1,800+ solutions</span></a></li>
-                        <li><a href="#">overloaded_error <span class="count">800+ solutions</span></a></li>
-                        <li><a href="#">api_error <span class="count">1,100+ solutions</span></a></li>
-                        <li><a href="#">View all Claude errors → <span class="count">8,200+</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">authentication_error <span class="count">1,200+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">rate_limit_error <span class="count">1,500+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">invalid_request_error <span class="count">1,800+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">overloaded_error <span class="count">800+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">api_error <span class="count">1,100+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">View all Claude errors → <span class="count">8,200+</span></a></li>
                     </ul>
                 </div>
                 
@@ -438,12 +363,12 @@
                         <h3>LangChain Errors</h3>
                     </div>
                     <ul class="api-errors">
-                        <li><a href="#">OutputParserException <span class="count">2,100+ solutions</span></a></li>
-                        <li><a href="#">ValueError: Invalid chain <span class="count">1,800+ solutions</span></a></li>
-                        <li><a href="#">Memory errors <span class="count">1,500+ solutions</span></a></li>
-                        <li><a href="#">Agent execution errors <span class="count">2,400+ solutions</span></a></li>
-                        <li><a href="#">LCEL errors <span class="count">1,200+ solutions</span></a></li>
-                        <li><a href="#">View all LangChain errors → <span class="count">15,000+</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">OutputParserException <span class="count">2,100+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">ValueError: Invalid chain <span class="count">1,800+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Memory errors <span class="count">1,500+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Agent execution errors <span class="count">2,400+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">LCEL errors <span class="count">1,200+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">View all LangChain errors → <span class="count">15,000+</span></a></li>
                     </ul>
                 </div>
                 
@@ -453,12 +378,12 @@
                         <h3>Vector Database Errors</h3>
                     </div>
                     <ul class="api-errors">
-                        <li><a href="#">Pinecone connection errors <span class="count">1,400+ solutions</span></a></li>
-                        <li><a href="#">ChromaDB persistence issues <span class="count">1,200+ solutions</span></a></li>
-                        <li><a href="#">Weaviate schema errors <span class="count">800+ solutions</span></a></li>
-                        <li><a href="#">Embedding dimension mismatch <span class="count">1,100+ solutions</span></a></li>
-                        <li><a href="#">Index errors <span class="count">900+ solutions</span></a></li>
-                        <li><a href="#">View all Vector DB errors → <span class="count">7,500+</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Pinecone connection errors <span class="count">1,400+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">ChromaDB persistence issues <span class="count">1,200+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Weaviate schema errors <span class="count">800+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Embedding dimension mismatch <span class="count">1,100+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Index errors <span class="count">900+ solutions</span></a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">View all Vector DB errors → <span class="count">7,500+</span></a></li>
                     </ul>
                 </div>
             </div>

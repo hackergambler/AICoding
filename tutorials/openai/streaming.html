@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streaming Responses | OpenAI API | AI Coding Academy</title>
-    <meta name="description" content="Learn how to stream responses token-by-token for better user experience in chat applications.">
+    <title>OpenAI Streaming — Real-time Responses | AI Coding Academy</title>
+    <meta name="description" content="Stream OpenAI responses in Python, FastAPI, Node.js, and React for real-time UIs.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,29 +20,49 @@
         .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
         .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
         .lesson-content h2:first-child { margin-top: 0; }
-        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); color: var(--accent-secondary); }
+        .lesson-content h4 { font-family: var(--font-heading); font-size: 1rem; margin: var(--space-lg) 0 var(--space-sm); color: var(--text-primary); }
         .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
         .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
         .lesson-content li { margin-bottom: var(--space-sm); }
-        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
-        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; color: #e6edf3; }
-        .code-block .comment { color: #8b949e; }
-        .code-block .keyword { color: #ff7b72; }
-        .code-block .string { color: #a5d6ff; }
-        .code-block .function { color: #d2a8ff; }
-        .tip-box { background: rgba(0, 255, 170, 0.1); border: 1px solid rgba(0, 255, 170, 0.2); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .lesson-content code { background: rgba(0,255,170,0.1); color: var(--accent-primary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; position: relative; }
+        .code-block-label { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: var(--space-sm); display: flex; justify-content: space-between; align-items: center; }
+        .code-block-label .copy-btn { cursor: pointer; color: var(--accent-primary); border: 1px solid var(--accent-primary); background: transparent; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.65; color: #e6edf3; white-space: pre; }
+        .cm { color: #8b949e; }  /* comment */
+        .kw { color: #ff7b72; }  /* keyword */
+        .st { color: #a5d6ff; }  /* string */
+        .fn { color: #d2a8ff; }  /* function */
+        .nu { color: #79c0ff; }  /* number */
+        .cl { color: #ffa657; }  /* class */
+        .op { color: #ff7b72; }  /* operator */
+        .tip-box { background: rgba(0, 255, 170, 0.08); border: 1px solid rgba(0, 255, 170, 0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
         .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
-        .tip-box p { margin: 0; color: var(--text-secondary); }
+        .warn-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .warn-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-warning); margin-bottom: var(--space-sm); }
+        .info-box { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .info-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .tip-box p, .warn-box p, .info-box p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+        .toc { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-2xl); }
+        .toc h3 { font-family: var(--font-heading); color: var(--accent-primary); margin-bottom: var(--space-md); }
+        .toc ol { padding-left: var(--space-xl); color: var(--text-secondary); }
+        .toc li { margin-bottom: var(--space-xs); }
+        .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--accent-primary); }
         .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
         .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
         .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
         .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
         .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
         .lesson-nav .next { text-align: right; }
-        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+        .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-lg) 0; }
+        .example-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); padding: var(--space-lg); }
+        .example-card h4 { color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
-</head>
-<body>
+</head><body>
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
@@ -53,108 +73,164 @@
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
     </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-
-    <nav class="nav">
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
         <div class="nav-container">
             <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
             <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
                 <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
                 <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
                 <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../index.html" class="btn btn-primary">Start Free</a>
+                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
-
     <div class="lesson-container">
         <div class="breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="separator">/</span>
-            <a href="../index.html">Tutorials</a>
-            <span class="separator">/</span>
-            <a href="../../courses/openai.html">OpenAI API</a>
-            <span class="separator">/</span>
-            <span>Streaming Responses</span>
+            <a href="../../index.html">Home</a><span class="separator">/</span>
+            <a href="../index.html">Tutorials</a><span class="separator">/</span>
+            <a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
+            <span>Streaming</span>
         </div>
-
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 20 min</span>
-                <span class="lesson-meta-item">📚 Module 2, Lesson 1</span>
+                <span class="lesson-meta-item">⏱️ 25 min</span>
             </div>
-            <h1 class="lesson-title">Streaming Responses</h1>
-            <p class="lesson-description">Learn how to stream responses token-by-token for better user experience in chat applications.</p>
+            <h1 class="lesson-title">Streaming OpenAI Responses</h1>
+            <p class="lesson-description">Stream tokens in real time with Python, FastAPI, async generators, and frontend integration using Server-Sent Events.</p>
         </header>
-
         <div class="lesson-content">
-            <h2>Why Use Streaming?</h2>
-            <p>Streaming delivers responses token-by-token instead of waiting for the complete response. This provides a much better user experience, especially for long responses.</p>
+            <h2>Basic Streaming</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — stream tokens to console</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
 
-            <h2>Basic Streaming Implementation</h2>
-            <div class="code-block">
-<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+client = OpenAI()
 
-client = <span class="function">OpenAI</span>()
+<span class="kw">with</span> client.chat.completions.stream(
+    model=<span class="st">"gpt-4o"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Write a short poem about async programming."</span>}]
+) <span class="kw">as</span> stream:
+    <span class="kw">for</span> event <span class="kw">in</span> stream:
+        chunk = event.choices[<span class="nu">0</span>].delta.content <span class="kw">if</span> event.choices <span class="kw">else None</span>
+        <span class="kw">if</span> chunk:
+            <span class="kw">print</span>(chunk, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
 
-<span class="comment"># Enable streaming with stream=True</span>
-stream = client.chat.completions.<span class="function">create</span>(
-    model=<span class="string">"gpt-4o-mini"</span>,
-    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Write a short poem"</span>}],
-    stream=<span class="keyword">True</span>
-)
+<span class="kw">print</span>()  <span class="cm"># newline after streaming</span>
 
-<span class="comment"># Process chunks as they arrive</span>
-<span class="keyword">for</span> chunk <span class="keyword">in</span> stream:
-    <span class="keyword">if</span> chunk.choices[<span class="variable">0</span>].delta.content:
-        <span class="function">print</span>(chunk.choices[<span class="variable">0</span>].delta.content, end=<span class="string">""</span>, flush=<span class="keyword">True</span>)</pre>
-            </div>
+<span class="cm"># Or use the new .stream() context manager (SDK v1.x+)</span>
+<span class="kw">with</span> client.chat.completions.stream(model=<span class="st">"gpt-4o"</span>,
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Hello"</span>}]) <span class="kw">as</span> s:
+    full_text = s.get_final_completion().choices[<span class="nu">0</span>].message.content
+    <span class="kw">print</span>(<span class="st">"Full text:"</span>, full_text)</pre>
+</div>
+            <h2>Async Streaming</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — async streaming generator</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> asyncio
+<span class="kw">from</span> openai <span class="kw">import</span> AsyncOpenAI
 
-            <h2>Streaming with Async Python</h2>
-            <div class="code-block">
-<pre><span class="keyword">import</span> asyncio
-<span class="keyword">from</span> openai <span class="keyword">import</span> AsyncOpenAI
+client = AsyncOpenAI()
 
-client = <span class="function">AsyncOpenAI</span>()
+<span class="kw">async def</span> <span class="fn">stream_completion</span>(prompt: str):
+    <span class="st">&#34;&#34;&#34;Async generator that yields text chunks.&#34;&#34;&#34;</span>
+    <span class="kw">async with</span> client.chat.completions.stream(
+        model=<span class="st">"gpt-4o"</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]
+    ) <span class="kw">as</span> stream:
+        <span class="kw">async for</span> event <span class="kw">in</span> stream:
+            chunk = event.choices[<span class="nu">0</span>].delta.content <span class="kw">if</span> event.choices <span class="kw">else None</span>
+            <span class="kw">if</span> chunk:
+                <span class="kw">yield</span> chunk
 
-<span class="keyword">async def</span> <span class="function">stream_response</span>():
-    stream = <span class="keyword">await</span> client.chat.completions.<span class="function">create</span>(
-        model=<span class="string">"gpt-4o-mini"</span>,
-        messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Explain quantum computing"</span>}],
-        stream=<span class="keyword">True</span>
-    )
-    
-    <span class="keyword">async for</span> chunk <span class="keyword">in</span> stream:
-        <span class="keyword">if</span> chunk.choices[<span class="variable">0</span>].delta.content:
-            <span class="function">print</span>(chunk.choices[<span class="variable">0</span>].delta.content, end=<span class="string">""</span>)
+<span class="kw">async def</span> <span class="fn">main</span>():
+    <span class="kw">async for</span> chunk <span class="kw">in</span> stream_completion(<span class="st">"Explain recursion in 3 sentences."</span>):
+        <span class="kw">print</span>(chunk, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
 
-asyncio.<span class="function">run</span>(<span class="function">stream_response</span>())</pre>
-            </div>
+asyncio.run(main())</pre>
+</div>
+            <h2>FastAPI Streaming Endpoint</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — FastAPI with SSE streaming</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI
+<span class="kw">from</span> fastapi.responses <span class="kw">import</span> StreamingResponse
+<span class="kw">from</span> openai <span class="kw">import</span> AsyncOpenAI
+<span class="kw">import</span> asyncio, json
 
-            <div class="tip-box">
-                <div class="tip-box-title">💡 Web Applications</div>
-                <p>For web apps, use Server-Sent Events (SSE) to stream responses to the browser. Most frameworks like FastAPI and Flask support this.</p>
-            </div>
+app = FastAPI()
+client = AsyncOpenAI()
+
+<span class="kw">async def</span> <span class="fn">generate_stream</span>(prompt: str):
+    <span class="st">&#34;&#34;&#34;Yields Server-Sent Events for the frontend.&#34;&#34;&#34;</span>
+    <span class="kw">async with</span> client.chat.completions.stream(
+        model=<span class="st">"gpt-4o"</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: prompt}]
+    ) <span class="kw">as</span> stream:
+        <span class="kw">async for</span> event <span class="kw">in</span> stream:
+            chunk = event.choices[<span class="nu">0</span>].delta.content <span class="kw">if</span> event.choices <span class="kw">else None</span>
+            <span class="kw">if</span> chunk:
+                data = json.dumps({<span class="st">"text"</span>: chunk})
+                <span class="kw">yield</span> <span class="st">f"data: {data}\n\n"</span>
+    <span class="kw">yield</span> <span class="st">"data: [DONE]\n\n"</span>
+
+@app.post(<span class="st">"/stream"</span>)
+<span class="kw">async def</span> <span class="fn">stream_endpoint</span>(body: dict):
+    <span class="kw">return</span> StreamingResponse(
+        generate_stream(body[<span class="st">"prompt"</span>]),
+        media_type=<span class="st">"text/event-stream"</span>,
+        headers={
+            <span class="st">"Cache-Control"</span>: <span class="st">"no-cache"</span>,
+            <span class="st">"X-Accel-Buffering"</span>: <span class="st">"no"</span>,
+        }
+    )</pre>
+</div><div class="code-block">
+<div class="code-block-label"><span>JavaScript — consume SSE stream in the browser</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">async function</span> <span class="fn">streamResponse</span>(prompt) {
+  <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="st">'/stream'</span>, {
+    method: <span class="st">'POST'</span>,
+    headers: { <span class="st">'Content-Type'</span>: <span class="st">'application/json'</span> },
+    body: JSON.stringify({ prompt })
+  });
+
+  <span class="kw">const</span> reader = response.body.getReader();
+  <span class="kw">const</span> decoder = <span class="kw">new</span> TextDecoder();
+  <span class="kw">let</span> fullText = <span class="st">''</span>;
+
+  <span class="kw">while</span> (<span class="kw">true</span>) {
+    <span class="kw">const</span> { done, value } = <span class="kw">await</span> reader.read();
+    <span class="kw">if</span> (done) <span class="kw">break</span>;
+    <span class="kw">const</span> text = decoder.decode(value);
+    <span class="kw">const</span> lines = text.split(<span class="st">'\n'</span>);
+    <span class="kw">for</span> (<span class="kw">const</span> line <span class="kw">of</span> lines) {
+      <span class="kw">if</span> (line.startsWith(<span class="st">'data: '</span>)) {
+        <span class="kw">const</span> data = line.slice(<span class="nu">6</span>);
+        <span class="kw">if</span> (data === <span class="st">'[DONE]'</span>) <span class="kw">break</span>;
+        <span class="kw">const</span> { text: chunk } = JSON.parse(data);
+        fullText += chunk;
+        document.getElementById(<span class="st">'output'</span>).textContent = fullText;
+      }
+    }
+  }
+  <span class="kw">return</span> fullText;
+}</pre>
+</div>
         </div>
-
         <nav class="lesson-nav">
-            <a href="tokens-and-models.html" class="prev">
+            <a href="function-calling.html" class="prev">
                 <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Tokens & Models</div>
-            </a>
-            <a href="function-calling.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
                 <div class="lesson-nav-title">Function Calling</div>
+            </a>
+            <a href="tokens-and-models.html" class="next">
+                <div class="lesson-nav-label">Next →</div>
+                <div class="lesson-nav-title">Tokens & Models</div>
             </a>
         </nav>
     </div>
-
     <footer>
         <div class="footer-container">
             <div class="footer-grid">
@@ -162,7 +238,7 @@ asyncio.<span class="function">run</span>(<span class="function">stream_response
                     <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
                     <p>The most comprehensive AI coding learning platform.</p>
                 </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
                 <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
                 <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
             </div>
@@ -173,5 +249,16 @@ asyncio.<span class="function">run</span>(<span class="function">stream_response
     </footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.closest('.code-block').querySelector('pre');
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                this.textContent = '✓ Copied';
+                setTimeout(() => this.textContent = 'Copy', 1500);
+            });
+        });
+    });
+    </script>
 </body>
 </html>

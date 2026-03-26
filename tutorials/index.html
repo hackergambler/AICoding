@@ -148,84 +148,7 @@
         @media (max-width: 1200px) { .tutorials-grid { grid-template-columns: repeat(2, 1fr); } .level-cards { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .tutorials-grid, .level-cards { grid-template-columns: 1fr; } .filter-container { flex-direction: column; align-items: flex-start; } }
     </style>
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -265,7 +188,7 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-primary">Start Free</a>
+                <a href="openai/getting-started.html" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
         </div>
@@ -358,7 +281,7 @@
                     <a href="beginner.html">View all beginner tutorials →</a>
                 </div>
                 <div class="tutorials-grid">
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🤖</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -370,7 +293,7 @@
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🧠</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -382,7 +305,7 @@
                             <span>📚 Claude</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🐍</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -394,7 +317,7 @@
                             <span>📚 Setup</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">💬</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -406,7 +329,7 @@
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🔑</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -418,7 +341,7 @@
                             <span>📚 Security</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">✨</div>
                             <span class="badge badge-beginner">Beginner</span>
@@ -440,7 +363,7 @@
                     <a href="../courses/openai.html">View all 12,500+ OpenAI tutorials →</a>
                 </div>
                 <div class="tutorials-grid">
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🌊</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -452,7 +375,7 @@
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🛠️</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -464,7 +387,7 @@
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">👁️</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -486,7 +409,7 @@
                     <a href="../courses/rag.html">View all 18,000+ RAG tutorials →</a>
                 </div>
                 <div class="tutorials-grid">
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">📄</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -498,7 +421,7 @@
                             <span>📚 RAG</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🗄️</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -510,7 +433,7 @@
                             <span>📚 RAG</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">✂️</div>
                             <span class="badge badge-advanced">Advanced</span>
@@ -532,7 +455,7 @@
                     <a href="../courses/langchain.html">View all 15,000+ LangChain tutorials →</a>
                 </div>
                 <div class="tutorials-grid">
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🔗</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -544,7 +467,7 @@
                             <span>📚 LangChain</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🧠</div>
                             <span class="badge badge-intermediate">Intermediate</span>
@@ -556,7 +479,7 @@
                             <span>📚 LangChain</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">📝</div>
                             <span class="badge badge-advanced">Advanced</span>
@@ -578,7 +501,7 @@
                     <a href="../courses/agents.html">View all 14,000+ Agent tutorials →</a>
                 </div>
                 <div class="tutorials-grid">
-                    <a href="#" class="tutorial-card reveal" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🎯</div>
                             <span class="badge badge-advanced">Advanced</span>
@@ -590,7 +513,7 @@
                             <span>📚 Agents</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-1" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-1" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">🔄</div>
                             <span class="badge badge-advanced">Advanced</span>
@@ -602,7 +525,7 @@
                             <span>📚 Agents</span>
                         </div>
                     </a>
-                    <a href="#" class="tutorial-card reveal reveal-delay-2" data-searchable>
+                    <a href="openai/getting-started.html" class="tutorial-card reveal reveal-delay-2" data-searchable>
                         <div class="tutorial-card-header">
                             <div class="tutorial-card-icon">👥</div>
                             <span class="badge badge-expert">Expert</span>

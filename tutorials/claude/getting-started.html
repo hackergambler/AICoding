@@ -4,162 +4,144 @@
     <meta charset="UTF-8">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getting Started with Claude API | Claude API | AI Coding Academy</title>
-    <meta name="description" content="Set up your Anthropic account, get API keys, and make your first Claude API call.">
+    <title>Getting Started with Claude API | AI Coding Academy</title>
+    <meta name="description" content="Install Anthropic SDK, make your first Claude call, use system prompts, manage multi-turn conversations, and stream responses.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/style.css">
     <style>
-        .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
-        .lesson-header { margin-bottom: var(--space-3xl); }
-        .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
-        .lesson-meta-item { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.9rem; color: var(--text-muted); }
-        .lesson-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-lg); line-height: 1.2; }
-        .lesson-description { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
-        .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
-        .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
-        .lesson-content h2:first-child { margin-top: 0; }
-        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); }
-        .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
-        .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
-        .lesson-content li { margin-bottom: var(--space-sm); }
-        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
-        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; color: #e6edf3; }
-        .code-block .comment { color: #8b949e; }
-        .code-block .keyword { color: #ff7b72; }
-        .code-block .string { color: #a5d6ff; }
-        .code-block .function { color: #d2a8ff; }
-        .tip-box { background: rgba(0, 255, 170, 0.1); border: 1px solid rgba(0, 255, 170, 0.2); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
-        .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
-        .tip-box p { margin: 0; color: var(--text-secondary); }
-        .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
-        .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
-        .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
-        .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
-        .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
-        .lesson-nav .next { text-align: right; }
-        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box,.warn-box,.info-box,.error-example,.fix-example{border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25)}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25)}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25)}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .error-example{background:#1a0a0a;border:1px solid rgba(239,68,68,.3)}
+        .error-example-title{font-family:var(--font-heading);color:#ef4444;font-weight:600;margin-bottom:var(--space-sm)}
+        .fix-example{background:#0a1a0a;border:1px solid rgba(34,197,94,.3)}
+        .fix-example-title{font-family:var(--font-heading);color:#22c55e;font-weight:600;margin-bottom:var(--space-sm)}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
-    </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
     <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
-    </nav>
-
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
     <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="separator">/</span>
-            <a href="../index.html">Tutorials</a>
-            <span class="separator">/</span>
-            <a href="../../courses/claude.html">Claude API</a>
-            <span class="separator">/</span>
-            <span>Getting Started with Claude API</span>
-        </div>
-
+        <div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/claude.html">Claude API</a><span class="separator">/</span><span>Getting Started</span></div>
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 15 min</span>
-                <span class="lesson-meta-item">📚 Module 1, Lesson 1</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 20 min</span>
             </div>
             <h1 class="lesson-title">Getting Started with Claude API</h1>
-            <p class="lesson-description">Set up your Anthropic account, get API keys, and make your first Claude API call.</p>
+            <p class="lesson-description">Install Anthropic SDK, make your first Claude call, use system prompts, manage multi-turn conversations, and stream responses.</p>
         </header>
+<div class="lesson-content"><h2>1. Install and Configure</h2><div class="code-block"><div class="code-block-label"><span>bash</span><button class="copy-btn">Copy</button></div><pre>pip install anthropic
+export ANTHROPIC_API_KEY="sk-ant-..."</pre></div><h2>2. Your First Claude Message</h2><div class="code-block"><div class="code-block-label"><span>Python - minimal Claude API call</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> anthropic
 
-        <div class="lesson-content">
-            <h2>Create an Anthropic Account</h2>
-            <p>To use the Claude API, you need an Anthropic account:</p>
-            <ol>
-                <li>Go to <strong>console.anthropic.com</strong></li>
-                <li>Sign up with your email</li>
-                <li>Verify your account</li>
-                <li>Navigate to API Keys section</li>
-            </ol>
+<span class="cm"># Reads ANTHROPIC_API_KEY from environment automatically</span>
+client = anthropic.Anthropic()
 
-            <h2>Install the SDK</h2>
-            <div class="code-block">
-<pre>pip install anthropic</pre>
-            </div>
-
-            <h2>Your First Claude API Call</h2>
-            <div class="code-block">
-<pre><span class="keyword">import</span> anthropic
-
-client = anthropic.<span class="function">Anthropic</span>()  <span class="comment"># Uses ANTHROPIC_API_KEY env var</span>
-
-message = client.messages.<span class="function">create</span>(
-    model=<span class="string">"claude-3-5-sonnet-20241022"</span>,
-    max_tokens=<span class="variable">1024</span>,
-    messages=[
-        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Hello, Claude!"</span>}
-    ]
+message = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">1024</span>,
+    messages=[{"role": "user", "content": "Explain recursion in 3 sentences."}]
 )
 
-<span class="function">print</span>(message.content[<span class="variable">0</span>].text)</pre>
-            </div>
+print(message.content[0].text)
+print(f"Model: {message.model}")
+print(f"Input tokens: {message.usage.input_tokens}")
+print(f"Output tokens: {message.usage.output_tokens}")
+print(f"Stop reason: {message.stop_reason}")</pre></div><h2>3. System Prompts</h2><p>Claude uses a top-level <code>system</code> parameter - not a system message in the messages array.</p><div class="code-block"><div class="code-block-label"><span>Python - system prompt</span><button class="copy-btn">Copy</button></div><pre>message = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    system=<span class="st">"You are a concise Python tutor. Give short code examples. No preambles."</span>,
+    messages=[{"role": "user", "content": "How do I open a file?"}]
+)
+print(message.content[0].text)</pre></div><h2>4. Multi-turn Conversations</h2><div class="code-block"><div class="code-block-label"><span>Python - conversation history</span><button class="copy-btn">Copy</button></div><pre>messages = [
+    {"role": "user", "content": "What is a Python generator?"},
+    {"role": "assistant", "content": "A generator is a function that uses yield to produce values lazily."},
+    {"role": "user", "content": "Show me a real example."}  <span class="cm"># remembers prior turns</span>
+]
 
-            <div class="tip-box">
-                <div class="tip-box-title">💡 Claude Models</div>
-                <p><strong>Claude 3.5 Sonnet</strong>: Best balance of speed and intelligence. <strong>Claude 3 Opus</strong>: Most powerful. <strong>Claude 3 Haiku</strong>: Fastest and cheapest.</p>
-            </div>
-        </div>
+resp = client.messages.create(
+    model=<span class="st">"claude-opus-4-5"</span>, max_tokens=<span class="nu">512</span>, messages=messages
+)
+print(resp.content[0].text)</pre></div><h2>5. Streaming</h2><div class="code-block"><div class="code-block-label"><span>Python - streaming response tokens</span><button class="copy-btn">Copy</button></div><pre><span class="kw">with</span> client.messages.stream(
+    model=<span class="st">"claude-opus-4-5"</span>,
+    max_tokens=<span class="nu">512</span>,
+    messages=[{"role": "user", "content": "Write a haiku about programming."}]
+) <span class="kw">as</span> stream:
+    <span class="kw">for</span> text <span class="kw">in</span> stream.text_stream:
+        print(text, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
 
+final = stream.get_final_message()
+print(f"\nTotal tokens: {final.usage.input_tokens + final.usage.output_tokens}")</pre></div><h2>6. Model Selection Guide</h2><ul><li><strong>claude-opus-4-5</strong> - Most capable. Complex reasoning, long-form writing, analysis. $15/$75 per MTok.</li><li><strong>claude-sonnet-4-6</strong> - Balanced. Best for most production tasks. $3/$15 per MTok.</li><li><strong>claude-haiku-4-5-20251001</strong> - Fastest, cheapest. High-volume simple tasks. $0.25/$1.25 per MTok.</li></ul><div class="code-block"><div class="code-block-label"><span>Python - choose model based on task</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">get_model</span>(complexity: str) -> str:
+    <span class="kw">return</span> {
+        <span class="st">"simple"</span>:  <span class="st">"claude-haiku-4-5-20251001"</span>,
+        <span class="st">"normal"</span>:  <span class="st">"claude-sonnet-4-6"</span>,
+        <span class="st">"complex"</span>: <span class="st">"claude-opus-4-5"</span>,
+    }.get(complexity, <span class="st">"claude-sonnet-4-6"</span>)</pre></div><div class="tip-box"><div class="tip-box-title">💡 Cost tip</div><p>Use Haiku for all prototyping and testing - it is 60x cheaper than Opus. Switch to Sonnet or Opus only when quality requires it.</p></div></div>
         <nav class="lesson-nav">
-            <a href="../../courses/claude.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Course Overview</div>
-            </a>
-            <a href="messages-api.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Messages API</div>
-            </a>
+            <a href="../../courses/claude.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Claude Course Overview</div></a>
+            <a href="messages-api.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Messages API Deep Dive</div></a>
         </nav>
     </div>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+        <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>
-</body>
-</html>
+    <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
+</body></html>

@@ -10,84 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    </style>
+
 </head>
 <body>
     <div class="top-bar">
@@ -1181,6 +1104,138 @@ docs = compressed.retrieve("How do I handle timeouts?")
             </div>
         </section>
 
+
+        <!-- Structured Bug Examples -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title reveal">Common Memory Bugs — With Fixes</h2>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 1: Context Not Passed Between Agent Steps</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">Each LLM call starts fresh with no history — the agent cannot remember what happened in previous steps.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: every step forgets everything</span>
+<span class="kw">def</span> <span class="fn">agent_step</span>(task: str) -> str:
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task}]  <span class="cm"># no history!</span>
+    )
+    <span class="kw">return</span> resp.choices[<span class="nu">0</span>].message.content
+
+agent_step(<span class="st">"The user is Alice, age 30."</span>)
+agent_step(<span class="st">"What is the user's name?"</span>)  <span class="cm"># has no idea — returns wrong answer</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — accumulate history across steps</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre>history = []
+
+<span class="kw">def</span> <span class="fn">agent_step</span>(task: str) -> str:
+    history.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task})
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>, messages=history
+    )
+    answer = resp.choices[<span class="nu">0</span>].message.content
+    history.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: answer})
+    <span class="kw">return</span> answer</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 2: Vector Store Query Returns Empty — Documents Never Added</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">Vector store created but documents never indexed — all similarity queries return empty results.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: forgot to call from_documents() or add_documents()</span>
+<span class="kw">from</span> langchain_community.vectorstores <span class="kw">import</span> Chroma
+<span class="kw">from</span> langchain_openai <span class="kw">import</span> OpenAIEmbeddings
+
+vectorstore = Chroma(embedding_function=OpenAIEmbeddings())
+<span class="cm"># documents never added!</span>
+results = vectorstore.similarity_search(<span class="st">"Python tutorial"</span>)  <span class="cm"># returns []</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — use from_documents() or verify count before querying</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> langchain_core.documents <span class="kw">import</span> Document
+
+docs = [Document(page_content=<span class="st">"Python is great for AI"</span>), ...]
+
+<span class="cm"># Build index from documents</span>
+vectorstore = Chroma.from_documents(docs, OpenAIEmbeddings())
+print(<span class="st">f"Indexed: {vectorstore._collection.count()} docs"</span>)  <span class="cm"># always verify</span>
+
+results = vectorstore.similarity_search(<span class="st">"Python tutorial"</span>)
+print(<span class="st">f"Found: {len(results)} results"</span>)</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 3: LangChain Memory Not Persisted — Lost on Restart</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">In-memory ConversationBufferMemory is lost every time the app restarts. Users lose their entire conversation history.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> langchain.memory <span class="kw">import</span> ConversationBufferMemory
+memory = ConversationBufferMemory()  <span class="cm"># in-RAM only — gone on restart</span>
+memory.save_context({<span class="st">"input"</span>: <span class="st">"hi"</span>}, {<span class="st">"output"</span>: <span class="st">"hello!"</span>})
+<span class="cm"># App restarts... conversation lost</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — use Redis-backed or SQLite-backed message history</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> os
+<span class="kw">from</span> langchain_community.chat_message_histories <span class="kw">import</span> RedisChatMessageHistory
+
+history = RedisChatMessageHistory(
+    session_id=<span class="st">"user_alice_session_1"</span>,
+    url=os.environ[<span class="st">"REDIS_URL"</span>],
+    ttl=<span class="nu">86400</span>  <span class="cm"># expire after 24 hours</span>
+)
+<span class="cm"># Survives restarts — stored in Redis</span>
+history.add_user_message(<span class="st">"What is Python?"</span>)
+history.add_ai_message(<span class="st">"Python is a programming language."</span>)
+print(<span class="st">f"History has {len(history.messages)} messages"</span>)</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 4: Duplicate Context From Semantic Retrieval</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">The same document chunk is retrieved multiple times because it matches multiple aspects of the query, wasting tokens and confusing the LLM.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: no deduplication — same chunk appears 3x</span>
+docs = retriever.invoke(<span class="st">"Python decorators"</span>)
+context = <span class="st">"\n\n"</span>.join(d.page_content <span class="kw">for</span> d <span class="kw">in</span> docs)
+<span class="cm"># context repeats "Python decorators are functions..." three times</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — deduplicate by content hash before building context</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">deduplicate_docs</span>(docs: list) -> list:
+    seen, unique = set(), []
+    <span class="kw">for</span> doc <span class="kw">in</span> docs:
+        h = hash(doc.page_content[:<span class="nu">200</span>])
+        <span class="kw">if</span> h <span class="kw">not in</span> seen:
+            seen.add(h); unique.append(doc)
+    <span class="kw">return</span> unique
+
+docs = retriever.invoke(<span class="st">"Python decorators"</span>)
+context = <span class="st">"\n\n"</span>.join(d.page_content <span class="kw">for</span> d <span class="kw">in</span> deduplicate_docs(docs))
+print(<span class="st">f"Using {len(deduplicate_docs(docs))} unique chunks"</span>)</pre></div>
+                    </div>
+                </div>
+
+                <div class="error-card reveal" style="background:#1a0a0a;border:1px solid rgba(239,68,68,.3);border-radius:16px;padding:2rem;margin-bottom:1.5rem">
+                    <h3 style="font-family:var(--font-heading);color:#ef4444;margin-bottom:.75rem">Bug 5: Embedding Cache Miss — Same Text Re-Embedded Every Call</h3>
+                    <p style="color:var(--text-secondary);margin-bottom:1rem">No caching on embedding calls means identical text strings are sent to the API repeatedly, wasting money.</p>
+                    <div class="code-block"><div class="code-block-label"><span>Python - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: same system prompt embedded on every single request</span>
+<span class="kw">def</span> <span class="fn">get_embedding</span>(text: str) -> list:
+    resp = client.embeddings.create(model=<span class="st">"text-embedding-3-small"</span>, input=text)
+    <span class="kw">return</span> resp.data[<span class="nu">0</span>].embedding  <span class="cm"># called 1000x with same text = $$ wasted</span></pre></div>
+                    <div style="background:#0a1a0a;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:1.5rem;margin-top:1rem">
+                        <p style="font-family:var(--font-heading);font-weight:600;color:#22c55e;margin-bottom:.5rem">✅ Fix — cache embeddings with functools.lru_cache or Redis</p>
+                        <div class="code-block"><div class="code-block-label"><span>Python - fixed</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> functools <span class="kw">import</span> lru_cache
+<span class="kw">import</span> hashlib, json
+
+<span class="cm"># In-memory LRU cache (fast, lost on restart)</span>
+@lru_cache(maxsize=<span class="nu">1000</span>)
+<span class="kw">def</span> <span class="fn">get_embedding_cached</span>(text: str) -> tuple:
+    resp = client.embeddings.create(model=<span class="st">"text-embedding-3-small"</span>, input=text)
+    <span class="kw">return</span> tuple(resp.data[<span class="nu">0</span>].embedding)  <span class="cm"># tuple is hashable for lru_cache</span>
+
+<span class="cm"># Check cache stats</span>
+print(get_embedding_cached.cache_info())</pre></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- Related Categories -->
         <section class="section section-alt">
             <div class="container">
@@ -1231,16 +1286,16 @@ docs = compressed.retrieve("How do I handle timeouts?")
                     <h4>Resources</h4>
                     <ul>
                         <li><a href="index.html">Debugging Hub</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Community</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">About</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Blog</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Contact</a></li>
                     </ul>
                 </div>
             </div>

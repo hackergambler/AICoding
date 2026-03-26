@@ -147,7 +147,100 @@ client = OpenAI(
         model=<span class="st">"gpt-4o-mini"</span>,
         messages=[{"role": "user", "content": event["prompt"]}]
     )
-    <span class="kw">return</span> {"result": resp.choices[0].message.content}</pre></div></div><div class="warn-box"><div class="warn-box-title">⚠️ CORS in production</div><p>If your frontend gets CORS errors, add <code>CORSMiddleware</code> to FastAPI with your specific production domain. Never use <code>allow_origins=["*"]</code> in production.</p></div></div>
+    <span class="kw">return</span> {"result": resp.choices[0].message.content}</pre></div></div><div class="warn-box"><div class="warn-box-title">⚠️ CORS in production</div><p>If your frontend gets CORS errors, add <code>CORSMiddleware</code> to FastAPI with your specific production domain. Never use <code>allow_origins=["*"]</code> in production.</p></div>
+        <h2>Bug 5: CORS Error in Production</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — missing or wrong CORS headers block frontend</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: no CORS middleware — browser blocks all requests from frontend</span>
+<span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI
+app = FastAPI()
+
+<span class="cm"># No CORSMiddleware added!</span>
+<span class="cm"># Browser error: "Access to fetch ... blocked by CORS policy"</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — add CORSMiddleware with explicit origins</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> fastapi <span class="kw">import</span> FastAPI
+<span class="kw">from</span> fastapi.middleware.cors <span class="kw">import</span> CORSMiddleware
+<span class="kw">import</span> os
+
+app = FastAPI()
+
+<span class="cm"># Read allowed origins from env (never hardcode in code)</span>
+ALLOWED_ORIGINS = os.environ.get(<span class="st">"ALLOWED_ORIGINS"</span>, <span class="st">"http://localhost:3000"</span>).split(<span class="st">","</span>)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,   <span class="cm"># NEVER use ["*"] in production</span>
+    allow_credentials=<span class="kw">True</span>,
+    allow_methods=[<span class="st">"GET"</span>, <span class="st">"POST"</span>],
+    allow_headers=[<span class="st">"Authorization"</span>, <span class="st">"Content-Type"</span>],
+)</pre></div>
+        </div>
+
+        <h2>Bug 6: Health Check Endpoint Missing — Load Balancer Kills Pods</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — no health endpoint, Kubernetes/ECS terminates healthy pods</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: no /health endpoint</span>
+<span class="cm"># AWS ALB, Kubernetes, and ECS all probe /health (or /healthz)</span>
+<span class="cm"># When they get 404, they mark the pod as unhealthy and kill it</span>
+app = FastAPI()
+
+@app.post(<span class="st">"/chat"</span>)
+<span class="kw">async def</span> <span class="fn">chat</span>(body: dict):
+    <span class="kw">return</span> {"answer": "..."}</pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — add health and readiness endpoints</div>
+            <div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">import</span> os
+
+START_TIME = datetime.now()
+
+@app.get(<span class="st">"/health"</span>)            <span class="cm"># liveness: am I running?</span>
+<span class="kw">async def</span> <span class="fn">health</span>():
+    <span class="kw">return</span> {"status": "ok", "uptime": str(datetime.now() - START_TIME)}
+
+@app.get(<span class="st">"/ready"</span>)             <span class="cm"># readiness: am I ready for traffic?</span>
+<span class="kw">async def</span> <span class="fn">ready</span>():
+    <span class="cm"># Check your dependencies here</span>
+    api_key_set = bool(os.environ.get(<span class="st">"OPENAI_API_KEY"</span>))
+    <span class="kw">if not</span> api_key_set:
+        <span class="kw">from</span> fastapi <span class="kw">import</span> HTTPException
+        <span class="kw">raise</span> HTTPException(status_code=<span class="nu">503</span>, detail=<span class="st">"API key not configured"</span>)
+    <span class="kw">return</span> {"status": "ready"}</pre></div>
+        </div>
+
+        <h2>Bug 7: Docker Image Too Large — Slow Deploys</h2>
+        <div class="error-example">
+            <div class="error-example-title">❌ Broken — single-stage build includes dev tools, gigabytes of waste</div>
+            <div class="code-block"><div class="code-block-label"><span>Dockerfile</span><button class="copy-btn">Copy</button></div><pre>FROM python:3.12       <span class="cm"># 1.02GB base image</span>
+COPY . .
+RUN pip install -r requirements.txt  <span class="cm"># installs everything including dev tools</span>
+CMD ["uvicorn", "app:app"]
+<span class="cm"># Result: 2.5GB+ image, 3-minute deploys</span></pre></div>
+        </div>
+        <div class="fix-example">
+            <div class="fix-example-title">✅ Fixed — multi-stage build with slim base</div>
+            <div class="code-block"><div class="code-block-label"><span>Dockerfile</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Stage 1: build dependencies</span>
+FROM python:3.12-slim AS builder
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+<span class="cm"># Stage 2: lean runtime image</span>
+FROM python:3.12-slim AS runtime
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY src/ ./src/
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+USER nobody                          <span class="cm"># never run as root</span>
+CMD ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8000"]
+<span class="cm"># Result: ~200MB image, 30-second deploys</span></pre></div>
+        </div>
+</div>
         <nav class="lesson-nav">
             <a href="configuration.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Configuration Errors</div></a>
             <a href="index.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Debugging Home</div></a>

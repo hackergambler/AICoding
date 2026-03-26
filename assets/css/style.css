@@ -1016,3 +1016,23 @@ footer {
         display: none;
     }
 }
+
+/* ── Stat items (used on homepage hero) ── */
+.stat-item {
+    text-align: center;
+}
+.stat-value {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+}
+.stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
