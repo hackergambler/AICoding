@@ -1,6 +1,6 @@
 name: Autonomous AI Coding Builder
 on:
-  workflow_dispatch: # Allows you to start it manually
+  workflow_dispatch:
   issue_comment:
     types: [created]
 
@@ -8,26 +8,34 @@ jobs:
   build:
     if: contains(github.event.comment.body, '@claude build') || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Setup Git
+        run: |
+          git config --global user.name "Claude-Bot"
+          git config --global user.email "claude-bot@myrqai.com"
       
       - name: Claude Continuous Worker
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          # This loop runs until Claude creates a file named 'finished.txt'
+          # This loop runs until Claude creates 'finished.txt'
           until [ -f finished.txt ]; do
-            echo "Claude is working..."
-            npx @anthropic-ai/claude-code --print "Read CLAUDE.md. Fix one broken link or add one missing tutorial from the 4-tier plan. If the entire site is 100% done with NO errors, create finished.txt." || {
-              echo "Rate limit reached or error occurred. Sleeping for 5 minutes..."
+            echo "Claude is starting a new task..."
+            
+            # --yes: Auto-approves file writes
+            # --dangerously-skip-permissions: Bypasses the manual approval prompts
+            npx @anthropic-ai/claude-code --yes --dangerously-skip-permissions --print "Read CLAUDE.md. Fix the next broken link or missing content gap. After each fix, exit so I can commit the changes. If 100% done, create finished.txt." || {
+              echo "API Limit or Credit issue. Sleeping 5 mins..."
               sleep 300
             }
+
+            # Commit progress after every single fix so you never lose work
+            git add .
+            git commit -m "Claude: Fixed a link/added content" || echo "No changes to commit"
+            git push
           done
-          
-      - name: Commit Changes
-        run: |
-          git config --global user.name "Claude-Bot"
-          git config --global user.email "claude-bot@myrqai.com"
-          git add .
-          git commit -m "Claude: Autonomous update to AI Coding"
-          git push
