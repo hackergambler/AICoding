@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Completions Deep Dive | OpenAI API | AI Coding Academy</title>
+    <meta name="description" content="Master the OpenAI Chat Completions API - learn about messages, roles, system prompts, and building conversation history.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
+        .lesson-header { margin-bottom: var(--space-3xl); }
+        .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
+        .lesson-meta-item { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.9rem; color: var(--text-muted); }
+        .lesson-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-lg); line-height: 1.2; }
+        .lesson-description { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
+        .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
+        .lesson-content h2:first-child { margin-top: 0; }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); }
+        .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
+        .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
+        .lesson-content li { margin-bottom: var(--space-sm); }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.9rem; line-height: 1.6; color: #e6edf3; }
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+        .code-block .variable { color: #ffa657; }
+        .tip-box { background: rgba(0, 255, 170, 0.1); border: 1px solid rgba(0, 255, 170, 0.2); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); display: flex; align-items: center; gap: var(--space-sm); }
+        .tip-box p { margin: 0; color: var(--text-secondary); }
+        .role-card { background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-md) 0; }
+        .role-card-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
+        .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
+        .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+        .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
+        .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
+        .lesson-nav .next { text-align: right; }
+        .toc { background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-2xl); }
+        .toc-title { font-family: var(--font-heading); font-weight: 600; margin-bottom: var(--space-md); color: var(--text-primary); }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { padding: var(--space-xs) 0; }
+        .toc-list a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .toc-list a:hover { color: var(--accent-primary); }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="../index.html" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="../index.html">Tutorials</a>
+            <span class="separator">/</span>
+            <a href="../../courses/openai.html">OpenAI API</a>
+            <span class="separator">/</span>
+            <span>Chat Completions</span>
+        </div>
+
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-beginner">Beginner</span>
+                <span class="lesson-meta-item">⏱️ 20 min read</span>
+                <span class="lesson-meta-item">📚 Module 2, Lesson 1</span>
+            </div>
+            <h1 class="lesson-title">Chat Completions Deep Dive</h1>
+            <p class="lesson-description">The Chat Completions API is the core of OpenAI's GPT models. Learn how messages work, understand the three roles, and build multi-turn conversations.</p>
+        </header>
+
+        <div class="toc">
+            <div class="toc-title">📑 In This Lesson</div>
+            <ul class="toc-list">
+                <li><a href="#understanding-messages">1. Understanding the Messages Array</a></li>
+                <li><a href="#three-roles">2. The Three Roles Explained</a></li>
+                <li><a href="#system-prompts">3. Crafting Effective System Prompts</a></li>
+                <li><a href="#conversation-history">4. Building Conversation History</a></li>
+                <li><a href="#parameters">5. Key Parameters</a></li>
+                <li><a href="#practice">6. Practice Exercise</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-content">
+            <h2 id="understanding-messages">1. Understanding the Messages Array</h2>
+            <p>Every Chat Completions request contains a <code>messages</code> array. This array represents the conversation history and tells GPT the context of your request:</p>
+
+            <div class="code-block">
+<pre>messages = [
+    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a helpful coding assistant."</span>},
+    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"How do I read a file in Python?"</span>},
+    {<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: <span class="string">"Here's how to read a file..."</span>},
+    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Can you show me with error handling?"</span>}
+]</pre>
+            </div>
+
+            <p>The API processes this entire conversation to understand context and generate an appropriate response.</p>
+
+            <h2 id="three-roles">2. The Three Roles Explained</h2>
+            
+            <div class="role-card">
+                <div class="role-card-title">🎯 System Role</div>
+                <p>Sets the behavior, personality, and constraints for the AI. Think of it as the "configuration" for the assistant. Only include one system message at the start.</p>
+            </div>
+
+            <div class="role-card">
+                <div class="role-card-title">👤 User Role</div>
+                <p>Represents messages from the human user. These are the questions, requests, or inputs that the AI should respond to.</p>
+            </div>
+
+            <div class="role-card">
+                <div class="role-card-title">🤖 Assistant Role</div>
+                <p>Represents previous AI responses. Include these to give the model context about what it has already said in the conversation.</p>
+            </div>
+
+            <h2 id="system-prompts">3. Crafting Effective System Prompts</h2>
+            <p>The system prompt is incredibly powerful. Here are examples for different use cases:</p>
+
+            <div class="code-block">
+<pre><span class="comment"># For a coding assistant:</span>
+system_prompt = <span class="string">"""You are an expert Python developer. 
+- Always provide working, tested code
+- Include comments explaining the code
+- Mention potential edge cases
+- Suggest improvements when relevant"""</span>
+
+<span class="comment"># For a customer service bot:</span>
+system_prompt = <span class="string">"""You are a friendly customer service representative for TechCorp.
+- Be helpful and empathetic
+- If you don't know something, say so
+- For billing issues, direct users to billing@techcorp.com
+- Keep responses concise but complete"""</span>
+
+<span class="comment"># For a creative writing assistant:</span>
+system_prompt = <span class="string">"""You are a creative writing coach.
+- Help users develop their stories and characters
+- Give constructive feedback
+- Suggest techniques from famous authors
+- Encourage experimentation"""</span></pre>
+            </div>
+
+            <h2 id="conversation-history">4. Building Conversation History</h2>
+            <p>For multi-turn conversations, you need to maintain and send the full history:</p>
+
+            <div class="code-block">
+<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+
+client = <span class="function">OpenAI</span>()
+
+<span class="comment"># Initialize conversation with system prompt</span>
+conversation = [
+    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a helpful assistant."</span>}
+]
+
+<span class="keyword">def</span> <span class="function">chat</span>(user_message):
+    <span class="comment"># Add user message to history</span>
+    conversation.<span class="function">append</span>({<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: user_message})
+    
+    <span class="comment"># Get response</span>
+    response = client.chat.completions.<span class="function">create</span>(
+        model=<span class="string">"gpt-4o-mini"</span>,
+        messages=conversation
+    )
+    
+    assistant_message = response.choices[<span class="variable">0</span>].message.content
+    
+    <span class="comment"># Add assistant response to history</span>
+    conversation.<span class="function">append</span>({<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: assistant_message})
+    
+    <span class="keyword">return</span> assistant_message
+
+<span class="comment"># Example conversation</span>
+<span class="function">print</span>(<span class="function">chat</span>(<span class="string">"My name is Alex"</span>))
+<span class="function">print</span>(<span class="function">chat</span>(<span class="string">"What's my name?"</span>))  <span class="comment"># It remembers!</span></pre>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">💡 Managing Long Conversations</div>
+                <p>As conversations grow, you'll hit token limits. Strategies include: summarizing older messages, using a sliding window of recent messages, or storing conversation in a database and retrieving relevant parts.</p>
+            </div>
+
+            <h2 id="parameters">5. Key Parameters</h2>
+            <p>Beyond messages, these parameters control the output:</p>
+
+            <div class="code-block">
+<pre>response = client.chat.completions.<span class="function">create</span>(
+    model=<span class="string">"gpt-4o-mini"</span>,
+    messages=messages,
+    
+    <span class="comment"># Temperature: 0-2, controls randomness</span>
+    <span class="comment"># 0 = deterministic, 1 = balanced, 2 = very random</span>
+    temperature=<span class="variable">0.7</span>,
+    
+    <span class="comment"># Max tokens: limit response length</span>
+    max_tokens=<span class="variable">500</span>,
+    
+    <span class="comment"># Top P: alternative to temperature (use one or the other)</span>
+    <span class="comment"># 0.1 = consider top 10% probable tokens</span>
+    top_p=<span class="variable">1.0</span>,
+    
+    <span class="comment"># Stop sequences: stop generation at these strings</span>
+    stop=[<span class="string">"END"</span>, <span class="string">"---"</span>],
+    
+    <span class="comment"># Presence penalty: -2 to 2, discourages repetition of topics</span>
+    presence_penalty=<span class="variable">0</span>,
+    
+    <span class="comment"># Frequency penalty: -2 to 2, discourages repetition of words</span>
+    frequency_penalty=<span class="variable">0</span>
+)</pre>
+            </div>
+
+            <h2 id="practice">6. Practice Exercise</h2>
+            <p>Build a simple chatbot that:</p>
+            <ol>
+                <li>Has a custom system prompt for a specific domain (cooking, fitness, etc.)</li>
+                <li>Maintains conversation history</li>
+                <li>Runs in a loop until the user types "quit"</li>
+            </ol>
+
+            <div class="code-block">
+<pre><span class="comment"># Your turn! Complete this code:</span>
+<span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+
+client = <span class="function">OpenAI</span>()
+
+conversation = [
+    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"Your custom prompt here..."</span>}
+]
+
+<span class="keyword">while</span> <span class="variable">True</span>:
+    user_input = <span class="function">input</span>(<span class="string">"You: "</span>)
+    <span class="keyword">if</span> user_input.lower() == <span class="string">"quit"</span>:
+        <span class="keyword">break</span>
+    
+    <span class="comment"># Add your code here...</span>
+    
+<span class="function">print</span>(<span class="string">"Goodbye!"</span>)</pre>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="getting-started.html" class="prev">
+                <div class="lesson-nav-label">← Previous</div>
+                <div class="lesson-nav-title">Getting Started</div>
+            </a>
+            <a href="tokens-and-models.html" class="next">
+                <div class="lesson-nav-label">Next →</div>
+                <div class="lesson-nav-title">Tokens & Model Selection</div>
+            </a>
+        </nav>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>The most comprehensive AI coding learning platform.</p>
+                </div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

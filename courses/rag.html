@@ -2,901 +2,192 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG Systems Mastery | AI Coding Academy</title>
+    <title>RAG Systems Complete Guide | AI Coding Academy</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-<style>
-    /* Top Bar - MYRQAI Network Links */
-    .top-bar {
-        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
-        border-bottom: 1px solid rgba(0,255,170,0.1);
-        padding: 10px var(--space-xl);
-        position: relative;
-        z-index: 1002;
-    }
-    .top-bar-container {
-        max-width: 1440px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .top-bar-links {
-        display: flex;
-        gap: var(--space-xl);
-    }
-    .top-bar-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-family: var(--font-mono);
-        font-size: 0.8rem;
-        letter-spacing: 0.03em;
-        transition: all 0.2s;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 12px;
-        border-radius: var(--radius-sm);
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.05);
-    }
-    .top-bar-links a:hover {
-        color: var(--accent-primary);
-        background: rgba(0,255,170,0.08);
-        border-color: rgba(0,255,170,0.2);
-    }
-    .top-bar-links a .link-icon {
-        font-size: 1rem;
-    }
-    .top-bar-right {
-        color: var(--text-dim);
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-    }
-    @media (max-width: 768px) {
-        .top-bar { padding: 8px var(--space-md); }
-        .top-bar-links { gap: var(--space-sm); }
-        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
-        .top-bar-links a .link-text { display: none; }
-        .top-bar-right { display: none; }
-    }
-    
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal { min-height: 90px; }
-    .ad-container-square { min-height: 250px; }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
+    <style>
+        .course-hero { padding: calc(140px + var(--space-2xl)) var(--space-xl) var(--space-3xl); background: linear-gradient(180deg, rgba(236, 72, 153, 0.1) 0%, transparent 50%); }
+        .course-hero-content { max-width: 900px; margin: 0 auto; text-align: center; }
+        .course-icon { font-size: 4rem; margin-bottom: var(--space-lg); }
+        .course-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: var(--space-lg); }
+        .course-hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto var(--space-2xl); line-height: 1.7; }
+        .course-meta { display: flex; justify-content: center; gap: var(--space-2xl); flex-wrap: wrap; }
+        .course-meta-item { text-align: center; }
+        .course-meta-label { font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: var(--space-xs); }
+        .course-meta-value { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #ec4899; }
+        .course-content { padding: var(--space-3xl) var(--space-xl); max-width: 1200px; margin: 0 auto; }
+        .module-section { margin-bottom: var(--space-4xl); }
+        .module-section h2 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: var(--space-xl); }
+        .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: var(--space-xl); }
+        .module-card { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); transition: var(--transition-base); cursor: pointer; text-decoration: none; display: block; color: inherit; }
+        .module-card:hover { border-color: #ec4899; transform: translateY(-4px); }
+        .module-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); }
+        .module-number { font-family: var(--font-mono); font-size: 0.85rem; color: #ec4899; }
+        .module-card h3 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: var(--space-sm); }
+        .module-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: var(--space-lg); }
+        .module-lessons { list-style: none; padding: 0; margin: 0 0 var(--space-lg); }
+        .module-lessons li { padding: var(--space-xs) 0; color: var(--text-muted); font-size: 0.9rem; }
+        .module-lessons li::before { content: "→ "; color: #ec4899; }
+        .module-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); }
+        .top-bar { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%); border-bottom: 1px solid rgba(0,255,170,0.1); padding: 10px var(--space-xl); z-index: 1002; }
+        .top-bar-container { max-width: 1440px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .top-bar-links { display: flex; gap: var(--space-xl); }
+        .top-bar-links a { color: var(--text-muted); text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; display: flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--radius-sm); background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+        .top-bar-links a:hover { color: var(--accent-primary); }
+        .top-bar-right { color: var(--text-dim); font-family: var(--font-mono); font-size: 0.75rem; }
     </style>
 </head>
 <body>
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
-                    <span class="link-icon">📚</span>
-                    <span class="link-text">AI Library</span>
-                </a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
-                    <span class="link-icon">🪜</span>
-                    <span class="link-text">AI Ladder</span>
-                </a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
-                    <span class="link-icon">🏠</span>
-                    <span class="link-text">MYRQAI</span>
-                </a>
+                <a href="https://www.library.myrqai.com" target="_blank"><span>📚</span><span>AI Library</span></a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank"><span>🪜</span><span>AI Ladder</span></a>
+                <a href="https://www.myrqai.com" target="_blank"><span>🏠</span><span>MYRQAI</span></a>
             </div>
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
     </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+
     <nav class="nav">
         <div class="nav-container">
-            <a href="../index.html" class="nav-logo">
-                <span class="logo-icon">⚡</span>
-                AI Coding Academy
-            </a>
+            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
             <ul class="nav-menu">
                 <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
-                <li><a href="../courses/index.html" class="nav-link active">Courses</a></li>
+                <li><a href="index.html" class="nav-link active">Courses</a></li>
                 <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
                 <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
             </ul>
             <div class="nav-actions">
-                <button class="btn btn-ghost search-trigger">
-                    <span>🔍</span>
-                    <span class="search-shortcut">⌘K</span>
-                </button>
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
             </div>
         </div>
     </nav>
 
-    <main class="main-content">
-        <!-- Course Hero -->
-        <section class="course-hero" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(7, 8, 10, 1) 50%);">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="../index.html">Home</a>
-                    <span>/</span>
-                    <a href="index.html">Courses</a>
-                    <span>/</span>
-                    <span>RAG Systems</span>
-                </div>
-                <div class="course-hero-content">
-                    <div class="course-hero-text">
-                        <div class="course-badge">
-                            <span class="badge badge-advanced">Advanced</span>
-                            <span class="badge badge-outline">18,000+ Lessons</span>
-                        </div>
-                        <h1>RAG Systems Mastery</h1>
-                        <p class="course-description">Build production-ready Retrieval Augmented Generation systems. Learn vector databases, embedding strategies, chunking algorithms, hybrid search, and advanced retrieval patterns.</p>
-                        <div class="course-meta">
-                            <div class="meta-item">
-                                <span class="meta-icon">📚</span>
-                                <span>12 Modules</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">⏱️</span>
-                                <span>45+ Hours</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">🎯</span>
-                                <span>32 Projects</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-icon">📝</span>
-                                <span>Certificate</span>
-                            </div>
-                        </div>
-                        <div class="course-actions">
-                            <a href="#module-1" class="btn btn-primary btn-lg">Start Learning</a>
-                            <a href="#curriculum" class="btn btn-outline btn-lg">View Curriculum</a>
-                        </div>
-                    </div>
-                    <div class="course-hero-visual">
-                        <div class="code-preview">
-                            <div class="code-header">
-                                <span class="code-dot"></span>
-                                <span class="code-dot"></span>
-                                <span class="code-dot"></span>
-                                <span class="code-title">rag_pipeline.py</span>
-                            </div>
-                            <pre><code><span class="code-keyword">from</span> langchain.vectorstores <span class="code-keyword">import</span> Chroma
-<span class="code-keyword">from</span> langchain.embeddings <span class="code-keyword">import</span> OpenAIEmbeddings
-<span class="code-keyword">from</span> langchain.text_splitter <span class="code-keyword">import</span> RecursiveCharacterTextSplitter
-
-<span class="code-comment"># Initialize embeddings</span>
-embeddings = OpenAIEmbeddings(
-    model=<span class="code-string">"text-embedding-3-large"</span>
-)
-
-<span class="code-comment"># Smart chunking with overlap</span>
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=<span class="code-number">1000</span>,
-    chunk_overlap=<span class="code-number">200</span>,
-    separators=[<span class="code-string">"\n\n"</span>, <span class="code-string">"\n"</span>, <span class="code-string">" "</span>]
-)
-
-<span class="code-comment"># Create vector store</span>
-vectorstore = Chroma.from_documents(
-    documents=chunks,
-    embedding=embeddings,
-    persist_directory=<span class="code-string">"./chroma_db"</span>
-)
-
-<span class="code-comment"># Semantic search</span>
-results = vectorstore.similarity_search(
-    query=<span class="code-string">"How does RAG improve accuracy?"</span>,
-    k=<span class="code-number">5</span>
-)</code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- What You'll Learn -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section-title">What You'll Master</h2>
-                <div class="skills-grid">
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">🔢</div>
-                        <h3>Vector Embeddings</h3>
-                        <p>Understand embedding models, dimensions, similarity metrics, and choosing the right model for your use case.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">🗄️</div>
-                        <h3>Vector Databases</h3>
-                        <p>Master Pinecone, Chroma, Weaviate, Qdrant, Milvus, and pgvector for production deployments.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">✂️</div>
-                        <h3>Chunking Strategies</h3>
-                        <p>Learn fixed-size, semantic, sentence-based, and recursive chunking with optimal overlap patterns.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">🔍</div>
-                        <h3>Hybrid Search</h3>
-                        <p>Combine semantic search with BM25, keyword matching, and metadata filtering for better retrieval.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">📊</div>
-                        <h3>Reranking</h3>
-                        <p>Implement cross-encoder reranking, Cohere Rerank, and custom scoring for precision.</p>
-                    </div>
-                    <div class="skill-card reveal">
-                        <div class="skill-icon">⚡</div>
-                        <h3>Production RAG</h3>
-                        <p>Build scalable pipelines with caching, batch processing, and real-time indexing.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Course Curriculum -->
-        <section class="section section-dark" id="curriculum">
-            <div class="container">
-                <h2 class="section-title">Complete Curriculum</h2>
-                <p class="section-subtitle">12 comprehensive modules covering every aspect of RAG systems</p>
-                
-                <div class="curriculum-list">
-                    <!-- Module 1 -->
-                    <div class="module-card reveal" id="module-1">
-                        <div class="module-header">
-                            <div class="module-number">01</div>
-                            <div class="module-info">
-                                <h3>RAG Fundamentals</h3>
-                                <p>Understanding retrieval augmented generation and why it matters</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-beginner">Beginner</span>
-                                <span>1,200+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/what-is-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">What is RAG and Why Use It?</span>
-                                    <span class="lesson-duration">15 min</span>
-                                </a>
-                                <a href="../tutorials/rag/rag-vs-finetuning.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">RAG vs Fine-tuning: When to Use Each</span>
-                                    <span class="lesson-duration">20 min</span>
-                                </a>
-                                <a href="../tutorials/rag/rag-architecture.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">RAG Architecture Deep Dive</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/first-rag-pipeline.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Build Your First RAG Pipeline</span>
-                                    <span class="lesson-duration">45 min</span>
-                                </a>
-                                <a href="../tutorials/rag/rag-evaluation.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Evaluating RAG Quality</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=rag-fundamentals" class="module-view-all">View all 1,200+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 2 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">02</div>
-                            <div class="module-info">
-                                <h3>Vector Embeddings Deep Dive</h3>
-                                <p>Master embedding models, dimensions, and similarity computations</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-intermediate">Intermediate</span>
-                                <span>1,800+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/embedding-models.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">OpenAI Embeddings: ada-002 vs text-embedding-3</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/open-source-embeddings.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Open Source: Sentence Transformers & BGE</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/similarity-metrics.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Cosine vs Dot Product vs Euclidean Distance</span>
-                                    <span class="lesson-duration">20 min</span>
-                                </a>
-                                <a href="../tutorials/rag/embedding-dimensions.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Dimension Reduction: When Less is More</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/multilingual-embeddings.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Multilingual Embedding Strategies</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/intermediate.html?topic=embeddings" class="module-view-all">View all 1,800+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 3 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">03</div>
-                            <div class="module-info">
-                                <h3>Vector Database Mastery</h3>
-                                <p>Production deployment with Pinecone, Chroma, Weaviate, and more</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-intermediate">Intermediate</span>
-                                <span>2,500+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/pinecone-guide.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Pinecone: Serverless Vector Database</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/chroma-local.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Chroma: Local Development & Persistence</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/weaviate-setup.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Weaviate: Hybrid Search Setup</span>
-                                    <span class="lesson-duration">45 min</span>
-                                </a>
-                                <a href="../tutorials/rag/qdrant-production.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Qdrant: High-Performance Vectors</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/pgvector-postgres.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">pgvector: Vectors in PostgreSQL</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/intermediate.html?topic=vector-databases" class="module-view-all">View all 2,500+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 4 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">04</div>
-                            <div class="module-info">
-                                <h3>Document Processing & Chunking</h3>
-                                <p>Optimal strategies for splitting and processing documents</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-intermediate">Intermediate</span>
-                                <span>1,600+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/chunking-strategies.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Chunking Strategies Comparison</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/recursive-chunking.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Recursive Character Text Splitter</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/semantic-chunking.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Semantic Chunking with Embeddings</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/pdf-processing.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">PDF Processing: Tables & Images</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/chunk-size-optimization.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Finding Optimal Chunk Size</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/intermediate.html?topic=chunking" class="module-view-all">View all 1,600+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 5 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">05</div>
-                            <div class="module-info">
-                                <h3>Retrieval Strategies</h3>
-                                <p>Advanced search patterns for better context retrieval</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-advanced">Advanced</span>
-                                <span>1,900+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/semantic-search.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Semantic Search Implementation</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/hybrid-search.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Hybrid Search: BM25 + Vectors</span>
-                                    <span class="lesson-duration">45 min</span>
-                                </a>
-                                <a href="../tutorials/rag/mmr-diversity.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">MMR: Maximal Marginal Relevance</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/metadata-filtering.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Metadata Filtering & Namespaces</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/multi-query-retrieval.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Multi-Query Retrieval Pattern</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=retrieval" class="module-view-all">View all 1,900+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 6 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">06</div>
-                            <div class="module-info">
-                                <h3>Reranking & Scoring</h3>
-                                <p>Improve retrieval precision with reranking models</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-advanced">Advanced</span>
-                                <span>1,400+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/why-rerank.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Why Reranking Matters</span>
-                                    <span class="lesson-duration">20 min</span>
-                                </a>
-                                <a href="../tutorials/rag/cohere-rerank.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Cohere Rerank Integration</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/cross-encoder.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Cross-Encoder Reranking</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/custom-scoring.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Custom Scoring Functions</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/rerank-evaluation.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Evaluating Reranker Performance</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=reranking" class="module-view-all">View all 1,400+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 7 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">07</div>
-                            <div class="module-info">
-                                <h3>Query Understanding</h3>
-                                <p>Transform user queries for better retrieval</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-advanced">Advanced</span>
-                                <span>1,300+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/query-expansion.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Query Expansion Techniques</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/hyde.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">HyDE: Hypothetical Document Embeddings</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/query-routing.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Query Routing to Multiple Indexes</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/step-back-prompting.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Step-Back Prompting</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=query-understanding" class="module-view-all">View all 1,300+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 8 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">08</div>
-                            <div class="module-info">
-                                <h3>Context Window Management</h3>
-                                <p>Optimize context selection for LLM consumption</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-advanced">Advanced</span>
-                                <span>1,100+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/context-compression.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Context Compression Techniques</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/lost-in-middle.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Lost in the Middle Problem</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                                <a href="../tutorials/rag/context-ordering.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Optimal Context Ordering</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/long-context-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">RAG with Long Context Models</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=context-management" class="module-view-all">View all 1,100+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 9 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">09</div>
-                            <div class="module-info">
-                                <h3>Advanced RAG Patterns</h3>
-                                <p>Self-RAG, Corrective RAG, and agentic retrieval</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-expert">Expert</span>
-                                <span>1,500+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/self-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Self-RAG: Self-Reflective Retrieval</span>
-                                    <span class="lesson-duration">45 min</span>
-                                </a>
-                                <a href="../tutorials/rag/corrective-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Corrective RAG (CRAG)</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/agentic-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Agentic RAG with Tool Use</span>
-                                    <span class="lesson-duration">50 min</span>
-                                </a>
-                                <a href="../tutorials/rag/graph-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Graph RAG: Knowledge Graphs + Vectors</span>
-                                    <span class="lesson-duration">55 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/expert.html?topic=advanced-rag" class="module-view-all">View all 1,500+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 10 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">10</div>
-                            <div class="module-info">
-                                <h3>Evaluation & Testing</h3>
-                                <p>Comprehensive RAG evaluation frameworks</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-advanced">Advanced</span>
-                                <span>1,200+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/ragas-framework.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">RAGAS Evaluation Framework</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/retrieval-metrics.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Retrieval Metrics: Recall, Precision, MRR</span>
-                                    <span class="lesson-duration">30 min</span>
-                                </a>
-                                <a href="../tutorials/rag/generation-metrics.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Generation Quality Metrics</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/rag-triad.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">The RAG Triad: Context, Ground, Answer</span>
-                                    <span class="lesson-duration">25 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/advanced.html?topic=rag-evaluation" class="module-view-all">View all 1,200+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 11 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">11</div>
-                            <div class="module-info">
-                                <h3>Production Deployment</h3>
-                                <p>Scale RAG systems for real-world applications</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-expert">Expert</span>
-                                <span>1,800+ lessons</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../tutorials/rag/caching-strategies.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Semantic Caching Strategies</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                                <a href="../tutorials/rag/batch-indexing.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Batch Indexing Pipelines</span>
-                                    <span class="lesson-duration">40 min</span>
-                                </a>
-                                <a href="../tutorials/rag/real-time-updates.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Real-Time Index Updates</span>
-                                    <span class="lesson-duration">45 min</span>
-                                </a>
-                                <a href="../tutorials/rag/multi-tenant-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">📖</span>
-                                    <span class="lesson-title">Multi-Tenant RAG Architecture</span>
-                                    <span class="lesson-duration">50 min</span>
-                                </a>
-                                <a href="../tutorials/rag/monitoring-observability.html" class="lesson-item">
-                                    <span class="lesson-icon">💻</span>
-                                    <span class="lesson-title">Monitoring & Observability</span>
-                                    <span class="lesson-duration">35 min</span>
-                                </a>
-                            </div>
-                            <a href="../tutorials/expert.html?topic=production-rag" class="module-view-all">View all 1,800+ lessons →</a>
-                        </div>
-                    </div>
-
-                    <!-- Module 12 -->
-                    <div class="module-card reveal">
-                        <div class="module-header">
-                            <div class="module-number">12</div>
-                            <div class="module-info">
-                                <h3>Capstone Projects</h3>
-                                <p>Build complete RAG applications from scratch</p>
-                            </div>
-                            <div class="module-meta">
-                                <span class="badge badge-expert">Expert</span>
-                                <span>32 Projects</span>
-                            </div>
-                        </div>
-                        <div class="module-content">
-                            <div class="lesson-list">
-                                <a href="../projects/rag-chatbot.html" class="lesson-item">
-                                    <span class="lesson-icon">🚀</span>
-                                    <span class="lesson-title">Document Q&A Chatbot</span>
-                                    <span class="lesson-duration">4 hours</span>
-                                </a>
-                                <a href="../projects/legal-research.html" class="lesson-item">
-                                    <span class="lesson-icon">🚀</span>
-                                    <span class="lesson-title">Legal Research Assistant</span>
-                                    <span class="lesson-duration">6 hours</span>
-                                </a>
-                                <a href="../projects/code-search.html" class="lesson-item">
-                                    <span class="lesson-icon">🚀</span>
-                                    <span class="lesson-title">Codebase Search Engine</span>
-                                    <span class="lesson-duration">5 hours</span>
-                                </a>
-                                <a href="../projects/multi-modal-rag.html" class="lesson-item">
-                                    <span class="lesson-icon">🚀</span>
-                                    <span class="lesson-title">Multi-Modal RAG System</span>
-                                    <span class="lesson-duration">8 hours</span>
-                                </a>
-                            </div>
-                            <a href="../projects/index.html?course=rag" class="module-view-all">View all 32 projects →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Prerequisites -->
-        <section class="section">
-            <div class="container">
-                <div class="prereq-grid">
-                    <div class="prereq-card">
-                        <h3>📋 Prerequisites</h3>
-                        <ul>
-                            <li>Python programming fundamentals</li>
-                            <li>Basic understanding of APIs</li>
-                            <li>Familiarity with LLMs (helpful but not required)</li>
-                            <li>Basic SQL knowledge (for pgvector module)</li>
-                        </ul>
-                    </div>
-                    <div class="prereq-card">
-                        <h3>🛠️ Tools You'll Use</h3>
-                        <ul>
-                            <li>OpenAI API / text-embedding-3</li>
-                            <li>LangChain & LlamaIndex</li>
-                            <li>Pinecone, Chroma, Weaviate</li>
-                            <li>Cohere Rerank</li>
-                            <li>RAGAS evaluation framework</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Related Courses -->
-        <section class="section section-dark">
-            <div class="container">
-                <h2 class="section-title">Continue Your Journey</h2>
-                <div class="related-courses">
-                    <a href="langchain.html" class="course-card reveal">
-                        <div class="course-card-header">
-                            <span class="course-icon">🦜</span>
-                            <span class="badge badge-intermediate">Intermediate</span>
-                        </div>
-                        <h3>LangChain Framework</h3>
-                        <p>Master the most popular framework for building LLM applications.</p>
-                        <span class="course-lessons">15,000+ lessons</span>
-                    </a>
-                    <a href="agents.html" class="course-card reveal">
-                        <div class="course-card-header">
-                            <span class="course-icon">🤖</span>
-                            <span class="badge badge-advanced">Advanced</span>
-                        </div>
-                        <h3>AI Agents</h3>
-                        <p>Build autonomous agents with tools, memory, and planning.</p>
-                        <span class="course-lessons">14,000+ lessons</span>
-                    </a>
-                    <a href="local-llms.html" class="course-card reveal">
-                        <div class="course-card-header">
-                            <span class="course-icon">🏠</span>
-                            <span class="badge badge-intermediate">Intermediate</span>
-                        </div>
-                        <h3>Local LLMs</h3>
-                        <p>Run models locally with Ollama, llama.cpp, and vLLM.</p>
-                        <span class="course-lessons">9,500+ lessons</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="section cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2>Ready to Master RAG Systems?</h2>
-                    <p>Start with the fundamentals and progress to building production-ready retrieval systems.</p>
-                    <a href="#module-1" class="btn btn-primary btn-lg">Begin Module 1 →</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../index.html" class="footer-logo">
-                        <span class="logo-icon">⚡</span>
-                        AI Coding Academy
-                    </a>
-                    <p>Master AI development with 100,000+ tutorials and hands-on projects.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Learning Paths</h4>
-                    <ul>
-                        <li><a href="../tutorials/beginner.html">Beginner</a></li>
-                        <li><a href="../tutorials/intermediate.html">Intermediate</a></li>
-                        <li><a href="../tutorials/advanced.html">Advanced</a></li>
-                        <li><a href="../tutorials/expert.html">Expert</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Courses</h4>
-                    <ul>
-                        <li><a href="openai.html">OpenAI API</a></li>
-                        <li><a href="claude.html">Claude API</a></li>
-                        <li><a href="langchain.html">LangChain</a></li>
-                        <li><a href="rag.html">RAG Systems</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="../debugging/index.html">Debugging Hub</a></li>
-                        <li><a href="../projects/index.html">Projects</a></li>
-                        <li><a href="#">API Reference</a></li>
-                        <li><a href="#">Community</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 AI Coding Academy. All rights reserved.</p>
+    <section class="course-hero">
+        <div class="course-hero-content">
+            <div class="course-icon">🔍</div>
+            <h1>RAG Systems Complete Guide</h1>
+            <p>Build production-ready Retrieval-Augmented Generation systems. Master document processing, vector stores, retrieval strategies, and evaluation.</p>
+            <div class="course-meta">
+                <div class="course-meta-item"><span class="course-meta-label">Lessons</span><span class="course-meta-value">18,000+</span></div>
+                <div class="course-meta-item"><span class="course-meta-label">Projects</span><span class="course-meta-value">250+</span></div>
+                <div class="course-meta-item"><span class="course-meta-label">Level</span><span class="course-meta-value">All Levels</span></div>
             </div>
         </div>
-    </footer>
+    </section>
 
+    <section class="course-content">
+        <div class="module-section">
+            <h2>🌱 Beginner Modules</h2>
+            <div class="module-grid">
+                <a href="../tutorials/rag/introduction.html" class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 1</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Introduction to RAG</h3>
+                    <p>Understand what RAG is and why it solves key LLM limitations.</p>
+                    <ul class="module-lessons">
+                        <li>What is RAG?</li>
+                        <li>RAG vs Fine-tuning</li>
+                        <li>RAG Architecture</li>
+                        <li>Use Cases</li>
+                    </ul>
+                    <div class="module-meta"><span>📚 400+ lessons</span><span>⏱️ 8-10 hours</span></div>
+                </a>
+                
+                <a href="../tutorials/rag/document-loading.html" class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 2</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Document Loading</h3>
+                    <p>Load PDFs, Word docs, web pages, and other document types.</p>
+                    <ul class="module-lessons">
+                        <li>PDF Loaders</li>
+                        <li>Text & Markdown</li>
+                        <li>Web Scraping</li>
+                        <li>Database Sources</li>
+                    </ul>
+                    <div class="module-meta"><span>📚 600+ lessons</span><span>⏱️ 12-14 hours</span></div>
+                </a>
+
+                <a href="../tutorials/rag/text-splitting.html" class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 3</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Text Splitting</h3>
+                    <p>Split documents into optimal chunks for embedding and retrieval.</p>
+                    <ul class="module-lessons">
+                        <li>Why Split Text?</li>
+                        <li>Chunk Size Selection</li>
+                        <li>Overlap Strategies</li>
+                        <li>Semantic Chunking</li>
+                    </ul>
+                    <div class="module-meta"><span>📚 500+ lessons</span><span>⏱️ 10-12 hours</span></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="module-section">
+            <h2>📈 Intermediate Modules</h2>
+            <div class="module-grid">
+                <a href="../tutorials/rag/introduction.html" class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 4</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Embeddings & Vector Stores</h3>
+                    <p>Create embeddings and store them in vector databases.</p>
+                    <ul class="module-lessons">
+                        <li>Embedding Models</li>
+                        <li>Pinecone Setup</li>
+                        <li>Chroma DB</li>
+                        <li>FAISS</li>
+                    </ul>
+                    <div class="module-meta"><span>📚 800+ lessons</span><span>⏱️ 16-18 hours</span></div>
+                </a>
+
+                <a href="../tutorials/rag/text-splitting.html" class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">Module 5</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Retrieval Strategies</h3>
+                    <p>Advanced retrieval techniques for better results.</p>
+                    <ul class="module-lessons">
+                        <li>Similarity Search</li>
+                        <li>MMR Retrieval</li>
+                        <li>Hybrid Search</li>
+                        <li>Reranking</li>
+                    </ul>
+                    <div class="module-meta"><span>📚 700+ lessons</span><span>⏱️ 14-16 hours</span></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                </div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="index.html">Courses</a></li></ul></div>
+                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a></p></div>
+        </div>
+    </footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
 </body>
