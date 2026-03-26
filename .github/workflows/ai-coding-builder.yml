@@ -1,0 +1,33 @@
+name: Autonomous AI Coding Builder
+on:
+  workflow_dispatch: # Allows you to start it manually
+  issue_comment:
+    types: [created]
+
+jobs:
+  build:
+    if: contains(github.event.comment.body, '@claude build') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Claude Continuous Worker
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # This loop runs until Claude creates a file named 'finished.txt'
+          until [ -f finished.txt ]; do
+            echo "Claude is working..."
+            npx @anthropic-ai/claude-code --print "Read CLAUDE.md. Fix one broken link or add one missing tutorial from the 4-tier plan. If the entire site is 100% done with NO errors, create finished.txt." || {
+              echo "Rate limit reached or error occurred. Sleeping for 5 minutes..."
+              sleep 300
+            }
+          done
+          
+      - name: Commit Changes
+        run: |
+          git config --global user.name "Claude-Bot"
+          git config --global user.email "claude-bot@myrqai.com"
+          git add .
+          git commit -m "Claude: Autonomous update to AI Coding"
+          git push
