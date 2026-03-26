@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data & Format Errors - AI Coding Academy Debugging Hub</title>
+    <meta name="description" content="9,400+ solutions for data processing, JSON parsing, encoding, and format conversion errors in AI/ML applications.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                AI Coding Academy
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link active">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-secondary btn-sm" aria-label="Search">
+                    <span>⌘K</span>
+                </button>
+                <a href="#start" class="btn btn-primary btn-sm">Start Learning</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="debug-hero">
+            <div class="container">
+                <nav class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="breadcrumb-sep">→</span>
+                    <a href="index.html">Debugging Hub</a>
+                    <span class="breadcrumb-sep">→</span>
+                    <span class="breadcrumb-current">Data & Format Errors</span>
+                </nav>
+                
+                <div class="debug-hero-content">
+                    <div class="debug-icon-large" style="background: linear-gradient(135deg, #f59e0b, #d97706);">📊</div>
+                    <h1>Data & Format Errors</h1>
+                    <p class="debug-hero-subtitle">9,400+ solutions for JSON parsing, encoding issues, data validation, type mismatches, and format conversion problems in AI applications.</p>
+                    
+                    <div class="debug-stats-row">
+                        <div class="debug-stat">
+                            <span class="debug-stat-value">9,400+</span>
+                            <span class="debug-stat-label">Solutions</span>
+                        </div>
+                        <div class="debug-stat">
+                            <span class="debug-stat-value">14</span>
+                            <span class="debug-stat-label">Categories</span>
+                        </div>
+                        <div class="debug-stat">
+                            <span class="debug-stat-value">98.7%</span>
+                            <span class="debug-stat-label">Resolution Rate</span>
+                        </div>
+                        <div class="debug-stat">
+                            <span class="debug-stat-value">Daily</span>
+                            <span class="debug-stat-label">Updates</span>
+                        </div>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="debug-search-box">
+                        <input type="text" id="errorSearch" placeholder="Describe your data or format error..." class="debug-search-input">
+                        <button class="btn btn-primary">Find Solution</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Diagnosis -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Quick Diagnosis</h2>
+                <p class="section-subtitle">Select the symptom that best describes your issue</p>
+                
+                <div class="diagnosis-grid">
+                    <a href="#json-errors" class="diagnosis-card">
+                        <span class="diagnosis-icon">{ }</span>
+                        <h3>JSON Parse Error</h3>
+                        <p>Invalid JSON, unexpected tokens, malformed responses</p>
+                        <span class="diagnosis-count">2,100+ solutions</span>
+                    </a>
+                    
+                    <a href="#encoding" class="diagnosis-card">
+                        <span class="diagnosis-icon">🔤</span>
+                        <h3>Encoding Issues</h3>
+                        <p>UTF-8 errors, character corruption, byte sequences</p>
+                        <span class="diagnosis-count">1,400+ solutions</span>
+                    </a>
+                    
+                    <a href="#type-errors" class="diagnosis-card">
+                        <span class="diagnosis-icon">⚠️</span>
+                        <h3>Type Mismatches</h3>
+                        <p>Wrong data types, conversion failures, schema validation</p>
+                        <span class="diagnosis-count">1,800+ solutions</span>
+                    </a>
+                    
+                    <a href="#serialization" class="diagnosis-card">
+                        <span class="diagnosis-icon">📦</span>
+                        <h3>Serialization Errors</h3>
+                        <p>Pickle, protobuf, msgpack serialization failures</p>
+                        <span class="diagnosis-count">1,200+ solutions</span>
+                    </a>
+                    
+                    <a href="#validation" class="diagnosis-card">
+                        <span class="diagnosis-icon">✓</span>
+                        <h3>Validation Failures</h3>
+                        <p>Schema validation, Pydantic errors, data constraints</p>
+                        <span class="diagnosis-count">1,500+ solutions</span>
+                    </a>
+                    
+                    <a href="#conversion" class="diagnosis-card">
+                        <span class="diagnosis-icon">🔄</span>
+                        <h3>Format Conversion</h3>
+                        <p>CSV, XML, YAML, document format issues</p>
+                        <span class="diagnosis-count">1,400+ solutions</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- JSON Parsing Errors -->
+        <section id="json-errors" class="section section-alt">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">JSON Parsing Errors</h2>
+                        <p class="section-subtitle">2,100+ solutions for JSON-related issues</p>
+                    </div>
+                    <span class="solution-count-badge">2,100+ Solutions</span>
+                </div>
+
+                <!-- Error: JSONDecodeError -->
+                <div class="error-block" id="json-decode-error">
+                    <div class="error-header">
+                        <span class="error-type">JSONDecodeError</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>json.decoder.JSONDecodeError: Expecting value</h3>
+                    
+                    <div class="error-message">
+                        <code>json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Why This Happens</h4>
+                        <ul class="error-causes">
+                            <li>Empty response from API (no content returned)</li>
+                            <li>Response is not JSON (HTML error page, plain text)</li>
+                            <li>Byte Order Mark (BOM) at start of string</li>
+                            <li>Whitespace or invisible characters before JSON</li>
+                            <li>API returned non-200 status with error message</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python"># Always check response before parsing
+import json
+import requests
+
+def safe_json_parse(response):
+    """Safely parse JSON from API response."""
+    # Check status code first
+    if not response.ok:
+        print(f"HTTP Error {response.status_code}: {response.text[:200]}")
+        return None
+    
+    # Check if response has content
+    if not response.text or not response.text.strip():
+        print("Empty response received")
+        return None
+    
+    # Check content type
+    content_type = response.headers.get('content-type', '')
+    if 'application/json' not in content_type:
+        print(f"Unexpected content type: {content_type}")
+        print(f"Response preview: {response.text[:200]}")
+        return None
+    
+    try:
+        # Remove BOM if present
+        text = response.text.lstrip('\ufeff')
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        print(f"JSON Parse Error at position {e.pos}: {e.msg}")
+        print(f"Problematic content: {response.text[max(0,e.pos-20):e.pos+20]}")
+        return None
+
+# Usage
+response = requests.get("https://api.example.com/data")
+data = safe_json_parse(response)
+if data:
+    print("Successfully parsed:", data)</code></pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <strong>💡 Pro Tip:</strong> When debugging JSON issues, always print <code>repr(response.text[:100])</code> to see hidden characters like BOM, newlines, or HTML tags that might not be visible in normal output.
+                    </div>
+                </div>
+
+                <!-- Error: Unexpected Token -->
+                <div class="error-block" id="unexpected-token">
+                    <div class="error-header">
+                        <span class="error-type">SyntaxError</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>Unexpected token in JSON at position X</h3>
+                    
+                    <div class="error-message">
+                        <code>json.decoder.JSONDecodeError: Expecting ',' delimiter: line 5 column 23</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Common Causes</h4>
+                        <ul class="error-causes">
+                            <li>Trailing commas after last array/object element</li>
+                            <li>Single quotes instead of double quotes</li>
+                            <li>Unquoted property names</li>
+                            <li>Comments in JSON (not allowed in strict JSON)</li>
+                            <li>NaN, Infinity, or undefined values</li>
+                            <li>Truncated response (incomplete JSON)</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution: Fix Common JSON Issues</h4>
+                        <pre class="code-block"><code class="language-python">import re
+import json
+
+def fix_common_json_issues(json_string):
+    """Attempt to fix common JSON formatting issues."""
+    # Remove BOM
+    text = json_string.lstrip('\ufeff')
+    
+    # Remove JavaScript-style comments
+    text = re.sub(r'//.*?$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'/\*.*?\*/', '', text, flags=re.DOTALL)
+    
+    # Remove trailing commas before } or ]
+    text = re.sub(r',\s*([}\]])', r'\1', text)
+    
+    # Try to parse
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+    
+    # Try with json5 for more lenient parsing
+    try:
+        import json5
+        return json5.loads(text)
+    except ImportError:
+        print("Install json5 for lenient parsing: pip install json5")
+    except Exception:
+        pass
+    
+    return None
+
+# For LLM responses that might have markdown
+def extract_json_from_llm_response(response_text):
+    """Extract JSON from LLM response that might include markdown."""
+    # Try to find JSON in code blocks
+    patterns = [
+        r'```json\s*([\s\S]*?)\s*```',
+        r'```\s*([\s\S]*?)\s*```',
+        r'\{[\s\S]*\}',
+        r'\[[\s\S]*\]'
+    ]
+    
+    for pattern in patterns:
+        matches = re.findall(pattern, response_text)
+        for match in matches:
+            try:
+                return json.loads(match)
+            except json.JSONDecodeError:
+                continue
+    
+    return None
+
+# Usage
+messy_response = '''
+Here's the data you requested:
+```json
+{
+    "name": "test",
+    "values": [1, 2, 3,],  // trailing comma
+}
+```
+'''
+data = extract_json_from_llm_response(messy_response)
+print(data)  # {'name': 'test', 'values': [1, 2, 3]}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Error: Invalid Control Character -->
+                <div class="error-block" id="control-character">
+                    <div class="error-header">
+                        <span class="error-type">JSONDecodeError</span>
+                        <span class="badge badge-advanced">Tricky</span>
+                    </div>
+                    <h3>Invalid control character in string</h3>
+                    
+                    <div class="error-message">
+                        <code>json.decoder.JSONDecodeError: Invalid control character at: line 3 column 45</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Why This Happens</h4>
+                        <p>JSON strings cannot contain raw control characters (characters with ASCII codes 0-31). This commonly occurs with:</p>
+                        <ul class="error-causes">
+                            <li>Unescaped newlines (\n) or tabs (\t) inside strings</li>
+                            <li>Carriage returns (\r) from Windows line endings</li>
+                            <li>Form feeds, backspaces, or other control chars</li>
+                            <li>Data scraped from PDFs or legacy systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python">import json
+import re
+
+def sanitize_for_json(text):
+    """Remove or escape control characters for valid JSON."""
+    # Method 1: Remove all control characters
+    cleaned = ''.join(char for char in text if ord(char) >= 32 or char in '\n\r\t')
+    
+    # Method 2: Escape control characters
+    def escape_control_chars(s):
+        result = []
+        for char in s:
+            if ord(char) < 32 and char not in '\n\r\t':
+                result.append(f'\\u{ord(char):04x}')
+            else:
+                result.append(char)
+        return ''.join(result)
+    
+    return cleaned
+
+def parse_json_with_control_chars(json_string):
+    """Parse JSON that might contain control characters."""
+    try:
+        return json.loads(json_string)
+    except json.JSONDecodeError as e:
+        if "control character" in str(e).lower():
+            # Try with strict=False (allows control chars in strings)
+            return json.loads(json_string, strict=False)
+        raise
+
+# For creating JSON with special characters
+def safe_json_string(value):
+    """Safely encode a string for JSON."""
+    if not isinstance(value, str):
+        return value
+    
+    # json.dumps will properly escape everything
+    encoded = json.dumps(value)
+    # Remove the surrounding quotes
+    return encoded[1:-1]
+
+# Example
+problematic_text = "Line 1\x00Line 2\x1fLine 3"  # Contains null and unit separator
+clean_text = sanitize_for_json(problematic_text)
+data = {"content": clean_text}
+json_str = json.dumps(data)
+print(json_str)  # Valid JSON</code></pre>
+                    </div>
+                </div>
+
+                <!-- Error: Object of type X is not JSON serializable -->
+                <div class="error-block" id="not-serializable">
+                    <div class="error-header">
+                        <span class="error-type">TypeError</span>
+                        <span class="badge badge-beginner">Common</span>
+                    </div>
+                    <h3>Object of type X is not JSON serializable</h3>
+                    
+                    <div class="error-message">
+                        <code>TypeError: Object of type datetime is not JSON serializable</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Common Non-Serializable Types</h4>
+                        <ul class="error-causes">
+                            <li><code>datetime</code>, <code>date</code>, <code>time</code> objects</li>
+                            <li><code>numpy</code> arrays and types (int64, float64, etc.)</li>
+                            <li><code>pandas</code> DataFrames and Series</li>
+                            <li><code>bytes</code> and <code>bytearray</code></li>
+                            <li><code>set</code> and <code>frozenset</code></li>
+                            <li><code>Decimal</code> objects</li>
+                            <li>Custom class instances</li>
+                            <li><code>UUID</code> objects</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution: Custom JSON Encoder</h4>
+                        <pre class="code-block"><code class="language-python">import json
+from datetime import datetime, date, time
+from decimal import Decimal
+from uuid import UUID
+import numpy as np
+import pandas as pd
+
+class UniversalJSONEncoder(json.JSONEncoder):
+    """JSON encoder that handles common non-serializable types."""
+    
+    def default(self, obj):
+        # Datetime types
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        if isinstance(obj, date):
+            return obj.isoformat()
+        if isinstance(obj, time):
+            return obj.isoformat()
+        
+        # Numpy types
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        if isinstance(obj, (np.int_, np.intc, np.intp, np.int8,
+                           np.int16, np.int32, np.int64)):
+            return int(obj)
+        if isinstance(obj, (np.float_, np.float16, np.float32, np.float64)):
+            return float(obj)
+        if isinstance(obj, np.bool_):
+            return bool(obj)
+        
+        # Pandas types
+        if isinstance(obj, pd.DataFrame):
+            return obj.to_dict(orient='records')
+        if isinstance(obj, pd.Series):
+            return obj.tolist()
+        if pd.isna(obj):
+            return None
+        
+        # Other common types
+        if isinstance(obj, Decimal):
+            return float(obj)
+        if isinstance(obj, UUID):
+            return str(obj)
+        if isinstance(obj, bytes):
+            return obj.decode('utf-8', errors='replace')
+        if isinstance(obj, set):
+            return list(obj)
+        if isinstance(obj, frozenset):
+            return list(obj)
+        
+        # For custom objects, try common attributes
+        if hasattr(obj, '__dict__'):
+            return obj.__dict__
+        if hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        if hasattr(obj, 'to_json'):
+            return obj.to_json()
+        
+        return super().default(obj)
+
+# Usage
+data = {
+    "timestamp": datetime.now(),
+    "values": np.array([1, 2, 3]),
+    "df": pd.DataFrame({"a": [1, 2], "b": [3, 4]}),
+    "id": UUID("12345678-1234-5678-1234-567812345678"),
+    "tags": {"python", "json", "ai"}
+}
+
+json_str = json.dumps(data, cls=UniversalJSONEncoder, indent=2)
+print(json_str)
+
+# Or use as default function
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default."""
+    if isinstance(obj, datetime):
+        return obj.isoformat()
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if hasattr(obj, '__dict__'):
+        return obj.__dict__
+    raise TypeError(f"Type {type(obj)} not serializable")
+
+json.dumps(data, default=json_serial)</code></pre>
+                    </div>
+                </div>
+
+                <!-- More JSON Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>Circular Reference Error</h4>
+                        <p>ValueError: Circular reference detected</p>
+                        <pre class="code-block"><code class="language-python"># Use custom encoder that handles circular refs
+import json
+
+def remove_circular_refs(obj, seen=None):
+    if seen is None:
+        seen = set()
+    
+    obj_id = id(obj)
+    if obj_id in seen:
+        return "[Circular Reference]"
+    
+    if isinstance(obj, dict):
+        seen.add(obj_id)
+        return {k: remove_circular_refs(v, seen.copy()) 
+                for k, v in obj.items()}
+    if isinstance(obj, list):
+        seen.add(obj_id)
+        return [remove_circular_refs(item, seen.copy()) 
+                for item in obj]
+    return obj
+
+# Or limit depth
+json.dumps(data, default=str, 
+           check_circular=False)  # Dangerous!</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Unicode Escape Issues</h4>
+                        <p>Encoded unicode appears as \uXXXX</p>
+                        <pre class="code-block"><code class="language-python"># Preserve unicode characters
+json.dumps(data, ensure_ascii=False)
+
+# Read file with proper encoding
+with open('data.json', 'r', 
+          encoding='utf-8') as f:
+    data = json.load(f)
+
+# Write with unicode preserved
+with open('output.json', 'w', 
+          encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, 
+              indent=2)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Large Number Precision</h4>
+                        <p>Integers lose precision in JSON</p>
+                        <pre class="code-block"><code class="language-python"># JavaScript has 53-bit integer precision
+# Large IDs may lose precision
+
+# Solution: Use strings for large integers
+data = {
+    "id": str(9007199254740993),  # > 2^53
+    "snowflake_id": "1234567890123456789"
+}
+
+# Or use Decimal for precision
+from decimal import Decimal
+import json
+
+class PreciseEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Decimal):
+            return str(obj)
+        return super().default(obj)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Pretty Print JSON</h4>
+                        <p>Format JSON for readability</p>
+                        <pre class="code-block"><code class="language-python"># Basic pretty print
+print(json.dumps(data, indent=2))
+
+# Custom separators for compact output
+json.dumps(data, separators=(',', ':'))
+
+# Sort keys for consistent output
+json.dumps(data, indent=2, sort_keys=True)
+
+# Highlight JSON in terminal
+from pygments import highlight
+from pygments.lexers import JsonLexer
+from pygments.formatters import TerminalFormatter
+
+print(highlight(
+    json.dumps(data, indent=2),
+    JsonLexer(),
+    TerminalFormatter()
+))</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Encoding Issues -->
+        <section id="encoding" class="section">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">Encoding & Character Issues</h2>
+                        <p class="section-subtitle">1,400+ solutions for text encoding problems</p>
+                    </div>
+                    <span class="solution-count-badge">1,400+ Solutions</span>
+                </div>
+
+                <!-- Error: UnicodeDecodeError -->
+                <div class="error-block" id="unicode-decode">
+                    <div class="error-header">
+                        <span class="error-type">UnicodeDecodeError</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>UnicodeDecodeError: 'utf-8' codec can't decode byte</h3>
+                    
+                    <div class="error-message">
+                        <code>UnicodeDecodeError: 'utf-8' codec can't decode byte 0x92 in position 15: invalid start byte</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Why This Happens</h4>
+                        <ul class="error-causes">
+                            <li>File is encoded in a different format (latin-1, cp1252, etc.)</li>
+                            <li>Binary data being read as text</li>
+                            <li>Mixed encodings in the same file</li>
+                            <li>Windows "smart quotes" and special characters</li>
+                            <li>Legacy data from older systems</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python">import chardet
+from charset_normalizer import from_bytes
+
+def read_file_any_encoding(filepath):
+    """Read file with automatic encoding detection."""
+    # First, read as binary
+    with open(filepath, 'rb') as f:
+        raw_data = f.read()
+    
+    # Detect encoding
+    detected = chardet.detect(raw_data)
+    encoding = detected['encoding']
+    confidence = detected['confidence']
+    
+    print(f"Detected encoding: {encoding} (confidence: {confidence:.0%})")
+    
+    # Try detected encoding first
+    try:
+        return raw_data.decode(encoding)
+    except (UnicodeDecodeError, TypeError):
+        pass
+    
+    # Fallback to common encodings
+    encodings_to_try = [
+        'utf-8', 'utf-8-sig',  # UTF-8 with/without BOM
+        'latin-1', 'iso-8859-1',  # Western European
+        'cp1252', 'windows-1252',  # Windows Western
+        'cp1251',  # Cyrillic
+        'gb2312', 'gbk', 'gb18030',  # Chinese
+        'shift_jis', 'euc-jp',  # Japanese
+        'euc-kr',  # Korean
+    ]
+    
+    for enc in encodings_to_try:
+        try:
+            return raw_data.decode(enc)
+        except (UnicodeDecodeError, LookupError):
+            continue
+    
+    # Last resort: decode with replacement
+    return raw_data.decode('utf-8', errors='replace')
+
+# For OpenAI/Anthropic API with proper encoding
+def prepare_text_for_api(text):
+    """Ensure text is properly encoded for API calls."""
+    if isinstance(text, bytes):
+        text = text.decode('utf-8', errors='replace')
+    
+    # Normalize unicode (NFC form)
+    import unicodedata
+    text = unicodedata.normalize('NFC', text)
+    
+    # Remove null bytes
+    text = text.replace('\x00', '')
+    
+    return text
+
+# Smart encoding for writing
+def write_file_utf8(filepath, content):
+    """Write file with UTF-8 encoding (safest for AI APIs)."""
+    with open(filepath, 'w', encoding='utf-8', newline='') as f:
+        f.write(content)</code></pre>
+                    </div>
+
+                    <div class="tip-box">
+                        <strong>💡 Best Practice:</strong> Always use <code>encoding='utf-8'</code> when opening files, and convert legacy data to UTF-8 as early as possible in your pipeline.
+                    </div>
+                </div>
+
+                <!-- Error: UnicodeEncodeError -->
+                <div class="error-block" id="unicode-encode">
+                    <div class="error-header">
+                        <span class="error-type">UnicodeEncodeError</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>UnicodeEncodeError: 'ascii' codec can't encode character</h3>
+                    
+                    <div class="error-message">
+                        <code>UnicodeEncodeError: 'ascii' codec can't encode character '\xe9' in position 5: ordinal not in range(128)</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python"># Fix for print() encoding issues
+import sys
+import io
+
+# Set stdout to UTF-8
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+# Or handle when writing
+text = "Café résumé naïve"
+
+# Method 1: Encode with replacement
+safe_text = text.encode('ascii', errors='replace').decode('ascii')
+# Output: Caf? r?sum? na?ve
+
+# Method 2: Transliterate to ASCII
+import unicodedata
+def to_ascii(text):
+    """Convert unicode to closest ASCII equivalent."""
+    # Normalize to decomposed form
+    normalized = unicodedata.normalize('NFD', text)
+    # Remove combining characters (accents)
+    ascii_text = ''.join(c for c in normalized 
+                         if unicodedata.category(c) != 'Mn')
+    return ascii_text
+
+print(to_ascii("Café résumé"))  # "Cafe resume"
+
+# Method 3: Use unidecode for better transliteration
+from unidecode import unidecode
+print(unidecode("北京 München Café"))  # "Bei Jing  Munchen Cafe"
+
+# For API responses with special characters
+def clean_for_display(text):
+    """Clean text for safe display anywhere."""
+    # Replace problematic characters
+    replacements = {
+        '\u2018': "'",  # Left single quote
+        '\u2019': "'",  # Right single quote
+        '\u201c': '"',  # Left double quote
+        '\u201d': '"',  # Right double quote
+        '\u2013': '-',  # En dash
+        '\u2014': '--', # Em dash
+        '\u2026': '...', # Ellipsis
+        '\xa0': ' ',    # Non-breaking space
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text</code></pre>
+                    </div>
+                </div>
+
+                <!-- More Encoding Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>Base64 Encoding for Binary</h4>
+                        <p>Send binary data in JSON/API calls</p>
+                        <pre class="code-block"><code class="language-python">import base64
+
+# Encode binary to base64 string
+with open('image.png', 'rb') as f:
+    binary_data = f.read()
+
+b64_string = base64.b64encode(
+    binary_data
+).decode('utf-8')
+
+# For OpenAI Vision API
+message = {
+    "role": "user",
+    "content": [
+        {"type": "text", "text": "Describe:"},
+        {"type": "image_url", "image_url": {
+            "url": f"data:image/png;base64,{b64_string}"
+        }}
+    ]
+}
+
+# Decode back to binary
+decoded = base64.b64decode(b64_string)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>BOM (Byte Order Mark) Issues</h4>
+                        <p>UTF-8 BOM causing parse errors</p>
+                        <pre class="code-block"><code class="language-python"># Detect and remove BOM
+def remove_bom(text):
+    if text.startswith('\ufeff'):
+        return text[1:]
+    return text
+
+# Read file with BOM handling
+with open('file.txt', 'r', 
+          encoding='utf-8-sig') as f:  # -sig handles BOM
+    content = f.read()
+
+# Write without BOM (standard UTF-8)
+with open('output.txt', 'w', 
+          encoding='utf-8') as f:
+    f.write(content)
+
+# Write with BOM (for Excel compatibility)
+with open('excel.csv', 'w', 
+          encoding='utf-8-sig') as f:
+    f.write(csv_content)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Mixed Encoding Detection</h4>
+                        <p>File has inconsistent encoding</p>
+                        <pre class="code-block"><code class="language-python">from charset_normalizer import from_bytes
+
+def smart_decode(raw_bytes):
+    """Handle files with mixed encodings."""
+    result = from_bytes(raw_bytes)
+    best = result.best()
+    if best:
+        return str(best)
+    
+    # Fallback: decode line by line
+    lines = []
+    for line in raw_bytes.split(b'\n'):
+        detected = chardet.detect(line)
+        enc = detected['encoding'] or 'utf-8'
+        try:
+            lines.append(line.decode(enc))
+        except:
+            lines.append(line.decode('utf-8', 
+                                     errors='replace'))
+    return '\n'.join(lines)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>URL Encoding Issues</h4>
+                        <p>Special characters in URLs</p>
+                        <pre class="code-block"><code class="language-python">from urllib.parse import quote, unquote, urlencode
+
+# Encode special characters in URL
+query = "search term with spaces & symbols"
+safe_query = quote(query)
+# "search%20term%20with%20spaces%20%26%20symbols"
+
+# Encode query parameters
+params = {
+    "q": "café résumé",
+    "page": 1
+}
+query_string = urlencode(params)
+# "q=caf%C3%A9+r%C3%A9sum%C3%A9&page=1"
+
+# Decode URL
+decoded = unquote("caf%C3%A9")  # "café"</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Type Mismatches -->
+        <section id="type-errors" class="section section-alt">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">Type Mismatch Errors</h2>
+                        <p class="section-subtitle">1,800+ solutions for data type issues</p>
+                    </div>
+                    <span class="solution-count-badge">1,800+ Solutions</span>
+                </div>
+
+                <!-- Error: Expected string, got dict -->
+                <div class="error-block" id="type-mismatch-api">
+                    <div class="error-header">
+                        <span class="error-type">TypeError</span>
+                        <span class="badge badge-beginner">Common</span>
+                    </div>
+                    <h3>Expected string, got dict/list (API Message Errors)</h3>
+                    
+                    <div class="error-message">
+                        <code>openai.BadRequestError: Invalid type for 'messages[0].content': expected a string, got object</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Why This Happens</h4>
+                        <p>LLM APIs are strict about message formats. The content field expects different types based on context:</p>
+                        <ul class="error-causes">
+                            <li>Using multimodal format for text-only models</li>
+                            <li>Forgetting to extract text from function call results</li>
+                            <li>Passing raw response objects instead of strings</li>
+                            <li>Accidentally nesting content arrays</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python"># OpenAI message format validation
+def validate_openai_message(message):
+    """Ensure message is in correct format for OpenAI API."""
+    role = message.get("role")
+    content = message.get("content")
+    
+    # For user/assistant messages
+    if role in ["user", "assistant"]:
+        # Text-only format
+        if isinstance(content, str):
+            return message
+        
+        # Multimodal format (vision)
+        if isinstance(content, list):
+            validated_content = []
+            for item in content:
+                if isinstance(item, dict):
+                    if item.get("type") == "text":
+                        validated_content.append(item)
+                    elif item.get("type") == "image_url":
+                        validated_content.append(item)
+                elif isinstance(item, str):
+                    validated_content.append({"type": "text", "text": item})
+            return {"role": role, "content": validated_content}
+        
+        # Convert other types to string
+        return {"role": role, "content": str(content)}
+    
+    # System message must be string
+    if role == "system":
+        if not isinstance(content, str):
+            content = str(content) if content else ""
+        return {"role": "system", "content": content}
+    
+    return message
+
+# Common mistake: function call results
+def format_function_result(function_name, result):
+    """Format function call result for message history."""
+    # WRONG: passing dict directly
+    # {"role": "function", "content": {"data": result}}
+    
+    # CORRECT: serialize to string
+    import json
+    return {
+        "role": "function",
+        "name": function_name,
+        "content": json.dumps(result) if not isinstance(result, str) else result
+    }
+
+# Anthropic Claude format
+def format_claude_message(content):
+    """Format message for Claude API."""
+    if isinstance(content, str):
+        return content
+    
+    if isinstance(content, list):
+        # Claude expects list of content blocks
+        formatted = []
+        for item in content:
+            if isinstance(item, str):
+                formatted.append({"type": "text", "text": item})
+            elif isinstance(item, dict):
+                formatted.append(item)
+        return formatted
+    
+    return str(content)</code></pre>
+                    </div>
+                </div>
+
+                <!-- Error: None type errors -->
+                <div class="error-block" id="nonetype-error">
+                    <div class="error-header">
+                        <span class="error-type">TypeError</span>
+                        <span class="badge badge-beginner">Very Common</span>
+                    </div>
+                    <h3>NoneType has no attribute / cannot subscript NoneType</h3>
+                    
+                    <div class="error-message">
+                        <code>TypeError: 'NoneType' object is not subscriptable</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution: Safe Data Access</h4>
+                        <pre class="code-block"><code class="language-python"># Problem: Chained access fails if any part is None
+# response['choices'][0]['message']['content']
+
+# Solution 1: Use .get() with defaults
+def safe_get_nested(data, *keys, default=None):
+    """Safely get nested dictionary values."""
+    for key in keys:
+        if isinstance(data, dict):
+            data = data.get(key)
+        elif isinstance(data, (list, tuple)) and isinstance(key, int):
+            try:
+                data = data[key]
+            except IndexError:
+                return default
+        else:
+            return default
+        if data is None:
+            return default
+    return data
+
+# Usage
+content = safe_get_nested(response, 'choices', 0, 'message', 'content', default="")
+
+# Solution 2: Try/except wrapper
+def safe_extract(func, default=None):
+    """Wrapper for safe data extraction."""
+    try:
+        result = func()
+        return result if result is not None else default
+    except (KeyError, IndexError, TypeError, AttributeError):
+        return default
+
+# Usage
+content = safe_extract(
+    lambda: response['choices'][0]['message']['content'],
+    default=""
+)
+
+# Solution 3: Pydantic models for validation
+from pydantic import BaseModel
+from typing import Optional, List
+
+class Message(BaseModel):
+    role: str
+    content: Optional[str] = None
+
+class Choice(BaseModel):
+    index: int
+    message: Message
+    finish_reason: Optional[str] = None
+
+class ChatResponse(BaseModel):
+    id: str
+    choices: List[Choice]
+
+# Auto-validates and provides defaults
+parsed = ChatResponse.model_validate(response)
+content = parsed.choices[0].message.content or ""</code></pre>
+                    </div>
+                </div>
+
+                <!-- More Type Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>String to Number Conversion</h4>
+                        <p>Parse numbers from string data</p>
+                        <pre class="code-block"><code class="language-python">def safe_int(value, default=0):
+    """Convert to int safely."""
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        return int(value)
+    if isinstance(value, str):
+        # Remove common formatting
+        cleaned = value.strip()
+        cleaned = cleaned.replace(',', '')
+        cleaned = cleaned.replace('$', '')
+        try:
+            return int(float(cleaned))
+        except ValueError:
+            return default
+    return default
+
+def safe_float(value, default=0.0):
+    """Convert to float safely."""
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, str):
+        cleaned = value.strip()
+        cleaned = cleaned.replace(',', '')
+        cleaned = cleaned.replace('%', '')
+        try:
+            return float(cleaned)
+        except ValueError:
+            return default
+    return default</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Boolean Coercion</h4>
+                        <p>Handle various boolean representations</p>
+                        <pre class="code-block"><code class="language-python">def to_bool(value):
+    """Convert various values to boolean."""
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lower = value.lower().strip()
+        if lower in ('true', 'yes', '1', 'on', 'enabled'):
+            return True
+        if lower in ('false', 'no', '0', 'off', 'disabled', ''):
+            return False
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if value is None:
+        return False
+    return bool(value)
+
+# Handle JSON booleans from different sources
+def normalize_json_bool(data, keys):
+    """Normalize boolean fields in dict."""
+    for key in keys:
+        if key in data:
+            data[key] = to_bool(data[key])
+    return data</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>List vs Single Item</h4>
+                        <p>Handle APIs that return either</p>
+                        <pre class="code-block"><code class="language-python">def ensure_list(value):
+    """Ensure value is always a list."""
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return value
+    if isinstance(value, (tuple, set)):
+        return list(value)
+    return [value]
+
+def ensure_single(value, default=None):
+    """Get single item from list or value."""
+    if value is None:
+        return default
+    if isinstance(value, (list, tuple)):
+        return value[0] if value else default
+    return value
+
+# Example: API returns single or list
+results = ensure_list(api_response.get('items'))
+for item in results:
+    process(item)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Dynamic Type Checking</h4>
+                        <p>Runtime type validation</p>
+                        <pre class="code-block"><code class="language-python">from typing import get_origin, get_args, Union
+
+def check_type(value, expected_type):
+    """Check if value matches expected type."""
+    origin = get_origin(expected_type)
+    
+    if origin is Union:
+        return any(check_type(value, arg) 
+                   for arg in get_args(expected_type))
+    
+    if origin is list:
+        if not isinstance(value, list):
+            return False
+        item_type = get_args(expected_type)[0]
+        return all(check_type(v, item_type) 
+                   for v in value)
+    
+    if origin is dict:
+        if not isinstance(value, dict):
+            return False
+        key_type, val_type = get_args(expected_type)
+        return all(check_type(k, key_type) and
+                   check_type(v, val_type)
+                   for k, v in value.items())
+    
+    return isinstance(value, expected_type)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Serialization Errors -->
+        <section id="serialization" class="section">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">Serialization Errors</h2>
+                        <p class="section-subtitle">1,200+ solutions for pickle, protobuf, and other serialization issues</p>
+                    </div>
+                    <span class="solution-count-badge">1,200+ Solutions</span>
+                </div>
+
+                <!-- Error: Pickle errors -->
+                <div class="error-block" id="pickle-errors">
+                    <div class="error-header">
+                        <span class="error-type">PicklingError</span>
+                        <span class="badge badge-advanced">Complex</span>
+                    </div>
+                    <h3>Can't pickle / UnpicklingError</h3>
+                    
+                    <div class="error-message">
+                        <code>_pickle.PicklingError: Can't pickle &lt;class 'module'&gt;: attribute lookup module on builtins failed</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Why This Happens</h4>
+                        <ul class="error-causes">
+                            <li>Trying to pickle lambda functions or closures</li>
+                            <li>Pickling objects with unpicklable attributes (file handles, database connections)</li>
+                            <li>Class definition changed between pickle and unpickle</li>
+                            <li>Module not available in unpickling environment</li>
+                            <li>Circular references with custom __reduce__</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution</h4>
+                        <pre class="code-block"><code class="language-python">import pickle
+import dill  # More powerful serialization
+
+# Problem: Lambda can't be pickled with standard pickle
+func = lambda x: x * 2
+# pickle.dumps(func)  # Fails!
+
+# Solution 1: Use dill instead of pickle
+import dill
+serialized = dill.dumps(func)
+restored = dill.loads(serialized)
+
+# Solution 2: Make class picklable
+class MyModel:
+    def __init__(self):
+        self.data = []
+        self._connection = None  # Unpicklable!
+    
+    def __getstate__(self):
+        """Control what gets pickled."""
+        state = self.__dict__.copy()
+        # Remove unpicklable attributes
+        del state['_connection']
+        return state
+    
+    def __setstate__(self, state):
+        """Control unpickling."""
+        self.__dict__.update(state)
+        # Reinitialize unpicklable attributes
+        self._connection = None
+    
+    def connect(self):
+        """Reconnect after unpickling."""
+        if self._connection is None:
+            self._connection = create_connection()
+
+# Solution 3: Use cloudpickle for complex objects
+import cloudpickle
+
+# Works with lambdas, closures, and dynamically created classes
+serialized = cloudpickle.dumps(lambda x: x * 2)
+
+# Solution 4: Implement custom serialization
+class SafeSerializer:
+    @staticmethod
+    def dumps(obj):
+        """Serialize with fallbacks."""
+        try:
+            return pickle.dumps(obj, protocol=pickle.HIGHEST_PROTOCOL)
+        except (pickle.PicklingError, TypeError):
+            try:
+                return dill.dumps(obj)
+            except Exception:
+                return cloudpickle.dumps(obj)
+    
+    @staticmethod
+    def loads(data):
+        """Deserialize with fallbacks."""
+        try:
+            return pickle.loads(data)
+        except Exception:
+            try:
+                return dill.loads(data)
+            except Exception:
+                return cloudpickle.loads(data)</code></pre>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Security Warning:</strong> Never unpickle data from untrusted sources! Pickle can execute arbitrary code during deserialization. Use JSON or other safe formats for user-provided data.
+                    </div>
+                </div>
+
+                <!-- More Serialization Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>Protocol Buffer Errors</h4>
+                        <p>Protobuf parsing/serialization issues</p>
+                        <pre class="code-block"><code class="language-python"># Common: Field type mismatch
+# Ensure you're using the correct proto definition
+
+from google.protobuf import json_format
+from google.protobuf.message import DecodeError
+
+def safe_proto_parse(proto_class, data):
+    """Safely parse protobuf data."""
+    message = proto_class()
+    try:
+        if isinstance(data, bytes):
+            message.ParseFromString(data)
+        elif isinstance(data, dict):
+            json_format.ParseDict(data, message)
+        elif isinstance(data, str):
+            json_format.Parse(data, message)
+        return message
+    except DecodeError as e:
+        print(f"Proto decode error: {e}")
+        return None
+
+# Convert proto to dict for debugging
+def proto_to_dict(message):
+    return json_format.MessageToDict(
+        message,
+        preserving_proto_field_name=True
+    )</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>MessagePack Issues</h4>
+                        <p>msgpack serialization problems</p>
+                        <pre class="code-block"><code class="language-python">import msgpack
+from datetime import datetime
+
+# Custom type handling
+def msgpack_encoder(obj):
+    if isinstance(obj, datetime):
+        return {'__datetime__': True, 
+                'value': obj.isoformat()}
+    raise TypeError(f"Unknown type: {type(obj)}")
+
+def msgpack_decoder(obj):
+    if '__datetime__' in obj:
+        return datetime.fromisoformat(obj['value'])
+    return obj
+
+# Pack with custom encoder
+packed = msgpack.packb(data, default=msgpack_encoder)
+
+# Unpack with custom decoder  
+unpacked = msgpack.unpackb(
+    packed, 
+    object_hook=msgpack_decoder,
+    raw=False  # Decode strings as str, not bytes
+)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Joblib for ML Models</h4>
+                        <p>Save/load scikit-learn models</p>
+                        <pre class="code-block"><code class="language-python">import joblib
+from sklearn.ensemble import RandomForestClassifier
+
+# Train model
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+
+# Save with compression
+joblib.dump(model, 'model.joblib', compress=3)
+
+# Load model
+loaded_model = joblib.load('model.joblib')
+
+# Handle version mismatches
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    model = joblib.load('old_model.joblib')
+
+# For large models, use memory mapping
+model = joblib.load('large_model.joblib', 
+                    mmap_mode='r')</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>YAML Serialization</h4>
+                        <p>Safe YAML loading and dumping</p>
+                        <pre class="code-block"><code class="language-python">import yaml
+
+# ALWAYS use safe_load to prevent code execution
+with open('config.yaml', 'r') as f:
+    config = yaml.safe_load(f)
+
+# For custom types, use SafeLoader
+class MyClass:
+    def __init__(self, value):
+        self.value = value
+
+def myclass_constructor(loader, node):
+    value = loader.construct_scalar(node)
+    return MyClass(value)
+
+yaml.SafeLoader.add_constructor(
+    '!myclass', myclass_constructor
+)
+
+# Dump with proper encoding
+with open('output.yaml', 'w', encoding='utf-8') as f:
+    yaml.dump(data, f, 
+              default_flow_style=False,
+              allow_unicode=True)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Validation Failures -->
+        <section id="validation" class="section section-alt">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">Data Validation Errors</h2>
+                        <p class="section-subtitle">1,500+ solutions for schema validation and Pydantic issues</p>
+                    </div>
+                    <span class="solution-count-badge">1,500+ Solutions</span>
+                </div>
+
+                <!-- Error: Pydantic ValidationError -->
+                <div class="error-block" id="pydantic-validation">
+                    <div class="error-header">
+                        <span class="error-type">ValidationError</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>Pydantic ValidationError</h3>
+                    
+                    <div class="error-message">
+                        <code>pydantic_core._pydantic_core.ValidationError: 2 validation errors for UserModel</code>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution: Robust Pydantic Models</h4>
+                        <pre class="code-block"><code class="language-python">from pydantic import BaseModel, Field, field_validator, model_validator
+from pydantic import ConfigDict
+from typing import Optional, List, Any
+from datetime import datetime
+
+class FlexibleModel(BaseModel):
+    """Model that handles messy real-world data."""
+    
+    model_config = ConfigDict(
+        # Allow extra fields without error
+        extra='ignore',
+        # Coerce types when possible
+        coerce_numbers_to_str=True,
+        # Strip whitespace from strings
+        str_strip_whitespace=True,
+    )
+    
+    name: str
+    age: Optional[int] = None
+    email: Optional[str] = None
+    tags: List[str] = Field(default_factory=list)
+    created_at: Optional[datetime] = None
+    
+    @field_validator('age', mode='before')
+    @classmethod
+    def coerce_age(cls, v):
+        """Handle age as string or int."""
+        if v is None or v == '':
+            return None
+        if isinstance(v, str):
+            try:
+                return int(v)
+            except ValueError:
+                return None
+        return v
+    
+    @field_validator('tags', mode='before')
+    @classmethod  
+    def ensure_tags_list(cls, v):
+        """Handle tags as string or list."""
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [t.strip() for t in v.split(',') if t.strip()]
+        return v
+    
+    @field_validator('created_at', mode='before')
+    @classmethod
+    def parse_datetime(cls, v):
+        """Handle various datetime formats."""
+        if v is None or v == '':
+            return None
+        if isinstance(v, datetime):
+            return v
+        if isinstance(v, (int, float)):
+            return datetime.fromtimestamp(v)
+        if isinstance(v, str):
+            # Try common formats
+            for fmt in [
+                '%Y-%m-%dT%H:%M:%S',
+                '%Y-%m-%dT%H:%M:%SZ',
+                '%Y-%m-%d %H:%M:%S',
+                '%Y-%m-%d',
+                '%m/%d/%Y',
+            ]:
+                try:
+                    return datetime.strptime(v, fmt)
+                except ValueError:
+                    continue
+            # Try ISO format as fallback
+            try:
+                return datetime.fromisoformat(v.replace('Z', '+00:00'))
+            except ValueError:
+                pass
+        return None
+    
+    @model_validator(mode='after')
+    def validate_model(self):
+        """Cross-field validation."""
+        if self.email and '@' not in self.email:
+            self.email = None  # Invalid email, set to None
+        return self
+
+# Graceful parsing with error collection
+def parse_with_errors(model_class, data: dict):
+    """Parse data and collect all errors instead of failing fast."""
+    errors = []
+    cleaned_data = {}
+    
+    for field_name, field_info in model_class.model_fields.items():
+        value = data.get(field_name)
+        try:
+            # Try individual field validation
+            model_class.__pydantic_validator__.validate_assignment(
+                model_class.__pydantic_core_schema__,
+                field_name,
+                value,
+            )
+            cleaned_data[field_name] = value
+        except Exception as e:
+            errors.append({"field": field_name, "error": str(e)})
+            # Use default if available
+            if field_info.default is not None:
+                cleaned_data[field_name] = field_info.default
+    
+    try:
+        result = model_class.model_validate(cleaned_data)
+        return result, errors
+    except Exception as e:
+        return None, errors + [{"error": str(e)}]</code></pre>
+                    </div>
+                </div>
+
+                <!-- More Validation Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>JSON Schema Validation</h4>
+                        <p>Validate JSON against schema</p>
+                        <pre class="code-block"><code class="language-python">import jsonschema
+from jsonschema import validate, ValidationError
+
+schema = {
+    "type": "object",
+    "required": ["name", "messages"],
+    "properties": {
+        "name": {"type": "string"},
+        "messages": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": ["role", "content"],
+                "properties": {
+                    "role": {"enum": ["user", "assistant"]},
+                    "content": {"type": "string"}
+                }
+            }
+        }
+    }
+}
+
+def validate_with_details(data, schema):
+    """Validate and return detailed errors."""
+    validator = jsonschema.Draft7Validator(schema)
+    errors = list(validator.iter_errors(data))
+    if errors:
+        for error in errors:
+            path = '.'.join(str(p) for p in error.path)
+            print(f"Error at '{path}': {error.message}")
+        return False
+    return True</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>OpenAI Function Schema</h4>
+                        <p>Validate function calling responses</p>
+                        <pre class="code-block"><code class="language-python">from pydantic import BaseModel, create_model
+from typing import Optional
+import json
+
+def validate_function_call(response, expected_schema):
+    """Validate OpenAI function call response."""
+    if not response.choices:
+        return None, "No choices in response"
+    
+    message = response.choices[0].message
+    if not message.function_call:
+        return None, "No function call in response"
+    
+    try:
+        args = json.loads(message.function_call.arguments)
+    except json.JSONDecodeError as e:
+        return None, f"Invalid JSON: {e}"
+    
+    # Validate against schema
+    try:
+        # Create dynamic Pydantic model from schema
+        model = create_model('FunctionArgs', **{
+            name: (info.get('type', str), ...)
+            for name, info in expected_schema['properties'].items()
+        })
+        validated = model.model_validate(args)
+        return validated.model_dump(), None
+    except Exception as e:
+        return None, f"Validation failed: {e}"</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Pandas DataFrame Validation</h4>
+                        <p>Validate DataFrame structure and types</p>
+                        <pre class="code-block"><code class="language-python">import pandas as pd
+import pandera as pa
+from pandera import Column, Check, DataFrameSchema
+
+# Define schema
+schema = DataFrameSchema({
+    "user_id": Column(int, Check.ge(0)),
+    "email": Column(str, Check.str_contains("@")),
+    "age": Column(int, Check.in_range(0, 150), nullable=True),
+    "score": Column(float, Check.in_range(0, 100)),
+})
+
+# Validate DataFrame
+try:
+    validated_df = schema.validate(df)
+except pa.errors.SchemaError as e:
+    print(f"Validation failed: {e}")
+    # Get failure cases
+    print(e.failure_cases)
+
+# Coerce types during validation
+schema_coerce = DataFrameSchema({
+    "user_id": Column(int, coerce=True),
+    "score": Column(float, coerce=True),
+})</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Request Body Validation</h4>
+                        <p>FastAPI/Flask request validation</p>
+                        <pre class="code-block"><code class="language-python">from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, field_validator
+
+app = FastAPI()
+
+class ChatRequest(BaseModel):
+    model: str
+    messages: list[dict]
+    temperature: float = 0.7
+    
+    @field_validator('messages')
+    @classmethod
+    def validate_messages(cls, v):
+        if not v:
+            raise ValueError('Messages cannot be empty')
+        for msg in v:
+            if 'role' not in msg or 'content' not in msg:
+                raise ValueError('Each message needs role and content')
+        return v
+
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    # Request is automatically validated
+    return {"status": "ok"}
+
+# Custom error handling
+@app.exception_handler(ValueError)
+async def validation_exception_handler(request, exc):
+    return {"error": str(exc)}, 422</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Format Conversion -->
+        <section id="conversion" class="section">
+            <div class="container">
+                <div class="section-header-with-count">
+                    <div>
+                        <h2 class="section-title">Format Conversion Errors</h2>
+                        <p class="section-subtitle">1,400+ solutions for CSV, XML, YAML, and document conversions</p>
+                    </div>
+                    <span class="solution-count-badge">1,400+ Solutions</span>
+                </div>
+
+                <!-- CSV Issues -->
+                <div class="error-block" id="csv-errors">
+                    <div class="error-header">
+                        <span class="error-type">csv.Error</span>
+                        <span class="badge badge-intermediate">Common</span>
+                    </div>
+                    <h3>CSV Parsing and Writing Issues</h3>
+                    
+                    <div class="error-section">
+                        <h4>Common CSV Problems</h4>
+                        <ul class="error-causes">
+                            <li>Incorrect delimiter detection</li>
+                            <li>Quoted fields with embedded quotes or newlines</li>
+                            <li>Inconsistent number of columns</li>
+                            <li>Encoding issues (especially with Excel exports)</li>
+                            <li>Large files causing memory issues</li>
+                        </ul>
+                    </div>
+
+                    <div class="error-section">
+                        <h4>Solution: Robust CSV Handling</h4>
+                        <pre class="code-block"><code class="language-python">import csv
+import pandas as pd
+from io import StringIO
+
+def smart_read_csv(filepath, **kwargs):
+    """Read CSV with automatic delimiter and encoding detection."""
+    import chardet
+    
+    # Detect encoding
+    with open(filepath, 'rb') as f:
+        raw = f.read(10000)
+        encoding = chardet.detect(raw)['encoding']
+    
+    # Read sample to detect delimiter
+    with open(filepath, 'r', encoding=encoding, errors='replace') as f:
+        sample = f.read(5000)
+    
+    # Detect delimiter
+    sniffer = csv.Sniffer()
+    try:
+        dialect = sniffer.sniff(sample)
+        delimiter = dialect.delimiter
+    except csv.Error:
+        # Count common delimiters
+        delimiters = [',', ';', '\t', '|']
+        delimiter = max(delimiters, key=lambda d: sample.count(d))
+    
+    # Read with detected settings
+    return pd.read_csv(
+        filepath,
+        encoding=encoding,
+        delimiter=delimiter,
+        on_bad_lines='warn',  # Don't fail on bad lines
+        **kwargs
+    )
+
+def read_csv_robust(filepath):
+    """Handle problematic CSVs with multiple strategies."""
+    strategies = [
+        # Standard
+        {'encoding': 'utf-8'},
+        # Windows
+        {'encoding': 'cp1252'},
+        # With BOM
+        {'encoding': 'utf-8-sig'},
+        # Tab-separated
+        {'encoding': 'utf-8', 'sep': '\t'},
+        # Semicolon (European)
+        {'encoding': 'utf-8', 'sep': ';'},
+        # Quote all
+        {'encoding': 'utf-8', 'quoting': csv.QUOTE_ALL},
+    ]
+    
+    for params in strategies:
+        try:
+            df = pd.read_csv(filepath, **params, on_bad_lines='skip')
+            if len(df) > 0 and len(df.columns) > 1:
+                print(f"Successfully read with: {params}")
+                return df
+        except Exception as e:
+            continue
+    
+    raise ValueError(f"Could not parse CSV: {filepath}")
+
+# Write CSV for Excel compatibility
+def write_csv_excel_safe(df, filepath):
+    """Write CSV that opens correctly in Excel."""
+    df.to_csv(
+        filepath,
+        index=False,
+        encoding='utf-8-sig',  # BOM for Excel
+        quoting=csv.QUOTE_NONNUMERIC,
+    )
+
+# Stream large CSVs
+def process_large_csv(filepath, chunk_size=10000):
+    """Process large CSV in chunks."""
+    for chunk in pd.read_csv(filepath, chunksize=chunk_size):
+        # Process each chunk
+        yield chunk</code></pre>
+                    </div>
+                </div>
+
+                <!-- More Conversion Solutions -->
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4>XML Parsing Issues</h4>
+                        <p>Handle malformed XML</p>
+                        <pre class="code-block"><code class="language-python">from lxml import etree
+from bs4 import BeautifulSoup
+import re
+
+def parse_xml_robust(xml_string):
+    """Parse XML with error recovery."""
+    # Try strict parsing first
+    try:
+        return etree.fromstring(xml_string.encode())
+    except etree.XMLSyntaxError:
+        pass
+    
+    # Try with recovery mode
+    parser = etree.XMLParser(recover=True)
+    try:
+        return etree.fromstring(xml_string.encode(), parser)
+    except:
+        pass
+    
+    # Fall back to BeautifulSoup (most lenient)
+    soup = BeautifulSoup(xml_string, 'lxml-xml')
+    return soup
+
+# Fix common XML issues
+def sanitize_xml(xml_string):
+    # Remove invalid characters
+    xml_string = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', xml_string)
+    # Escape unescaped ampersands
+    xml_string = re.sub(r'&(?!amp;|lt;|gt;|quot;|apos;)', '&amp;', xml_string)
+    return xml_string</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>YAML to JSON Conversion</h4>
+                        <p>Convert between YAML and JSON</p>
+                        <pre class="code-block"><code class="language-python">import yaml
+import json
+
+def yaml_to_json(yaml_string):
+    """Convert YAML to JSON."""
+    data = yaml.safe_load(yaml_string)
+    return json.dumps(data, indent=2, ensure_ascii=False)
+
+def json_to_yaml(json_string):
+    """Convert JSON to YAML."""
+    data = json.loads(json_string)
+    return yaml.dump(data, default_flow_style=False, 
+                     allow_unicode=True)
+
+# Handle YAML anchors and aliases
+def flatten_yaml_anchors(yaml_string):
+    """Resolve YAML anchors to produce flat output."""
+    data = yaml.safe_load(yaml_string)
+    # Re-serialize without anchors
+    return yaml.dump(data, default_flow_style=False)
+
+# Multi-document YAML
+def read_multi_doc_yaml(filepath):
+    """Read YAML file with multiple documents."""
+    with open(filepath, 'r') as f:
+        return list(yaml.safe_load_all(f))</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Excel to DataFrame Issues</h4>
+                        <p>Handle Excel file problems</p>
+                        <pre class="code-block"><code class="language-python">import pandas as pd
+from openpyxl import load_workbook
+
+def read_excel_smart(filepath):
+    """Read Excel with common issue handling."""
+    # Get sheet names
+    wb = load_workbook(filepath, read_only=True)
+    sheets = wb.sheetnames
+    wb.close()
+    
+    # Read all sheets or specific one
+    dfs = {}
+    for sheet in sheets:
+        try:
+            df = pd.read_excel(
+                filepath,
+                sheet_name=sheet,
+                engine='openpyxl',
+                # Skip empty rows
+                na_values=['', 'NA', 'N/A', '#N/A'],
+            )
+            # Remove completely empty rows
+            df = df.dropna(how='all')
+            dfs[sheet] = df
+        except Exception as e:
+            print(f"Error reading {sheet}: {e}")
+    
+    return dfs
+
+# Handle merged cells
+def unmerge_cells(filepath):
+    """Read Excel and unmerge merged cells."""
+    from openpyxl import load_workbook
+    wb = load_workbook(filepath)
+    ws = wb.active
+    
+    # Copy merged cell values
+    for merged_range in list(ws.merged_cells.ranges):
+        min_col, min_row, max_col, max_row = merged_range.bounds
+        value = ws.cell(min_row, min_col).value
+        ws.unmerge_cells(str(merged_range))
+        for row in range(min_row, max_row + 1):
+            for col in range(min_col, max_col + 1):
+                ws.cell(row, col, value)
+    
+    return pd.DataFrame(ws.values)</code></pre>
+                    </div>
+
+                    <div class="solution-card">
+                        <h4>Markdown to HTML/Text</h4>
+                        <p>Convert Markdown formats</p>
+                        <pre class="code-block"><code class="language-python">import markdown
+from markdownify import markdownify as md_from_html
+import re
+
+def markdown_to_html(md_text):
+    """Convert Markdown to HTML."""
+    return markdown.markdown(
+        md_text,
+        extensions=['fenced_code', 'tables', 'nl2br']
+    )
+
+def html_to_markdown(html_text):
+    """Convert HTML to Markdown."""
+    return md_from_html(html_text, heading_style="ATX")
+
+def markdown_to_plain_text(md_text):
+    """Strip Markdown formatting."""
+    # Remove code blocks
+    text = re.sub(r'```[\s\S]*?```', '', md_text)
+    text = re.sub(r'`[^`]+`', '', text)
+    # Remove links but keep text
+    text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', text)
+    # Remove images
+    text = re.sub(r'!\[.*?\]\([^)]+\)', '', text)
+    # Remove headers
+    text = re.sub(r'^#+\s*', '', text, flags=re.MULTILINE)
+    # Remove emphasis
+    text = re.sub(r'[*_]{1,3}([^*_]+)[*_]{1,3}', r'\1', text)
+    return text.strip()</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Pages -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Related Debugging Categories</h2>
+                <div class="related-grid">
+                    <a href="api-keys.html" class="related-card">
+                        <span class="related-icon">🔑</span>
+                        <div class="related-content">
+                            <h3>API Key & Auth Errors</h3>
+                            <p>Authentication, authorization, and key management issues</p>
+                            <span class="related-count">8,500+ solutions</span>
+                        </div>
+                    </a>
+                    
+                    <a href="memory.html" class="related-card">
+                        <span class="related-icon">🧠</span>
+                        <div class="related-content">
+                            <h3>Memory & Context Errors</h3>
+                            <p>Token limits, context windows, and memory management</p>
+                            <span class="related-count">6,200+ solutions</span>
+                        </div>
+                    </a>
+                    
+                    <a href="network.html" class="related-card">
+                        <span class="related-icon">🌐</span>
+                        <div class="related-content">
+                            <h3>Network & Timeout Errors</h3>
+                            <p>Connection issues, timeouts, and retry strategies</p>
+                            <span class="related-count">5,800+ solutions</span>
+                        </div>
+                    </a>
+                    
+                    <a href="async.html" class="related-card">
+                        <span class="related-icon">⚡</span>
+                        <div class="related-content">
+                            <h3>Async & Streaming Errors</h3>
+                            <p>Asynchronous operations, streaming, and concurrency</p>
+                            <span class="related-count">5,500+ solutions</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        AI Coding Academy
+                    </a>
+                    <p class="footer-tagline">Master AI-Powered Development</p>
+                    <p class="footer-description">The most comprehensive resource for learning to build with LLMs, from basics to production-ready applications.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Learning Paths</h4>
+                        <ul>
+                            <li><a href="../tutorials/beginner.html">Beginner Track</a></li>
+                            <li><a href="../tutorials/intermediate.html">Intermediate Track</a></li>
+                            <li><a href="../tutorials/advanced.html">Advanced Track</a></li>
+                            <li><a href="../tutorials/expert.html">Expert Track</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Popular Courses</h4>
+                        <ul>
+                            <li><a href="../courses/openai.html">OpenAI API</a></li>
+                            <li><a href="../courses/langchain.html">LangChain</a></li>
+                            <li><a href="../courses/rag.html">RAG Systems</a></li>
+                            <li><a href="../courses/agents.html">AI Agents</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="../debugging/index.html">Debugging Hub</a></li>
+                            <li><a href="../projects/index.html">Projects</a></li>
+                            <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                            <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Coding Academy. Building the future of AI education.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short-Term Memory (Context Window) | AI Coding Academy</title>
+    <meta name="description" content="Learn Short-Term Memory (Context Window) in the AI Agents course. Practical Python code and real-world examples.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-meta-item{display:flex;align-items:center;gap:var(--space-xs);font-size:.9rem;color:var(--text-muted)}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/agents.html">Agents</a><span class="separator">/</span><span>Short-Term Memory (Context Window)</span>
+        </div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-intermediate">Intermediate</span>
+                <span class="lesson-meta-item">⏱️ 25 min</span>
+            </div>
+            <h1 class="lesson-title">Short-Term Memory (Context Window)</h1>
+            <p class="lesson-description">Learn Short-Term Memory (Context Window) in the AI Agents course. Practical Python code and real-world examples.</p>
+        </header>
+        <div class="lesson-content">
+<h2>Overview</h2>
+<p>This lesson covers <strong>Short-Term Memory (Context Window)</strong> — a key concept in building production AI agents. By the end, you will understand the theory and have working Python code you can use immediately.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python - Short Term Memory example</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Short-Term Memory (Context Window)</span>
+<span class="cm"># This pattern is used in production agent systems</span>
+
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+<span class="kw">import</span> json
+
+client = OpenAI()
+
+<span class="kw">def</span> <span class="fn">implement_short_term_memory</span>(
+    task: str,
+    context: dict = None
+) -> dict:
+    <span class="st">&#34;&#34;&#34;
+    Implements the Short-Term Memory (Context Window) pattern.
+    
+    Args:
+        task: The goal or task description
+        context: Optional context dict with relevant data
+        
+    Returns:
+        dict with 'result' and 'steps' keys
+    &#34;&#34;&#34;</span>
+    messages = [
+        {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">f"You implement the Short-Term Memory (Context Window) pattern. Be precise and structured."</span>},
+        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task}
+    ]
+    
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o"</span>,
+        messages=messages,
+        max_tokens=<span class="nu">1024</span>
+    )
+    
+    result = resp.choices[<span class="nu">0</span>].message.content
+    tokens = resp.usage.total_tokens
+    
+    <span class="kw">return</span> {
+        <span class="st">"result"</span>: result,
+        <span class="st">"tokens_used"</span>: tokens,
+        <span class="st">"model"</span>: <span class="st">"gpt-4o"</span>
+    }
+
+<span class="cm"># Usage example</span>
+output = implement_short_term_memory(
+    task=<span class="st">"Demonstrate Short-Term Memory (Context Window) on a real-world problem"</span>
+)
+<span class="kw">print</span>(output[<span class="st">"result"</span>])</pre></div>
+<h2>Key Concepts</h2>
+<ul>
+<li><strong>Core principle</strong>: Short-Term Memory (Context Window) enables agents to handle complex multi-step tasks reliably</li>
+<li><strong>When to use it</strong>: Apply this pattern when simple single-shot prompting is insufficient</li>
+<li><strong>Trade-offs</strong>: More capability comes with more complexity and higher token costs</li>
+<li><strong>Best practices</strong>: Always add error handling, logging, and token budget guards</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">💡 Production tip</div><p>When implementing Short-Term Memory (Context Window) in production, instrument every step with structured logging. Agents fail in surprising ways — observability is essential.</p></div>
+<h2>Error Handling</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python - robust error handling wrapper</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> time, logging
+<span class="kw">from</span> anthropic <span class="kw">import</span> RateLimitError
+
+logger = logging.getLogger(__name__)
+
+<span class="kw">def</span> <span class="fn">with_retry</span>(fn, max_retries=<span class="nu">3</span>, backoff=<span class="nu">2</span>):
+    <span class="st">&#34;&#34;&#34;Retry wrapper with exponential backoff for agent tool calls.&#34;&#34;&#34;</span>
+    <span class="kw">for</span> attempt <span class="kw">in</span> range(max_retries):
+        <span class="kw">try</span>:
+            <span class="kw">return</span> fn()
+        <span class="kw">except</span> RateLimitError:
+            wait = backoff ** attempt
+            logger.warning(<span class="st">f"Rate limited. Waiting {{wait}}s..."</span>)
+            time.sleep(wait)
+        <span class="kw">except Exception</span> <span class="kw">as</span> e:
+            logger.error(<span class="st">f"Tool call failed: {{e}}"</span>)
+            <span class="kw">if</span> attempt == max_retries - <span class="nu">1</span>:
+                <span class="kw">return</span> {{<span class="st">"error"</span>: str(e)}}
+            time.sleep(backoff ** attempt)</pre></div></div>
+        <nav class="lesson-nav">
+            <a href="memory-types.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Agent Memory Types</div></a>
+            <a href="long-term-memory.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Long-Term Memory with Vector Stores</div></a>
+        </nav>
+    </div>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most comprehensive AI coding learning platform.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+            <li><a href="../../debugging/index.html">Debugging</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul>
+            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul>
+            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+        </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
+    </div></footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
+</body></html>

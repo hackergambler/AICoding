@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging Configuration and Environment Errors | AI Coding Academy</title>
+    <meta name="description" content="Fix environment variable issues, API key configuration errors, and .env file problems in AI applications.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box,.warn-box,.info-box,.error-example,.fix-example{border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25)}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25)}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25)}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .error-example{background:#1a0a0a;border:1px solid rgba(239,68,68,.3)}
+        .error-example-title{font-family:var(--font-heading);color:#ef4444;font-weight:600;margin-bottom:var(--space-sm)}
+        .fix-example{background:#0a1a0a;border:1px solid rgba(34,197,94,.3)}
+        .fix-example-title{font-family:var(--font-heading);color:#22c55e;font-weight:600;margin-bottom:var(--space-sm)}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+            <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <div class="breadcrumb"><a href="../index.html">Home</a><span class="separator">/</span><a href="index.html">Debugging</a><span class="separator">/</span><span>Configuration Errors</span></div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-beginner">Beginner</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 20 min</span>
+            </div>
+            <h1 class="lesson-title">Debugging Configuration and Environment Errors</h1>
+            <p class="lesson-description">Fix environment variable issues, API key configuration errors, and .env file problems in AI applications.</p>
+        </header>
+<div class="lesson-content"><h2>Configuration Errors Are #1 Cause of AI App Failures</h2><p>More than half of "my AI app does not work" issues come down to configuration - wrong API keys, missing environment variables, or incorrect base URLs. This guide covers every pattern.</p><h2>Bug 1: API Key Not Found</h2><div class="error-example"><div class="error-example-title">❌ openai.AuthenticationError: No API key provided</div><div class="code-block"><div class="code-block-label"><span>Python - broken code</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: key is None or hardcoded</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+client = OpenAI(api_key=<span class="kw">None</span>)  <span class="cm"># crashes</span>
+<span class="cm"># or: api_key="sk-abc123"  insecure + easy to commit!</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Use os.environ with a clear error message</div><div class="code-block"><div class="code-block-label"><span>Python - correct approach</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> os
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+api_key = os.environ.get(<span class="st">"OPENAI_API_KEY"</span>)
+<span class="kw">if not</span> api_key:
+    <span class="kw">raise</span> EnvironmentError(
+        <span class="st">"OPENAI_API_KEY not set. Run: export OPENAI_API_KEY='sk-...'"</span>
+    )
+client = OpenAI(api_key=api_key)
+
+<span class="cm"># Or let the SDK read it automatically:</span>
+client = OpenAI()  <span class="cm"># reads OPENAI_API_KEY from env by default</span></pre></div></div><h2>Bug 2: .env File Not Loaded</h2><div class="error-example"><div class="error-example-title">❌ Key in .env but os.environ returns None</div><div class="code-block"><div class="code-block-label"><span>Python - broken code</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># .env file has: OPENAI_API_KEY=sk-abc...</span>
+<span class="cm"># But this returns None because .env is never loaded!</span>
+<span class="kw">import</span> os
+key = os.environ.get(<span class="st">"OPENAI_API_KEY"</span>)  <span class="cm"># None!</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Load .env before accessing variables</div><div class="code-block"><div class="code-block-label"><span>Python - fixed code</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> dotenv <span class="kw">import</span> load_dotenv
+<span class="kw">import</span> os
+
+load_dotenv()  <span class="cm"># loads .env from current working directory</span>
+
+key = os.environ.get(<span class="st">"OPENAI_API_KEY"</span>)  <span class="cm"># now works!</span>
+
+<span class="cm"># Debug: see what is actually loaded</span>
+<span class="kw">from</span> dotenv <span class="kw">import</span> dotenv_values
+config = dotenv_values(<span class="st">".env"</span>)
+<span class="kw">for</span> k, v <span class="kw">in</span> config.items():
+    masked = v[:4] + <span class="st">"..."</span> <span class="kw">if</span> v <span class="kw">else</span> <span class="st">"EMPTY"</span>
+    print(f"{k}: {masked}")</pre></div></div><h2>Bug 3: Wrong Base URL for Local Models</h2><div class="error-example"><div class="error-example-title">❌ Connection refused when using Ollama or LiteLLM</div><div class="code-block"><div class="code-block-label"><span>Python - broken code</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: no base_url set, connects to api.openai.com</span>
+client = OpenAI()  <span class="cm"># goes to OpenAI cloud!</span>
+resp = client.chat.completions.create(model=<span class="st">"llama3.2"</span>, ...)  <span class="cm"># 404</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Set base_url for local or custom endpoints</div><div class="code-block"><div class="code-block-label"><span>Python - fixed code</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+
+<span class="cm"># Ollama local server</span>
+client = OpenAI(base_url=<span class="st">"http://localhost:11434/v1"</span>, api_key=<span class="st">"ollama"</span>)
+
+<span class="cm"># LiteLLM proxy</span>
+client = OpenAI(base_url=<span class="st">"http://localhost:4000"</span>, api_key=<span class="st">"sk-1234"</span>)
+
+<span class="cm"># Azure OpenAI</span>
+<span class="kw">from</span> openai <span class="kw">import</span> AzureOpenAI
+client = AzureOpenAI(
+    azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
+    api_key=os.environ["AZURE_OPENAI_KEY"],
+    api_version=<span class="st">"2024-02-01"</span>
+)</pre></div></div><h2>Bug 4: Wrong Model Name</h2><div class="error-example"><div class="error-example-title">❌ openai.NotFoundError: The model does not exist</div><div class="code-block"><div class="code-block-label"><span>Text - common wrong model names</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG names (deprecated or incorrect)</span>
+"gpt-4"             -> use "gpt-4o"
+"gpt-3.5-turbo"     -> use "gpt-4o-mini"
+"claude-3-sonnet"   -> use "claude-sonnet-4-6"
+"llama3"            -> use "llama3.2" or "llama3.1:8b" in Ollama</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Current model names 2026</div><div class="code-block"><div class="code-block-label"><span>Python - correct model names</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># OpenAI</span>
+OPENAI = ["gpt-4o", "gpt-4o-mini", "o1", "o3-mini"]
+
+<span class="cm"># Anthropic</span>
+ANTHROPIC = ["claude-opus-4-5", "claude-sonnet-4-6", "claude-haiku-4-5-20251001"]
+
+<span class="cm"># Google</span>
+GOOGLE = ["gemini-2.0-flash", "gemini-1.5-pro", "gemini-1.5-flash"]
+
+<span class="cm"># Ollama local</span>
+OLLAMA = ["llama3.2", "llama3.1:8b", "mistral", "codellama:13b"]</pre></div></div><div class="tip-box"><div class="tip-box-title">💡 Config validation on startup</div><p>Run a config check at app startup that validates all env vars and tests connectivity. Fail fast with a clear error rather than crashing at request time.</p></div></div>
+        <nav class="lesson-nav">
+            <a href="async.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Async Errors</div></a>
+            <a href="deployment.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Deployment Errors</div></a>
+        </nav>
+    </div>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+        <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
+</body></html>

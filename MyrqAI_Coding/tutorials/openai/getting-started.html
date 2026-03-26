@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with OpenAI API | AI Coding Academy</title>
+    <meta name="description" content="Learn how to set up your OpenAI account, get API keys, and make your first API call. Step-by-step beginner tutorial.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl);
+        }
+        .lesson-header {
+            margin-bottom: var(--space-3xl);
+        }
+        .lesson-meta {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+        }
+        .lesson-meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .lesson-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--space-lg);
+            line-height: 1.2;
+        }
+        .lesson-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .lesson-content {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
+        }
+        .lesson-content h2 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin: var(--space-2xl) 0 var(--space-lg);
+            color: var(--accent-primary);
+        }
+        .lesson-content h2:first-child {
+            margin-top: 0;
+        }
+        .lesson-content h3 {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin: var(--space-xl) 0 var(--space-md);
+        }
+        .lesson-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+        .lesson-content ul, .lesson-content ol {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-xl);
+        }
+        .lesson-content li {
+            margin-bottom: var(--space-sm);
+        }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+            overflow-x: auto;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #e6edf3;
+        }
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+        .code-block .variable { color: #ffa657; }
+        .tip-box {
+            background: rgba(0, 255, 170, 0.1);
+            border: 1px solid rgba(0, 255, 170, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+        .tip-box-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .tip-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        .warning-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+        .warning-box-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--accent-warning);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+        .warning-box p {
+            margin: 0;
+            color: var(--text-secondary);
+        }
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-lg);
+            margin-top: var(--space-3xl);
+        }
+        .lesson-nav a {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+        .lesson-nav a:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+        .lesson-nav-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-xs);
+        }
+        .lesson-nav-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .lesson-nav .next { text-align: right; }
+        .toc {
+            background: var(--bg-secondary);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+        .toc-title {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc-list li {
+            padding: var(--space-xs) 0;
+        }
+        .toc-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        .toc-list a:hover {
+            color: var(--accent-primary);
+        }
+        @media (max-width: 768px) {
+            .lesson-nav { flex-direction: column; }
+            .lesson-nav .next { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="../index.html" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <div class="lesson-container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="../index.html">Tutorials</a>
+            <span class="separator">/</span>
+            <a href="../../courses/openai.html">OpenAI API</a>
+            <span class="separator">/</span>
+            <span>Getting Started</span>
+        </div>
+
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-beginner">Beginner</span>
+                <span class="lesson-meta-item">⏱️ 15 min read</span>
+                <span class="lesson-meta-item">📚 Module 1, Lesson 1</span>
+            </div>
+            <h1 class="lesson-title">Getting Started with OpenAI API</h1>
+            <p class="lesson-description">Learn how to create an OpenAI account, generate API keys, set up your development environment, and make your very first API call. This is the foundation for everything else you'll learn.</p>
+        </header>
+
+        <div class="toc">
+            <div class="toc-title">📑 In This Lesson</div>
+            <ul class="toc-list">
+                <li><a href="#create-account">1. Create an OpenAI Account</a></li>
+                <li><a href="#get-api-key">2. Generate Your API Key</a></li>
+                <li><a href="#setup-environment">3. Set Up Your Environment</a></li>
+                <li><a href="#first-call">4. Make Your First API Call</a></li>
+                <li><a href="#understanding-response">5. Understanding the Response</a></li>
+                <li><a href="#next-steps">6. Next Steps</a></li>
+            </ul>
+        </div>
+
+        <div class="lesson-content">
+            <h2 id="create-account">1. Create an OpenAI Account</h2>
+            <p>Before you can use the OpenAI API, you need to create an account. Here's how:</p>
+            <ol>
+                <li>Go to <strong>platform.openai.com</strong></li>
+                <li>Click "Sign Up" in the top right corner</li>
+                <li>You can sign up with your email, Google account, Microsoft account, or Apple ID</li>
+                <li>Verify your email address</li>
+                <li>Complete phone verification (required for API access)</li>
+            </ol>
+
+            <div class="tip-box">
+                <div class="tip-box-title">💡 Pro Tip</div>
+                <p>New accounts typically receive free credits to get started. Check your usage page to see your current balance.</p>
+            </div>
+
+            <h2 id="get-api-key">2. Generate Your API Key</h2>
+            <p>Your API key is like a password that identifies you to OpenAI's servers. Here's how to get one:</p>
+            <ol>
+                <li>Log in to <strong>platform.openai.com</strong></li>
+                <li>Click on your profile icon in the top right</li>
+                <li>Select "View API Keys" or go directly to <strong>platform.openai.com/api-keys</strong></li>
+                <li>Click "Create new secret key"</li>
+                <li>Give it a descriptive name (e.g., "My First Project")</li>
+                <li>Copy the key immediately - you won't be able to see it again!</li>
+            </ol>
+
+            <div class="warning-box">
+                <div class="warning-box-title">⚠️ Important Security Note</div>
+                <p>Never share your API key publicly or commit it to version control. Treat it like a password. If you accidentally expose it, delete it immediately and create a new one.</p>
+            </div>
+
+            <h2 id="setup-environment">3. Set Up Your Environment</h2>
+            <p>We'll use Python for this tutorial. First, make sure you have Python 3.8+ installed, then install the OpenAI library:</p>
+
+            <div class="code-block">
+<pre><span class="comment"># Install the OpenAI Python library</span>
+pip install openai</pre>
+            </div>
+
+            <p>Next, set your API key as an environment variable. This is the safest way to use your key:</p>
+
+            <div class="code-block">
+<pre><span class="comment"># On macOS/Linux (add to ~/.bashrc or ~/.zshrc)</span>
+<span class="keyword">export</span> OPENAI_API_KEY=<span class="string">"your-api-key-here"</span>
+
+<span class="comment"># On Windows (Command Prompt)</span>
+<span class="keyword">set</span> OPENAI_API_KEY=<span class="string">your-api-key-here</span>
+
+<span class="comment"># On Windows (PowerShell)</span>
+<span class="variable">$env</span>:OPENAI_API_KEY=<span class="string">"your-api-key-here"</span></pre>
+            </div>
+
+            <h2 id="first-call">4. Make Your First API Call</h2>
+            <p>Now for the exciting part! Let's make your first API call to GPT-4:</p>
+
+            <div class="code-block">
+<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+
+<span class="comment"># Initialize the client (automatically uses OPENAI_API_KEY env variable)</span>
+client = <span class="function">OpenAI</span>()
+
+<span class="comment"># Make a chat completion request</span>
+response = client.chat.completions.<span class="function">create</span>(
+    model=<span class="string">"gpt-4o-mini"</span>,  <span class="comment"># Fast and cost-effective model</span>
+    messages=[
+        {
+            <span class="string">"role"</span>: <span class="string">"system"</span>,
+            <span class="string">"content"</span>: <span class="string">"You are a helpful assistant."</span>
+        },
+        {
+            <span class="string">"role"</span>: <span class="string">"user"</span>,
+            <span class="string">"content"</span>: <span class="string">"Hello! What can you help me with?"</span>
+        }
+    ]
+)
+
+<span class="comment"># Print the assistant's response</span>
+<span class="function">print</span>(response.choices[<span class="variable">0</span>].message.content)</pre>
+            </div>
+
+            <p>Save this code as <code>first_call.py</code> and run it:</p>
+
+            <div class="code-block">
+<pre>python first_call.py</pre>
+            </div>
+
+            <p>You should see a friendly response from the AI! 🎉</p>
+
+            <h2 id="understanding-response">5. Understanding the Response</h2>
+            <p>The API returns a response object with several useful fields:</p>
+
+            <div class="code-block">
+<pre><span class="comment"># The response object contains:</span>
+response.id                              <span class="comment"># Unique identifier for this request</span>
+response.model                           <span class="comment"># The model that was used</span>
+response.choices[<span class="variable">0</span>].message.content     <span class="comment"># The actual response text</span>
+response.choices[<span class="variable">0</span>].message.role        <span class="comment"># Always "assistant"</span>
+response.usage.prompt_tokens             <span class="comment"># Tokens in your input</span>
+response.usage.completion_tokens         <span class="comment"># Tokens in the response</span>
+response.usage.total_tokens              <span class="comment"># Total tokens used</span></pre>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-box-title">💡 What are Tokens?</div>
+                <p>Tokens are pieces of words. On average, 1 token ≈ 4 characters or ¾ of a word. The API charges based on tokens used. We'll cover this in detail in the next lesson.</p>
+            </div>
+
+            <h2 id="next-steps">6. Next Steps</h2>
+            <p>Congratulations! You've made your first OpenAI API call. Here's what to learn next:</p>
+            <ul>
+                <li><strong>Chat Completions Deep Dive</strong> - Learn about messages, roles, and conversation history</li>
+                <li><strong>Understanding Tokens & Pricing</strong> - Know how costs work</li>
+                <li><strong>Model Selection Guide</strong> - Choose the right model for your task</li>
+                <li><strong>Error Handling</strong> - Handle API errors gracefully</li>
+            </ul>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="../../courses/openai.html" class="prev">
+                <div class="lesson-nav-label">← Previous</div>
+                <div class="lesson-nav-title">Course Overview</div>
+            </a>
+            <a href="chat-completions.html" class="next">
+                <div class="lesson-nav-label">Next →</div>
+                <div class="lesson-nav-title">Chat Completions Deep Dive</div>
+            </a>
+        </nav>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>The most comprehensive AI coding learning platform.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="../index.html">All Tutorials</a></li>
+                        <li><a href="../../courses/index.html">Courses</a></li>
+                        <li><a href="../../projects/index.html">Projects</a></li>
+                        <li><a href="../../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>MYRQAI Network</h4>
+                    <ul>
+                        <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+                        <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+                        <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+                        <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/terms" target="_blank">Terms</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/contact" target="_blank">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

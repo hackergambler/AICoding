@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Mastery - 8,000+ Lessons | AI Coding Academy</title>
+    <meta name="description" content="Master prompt engineering from basics to advanced techniques. 8,000+ lessons on crafting effective prompts for any AI model.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                AI Coding Academy
+            </a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link active">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-ghost search-trigger">
+                    <span>⌘K</span>
+                </button>
+                <a href="../tutorials/beginner.html" class="btn btn-primary">Start Learning</a>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Courses</a>
+                <span>/</span>
+                <span>Prompt Engineering</span>
+            </nav>
+            
+            <div class="course-hero-content">
+                <div class="course-hero-text">
+                    <div class="course-badge">
+                        <span class="badge badge-beginner">All Levels</span>
+                        <span class="badge badge-outline">8,000+ Lessons</span>
+                    </div>
+                    <h1>Prompt Engineering Mastery</h1>
+                    <p class="course-tagline">The art and science of communicating with AI. From basic prompts to advanced techniques that unlock the full potential of any language model.</p>
+                    
+                    <div class="course-stats-row">
+                        <div class="stat-item">
+                            <span class="stat-number">8,000+</span>
+                            <span class="stat-label">Lessons</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">70+</span>
+                            <span class="stat-label">Hours</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">300+</span>
+                            <span class="stat-label">Templates</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">150+</span>
+                            <span class="stat-label">Exercises</span>
+                        </div>
+                    </div>
+                    
+                    <div class="course-cta-group">
+                        <a href="#curriculum" class="btn btn-primary btn-lg">View Curriculum</a>
+                        <a href="#techniques" class="btn btn-outline btn-lg">Explore Techniques</a>
+                    </div>
+                </div>
+                
+                <div class="course-hero-visual">
+                    <div class="code-preview">
+                        <div class="code-header">
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                            <span class="code-dot"></span>
+                            <span class="code-title">advanced_prompt.py</span>
+                        </div>
+                        <pre><code><span class="code-comment"># Chain of Thought prompting</span>
+system_prompt = <span class="code-string">"""You are an expert analyst.
+Think through problems step by step:
+1. Identify key information
+2. Break down the problem
+3. Analyze each component
+4. Synthesize your findings
+5. Provide actionable insights
+
+Format your response with clear sections."""</span>
+
+<span class="code-comment"># Few-shot learning with examples</span>
+examples = [
+    {<span class="code-string">"input"</span>: <span class="code-string">"Analyze Q3 sales"</span>,
+     <span class="code-string">"output"</span>: <span class="code-string">"## Analysis\n1. Revenue: +15%..."</span>},
+    {<span class="code-string">"input"</span>: <span class="code-string">"Review marketing ROI"</span>,
+     <span class="code-string">"output"</span>: <span class="code-string">"## Analysis\n1. Spend: $50K..."</span>}
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Prompt Engineering -->
+    <section class="course-why" id="why">
+        <div class="container">
+            <h2 class="section-title">Why Prompt Engineering Matters</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🎯</div>
+                    <h3>10x Better Results</h3>
+                    <p>The difference between a mediocre and excellent AI response often comes down to how you ask. Small prompt changes yield dramatically better outputs.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h3>Cost Efficiency</h3>
+                    <p>Well-crafted prompts reduce token usage by 30-50%. Fewer retries, shorter prompts, better first-attempt success rates.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🔄</div>
+                    <h3>Model Agnostic</h3>
+                    <p>Core prompting skills transfer across GPT-4, Claude, Gemini, Llama, and future models. Learn once, apply everywhere.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🚀</div>
+                    <h3>Career Advantage</h3>
+                    <p>Prompt engineering is the #1 in-demand AI skill. Companies pay premium for engineers who can effectively leverage AI.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🔓</div>
+                    <h3>Unlock Capabilities</h3>
+                    <p>Most users tap into only 20% of what models can do. Advanced prompting unlocks reasoning, analysis, and creative abilities.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⚡</div>
+                    <h3>Faster Development</h3>
+                    <p>Reduce iteration cycles. Get the output you need on the first or second try instead of the tenth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Techniques -->
+    <section class="techniques-section" id="techniques">
+        <div class="container">
+            <h2 class="section-title">Core Prompting Techniques</h2>
+            <p class="section-subtitle">Master these fundamental patterns that work across all AI models</p>
+            
+            <div class="techniques-grid">
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">📝</span>
+                        <h3>Zero-Shot Prompting</h3>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <p>Direct instructions without examples. The foundation of all prompting—clear, specific requests that guide the model.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Summarize this article in 3 bullet points,
+focusing on key business implications.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">📚</span>
+                        <h3>Few-Shot Learning</h3>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <p>Provide examples that demonstrate the desired format, style, or reasoning pattern you want the model to follow.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Convert to formal:
+"gonna be late" → "I will be delayed"
+"stuff's broken" → "The system is malfunctioning"
+"dunno" → ?</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">🔗</span>
+                        <h3>Chain of Thought</h3>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <p>Instruct the model to think step-by-step. Dramatically improves accuracy on complex reasoning and math problems.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Solve this step by step:
+If a train travels 120 miles in 2 hours,
+then stops for 30 minutes, then travels
+80 more miles in 1 hour, what's the
+average speed for the entire journey?</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">🎭</span>
+                        <h3>Role Prompting</h3>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <p>Assign the model a specific persona or expertise. Shapes response style, depth, and domain knowledge.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>You are a senior security engineer
+with 15 years of experience in
+penetration testing. Review this
+code for vulnerabilities.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">🌳</span>
+                        <h3>Tree of Thoughts</h3>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <p>Explore multiple reasoning paths simultaneously. The model evaluates different approaches before committing to a solution.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Consider 3 different approaches to
+solve this problem. For each approach:
+1. Outline the strategy
+2. Identify pros and cons
+3. Rate likelihood of success (1-10)
+Then choose the best approach.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">🔄</span>
+                        <h3>Self-Consistency</h3>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <p>Generate multiple responses and select the most consistent answer. Improves reliability on complex tasks.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Solve this problem 3 different ways.
+Then compare your answers. If they
+differ, analyze why and provide
+your most confident final answer.</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">🔍</span>
+                        <h3>ReAct (Reasoning + Acting)</h3>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <p>Interleave reasoning traces with actions. The model thinks, acts, observes, and adjusts in a loop.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Thought: I need to find the latest
+         revenue figures
+Action: search("company Q3 revenue")
+Observation: [search results]
+Thought: Now I can calculate...</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="technique-card">
+                    <div class="technique-header">
+                        <span class="technique-icon">📋</span>
+                        <h3>Structured Output</h3>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <p>Define exact output formats using JSON, XML, or markdown schemas. Essential for programmatic consumption.</p>
+                    <div class="technique-example">
+                        <div class="code-block compact">
+                            <pre><code>Extract entities and return as JSON:
+{
+  "people": ["name1", "name2"],
+  "organizations": ["org1"],
+  "dates": ["YYYY-MM-DD"]
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum -->
+    <section class="curriculum-section" id="curriculum">
+        <div class="container">
+            <h2 class="section-title">Complete Curriculum</h2>
+            <p class="section-subtitle">8,000+ lessons organized into 10 comprehensive modules</p>
+            
+            <div class="curriculum-grid">
+                <!-- Module 1 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">01</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Prompting Foundations</h3>
+                    <p>Understanding how LLMs process prompts and the principles of effective communication.</p>
+                    <ul class="module-topics">
+                        <li>How language models "think"</li>
+                        <li>Token economics and context windows</li>
+                        <li>Clarity, specificity, and constraints</li>
+                        <li>Common prompting antipatterns</li>
+                        <li>Testing and iterating on prompts</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 580 lessons</span>
+                        <span>⏱️ 5 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 2 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">02</span>
+                        <span class="badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Zero-Shot & Few-Shot Mastery</h3>
+                    <p>The two fundamental prompting paradigms and when to use each.</p>
+                    <ul class="module-topics">
+                        <li>Crafting effective zero-shot prompts</li>
+                        <li>Selecting and formatting examples</li>
+                        <li>Example ordering and diversity</li>
+                        <li>Negative examples and edge cases</li>
+                        <li>Dynamic example selection</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 720 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 3 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">03</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>System Prompts & Personas</h3>
+                    <p>Design system prompts that shape model behavior consistently across interactions.</p>
+                    <ul class="module-topics">
+                        <li>System prompt architecture</li>
+                        <li>Role and persona engineering</li>
+                        <li>Behavioral guardrails and constraints</li>
+                        <li>Multi-turn conversation design</li>
+                        <li>Testing persona consistency</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 850 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 4 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">04</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Chain of Thought & Reasoning</h3>
+                    <p>Unlock complex reasoning with step-by-step thinking prompts.</p>
+                    <ul class="module-topics">
+                        <li>Basic chain of thought patterns</li>
+                        <li>Zero-shot vs few-shot CoT</li>
+                        <li>Self-ask and decomposition</li>
+                        <li>Verification and error checking</li>
+                        <li>Math and logic applications</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 920 lessons</span>
+                        <span>⏱️ 9 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 5 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">05</span>
+                        <span class="badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Output Formatting & Structure</h3>
+                    <p>Control exactly how the model formats its responses for programmatic use.</p>
+                    <ul class="module-topics">
+                        <li>JSON and XML output patterns</li>
+                        <li>Markdown and structured text</li>
+                        <li>Schema enforcement techniques</li>
+                        <li>Handling parsing edge cases</li>
+                        <li>Hybrid text + structured outputs</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 680 lessons</span>
+                        <span>⏱️ 6 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 6 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">06</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Advanced Reasoning Techniques</h3>
+                    <p>Tree of Thoughts, Self-Consistency, and other cutting-edge approaches.</p>
+                    <ul class="module-topics">
+                        <li>Tree of Thoughts implementation</li>
+                        <li>Self-consistency sampling</li>
+                        <li>Maieutic prompting</li>
+                        <li>Analogical reasoning</li>
+                        <li>Multi-path evaluation</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 780 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 7 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">07</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Prompt Chaining & Orchestration</h3>
+                    <p>Build complex workflows with multiple prompts working together.</p>
+                    <ul class="module-topics">
+                        <li>Decomposing complex tasks</li>
+                        <li>Output routing and branching</li>
+                        <li>Error handling in chains</li>
+                        <li>State management patterns</li>
+                        <li>LangChain and similar tools</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 920 lessons</span>
+                        <span>⏱️ 9 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 8 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">08</span>
+                        <span class="badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Model-Specific Optimization</h3>
+                    <p>Tailor prompts for GPT-4, Claude, Gemini, and other major models.</p>
+                    <ul class="module-topics">
+                        <li>GPT-4 and OpenAI best practices</li>
+                        <li>Claude and Anthropic patterns</li>
+                        <li>Gemini and Google AI prompting</li>
+                        <li>Open-source model optimization</li>
+                        <li>Cross-model compatibility</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 850 lessons</span>
+                        <span>⏱️ 8 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 9 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">09</span>
+                        <span class="badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Production Prompt Engineering</h3>
+                    <p>Deploy and maintain prompts in production systems at scale.</p>
+                    <ul class="module-topics">
+                        <li>Prompt versioning and testing</li>
+                        <li>A/B testing prompt variations</li>
+                        <li>Monitoring and observability</li>
+                        <li>Cost optimization strategies</li>
+                        <li>Prompt injection prevention</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 920 lessons</span>
+                        <span>⏱️ 9 hours</span>
+                    </div>
+                </div>
+                
+                <!-- Module 10 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <span class="module-number">10</span>
+                        <span class="badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Domain-Specific Applications</h3>
+                    <p>Specialized prompting for code, writing, analysis, and more.</p>
+                    <ul class="module-topics">
+                        <li>Code generation and review prompts</li>
+                        <li>Creative writing and content</li>
+                        <li>Data analysis and extraction</li>
+                        <li>Customer service and support</li>
+                        <li>Education and tutoring prompts</li>
+                    </ul>
+                    <div class="module-meta">
+                        <span>📚 780 lessons</span>
+                        <span>⏱️ 7 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prompt Library -->
+    <section class="library-section" id="library">
+        <div class="container">
+            <h2 class="section-title">Prompt Template Library</h2>
+            <p class="section-subtitle">300+ battle-tested templates for common use cases</p>
+            
+            <div class="library-categories">
+                <div class="library-category">
+                    <h3>📝 Content Creation</h3>
+                    <ul class="template-list">
+                        <li>Blog post outline generator</li>
+                        <li>Social media content creator</li>
+                        <li>Email sequence writer</li>
+                        <li>Product description optimizer</li>
+                        <li>Landing page copy generator</li>
+                    </ul>
+                    <span class="template-count">45 templates</span>
+                </div>
+                
+                <div class="library-category">
+                    <h3>💻 Code & Development</h3>
+                    <ul class="template-list">
+                        <li>Code review assistant</li>
+                        <li>Bug finder and fixer</li>
+                        <li>Documentation generator</li>
+                        <li>Test case creator</li>
+                        <li>Refactoring advisor</li>
+                    </ul>
+                    <span class="template-count">52 templates</span>
+                </div>
+                
+                <div class="library-category">
+                    <h3>📊 Data & Analysis</h3>
+                    <ul class="template-list">
+                        <li>Data extraction prompts</li>
+                        <li>Report summarizer</li>
+                        <li>Trend analyzer</li>
+                        <li>SQL query generator</li>
+                        <li>Chart description creator</li>
+                    </ul>
+                    <span class="template-count">38 templates</span>
+                </div>
+                
+                <div class="library-category">
+                    <h3>💼 Business & Strategy</h3>
+                    <ul class="template-list">
+                        <li>SWOT analysis generator</li>
+                        <li>Meeting summarizer</li>
+                        <li>Competitive analysis</li>
+                        <li>Business plan outliner</li>
+                        <li>Risk assessment prompts</li>
+                    </ul>
+                    <span class="template-count">35 templates</span>
+                </div>
+                
+                <div class="library-category">
+                    <h3>🎓 Education & Learning</h3>
+                    <ul class="template-list">
+                        <li>Concept explainer (ELI5)</li>
+                        <li>Quiz generator</li>
+                        <li>Study guide creator</li>
+                        <li>Socratic tutor</li>
+                        <li>Flashcard generator</li>
+                    </ul>
+                    <span class="template-count">42 templates</span>
+                </div>
+                
+                <div class="library-category">
+                    <h3>🤖 AI Agent & RAG</h3>
+                    <ul class="template-list">
+                        <li>ReAct agent prompts</li>
+                        <li>RAG system prompts</li>
+                        <li>Tool selection prompts</li>
+                        <li>Memory summarization</li>
+                        <li>Conversation routing</li>
+                    </ul>
+                    <span class="template-count">48 templates</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Mistakes -->
+    <section class="mistakes-section" id="mistakes">
+        <div class="container">
+            <h2 class="section-title">Common Prompting Mistakes</h2>
+            <p class="section-subtitle">Learn what NOT to do to improve your prompts</p>
+            
+            <div class="mistakes-grid">
+                <div class="mistake-card">
+                    <div class="mistake-header">
+                        <span class="mistake-icon">❌</span>
+                        <h3>Being Too Vague</h3>
+                    </div>
+                    <div class="mistake-example bad">
+                        <span class="label">Bad</span>
+                        <code>"Write something about marketing"</code>
+                    </div>
+                    <div class="mistake-example good">
+                        <span class="label">Better</span>
+                        <code>"Write a 500-word LinkedIn post about B2B SaaS marketing trends in 2025, targeting CMOs"</code>
+                    </div>
+                </div>
+                
+                <div class="mistake-card">
+                    <div class="mistake-header">
+                        <span class="mistake-icon">❌</span>
+                        <h3>No Output Format</h3>
+                    </div>
+                    <div class="mistake-example bad">
+                        <span class="label">Bad</span>
+                        <code>"List the pros and cons"</code>
+                    </div>
+                    <div class="mistake-example good">
+                        <span class="label">Better</span>
+                        <code>"List 5 pros and 5 cons in two columns. Keep each point to one sentence."</code>
+                    </div>
+                </div>
+                
+                <div class="mistake-card">
+                    <div class="mistake-header">
+                        <span class="mistake-icon">❌</span>
+                        <h3>Overloading Single Prompts</h3>
+                    </div>
+                    <div class="mistake-example bad">
+                        <span class="label">Bad</span>
+                        <code>"Analyze this data, create visualizations, write a report, and suggest next steps"</code>
+                    </div>
+                    <div class="mistake-example good">
+                        <span class="label">Better</span>
+                        <code>Break into 4 separate prompts, each focused on one task</code>
+                    </div>
+                </div>
+                
+                <div class="mistake-card">
+                    <div class="mistake-header">
+                        <span class="mistake-icon">❌</span>
+                        <h3>Negative Instructions Only</h3>
+                    </div>
+                    <div class="mistake-example bad">
+                        <span class="label">Bad</span>
+                        <code>"Don't be boring, don't use jargon, don't be too long"</code>
+                    </div>
+                    <div class="mistake-example good">
+                        <span class="label">Better</span>
+                        <code>"Be engaging, use simple language, keep it under 200 words"</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tutorials -->
+    <section class="tutorials-preview" id="tutorials">
+        <div class="container">
+            <h2 class="section-title">Featured Tutorials</h2>
+            
+            <div class="tutorials-grid">
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-beginner">Beginner</span>
+                        <span class="tutorial-time">20 min</span>
+                    </div>
+                    <h3>Your First Effective Prompt</h3>
+                    <p>Learn the CRISP framework for writing clear, effective prompts that get results.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 15 lessons</span>
+                        <span>🎯 Practical</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-beginner">Beginner</span>
+                        <span class="tutorial-time">25 min</span>
+                    </div>
+                    <h3>Few-Shot Learning Explained</h3>
+                    <p>Master the art of teaching AI by example with practical few-shot patterns.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 18 lessons</span>
+                        <span>🎯 Foundational</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-intermediate">Intermediate</span>
+                        <span class="tutorial-time">35 min</span>
+                    </div>
+                    <h3>Chain of Thought Deep Dive</h3>
+                    <p>Unlock complex reasoning with step-by-step thinking prompts that actually work.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 28 lessons</span>
+                        <span>🎯 Reasoning</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-intermediate">Intermediate</span>
+                        <span class="tutorial-time">40 min</span>
+                    </div>
+                    <h3>System Prompts That Work</h3>
+                    <p>Design system prompts that shape consistent AI behavior across conversations.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 32 lessons</span>
+                        <span>🎯 Architecture</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-advanced">Advanced</span>
+                        <span class="tutorial-time">55 min</span>
+                    </div>
+                    <h3>Production Prompt Versioning</h3>
+                    <p>Set up prompt management systems for testing, versioning, and deployment.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 42 lessons</span>
+                        <span>🎯 Production</span>
+                    </div>
+                </article>
+                
+                <article class="tutorial-card">
+                    <div class="tutorial-header">
+                        <span class="badge badge-advanced">Advanced</span>
+                        <span class="tutorial-time">50 min</span>
+                    </div>
+                    <h3>Prompt Injection Prevention</h3>
+                    <p>Secure your prompts against injection attacks and adversarial inputs.</p>
+                    <div class="tutorial-meta">
+                        <span>📖 38 lessons</span>
+                        <span>🎯 Security</span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Master the Language of AI</h2>
+                <p>The best AI developers aren't just coders—they're communicators. Learn to speak AI's language fluently.</p>
+                <div class="cta-buttons">
+                    <a href="../tutorials/beginner.html" class="btn btn-primary btn-lg">Start Learning Free</a>
+                    <a href="index.html" class="btn btn-outline btn-lg">Explore All Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        AI Coding Academy
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, 50,000+ debugging solutions, and 500+ hands-on projects.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Learning Paths</h4>
+                    <ul>
+                        <li><a href="../tutorials/beginner.html">Beginner</a></li>
+                        <li><a href="../tutorials/intermediate.html">Intermediate</a></li>
+                        <li><a href="../tutorials/advanced.html">Advanced</a></li>
+                        <li><a href="../tutorials/expert.html">Expert</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Courses</h4>
+                    <ul>
+                        <li><a href="openai.html">OpenAI API</a></li>
+                        <li><a href="claude.html">Claude API</a></li>
+                        <li><a href="langchain.html">LangChain</a></li>
+                        <li><a href="rag.html">RAG Systems</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../debugging/index.html">Debugging Hub</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="https://www.myrqai.com" target="_blank">Privacy Policy</a>
+                    <a href="https://www.myrqai.com" target="_blank">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

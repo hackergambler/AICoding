@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Tutorials - AI Coding Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                <span>AI Coding Academy</span>
+            </a>
+            <div class="nav-links">
+                <a href="../tutorials/index.html" class="nav-link active">Tutorials</a>
+                <a href="../courses/index.html" class="nav-link">Courses</a>
+                <a href="../debugging/index.html" class="nav-link">Debugging</a>
+                <a href="../projects/index.html" class="nav-link">Projects</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-ghost">Sign In</button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Tutorials</a>
+                <span>/</span>
+                <span>Expert</span>
+            </div>
+            <div class="level-badge badge-expert">Expert Level</div>
+            <h1>Expert AI Development</h1>
+            <p class="hero-subtitle">Production-grade systems, cutting-edge research implementation, and industry-leading architectures. Master the most advanced AI techniques.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">18,500+</span>
+                    <span class="stat-label">Expert Tutorials</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">450+</span>
+                    <span class="stat-label">Hours of Content</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">95+</span>
+                    <span class="stat-label">Production Projects</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="tutorials-content">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Expert Topics</h3>
+                    <ul class="sidebar-nav">
+                        <li><a href="#production-systems" class="active">Production Systems</a></li>
+                        <li><a href="#distributed-ai">Distributed AI</a></li>
+                        <li><a href="#ml-ops">MLOps & DevOps</a></li>
+                        <li><a href="#research-impl">Research Implementation</a></li>
+                        <li><a href="#custom-models">Custom Model Training</a></li>
+                        <li><a href="#enterprise">Enterprise Architecture</a></li>
+                        <li><a href="#optimization">Performance Optimization</a></li>
+                        <li><a href="#security">AI Security</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Prerequisites</h3>
+                    <div class="prereq-list">
+                        <a href="advanced.html" class="prereq-item">
+                            <span class="prereq-badge badge-advanced">Advanced</span>
+                            <span>Complete Advanced Tutorials</span>
+                        </a>
+                        <a href="../courses/agents.html" class="prereq-item">
+                            <span class="prereq-badge badge-advanced">Course</span>
+                            <span>AI Agents Deep Dive</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="sidebar-section">
+                    <h3>Certification Path</h3>
+                    <div class="cert-progress">
+                        <div class="cert-item completed">
+                            <span class="cert-icon">✓</span>
+                            <span>Beginner Certified</span>
+                        </div>
+                        <div class="cert-item completed">
+                            <span class="cert-icon">✓</span>
+                            <span>Intermediate Certified</span>
+                        </div>
+                        <div class="cert-item completed">
+                            <span class="cert-icon">✓</span>
+                            <span>Advanced Certified</span>
+                        </div>
+                        <div class="cert-item current">
+                            <span class="cert-icon">◆</span>
+                            <span>Expert Certification</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Tutorial Grid -->
+            <div class="tutorials-main">
+                <!-- Production Systems -->
+                <section id="production-systems" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Production AI Systems</h2>
+                        <span class="tutorial-count">2,800+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Build enterprise-grade AI systems that handle millions of requests with 99.99% uptime.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>Building Multi-Tenant AI Platforms</h3>
+                            <p>Design and implement AI platforms serving multiple enterprise clients with isolated resources, custom models, and dedicated throughput.</p>
+                            <div class="card-tags">
+                                <span class="tag">Architecture</span>
+                                <span class="tag">Kubernetes</span>
+                                <span class="tag">Multi-tenancy</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">6 hrs</span>
+                            </div>
+                            <h3>High-Availability LLM Infrastructure</h3>
+                            <p>Implement active-active deployments across regions with automatic failover, load balancing, and zero-downtime updates.</p>
+                            <div class="card-tags">
+                                <span class="tag">HA</span>
+                                <span class="tag">Load Balancing</span>
+                                <span class="tag">Failover</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>Real-Time AI Processing at Scale</h3>
+                            <p>Build streaming AI pipelines processing millions of events per second with sub-100ms latency guarantees.</p>
+                            <div class="card-tags">
+                                <span class="tag">Kafka</span>
+                                <span class="tag">Flink</span>
+                                <span class="tag">Real-time</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">7 hrs</span>
+                            </div>
+                            <h3>Cost-Optimized AI Infrastructure</h3>
+                            <p>Implement intelligent routing, caching strategies, and resource scheduling to reduce AI infrastructure costs by 60%.</p>
+                            <div class="card-tags">
+                                <span class="tag">Cost Optimization</span>
+                                <span class="tag">Caching</span>
+                                <span class="tag">Scheduling</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Distributed AI -->
+                <section id="distributed-ai" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Distributed AI Systems</h2>
+                        <span class="tutorial-count">2,200+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Master distributed computing patterns for AI workloads across global infrastructure.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">12 hrs</span>
+                            </div>
+                            <h3>Distributed Model Inference</h3>
+                            <p>Implement tensor parallelism and pipeline parallelism for serving models across multiple GPUs and nodes.</p>
+                            <div class="card-tags">
+                                <span class="tag">Tensor Parallel</span>
+                                <span class="tag">Pipeline</span>
+                                <span class="tag">Multi-GPU</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">9 hrs</span>
+                            </div>
+                            <h3>Federated Learning Implementation</h3>
+                            <p>Build privacy-preserving distributed training systems where data never leaves client devices.</p>
+                            <div class="card-tags">
+                                <span class="tag">Federated</span>
+                                <span class="tag">Privacy</span>
+                                <span class="tag">Distributed Training</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>Global AI Edge Networks</h3>
+                            <p>Deploy AI models to edge locations worldwide with intelligent routing and model synchronization.</p>
+                            <div class="card-tags">
+                                <span class="tag">Edge Computing</span>
+                                <span class="tag">CDN</span>
+                                <span class="tag">Global Deploy</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">11 hrs</span>
+                            </div>
+                            <h3>Consensus in AI Systems</h3>
+                            <p>Implement distributed consensus for AI decision-making systems with Byzantine fault tolerance.</p>
+                            <div class="card-tags">
+                                <span class="tag">Consensus</span>
+                                <span class="tag">Raft</span>
+                                <span class="tag">BFT</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- MLOps -->
+                <section id="ml-ops" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>MLOps & AI DevOps</h2>
+                        <span class="tutorial-count">2,500+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Enterprise MLOps practices for continuous training, deployment, and monitoring.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>Complete MLOps Pipeline</h3>
+                            <p>Build end-to-end ML pipelines with automated training, validation, deployment, and rollback capabilities.</p>
+                            <div class="card-tags">
+                                <span class="tag">MLflow</span>
+                                <span class="tag">Kubeflow</span>
+                                <span class="tag">CI/CD</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">7 hrs</span>
+                            </div>
+                            <h3>Model Registry at Scale</h3>
+                            <p>Design model versioning, lineage tracking, and governance systems for enterprise AI platforms.</p>
+                            <div class="card-tags">
+                                <span class="tag">Model Registry</span>
+                                <span class="tag">Versioning</span>
+                                <span class="tag">Governance</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>AI Observability Platform</h3>
+                            <p>Build comprehensive monitoring for model performance, drift detection, and automated alerting.</p>
+                            <div class="card-tags">
+                                <span class="tag">Observability</span>
+                                <span class="tag">Drift Detection</span>
+                                <span class="tag">Alerting</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">6 hrs</span>
+                            </div>
+                            <h3>Feature Store Architecture</h3>
+                            <p>Design and implement enterprise feature stores with real-time and batch processing capabilities.</p>
+                            <div class="card-tags">
+                                <span class="tag">Feature Store</span>
+                                <span class="tag">Feast</span>
+                                <span class="tag">Real-time</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Research Implementation -->
+                <section id="research-impl" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Research Implementation</h2>
+                        <span class="tutorial-count">2,100+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Implement cutting-edge research papers and novel architectures from scratch.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">15 hrs</span>
+                            </div>
+                            <h3>Implementing Attention Mechanisms</h3>
+                            <p>Build attention from scratch: multi-head, flash attention, linear attention, and state-space models.</p>
+                            <div class="card-tags">
+                                <span class="tag">Attention</span>
+                                <span class="tag">Flash Attention</span>
+                                <span class="tag">Mamba</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">12 hrs</span>
+                            </div>
+                            <h3>Mixture of Experts Implementation</h3>
+                            <p>Implement MoE architectures with expert routing, load balancing, and capacity constraints.</p>
+                            <div class="card-tags">
+                                <span class="tag">MoE</span>
+                                <span class="tag">Expert Routing</span>
+                                <span class="tag">Scaling</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">14 hrs</span>
+                            </div>
+                            <h3>RLHF from Scratch</h3>
+                            <p>Build complete RLHF pipelines including reward modeling, PPO training, and DPO alternatives.</p>
+                            <div class="card-tags">
+                                <span class="tag">RLHF</span>
+                                <span class="tag">PPO</span>
+                                <span class="tag">DPO</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>Multimodal Architectures</h3>
+                            <p>Implement vision-language models, audio-text fusion, and unified multimodal transformers.</p>
+                            <div class="card-tags">
+                                <span class="tag">Multimodal</span>
+                                <span class="tag">Vision-Language</span>
+                                <span class="tag">Fusion</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Custom Models -->
+                <section id="custom-models" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Custom Model Training</h2>
+                        <span class="tutorial-count">2,400+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Train and fine-tune custom models for specialized domains and applications.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">20 hrs</span>
+                            </div>
+                            <h3>Pre-training LLMs from Scratch</h3>
+                            <p>Train a language model from scratch: data preparation, tokenizer training, distributed training setup.</p>
+                            <div class="card-tags">
+                                <span class="tag">Pre-training</span>
+                                <span class="tag">Distributed</span>
+                                <span class="tag">Data Pipeline</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>Domain-Specific Model Adaptation</h3>
+                            <p>Continued pre-training and fine-tuning strategies for legal, medical, and financial domains.</p>
+                            <div class="card-tags">
+                                <span class="tag">Domain Adaptation</span>
+                                <span class="tag">Continued Pre-training</span>
+                                <span class="tag">Specialized</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">9 hrs</span>
+                            </div>
+                            <h3>Model Merging & Composition</h3>
+                            <p>Combine multiple fine-tuned models using TIES, DARE, and task arithmetic techniques.</p>
+                            <div class="card-tags">
+                                <span class="tag">Model Merging</span>
+                                <span class="tag">TIES</span>
+                                <span class="tag">Composition</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">11 hrs</span>
+                            </div>
+                            <h3>Efficient Training Techniques</h3>
+                            <p>Master gradient checkpointing, mixed precision, ZeRO optimization, and memory-efficient training.</p>
+                            <div class="card-tags">
+                                <span class="tag">DeepSpeed</span>
+                                <span class="tag">ZeRO</span>
+                                <span class="tag">Mixed Precision</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Enterprise Architecture -->
+                <section id="enterprise" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Enterprise AI Architecture</h2>
+                        <span class="tutorial-count">2,000+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Design and implement AI systems for Fortune 500 organizations.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">12 hrs</span>
+                            </div>
+                            <h3>Enterprise AI Platform Design</h3>
+                            <p>Architect comprehensive AI platforms with governance, compliance, and audit capabilities.</p>
+                            <div class="card-tags">
+                                <span class="tag">Enterprise</span>
+                                <span class="tag">Governance</span>
+                                <span class="tag">Compliance</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>AI Gateway & API Management</h3>
+                            <p>Build centralized AI gateways with rate limiting, authentication, and usage analytics.</p>
+                            <div class="card-tags">
+                                <span class="tag">API Gateway</span>
+                                <span class="tag">Rate Limiting</span>
+                                <span class="tag">Analytics</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>Hybrid Cloud AI Deployment</h3>
+                            <p>Deploy AI across on-premise, private cloud, and public cloud with unified management.</p>
+                            <div class="card-tags">
+                                <span class="tag">Hybrid Cloud</span>
+                                <span class="tag">Multi-Cloud</span>
+                                <span class="tag">On-Premise</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">7 hrs</span>
+                            </div>
+                            <h3>AI Cost Management & FinOps</h3>
+                            <p>Implement comprehensive cost tracking, optimization, and chargeback systems for AI workloads.</p>
+                            <div class="card-tags">
+                                <span class="tag">FinOps</span>
+                                <span class="tag">Cost Management</span>
+                                <span class="tag">Chargeback</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Performance Optimization -->
+                <section id="optimization" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>Performance Optimization</h2>
+                        <span class="tutorial-count">2,300+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Squeeze maximum performance from AI systems with advanced optimization techniques.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">9 hrs</span>
+                            </div>
+                            <h3>CUDA Kernel Optimization</h3>
+                            <p>Write and optimize custom CUDA kernels for AI operations with maximum GPU utilization.</p>
+                            <div class="card-tags">
+                                <span class="tag">CUDA</span>
+                                <span class="tag">GPU</span>
+                                <span class="tag">Kernels</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>Quantization Deep Dive</h3>
+                            <p>Implement INT8, INT4, and mixed-precision quantization with minimal accuracy loss.</p>
+                            <div class="card-tags">
+                                <span class="tag">Quantization</span>
+                                <span class="tag">INT8</span>
+                                <span class="tag">GPTQ</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">7 hrs</span>
+                            </div>
+                            <h3>Speculative Decoding</h3>
+                            <p>Implement speculative decoding for 2-3x faster inference with draft models.</p>
+                            <div class="card-tags">
+                                <span class="tag">Speculative</span>
+                                <span class="tag">Draft Models</span>
+                                <span class="tag">Inference</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>KV Cache Optimization</h3>
+                            <p>Implement PagedAttention, continuous batching, and advanced KV cache management.</p>
+                            <div class="card-tags">
+                                <span class="tag">KV Cache</span>
+                                <span class="tag">PagedAttention</span>
+                                <span class="tag">vLLM</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- AI Security -->
+                <section id="security" class="tutorial-section">
+                    <div class="section-header">
+                        <h2>AI Security</h2>
+                        <span class="tutorial-count">2,200+ tutorials</span>
+                    </div>
+                    <p class="section-desc">Secure AI systems against adversarial attacks and ensure safe deployments.</p>
+                    
+                    <div class="tutorial-grid">
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">10 hrs</span>
+                            </div>
+                            <h3>Adversarial Robustness</h3>
+                            <p>Detect and defend against prompt injection, jailbreaks, and adversarial inputs.</p>
+                            <div class="card-tags">
+                                <span class="tag">Adversarial</span>
+                                <span class="tag">Prompt Injection</span>
+                                <span class="tag">Defense</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">8 hrs</span>
+                            </div>
+                            <h3>Model Security & Privacy</h3>
+                            <p>Implement differential privacy, secure inference, and model extraction prevention.</p>
+                            <div class="card-tags">
+                                <span class="tag">Privacy</span>
+                                <span class="tag">Differential Privacy</span>
+                                <span class="tag">Secure Inference</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">7 hrs</span>
+                            </div>
+                            <h3>AI Red Teaming</h3>
+                            <p>Conduct comprehensive security assessments of AI systems and build red team frameworks.</p>
+                            <div class="card-tags">
+                                <span class="tag">Red Team</span>
+                                <span class="tag">Assessment</span>
+                                <span class="tag">Testing</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+
+                        <article class="tutorial-card">
+                            <div class="card-header">
+                                <span class="level-badge badge-expert">Expert</span>
+                                <span class="duration">9 hrs</span>
+                            </div>
+                            <h3>AI Safety & Alignment</h3>
+                            <p>Implement Constitutional AI, RLHF safety training, and automated safety testing.</p>
+                            <div class="card-tags">
+                                <span class="tag">AI Safety</span>
+                                <span class="tag">Alignment</span>
+                                <span class="tag">Constitutional AI</span>
+                            </div>
+                            <div class="card-footer">
+                                <div class="difficulty">
+                                    <span class="diff-dots">
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                        <span class="dot filled"></span>
+                                    </span>
+                                </div>
+                                <a href="../tutorials/index.html" class="btn btn-sm">Start Tutorial</a>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Load More -->
+                <div class="load-more">
+                    <button class="btn btn-outline btn-lg">Load More Expert Tutorials</button>
+                    <p class="load-more-text">Showing 32 of 18,500+ tutorials</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        <span>AI Coding Academy</span>
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, hands-on projects, and expert guidance.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Learning</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">All Tutorials</a></li>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">Documentation</a></li>
+                        <li><a href="../tutorials/index.html">API Reference</a></li>
+                        <li><a href="../tutorials/index.html">Community</a></li>
+                        <li><a href="../tutorials/index.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">About</a></li>
+                        <li><a href="../tutorials/index.html">Careers</a></li>
+                        <li><a href="../tutorials/index.html">Contact</a></li>
+                        <li><a href="../tutorials/index.html">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="../tutorials/index.html">Privacy Policy</a>
+                    <a href="../tutorials/index.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

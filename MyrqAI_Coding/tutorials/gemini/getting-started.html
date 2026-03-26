@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Gemini API | AI Coding Academy</title>
+    <meta name="description" content="Set up Google AI Studio, get an API key, and make your first Gemini API call with Python and Node.js.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
+        .lesson-header { margin-bottom: var(--space-3xl); }
+        .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
+        .lesson-meta-item { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.9rem; color: var(--text-muted); }
+        .lesson-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-lg); line-height: 1.2; }
+        .lesson-description { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
+        .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
+        .lesson-content h2:first-child { margin-top: 0; }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); color: var(--accent-secondary); }
+        .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
+        .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
+        .lesson-content li { margin-bottom: var(--space-sm); }
+        .lesson-content code { background: rgba(0,255,170,0.1); color: var(--accent-primary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
+        .code-block-label { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: var(--space-sm); display: flex; justify-content: space-between; }
+        .code-block-label .copy-btn { cursor: pointer; color: var(--accent-primary); border: 1px solid var(--accent-primary); background: transparent; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.65; color: #e6edf3; white-space: pre; }
+        .cm { color: #8b949e; } .kw { color: #ff7b72; } .st { color: #a5d6ff; }
+        .fn { color: #d2a8ff; } .nu { color: #79c0ff; } .cl { color: #ffa657; }
+        .tip-box { background: rgba(0,255,170,0.08); border: 1px solid rgba(0,255,170,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
+        .warn-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .warn-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-warning); margin-bottom: var(--space-sm); }
+        .info-box { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .info-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .tip-box p, .warn-box p, .info-box p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
+        .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
+        .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+        .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
+        .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
+        .lesson-nav .next { text-align: right; }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+    </style>
+</head><body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/gemini.html">Gemini</a><span class="separator">/</span><span>Getting Started</span></div>
+        <header class="lesson-header">
+            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 20 min</span><span class="lesson-meta-item">📚 Lesson 1</span></div>
+            <h1 class="lesson-title">Getting Started with Gemini API</h1>
+            <p class="lesson-description">Set up Google AI Studio, obtain your API key, install the SDK, and make your first Gemini call in both Python and JavaScript.</p>
+        </header>
+        <div class="lesson-content">
+            <h2>1. Get Your API Key</h2>
+            <p>Go to <strong>Google AI Studio</strong> at <a href="https://aistudio.google.com" target="_blank" style="color:var(--accent-primary)">aistudio.google.com</a>, sign in with your Google account, and click <strong>Get API Key → Create API key</strong>. Copy it — you'll use it in every request.</p>
+<div class="warn-box"><div class="warn-box-title">⚠️ Free Tier Limits</div><p>Gemini 1.5 Flash is free up to 15 RPM and 1M tokens/day. gemini-1.5-pro has lower free limits. Check ai.google.dev/pricing for current rates.</p></div>
+            <h2>2. Install the SDK</h2>
+<div class="code-block">
+<div class="code-block-label"><span>bash</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Python</span>
+pip install google-generativeai
+
+<span class="cm"># Node.js</span>
+npm install @google/generative-ai
+
+<span class="cm"># Store your key safely</span>
+export GOOGLE_API_KEY="AIza..."   <span class="cm"># bash</span>
+<span class="cm"># Or use a .env file + python-dotenv</span></pre></div>
+            <h2>3. Your First API Call</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python - minimal Gemini call</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
+<span class="kw">import</span> os
+
+genai.configure(api_key=os.environ[<span class="st">"GOOGLE_API_KEY"</span>])
+
+model = genai.GenerativeModel(<span class="st">"gemini-1.5-flash"</span>)
+response = model.generate_content(<span class="st">"Explain how neural networks learn in 3 sentences."</span>)
+
+<span class="kw">print</span>(response.text)
+<span class="kw">print</span>(<span class="st">f"Finish reason: {response.candidates[0].finish_reason}"</span>)
+<span class="kw">print</span>(<span class="st">f"Token count: {response.usage_metadata.total_token_count}"</span>)</pre></div><div class="code-block">
+<div class="code-block-label"><span>JavaScript — Gemini with Node.js</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">const</span> { GoogleGenerativeAI } = require(<span class="st">"@google/generative-ai"</span>);
+
+<span class="kw">const</span> genAI = <span class="kw">new</span> GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+
+<span class="kw">async function</span> <span class="fn">main</span>() {
+  <span class="kw">const</span> model = genAI.getGenerativeModel({ model: <span class="st">"gemini-1.5-flash"</span> });
+  <span class="kw">const</span> result = <span class="kw">await</span> model.generateContent(<span class="st">"Write a haiku about async programming."</span>);
+  console.log(result.response.text());
+}
+main();</pre></div>
+            <h2>4. Model Selection</h2>
+            <ul>
+                <li><strong>gemini-1.5-flash</strong> — Fast, cheap, 1M token context. Best for most tasks.</li>
+                <li><strong>gemini-1.5-pro</strong> — Highest quality, 2M token context. Use for complex reasoning.</li>
+                <li><strong>gemini-1.5-flash-8b</strong> — Smallest and fastest. Great for classification/simple tasks.</li>
+                <li><strong>gemini-2.0-flash</strong> — Latest generation, fast and capable multimodal model.</li>
+            </ul>
+<div class="code-block">
+<div class="code-block-label"><span>Python — compare models side by side</span><button class="copy-btn">Copy</button></div>
+<pre>models_to_try = [
+    <span class="st">"gemini-1.5-flash"</span>,
+    <span class="st">"gemini-1.5-pro"</span>,
+    <span class="st">"gemini-2.0-flash"</span>,
+]
+prompt = <span class="st">"Write a one-line Python function to check if a number is prime."</span>
+
+<span class="kw">for</span> model_name <span class="kw">in</span> models_to_try:
+    model = genai.GenerativeModel(model_name)
+    resp = model.generate_content(prompt)
+    tokens = resp.usage_metadata.total_token_count
+    <span class="kw">print</span>(<span class="st">f"\n[{model_name}] ({tokens} tokens)"</span>)
+    <span class="kw">print</span>(resp.text[:200])</pre></div>
+            <h2>5. Generation Config</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — control temperature, tokens, and stops</span><button class="copy-btn">Copy</button></div>
+<pre>generation_config = genai.GenerationConfig(
+    temperature=<span class="nu">0.7</span>,        <span class="cm"># 0=deterministic, 1=creative, 2=max</span>
+    top_p=<span class="nu">0.95</span>,
+    top_k=<span class="nu">64</span>,
+    max_output_tokens=<span class="nu">512</span>,
+    stop_sequences=[<span class="st">"###"</span>, <span class="st">"END"</span>],
+    response_mime_type=<span class="st">"text/plain"</span>,   <span class="cm"># or "application/json"</span>
+)
+
+model = genai.GenerativeModel(
+    model_name=<span class="st">"gemini-1.5-flash"</span>,
+    generation_config=generation_config,
+    system_instruction=<span class="st">"You are a senior Python engineer. Always include type hints."</span>
+)
+
+response = model.generate_content(<span class="st">"Write a function to merge two sorted lists."</span>)
+<span class="kw">print</span>(response.text)</pre></div><div class="tip-box"><div class="tip-box-title">💡 System Instructions</div><p>Gemini uses <code>system_instruction</code> at model creation time (not per-call like OpenAI). Create one model instance per persona and reuse it.</p></div>
+        </div><nav class="lesson-nav">
+        <a href="../../courses/gemini.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Gemini Course Overview</div></a>
+        <a href="multimodal.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Multimodal: Text + Images</div></a>
+    </nav>
+    </div>    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most comprehensive AI coding learning platform.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+            <li><a href="../../debugging/index.html">Debugging</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul>
+            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul>
+            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+        </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    </div></footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
+</body></html>

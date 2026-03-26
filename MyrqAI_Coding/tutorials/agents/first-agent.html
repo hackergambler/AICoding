@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your First Agent | AI Coding Academy</title>
+    <meta name="description" content="Learn Build Your First Agent in the AI Agents course. Practical Python code and real-world examples.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-meta-item{display:flex;align-items:center;gap:var(--space-xs);font-size:.9rem;color:var(--text-muted)}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a>
+            <span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/agents.html">Agents</a><span class="separator">/</span><span>Build Your First Agent</span>
+        </div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-beginner">Beginner</span>
+                <span class="lesson-meta-item">⏱️ 30 min</span>
+            </div>
+            <h1 class="lesson-title">Build Your First Agent</h1>
+            <p class="lesson-description">Learn Build Your First Agent in the AI Agents course. Practical Python code and real-world examples.</p>
+        </header>
+        <div class="lesson-content">
+<h2>Your First Complete Agent</h2>
+<p>We'll build a research agent from scratch using OpenAI function calling. It can search the web, do math, and give a final answer. No frameworks — raw Python so you understand every piece.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python - complete first agent</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+<span class="kw">import</span> json, httpx
+
+client = OpenAI()
+
+<span class="cm"># ---- TOOLS ----</span>
+<span class="kw">def</span> <span class="fn">web_search</span>(query: str) -> str:
+    r = httpx.get(
+        <span class="st">f"https://api.duckduckgo.com/?q={{query}}&format=json"</span>,
+        timeout=<span class="nu">8</span>
+    )
+    data = r.json()
+    abstract = data.get(<span class="st">"AbstractText"</span>, <span class="st">""</span>)
+    <span class="kw">return</span> abstract[:<span class="nu">500</span>] <span class="kw">if</span> abstract <span class="kw">else</span> <span class="st">"No results found."</span>
+
+<span class="kw">def</span> <span class="fn">calculate</span>(expression: str) -> str:
+    <span class="kw">try</span>:
+        result = eval(expression, {{<span class="st">"__builtins__"</span>: {{}}}})
+        <span class="kw">return</span> str(result)
+    <span class="kw">except Exception</span> <span class="kw">as</span> e:
+        <span class="kw">return</span> <span class="st">f"Error: {{e}}"</span>
+
+TOOLS_DEF = [
+    {{<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {{
+        <span class="st">"name"</span>: <span class="st">"web_search"</span>,
+        <span class="st">"description"</span>: <span class="st">"Search the web for current factual information."</span>,
+        <span class="st">"parameters"</span>: {{<span class="st">"type"</span>: <span class="st">"object"</span>,
+            <span class="st">"properties"</span>: {{<span class="st">"query"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>}}}},
+            <span class="st">"required"</span>: [<span class="st">"query"</span>]}}
+    }}}}  ,
+    {{<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {{
+        <span class="st">"name"</span>: <span class="st">"calculate"</span>,
+        <span class="st">"description"</span>: <span class="st">"Evaluate a math expression. E.g. '2 ** 10' or '144 / 12'."</span>,
+        <span class="st">"parameters"</span>: {{<span class="st">"type"</span>: <span class="st">"object"</span>,
+            <span class="st">"properties"</span>: {{<span class="st">"expression"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>}}}},
+            <span class="st">"required"</span>: [<span class="st">"expression"</span>]}}
+    }}}}
+]
+
+TOOL_FNS = {{"web_search": web_search, "calculate": calculate}}
+
+<span class="cm"># ---- AGENT LOOP ----</span>
+<span class="kw">def</span> <span class="fn">run_agent</span>(goal: str, max_steps: int = <span class="nu">10</span>) -> str:
+    messages = [
+        {{<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">"You are a research agent. Use tools to find information and answer questions accurately."</span>}},
+        {{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: goal}}
+    ]
+    
+    <span class="kw">for</span> step <span class="kw">in</span> range(max_steps):
+        resp = client.chat.completions.create(
+            model=<span class="st">"gpt-4o-mini"</span>, messages=messages,
+            tools=TOOLS_DEF, tool_choice=<span class="st">"auto"</span>
+        )
+        msg = resp.choices[0].message
+        messages.append(msg)
+        
+        <span class="kw">if</span> resp.choices[0].finish_reason == <span class="st">"stop"</span>:
+            <span class="kw">return</span> msg.content  <span class="cm"># done</span>
+        
+        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls <span class="kw">or</span> []:
+            fn = TOOL_FNS[tc.function.name]
+            args = json.loads(tc.function.arguments)
+            result = fn(**args)
+            print(<span class="st">f"  [{tc.function.name}] {{args}} → {{result[:80]}}"</span>)
+            messages.append({{
+                <span class="st">"role"</span>: <span class="st">"tool"</span>,
+                <span class="st">"tool_call_id"</span>: tc.id,
+                <span class="st">"content"</span>: result
+            }})
+    
+    <span class="kw">return</span> <span class="st">"Max steps reached."</span>
+
+<span class="cm"># ---- RUN IT ----</span>
+print(run_agent(<span class="st">"What is the population of Japan? Calculate how many people per square km (area: 377975 km2)"</span>))</pre></div>
+<div class="tip-box"><div class="tip-box-title">💡 Max steps guard</div><p>Always set a maximum step limit. Without it, a buggy agent can loop forever, burning tokens and money.</p></div></div>
+        <nav class="lesson-nav">
+            <a href="agent-components.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Agent Components: LLM, Tools & Memory</div></a>
+            <a href="function-calling-basics.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Function Calling Basics</div></a>
+        </nav>
+    </div>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most comprehensive AI coding learning platform.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+            <li><a href="../../debugging/index.html">Debugging</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul>
+            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul>
+            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+        </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
+    </div></footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
+</body></html>

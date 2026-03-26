@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Mastery - AI Coding Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo">
+                <span class="logo-icon">⚡</span>
+                <span>AI Coding Academy</span>
+            </a>
+            <div class="nav-links">
+                <a href="../tutorials/index.html" class="nav-link">Tutorials</a>
+                <a href="../courses/index.html" class="nav-link active">Courses</a>
+                <a href="../debugging/index.html" class="nav-link">Debugging</a>
+                <a href="../projects/index.html" class="nav-link">Projects</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-ghost">Sign In</button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>/</span>
+                <a href="index.html">Courses</a>
+                <span>/</span>
+                <span>Gemini API</span>
+            </div>
+            <div class="course-hero-content">
+                <div class="course-hero-text">
+                    <div class="course-badge">
+                        <span class="badge-icon">🔵</span>
+                        <span>API Mastery Course</span>
+                    </div>
+                    <h1>Gemini API Complete Guide</h1>
+                    <p class="course-tagline">Master Google's Gemini API - from multimodal inputs to advanced generation, grounding, and production integration with Google Cloud.</p>
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📚</span>
+                            <span>7,800+ Lessons</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>160+ Hours</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🎯</span>
+                            <span>All Levels</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">🏆</span>
+                            <span>Certificate</span>
+                        </div>
+                    </div>
+                    <div class="course-actions">
+                        <button class="btn btn-primary btn-lg">Start Learning</button>
+                        <button class="btn btn-outline btn-lg">View Curriculum</button>
+                    </div>
+                </div>
+                <div class="course-hero-visual">
+                    <div class="code-preview">
+                        <div class="code-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="filename">gemini_example.py</span>
+                        </div>
+                        <pre class="code-content"><code><span class="keyword">import</span> google.generativeai <span class="keyword">as</span> genai
+
+genai.configure(api_key=<span class="string">"YOUR_API_KEY"</span>)
+
+model = genai.GenerativeModel(<span class="string">'gemini-pro'</span>)
+
+response = model.generate_content(
+    <span class="string">"Explain machine learning"</span>
+)
+
+<span class="keyword">print</span>(response.text)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Stats -->
+    <section class="course-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">7,800+</span>
+                    <span class="stat-label">Total Lessons</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">42</span>
+                    <span class="stat-label">Modules</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Hands-on Projects</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">750+</span>
+                    <span class="stat-label">Code Examples</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section class="course-outcomes">
+        <div class="container">
+            <h2 class="section-title">What You'll Learn</h2>
+            <div class="outcomes-grid">
+                <div class="outcome-card">
+                    <span class="outcome-icon">🎨</span>
+                    <h3>Multimodal Generation</h3>
+                    <p>Work with text, images, audio, and video using Gemini's powerful multimodal capabilities.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">🔗</span>
+                    <h3>Google Cloud Integration</h3>
+                    <p>Seamlessly integrate Gemini with Vertex AI, Cloud Functions, and Google Workspace.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">🌐</span>
+                    <h3>Grounding & Search</h3>
+                    <p>Ground responses with Google Search and custom data sources for accurate results.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">⚙️</span>
+                    <h3>Function Calling</h3>
+                    <p>Build powerful agentic applications with Gemini's function calling capabilities.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">📊</span>
+                    <h3>Structured Output</h3>
+                    <p>Generate structured JSON responses with schema enforcement and validation.</p>
+                </div>
+                <div class="outcome-card">
+                    <span class="outcome-icon">🚀</span>
+                    <h3>Production Scale</h3>
+                    <p>Deploy Gemini applications at scale with Vertex AI and enterprise features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Curriculum -->
+    <section class="course-curriculum">
+        <div class="container">
+            <h2 class="section-title">Course Curriculum</h2>
+            <p class="section-subtitle">42 comprehensive modules covering everything from basics to production</p>
+
+            <!-- Module 1: Getting Started -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">🎯</span>
+                    <div>
+                        <h3>Part 1: Getting Started</h3>
+                        <p>1,100+ lessons • Beginner friendly</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">01</span>
+                            <div>
+                                <h4>Introduction to Gemini</h4>
+                                <span class="module-meta">160 lessons • 3.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">What is Gemini? Understanding Google's AI</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">Gemini Model Family: Pro, Flash, and Ultra</span>
+                                <span class="lesson-duration">12 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Setting Up Google AI Studio</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Getting Your API Key</span>
+                                <span class="lesson-duration">8 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">🔧</span>
+                                <span class="lesson-title">Installing the Google AI SDK</span>
+                                <span class="lesson-duration">10 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 155 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">02</span>
+                            <div>
+                                <h4>Content Generation Basics</h4>
+                                <span class="module-meta">200 lessons • 4.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📖</span>
+                                <span class="lesson-title">Understanding generate_content()</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Generation Config Parameters</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Temperature and Top-K/Top-P</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 197 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">03</span>
+                            <div>
+                                <h4>Safety Settings & Filters</h4>
+                                <span class="module-meta">140 lessons • 3 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🛡️</span>
+                                <span class="lesson-title">Understanding Safety Categories</span>
+                                <span class="lesson-duration">12 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Configuring Safety Thresholds</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 138 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 2: Multimodal -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">🎨</span>
+                    <div>
+                        <h3>Part 2: Multimodal Capabilities</h3>
+                        <p>2,200+ lessons • Intermediate</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">04</span>
+                            <div>
+                                <h4>Vision & Image Understanding</h4>
+                                <span class="module-meta">350 lessons • 8 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📷</span>
+                                <span class="lesson-title">Image Input Methods</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Base64 vs File Upload vs URL</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Multi-Image Analysis</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 347 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">05</span>
+                            <div>
+                                <h4>Audio Processing</h4>
+                                <span class="module-meta">280 lessons • 6 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🎵</span>
+                                <span class="lesson-title">Audio Input Fundamentals</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Transcription with Gemini</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Audio Analysis & Understanding</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 277 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">06</span>
+                            <div>
+                                <h4>Video Understanding</h4>
+                                <span class="module-meta">320 lessons • 7 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🎬</span>
+                                <span class="lesson-title">Video Input Methods</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">YouTube Video Analysis</span>
+                                <span class="lesson-duration">22 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Frame-by-Frame Processing</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 317 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Advanced Features -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">⚙️</span>
+                    <div>
+                        <h3>Part 3: Advanced Features</h3>
+                        <p>2,400+ lessons • Advanced</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">07</span>
+                            <div>
+                                <h4>Function Calling</h4>
+                                <span class="module-meta">380 lessons • 8.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🔧</span>
+                                <span class="lesson-title">Function Declaration Syntax</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Handling Function Calls</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Parallel Function Execution</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 377 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">08</span>
+                            <div>
+                                <h4>Grounding with Search</h4>
+                                <span class="module-meta">300 lessons • 7 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🔍</span>
+                                <span class="lesson-title">Google Search Grounding</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Custom Data Grounding</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Citation Extraction</span>
+                                <span class="lesson-duration">18 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 297 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">09</span>
+                            <div>
+                                <h4>Structured Output & JSON</h4>
+                                <span class="module-meta">250 lessons • 5.5 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">📊</span>
+                                <span class="lesson-title">JSON Mode Basics</span>
+                                <span class="lesson-duration">15 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Schema Definition</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Complex Nested Schemas</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 247 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: Google Cloud -->
+            <div class="module-group">
+                <div class="module-group-header">
+                    <span class="module-group-icon">☁️</span>
+                    <div>
+                        <h3>Part 4: Google Cloud & Vertex AI</h3>
+                        <p>2,100+ lessons • Expert</p>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">10</span>
+                            <div>
+                                <h4>Vertex AI Integration</h4>
+                                <span class="module-meta">400 lessons • 9 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">☁️</span>
+                                <span class="lesson-title">Setting Up Vertex AI</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Service Account Authentication</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Vertex AI SDK Usage</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 397 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="module">
+                    <div class="module-header" data-accordion>
+                        <div class="module-info">
+                            <span class="module-number">11</span>
+                            <div>
+                                <h4>Enterprise Features</h4>
+                                <span class="module-meta">350 lessons • 8 hours</span>
+                            </div>
+                        </div>
+                        <span class="module-toggle">+</span>
+                    </div>
+                    <div class="module-content">
+                        <ul class="lesson-list">
+                            <li class="lesson">
+                                <span class="lesson-icon">🏢</span>
+                                <span class="lesson-title">VPC Service Controls</span>
+                                <span class="lesson-duration">30 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Customer-Managed Encryption</span>
+                                <span class="lesson-duration">25 min</span>
+                            </li>
+                            <li class="lesson">
+                                <span class="lesson-icon">💻</span>
+                                <span class="lesson-title">Audit Logging</span>
+                                <span class="lesson-duration">20 min</span>
+                            </li>
+                            <li class="lesson more-lessons">
+                                <span>+ 347 more lessons in this module</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="curriculum-footer">
+                <p>+ 30 more modules covering model tuning, embeddings, and specialized applications</p>
+                <button class="btn btn-outline">View Full Curriculum</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="course-projects">
+        <div class="container">
+            <h2 class="section-title">Hands-On Projects</h2>
+            <p class="section-subtitle">Build real applications as you learn</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-beginner">Beginner</span>
+                    </div>
+                    <h3>Image Describer</h3>
+                    <p>Build an app that describes images using Gemini Vision capabilities.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Vision API</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Video Summarizer</h3>
+                    <p>Create a tool that analyzes and summarizes YouTube videos.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Video API</span>
+                        <span>YouTube</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-intermediate">Intermediate</span>
+                    </div>
+                    <h3>Grounded Q&A Bot</h3>
+                    <p>Build a chatbot with Google Search grounding for accurate answers.</p>
+                    <div class="project-tech">
+                        <span>Grounding</span>
+                        <span>Search</span>
+                        <span>Streamlit</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Multi-Modal Assistant</h3>
+                    <p>Build an assistant that handles text, images, audio, and video.</p>
+                    <div class="project-tech">
+                        <span>Multimodal</span>
+                        <span>Functions</span>
+                        <span>FastAPI</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3>Data Extraction Pipeline</h3>
+                    <p>Extract structured data from documents, images, and PDFs.</p>
+                    <div class="project-tech">
+                        <span>Structured Output</span>
+                        <span>Vision</span>
+                        <span>JSON</span>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-level">
+                        <span class="level-badge badge-expert">Expert</span>
+                    </div>
+                    <h3>Enterprise AI Platform</h3>
+                    <p>Deploy a production Gemini system on Vertex AI with full observability.</p>
+                    <div class="project-tech">
+                        <span>Vertex AI</span>
+                        <span>Cloud Run</span>
+                        <span>Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Courses -->
+    <section class="related-courses">
+        <div class="container">
+            <h2 class="section-title">Continue Your Learning</h2>
+            <div class="related-grid">
+                <a href="openai.html" class="related-card">
+                    <span class="related-icon">🟢</span>
+                    <div>
+                        <h3>OpenAI API Mastery</h3>
+                        <p>12,500+ lessons</p>
+                    </div>
+                </a>
+                <a href="claude.html" class="related-card">
+                    <span class="related-icon">🟣</span>
+                    <div>
+                        <h3>Claude API Mastery</h3>
+                        <p>8,200+ lessons</p>
+                    </div>
+                </a>
+                <a href="rag.html" class="related-card">
+                    <span class="related-icon">🔍</span>
+                    <div>
+                        <h3>RAG Systems</h3>
+                        <p>18,000+ lessons</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="footer-logo">
+                        <span class="logo-icon">⚡</span>
+                        <span>AI Coding Academy</span>
+                    </a>
+                    <p>Master AI development with 100,000+ tutorials, hands-on projects, and expert guidance.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Learning</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">All Tutorials</a></li>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://www.myrqai.com" target="_blank">Documentation</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">API Reference</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Community</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="https://www.myrqai.com" target="_blank">About</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Careers</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Contact</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 AI Coding Academy. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="https://www.myrqai.com" target="_blank">Privacy Policy</a>
+                    <a href="https://www.myrqai.com" target="_blank">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

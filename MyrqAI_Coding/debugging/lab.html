@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging Lab: 10 Real-World Broken Code Examples | AI Coding Academy</title>
+    <meta name="description" content="10 real broken AI code examples with complete solutions: infinite loops, async bugs, context overflow, race conditions, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box,.warn-box,.info-box,.error-example,.fix-example{border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25)}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25)}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25)}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .error-example{background:#1a0a0a;border:1px solid rgba(239,68,68,.3)}
+        .error-example-title{font-family:var(--font-heading);color:#ef4444;font-weight:600;margin-bottom:var(--space-sm)}
+        .fix-example{background:#0a1a0a;border:1px solid rgba(34,197,94,.3)}
+        .fix-example-title{font-family:var(--font-heading);color:#22c55e;font-weight:600;margin-bottom:var(--space-sm)}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+            <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <div class="breadcrumb"><a href="../index.html">Home</a><span class="separator">/</span><a href="index.html">Debugging</a><span class="separator">/</span><span>Debugging Lab</span></div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-intermediate">Intermediate</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 90 min</span>
+            </div>
+            <h1 class="lesson-title">Debugging Lab: 10 Real-World Broken Code Examples</h1>
+            <p class="lesson-description">10 real broken AI code examples with complete solutions: infinite loops, async bugs, context overflow, race conditions, and more.</p>
+        </header>
+<div class="lesson-content"><h2>The Debugging Lab</h2><p>10 real broken AI code examples from common developer mistakes. Each shows the broken code, the exact error message, why it fails, and the correct fix. Work through them in order - they get progressively harder.</p><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);margin:var(--space-lg) 0"><a href="#lab1" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 1</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Infinite token loop</span></a><a href="#lab2" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 2</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Context window overflow</span></a><a href="#lab3" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 3</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Race condition in async</span></a><a href="#lab4" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 4</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Embedding model mismatch</span></a><a href="#lab5" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 5</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Tool result not serializable</span></a><a href="#lab6" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 6</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Missing await in stream</span></a><a href="#lab7" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 7</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Hallucinated function args</span></a><a href="#lab8" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 8</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Memory leak in chat</span></a><a href="#lab9" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 9</span><br><span style="font-size:.85rem;color:var(--text-secondary)">Rate limit cascade failure</span></a><a href="#lab10" style="background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-md);text-decoration:none"><span style="color:var(--accent-primary);font-family:var(--font-mono);font-weight:700">Lab 10</span><br><span style="font-size:.85rem;color:var(--text-secondary)">JSON parsing streaming output</span></a></div><h2 id="lab1">Lab 1: Infinite Token Generation Loop</h2><p><strong>Symptom:</strong> API calls never stop, token bill skyrockets, app hangs indefinitely.</p><div class="error-example"><div class="error-example-title">❌ Broken - infinite loop that never terminates</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">generate_until_done</span>(prompt: str) -> str:
+    result = <span class="st">""</span>
+    <span class="kw">while True</span>:  <span class="cm"># no exit condition!</span>
+        resp = client.chat.completions.create(
+            model=<span class="st">"gpt-4o-mini"</span>,
+            messages=[{"role":"user","content":prompt + result}]
+        )
+        chunk = resp.choices[0].message.content
+        result += chunk
+        <span class="kw">if</span> resp.choices[0].finish_reason == <span class="st">"stop"</span>:
+            <span class="kw">break</span>  <span class="cm"># BUG: always True on single call, never actually loops!</span>
+    <span class="kw">return</span> result  <span class="cm"># but if you remove break, it loops forever</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Use max_tokens as a hard limit - no loop needed</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">generate</span>(prompt: str, max_tokens: int = <span class="nu">2048</span>) -> str:
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,
+        messages=[{"role":"user","content":prompt}],
+        max_tokens=max_tokens  <span class="cm"># hard limit always</span>
+    )
+    <span class="kw">return</span> resp.choices[0].message.content</pre></div></div><h2 id="lab2">Lab 2: Context Window Overflow</h2><p><strong>Symptom:</strong> <code>openai.BadRequestError: This model maximum context length is 128000 tokens. Your messages resulted in 145231 tokens.</code></p><div class="error-example"><div class="error-example-title">❌ Broken - chat history grows forever</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">class</span> <span class="cl">ChatBot</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self):
+        self.history = []  <span class="cm"># grows forever, never trimmed!</span>
+
+    <span class="kw">def</span> <span class="fn">chat</span>(self, msg: str) -> str:
+        self.history.append({"role":"user","content":msg})
+        resp = client.chat.completions.create(
+            model=<span class="st">"gpt-4o-mini"</span>, messages=self.history
+        )
+        answer = resp.choices[0].message.content
+        self.history.append({"role":"assistant","content":answer})
+        <span class="kw">return</span> answer  <span class="cm"># crashes after ~100 long messages</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Sliding window with token counting</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> tiktoken
+
+<span class="kw">class</span> <span class="cl">ChatBot</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, max_tokens: int = <span class="nu">80_000</span>):
+        self.history = []
+        self.max_tokens = max_tokens
+        self.enc = tiktoken.encoding_for_model(<span class="st">"gpt-4o-mini"</span>)
+
+    <span class="kw">def</span> <span class="fn">_trim</span>(self):
+        <span class="kw">while</span> len(self.history) > <span class="nu">2</span>:
+            tokens = sum(len(self.enc.encode(str(m))) <span class="kw">for</span> m <span class="kw">in</span> self.history)
+            <span class="kw">if</span> tokens <= self.max_tokens: <span class="kw">break</span>
+            self.history.pop(<span class="nu">0</span>)  <span class="cm"># remove oldest message</span>
+
+    <span class="kw">def</span> <span class="fn">chat</span>(self, msg: str) -> str:
+        self.history.append({"role":"user","content":msg})
+        self._trim()
+        resp = client.chat.completions.create(
+            model=<span class="st">"gpt-4o-mini"</span>, messages=self.history
+        )
+        answer = resp.choices[0].message.content
+        self.history.append({"role":"assistant","content":answer})
+        <span class="kw">return</span> answer</pre></div></div><h2 id="lab3">Lab 3: Race Condition in Async Agent</h2><p><strong>Symptom:</strong> Non-deterministic results. Tool results get applied to the wrong requests. Output is garbled under concurrent load.</p><div class="error-example"><div class="error-example-title">❌ Broken - shared mutable state across coroutines</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: all concurrent requests share the same messages list</span>
+messages = [{"role":"system","content":"You are helpful."}]
+
+<span class="kw">async def</span> <span class="fn">handle</span>(user_msg: str) -> str:
+    messages.append({"role":"user","content":user_msg})  <span class="cm"># RACE!</span>
+    resp = <span class="kw">await</span> async_client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>, messages=messages
+    )
+    answer = resp.choices[0].message.content
+    messages.append({"role":"assistant","content":answer})  <span class="cm"># RACE!</span>
+    <span class="kw">return</span> answer
+
+<span class="cm"># Two concurrent requests will corrupt each other history</span>
+<span class="kw">await</span> asyncio.gather(handle(<span class="st">"Hello"</span>), handle(<span class="st">"Hi"</span>))</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Isolated state per request - never share mutable state</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">async def</span> <span class="fn">handle</span>(user_msg: str) -> str:
+    <span class="cm"># Each call gets its OWN private messages list</span>
+    local_messages = [
+        {"role":"system","content":"You are helpful."},
+        {"role":"user","content":user_msg}
+    ]
+    resp = <span class="kw">await</span> async_client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>, messages=local_messages
+    )
+    <span class="kw">return</span> resp.choices[0].message.content</pre></div></div><h2 id="lab4">Lab 4: Embedding Model Mismatch</h2><p><strong>Symptom:</strong> RAG returns irrelevant results, or a dimension mismatch error when loading a saved vector store.</p><div class="error-example"><div class="error-example-title">❌ Broken - different models for indexing vs querying</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Documents indexed with large model (3072 dims)</span>
+vs = FAISS.from_documents(docs, OpenAIEmbeddings(model=<span class="st">"text-embedding-3-large"</span>))
+vs.save_local(<span class="st">"./index"</span>)
+
+<span class="cm"># Query with different model (1536 dims) - DIMENSION MISMATCH!</span>
+vs = FAISS.load_local(<span class="st">"./index"</span>,
+    OpenAIEmbeddings(model=<span class="st">"text-embedding-ada-002"</span>),  <span class="cm"># WRONG!</span>
+    allow_dangerous_deserialization=<span class="kw">True</span>)
+results = vs.similarity_search(<span class="st">"query"</span>)  <span class="cm"># error or garbage results</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Save model name in metadata, assert on load</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre>EMBED_MODEL = <span class="st">"text-embedding-3-small"</span>  <span class="cm"># one model, used everywhere</span>
+embeddings = OpenAIEmbeddings(model=EMBED_MODEL)
+
+<span class="cm"># Save</span>
+vs = FAISS.from_documents(docs, embeddings)
+vs.save_local(<span class="st">"./index"</span>)
+Path(<span class="st">"./index/meta.json"</span>).write_text(json.dumps({"model": EMBED_MODEL}))
+
+<span class="cm"># Load with assertion</span>
+meta = json.loads(Path(<span class="st">"./index/meta.json"</span>).read_text())
+assert meta["model"] == EMBED_MODEL, f"Model mismatch: {meta['model']}"
+vs = FAISS.load_local(<span class="st">"./index"</span>, embeddings, allow_dangerous_deserialization=<span class="kw">True</span>)</pre></div></div><h2 id="lab5">Lab 5: Tool Result Not JSON-Serializable</h2><p><strong>Symptom:</strong> <code>TypeError: Object of type datetime is not JSON serializable</code> when passing tool results back to the model.</p><div class="error-example"><div class="error-example-title">❌ Broken - returning non-serializable types from tools</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> datetime <span class="kw">import</span> datetime
+<span class="kw">from</span> decimal <span class="kw">import</span> Decimal
+
+<span class="kw">def</span> <span class="fn">get_order</span>(order_id: str) -> dict:
+    <span class="kw">return</span> {
+        "id": order_id,
+        "created_at": datetime.now(),   <span class="cm"># NOT serializable!</span>
+        "amount": Decimal("49.99"),      <span class="cm"># NOT serializable!</span>
+    }
+
+result = get_order(<span class="st">"ORD-123"</span>)
+json.dumps(result)  <span class="cm"># TypeError crash!</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Return only JSON-safe types from tools</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">get_order</span>(order_id: str) -> dict:
+    <span class="kw">return</span> {
+        "id": order_id,
+        "created_at": datetime.now().isoformat(),  <span class="cm"># str</span>
+        "amount": float(Decimal(<span class="st">"49.99"</span>)),           <span class="cm"># float</span>
+    }
+
+<span class="cm"># Universal safe serializer for any tool result</span>
+<span class="kw">def</span> <span class="fn">safe_json</span>(obj) -> str:
+    <span class="kw">def</span> <span class="fn">default</span>(o):
+        <span class="kw">if isinstance</span>(o, datetime): <span class="kw">return</span> o.isoformat()
+        <span class="kw">if isinstance</span>(o, Decimal): <span class="kw">return</span> float(o)
+        <span class="kw">return</span> str(o)
+    <span class="kw">return</span> json.dumps(obj, default=default)</pre></div></div><h2 id="lab6">Lab 6: Missing await in Streaming</h2><p><strong>Symptom:</strong> <code>TypeError: 'coroutine' object is not an async iterable</code></p><div class="error-example"><div class="error-example-title">❌ Broken - missing await before iterating stream</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">async def</span> <span class="fn">stream</span>(prompt: str):
+    stream = async_client.chat.completions.create(  <span class="cm"># missing await!</span>
+        model=<span class="st">"gpt-4o"</span>,
+        messages=[{"role":"user","content":prompt}],
+        stream=<span class="kw">True</span>
+    )
+    <span class="kw">async for</span> chunk <span class="kw">in</span> stream:  <span class="cm"># TypeError: coroutine is not async iterable</span>
+        <span class="kw">yield</span> chunk.choices[0].delta.content</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Use the .stream() context manager which handles await internally</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">async def</span> <span class="fn">stream</span>(prompt: str):
+    <span class="kw">async with</span> async_client.chat.completions.stream(
+        model=<span class="st">"gpt-4o"</span>,
+        messages=[{"role":"user","content":prompt}]
+    ) <span class="kw">as</span> s:
+        <span class="kw">async for</span> event <span class="kw">in</span> s:
+            <span class="kw">if</span> event.choices <span class="kw">and</span> event.choices[0].delta.content:
+                <span class="kw">yield</span> event.choices[0].delta.content</pre></div></div><h2 id="lab7">Lab 7: Agent Hallucinates Function Arguments</h2><p><strong>Symptom:</strong> <code>KeyError</code> or <code>TypeError</code> when executing a tool - the LLM invented argument names that do not exist in the schema.</p><div class="error-example"><div class="error-example-title">❌ Broken - trusting LLM arguments blindly</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">execute_tool</span>(tool_call):
+    args = json.loads(tool_call.function.arguments)
+    fn = TOOLS[tool_call.function.name]
+    <span class="kw">return</span> fn(**args)  <span class="cm"># KeyError if LLM invented wrong arg name</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Validate arguments against the schema before executing</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> jsonschema <span class="kw">import</span> validate, ValidationError
+
+<span class="kw">def</span> <span class="fn">execute_tool</span>(tool_call) -> dict:
+    name = tool_call.function.name
+    <span class="kw">try</span>:
+        args = json.loads(tool_call.function.arguments)
+    <span class="kw">except</span> json.JSONDecodeError <span class="kw">as</span> e:
+        <span class="kw">return</span> {"error": f"Invalid JSON args: {e}"}
+    <span class="kw">try</span>:
+        validate(args, TOOL_SCHEMAS[name])
+    <span class="kw">except</span> ValidationError <span class="kw">as</span> e:
+        <span class="kw">return</span> {"error": f"Invalid args for {name}: {e.message}"}
+    fn = TOOLS.get(name)
+    <span class="kw">if not</span> fn: <span class="kw">return</span> {"error": f"Unknown tool: {name}"}
+    <span class="kw">try</span>:
+        <span class="kw">return</span> fn(**args)
+    <span class="kw">except Exception</span> <span class="kw">as</span> e:
+        <span class="kw">return</span> {"error": str(e)}</pre></div></div><h2 id="lab8">Lab 8: Memory Leak in Chat Session Store</h2><p><strong>Symptom:</strong> Server RAM grows unbounded over hours, eventually getting OOM-killed by the OS.</p><div class="error-example"><div class="error-example-title">❌ Broken - global dict that never cleans up old sessions</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: grows forever as users come and go</span>
+sessions: dict[str, list] = {}  <span class="cm"># never evicted!</span>
+
+<span class="kw">def</span> <span class="fn">get_session</span>(session_id: str) -> list:
+    <span class="kw">if</span> session_id <span class="kw">not in</span> sessions:
+        sessions[session_id] = []
+    <span class="kw">return</span> sessions[session_id]</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ TTL cache with automatic expiry</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> cachetools <span class="kw">import</span> TTLCache
+<span class="kw">from</span> threading <span class="kw">import</span> Lock
+
+<span class="cm"># Max 1000 sessions, each expires after 30 minutes of inactivity</span>
+sessions = TTLCache(maxsize=<span class="nu">1000</span>, ttl=<span class="nu">1800</span>)
+lock = Lock()
+
+<span class="kw">def</span> <span class="fn">get_session</span>(session_id: str) -> list:
+    <span class="kw">with</span> lock:
+        <span class="kw">if</span> session_id <span class="kw">not in</span> sessions:
+            sessions[session_id] = []
+        <span class="kw">return</span> sessions[session_id]
+
+<span class="cm"># Monitor in production</span>
+<span class="kw">def</span> <span class="fn">session_stats</span>():
+    <span class="kw">return</span> {"active": len(sessions), "max": sessions.maxsize, "ttl": sessions.ttl}</pre></div></div><h2 id="lab9">Lab 9: Rate Limit Cascade Failure</h2><p><strong>Symptom:</strong> One slow period triggers retries. The retry burst makes the rate limit worse. A death spiral consumes all retries and fails permanently.</p><div class="error-example"><div class="error-example-title">❌ Broken - fixed retry delay causes thundering herd</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> time
+
+<span class="kw">def</span> <span class="fn">call_api</span>(prompt):
+    <span class="kw">for</span> attempt <span class="kw">in</span> range(<span class="nu">5</span>):
+        <span class="kw">try</span>:
+            resp = client.chat.completions.create(...)
+            <span class="kw">return</span> resp.choices[0].message.content
+        <span class="kw">except</span> RateLimitError:
+            time.sleep(<span class="nu">1</span>)  <span class="cm"># all threads wake at the same moment = thundering herd</span>
+    <span class="kw">raise</span> Exception(<span class="st">"Failed after 5 attempts"</span>)</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Exponential backoff with random jitter plus circuit breaker</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> time, random
+<span class="kw">from</span> openai <span class="kw">import</span> RateLimitError
+
+<span class="kw">def</span> <span class="fn">call_with_backoff</span>(fn, max_retries=<span class="nu">5</span>):
+    <span class="kw">for</span> attempt <span class="kw">in</span> range(max_retries):
+        <span class="kw">try</span>:
+            <span class="kw">return</span> fn()
+        <span class="kw">except</span> RateLimitError:
+            base = 2 ** attempt
+            jitter = random.uniform(<span class="nu">0</span>, <span class="nu">1</span>)  <span class="cm"># prevents synchronized retries</span>
+            delay = min(base + jitter, <span class="nu">60</span>)    <span class="cm"># cap at 60s</span>
+            print(f"Rate limited. Waiting {delay:.1f}s (attempt {attempt+1})")
+            time.sleep(delay)
+    <span class="kw">raise</span> Exception(<span class="st">"Max retries exceeded"</span>)
+
+<span class="cm"># Usage</span>
+result = call_with_backoff(<span class="kw">lambda</span>: client.chat.completions.create(
+    model=<span class="st">"gpt-4o-mini"</span>, messages=[{"role":"user","content":"hello"}]
+))</pre></div></div><h2 id="lab10">Lab 10: JSON Parsing on Streaming Output</h2><p><strong>Symptom:</strong> <code>json.JSONDecodeError: Expecting value</code> when parsing LLM output as JSON during streaming - because you are parsing incomplete chunks.</p><div class="error-example"><div class="error-example-title">❌ Broken - parsing each chunk as complete JSON</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> json
+
+<span class="cm"># WRONG: streaming chunks are fragments like "{", "\"name\":", "Alice"</span>
+<span class="kw">with</span> client.chat.completions.stream(
+    model=<span class="st">"gpt-4o"</span>,
+    messages=[{"role":"user","content":"Return JSON: {name: Alice, age: 30}"}]
+) <span class="kw">as</span> stream:
+    <span class="kw">for</span> event <span class="kw">in</span> stream:
+        chunk = event.choices[0].delta.content
+        <span class="kw">if</span> chunk:
+            data = json.loads(chunk)  <span class="cm"># JSONDecodeError every time!</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Collect the full stream, then parse - display live meanwhile</div><div class="code-block"><div class="code-block-label"><span>Python</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> json
+
+full_text = <span class="st">""</span>
+<span class="kw">with</span> client.chat.completions.stream(
+    model=<span class="st">"gpt-4o"</span>,
+    messages=[{"role":"user","content":"Return JSON: {name: Alice, age: 30}"}],
+    response_format={"type":"json_object"}  <span class="cm"># enforce JSON output</span>
+) <span class="kw">as</span> stream:
+    <span class="kw">for</span> event <span class="kw">in</span> stream:
+        chunk = event.choices[0].delta.content <span class="kw">or</span> <span class="st">""</span>
+        full_text += chunk
+        print(chunk, end=<span class="st">""</span>, flush=<span class="kw">True</span>)  <span class="cm"># show live</span>
+
+<span class="cm"># Parse AFTER stream completes</span>
+data = json.loads(full_text)
+print(f"\nParsed: name={data['name']}, age={data['age']}") </pre></div></div></div>
+        <nav class="lesson-nav">
+            <a href="data.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Data Processing Errors</div></a>
+            <a href="index.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Debugging Home</div></a>
+        </nav>
+    </div>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+        <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
+</body></html>

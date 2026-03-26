@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner Tutorials | 25,000+ Lessons | AI Coding Academy</title>
+    <meta name="description" content="Start your AI coding journey from zero. 25,000+ beginner tutorials with step-by-step instructions and working code.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .level-hero {
+            padding: calc(140px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            text-align: center;
+            background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
+            border-bottom: 3px solid var(--level-beginner);
+        }
+        .level-hero .icon { font-size: 4rem; margin-bottom: var(--space-lg); }
+        .level-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: var(--space-md); }
+        .level-hero h1 span { color: var(--level-beginner); }
+        .level-hero p { color: var(--text-secondary); font-size: 1.2rem; max-width: 700px; margin: 0 auto var(--space-xl); }
+        .level-stats { display: flex; justify-content: center; gap: var(--space-3xl); flex-wrap: wrap; }
+        .level-stat { text-align: center; }
+        .level-stat-value { font-family: var(--font-mono); font-size: 2rem; color: var(--level-beginner); }
+        .level-stat-label { font-size: 0.9rem; color: var(--text-muted); }
+        .tutorials-section { padding: var(--space-4xl) var(--space-xl); }
+        .tutorials-container { max-width: 1440px; margin: 0 auto; }
+        .path-intro {
+            background: var(--bg-card);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-4xl);
+        }
+        .path-intro h2 { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: var(--space-md); color: var(--level-beginner); }
+        .path-intro p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
+        .path-intro ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-sm); }
+        .path-intro li { font-size: 0.9rem; color: var(--text-secondary); display: flex; align-items: center; gap: var(--space-sm); }
+        .path-intro li::before { content: '✓'; color: var(--level-beginner); font-weight: bold; }
+        .category-section { margin-bottom: var(--space-4xl); }
+        .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); }
+        .category-header h2 { font-family: var(--font-heading); font-size: 1.5rem; }
+        .tutorials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+        .tutorial-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: var(--transition-base);
+            text-decoration: none;
+            display: block;
+        }
+        .tutorial-card:hover { transform: translateY(-5px); border-color: rgba(34, 197, 94, 0.3); box-shadow: 0 10px 30px rgba(34, 197, 94, 0.1); }
+        .tutorial-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-md); }
+        .tutorial-card-icon { font-size: 2rem; }
+        .tutorial-card h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-primary); margin-bottom: var(--space-sm); line-height: 1.4; }
+        .tutorial-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: var(--space-md); line-height: 1.6; }
+        .tutorial-card-meta { display: flex; gap: var(--space-md); flex-wrap: wrap; font-size: 0.8rem; }
+        .tutorial-card-meta span { display: flex; align-items: center; gap: var(--space-xs); color: var(--text-muted); }
+        .tutorial-card-meta .time { color: var(--level-beginner); }
+        .next-level {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+        }
+        .next-level h2 { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: var(--space-md); }
+        .next-level p { color: var(--text-secondary); margin-bottom: var(--space-lg); }
+        @media (max-width: 1200px) { .tutorials-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) { .tutorials-grid { grid-template-columns: 1fr; } .path-intro ul { grid-template-columns: 1fr; } }
+    </style>
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="level-hero">
+        <div class="breadcrumb" style="padding-top: 0; justify-content: center;">
+            <a href="../index.html">Home</a>
+            <span class="separator">/</span>
+            <a href="index.html">Tutorials</a>
+            <span class="separator">/</span>
+            <span>Beginner</span>
+        </div>
+        <div class="icon">🌱</div>
+        <h1><span>Beginner</span> Tutorials</h1>
+        <p>Start from absolute zero. No coding experience required. We'll guide you step-by-step from "What is an API?" to building your first AI application.</p>
+        <div class="level-stats">
+            <div class="level-stat"><div class="level-stat-value">25,000+</div><div class="level-stat-label">Tutorials</div></div>
+            <div class="level-stat"><div class="level-stat-value">150+</div><div class="level-stat-label">Projects</div></div>
+            <div class="level-stat"><div class="level-stat-value">Free</div><div class="level-stat-label">Access</div></div>
+        </div>
+    </section>
+
+    <div class="ad-container ad-container-horizontal">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8668540803235423"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+    <section class="tutorials-section">
+        <div class="tutorials-container">
+            
+            <div class="path-intro reveal">
+                <h2>🎯 What You'll Learn at Beginner Level</h2>
+                <p>Our beginner tutorials assume zero prior experience. We explain everything from the ground up - what APIs are, how to set up Python, what AI models do, and how to write your first lines of code that interact with AI systems.</p>
+                <ul>
+                    <li>Python programming basics for AI</li>
+                    <li>Understanding APIs and how they work</li>
+                    <li>Setting up your development environment</li>
+                    <li>API key management and security</li>
+                    <li>Making your first AI API calls</li>
+                    <li>Understanding tokens and pricing</li>
+                    <li>Building simple chatbots</li>
+                    <li>Error handling basics</li>
+                </ul>
+            </div>
+
+            <!-- Start Here -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>🚀 Start Here (Recommended Order)</h2>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">1️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>What is AI and How Does it Work?</h3>
+                        <p>Understand the basics of AI, machine learning, and large language models in plain English.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            <span>📚 Concepts</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">2️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Setting Up Python for AI Development</h3>
+                        <p>Install Python, pip, create virtual environments, and get your system ready for AI coding.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            <span>📚 Setup</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">3️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Understanding APIs: The Basics</h3>
+                        <p>What is an API? How do you use one? A complete beginner's guide with real examples.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            <span>📚 Concepts</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">4️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Getting Your First API Key</h3>
+                        <p>Create accounts with OpenAI, Anthropic, and Google. Set up API keys securely.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 10 min</span>
+                            <span>📚 Setup</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">5️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Your First AI API Call</h3>
+                        <p>Write your first Python code that talks to an AI. Send a message, get a response!</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            <span>📚 OpenAI</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">6️⃣</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Build a Simple Chatbot</h3>
+                        <p>Create a working chatbot with conversation history. Your first real AI project!</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 30 min</span>
+                            <span>📚 Project</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Python Basics -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>🐍 Python Basics for AI</h2>
+                    <a href="../tutorials/index.html" style="color: var(--accent-primary); font-size: 0.9rem;">View all tutorials →</a>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📝</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Variables and Data Types</h3>
+                        <p>Strings, integers, floats, lists, and dictionaries - the building blocks of Python.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🔄</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Functions in Python</h3>
+                        <p>Write reusable code with functions. Essential for working with AI APIs.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 25 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📦</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Working with JSON</h3>
+                        <p>AI APIs use JSON. Learn to parse, create, and manipulate JSON data.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- OpenAI Beginner -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>🤖 OpenAI API Basics</h2>
+                    <a href="../courses/openai.html" style="color: var(--accent-primary); font-size: 0.9rem;">View all 3,200+ tutorials →</a>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">💬</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Chat Completions 101</h3>
+                        <p>Understand the Chat Completions API - the foundation of OpenAI interactions.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🎭</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>System, User, and Assistant Roles</h3>
+                        <p>Learn the message structure and how to use different roles effectively.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🎚️</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Temperature and Other Parameters</h3>
+                        <p>Control AI creativity and responses with temperature, top_p, and more.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🔢</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Understanding Tokens & Pricing</h3>
+                        <p>Learn how tokens work, estimate costs, and optimize your API spending.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🧠</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>GPT-4o vs GPT-4o-mini: Which to Use</h3>
+                        <p>Compare models, understand tradeoffs, and choose the right model for your task.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">⚠️</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Handling API Errors Gracefully</h3>
+                        <p>Try/catch patterns, error types, and building robust API interactions.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 25 min</span>
+                            </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Claude API Beginner -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>🧠 Claude API Basics</h2>
+                    <a href="../courses/claude.html" style="color: var(--accent-primary); font-size: 0.9rem;">View all 2,100+ tutorials →</a>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🚀</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Your First Claude API Call</h3>
+                        <p>Get started with Anthropic's Claude API - setup, authentication, and your first message.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📝</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Claude Message Format</h3>
+                        <p>Understand the Messages API structure - roles, content types, and best practices.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🎯</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>System Prompts in Claude</h3>
+                        <p>Write effective system prompts to shape Claude's behavior and responses.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">⚡</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Claude 3.5 Sonnet vs Haiku</h3>
+                        <p>Choose between Claude models based on speed, cost, and capability needs.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">💰</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Claude Pricing & Token Limits</h3>
+                        <p>Understand input/output tokens, context windows, and cost optimization.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🔧</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Max Tokens & Stop Sequences</h3>
+                        <p>Control response length and define stopping points for Claude's output.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gemini API Beginner -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>✨ Gemini API Basics</h2>
+                    <a href="../courses/gemini.html" style="color: var(--accent-primary); font-size: 0.9rem;">View all 1,900+ tutorials →</a>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🌟</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Getting Started with Gemini API</h3>
+                        <p>Set up Google AI Studio, get your API key, and make your first Gemini call.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 20 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📤</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Gemini generateContent Method</h3>
+                        <p>Learn the core content generation method and its parameters.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🖼️</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Multimodal Basics: Text + Images</h3>
+                        <p>Send images to Gemini and get text descriptions - your first multimodal app.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 25 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🆓</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Gemini Free Tier Explained</h3>
+                        <p>Understand rate limits, quotas, and how to maximize your free usage.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 10 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">⚙️</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Gemini Safety Settings</h3>
+                        <p>Configure content safety filters and understand Gemini's moderation system.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🤖</div>
+                            <span class="badge badge-beginner">Beginner</span>
+                        </div>
+                        <h3>Gemini 1.5 Pro vs Flash</h3>
+                        <p>Compare Google's flagship models for speed, quality, and cost.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 15 min</span>
+                            </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Simple Projects -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h2>🛠️ Beginner Projects</h2>
+                    <a href="../projects/index.html" style="color: var(--accent-primary); font-size: 0.9rem;">View all 150+ projects →</a>
+                </div>
+                <div class="tutorials-grid">
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">💬</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Build a CLI Chatbot</h3>
+                        <p>Create a terminal-based chatbot with conversation history using any API.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 45 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📧</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Email Subject Generator</h3>
+                        <p>Generate catchy email subject lines from body text using AI.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 30 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">✍️</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Text Summarizer</h3>
+                        <p>Build a tool that summarizes long articles into key points.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 35 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🌐</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Simple Translation App</h3>
+                        <p>Translate text between languages with automatic language detection.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 40 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-1">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">📝</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Grammar Checker</h3>
+                        <p>Build a tool that checks and corrects grammar in text.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 30 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                    <a href="../tutorials/index.html" class="tutorial-card reveal reveal-delay-2">
+                        <div class="tutorial-card-header">
+                            <div class="tutorial-card-icon">🎯</div>
+                            <span class="badge badge-beginner">Project</span>
+                        </div>
+                        <h3>Sentiment Analyzer</h3>
+                        <p>Analyze text for positive, negative, or neutral sentiment.</p>
+                        <div class="tutorial-card-meta">
+                            <span class="time">⏱️ 35 min</span>
+                            <span>📁 Full code</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Next Level -->
+            <div class="next-level reveal">
+                <h2>Ready for More? 📈</h2>
+                <p>Once you've mastered the basics, level up to Intermediate tutorials where you'll learn streaming, function calling, and building real applications.</p>
+                <a href="intermediate.html" class="btn btn-primary btn-lg">Continue to Intermediate →</a>
+            </div>
+
+        </div>
+    </section>
+    <div class="ad-container ad-container-horizontal">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8668540803235423"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>The most comprehensive AI coding learning platform. 100,000+ tutorials from beginner to expert.</p>
+                    <div style="margin-top: var(--space-md);">
+                        <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary); font-size: 0.85rem;">Part of MYRQAI Network →</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">All Tutorials</a></li>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Topics</h4>
+                    <ul>
+                        <li><a href="../courses/openai.html">OpenAI API</a></li>
+                        <li><a href="../courses/claude.html">Claude API</a></li>
+                        <li><a href="../courses/langchain.html">LangChain</a></li>
+                        <li><a href="../courses/rag.html">RAG Systems</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>MYRQAI Network</h4>
+                    <ul>
+                        <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+                        <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+                        <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+                        <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/terms" target="_blank">Terms</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/contact" target="_blank">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

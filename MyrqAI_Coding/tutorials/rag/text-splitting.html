@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Text Splitting — Chunk Size, Overlap & Strategies | AI Coding Academy</title>
+    <meta name="description" content="Master text splitting for RAG: recursive, semantic, token-based, and code-aware splitting.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
+        .lesson-header { margin-bottom: var(--space-3xl); }
+        .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
+        .lesson-meta-item { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.9rem; color: var(--text-muted); }
+        .lesson-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-lg); line-height: 1.2; }
+        .lesson-description { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
+        .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
+        .lesson-content h2:first-child { margin-top: 0; }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); color: var(--accent-secondary); }
+        .lesson-content h4 { font-family: var(--font-heading); font-size: 1rem; margin: var(--space-lg) 0 var(--space-sm); color: var(--text-primary); }
+        .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
+        .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
+        .lesson-content li { margin-bottom: var(--space-sm); }
+        .lesson-content code { background: rgba(0,255,170,0.1); color: var(--accent-primary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; position: relative; }
+        .code-block-label { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: var(--space-sm); display: flex; justify-content: space-between; align-items: center; }
+        .code-block-label .copy-btn { cursor: pointer; color: var(--accent-primary); border: 1px solid var(--accent-primary); background: transparent; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.65; color: #e6edf3; white-space: pre; }
+        .cm { color: #8b949e; }  /* comment */
+        .kw { color: #ff7b72; }  /* keyword */
+        .st { color: #a5d6ff; }  /* string */
+        .fn { color: #d2a8ff; }  /* function */
+        .nu { color: #79c0ff; }  /* number */
+        .cl { color: #ffa657; }  /* class */
+        .op { color: #ff7b72; }  /* operator */
+        .tip-box { background: rgba(0, 255, 170, 0.08); border: 1px solid rgba(0, 255, 170, 0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
+        .warn-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .warn-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-warning); margin-bottom: var(--space-sm); }
+        .info-box { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .info-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .tip-box p, .warn-box p, .info-box p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+        .toc { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-xl); margin-bottom: var(--space-2xl); }
+        .toc h3 { font-family: var(--font-heading); color: var(--accent-primary); margin-bottom: var(--space-md); }
+        .toc ol { padding-left: var(--space-xl); color: var(--text-secondary); }
+        .toc li { margin-bottom: var(--space-xs); }
+        .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        .toc a:hover { color: var(--accent-primary); }
+        .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
+        .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
+        .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+        .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
+        .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
+        .lesson-nav .next { text-align: right; }
+        .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-lg) 0; }
+        .example-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--radius-md); padding: var(--space-lg); }
+        .example-card h4 { color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
+    </style>
+</head><body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+    <div class="lesson-container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a><span class="separator">/</span>
+            <a href="../index.html">Tutorials</a><span class="separator">/</span>
+            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+            <span>Text Splitting</span>
+        </div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-intermediate">Intermediate</span>
+                <span class="lesson-meta-item">⏱️ 25 min</span>
+            </div>
+            <h1 class="lesson-title">Text Splitting Strategies</h1>
+            <p class="lesson-description">Choose the right splitting strategy for your RAG pipeline: recursive, character, semantic, token-aware, and code-specific splitters.</p>
+        </header>
+        <div class="lesson-content">
+            <h2>Why Splitting Matters</h2>
+            <p>If chunks are too large → they use too many context tokens and contain irrelevant text. Too small → they lose context and meaning. The right chunk size for your use case is the single biggest factor in RAG quality.</p>
+<div class="tip-box"><div class="tip-box-title">💡 Rule of Thumb</div><p>Start with chunk_size=1000, chunk_overlap=200. For technical docs, smaller (500/100) works better. For narrative text, larger (1500/300) preserves more context.</p></div>
+            <h2>RecursiveCharacterTextSplitter</h2>
+            <p>The go-to splitter. Tries to split on paragraphs → sentences → words → characters in that order, keeping chunks as semantically intact as possible.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — recursive text splitting</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=<span class="nu">1000</span>,        <span class="cm"># target chunk size in characters</span>
+    chunk_overlap=<span class="nu">200</span>,       <span class="cm"># overlap to preserve context between chunks</span>
+    length_function=len,      <span class="cm"># or use token counting (see below)</span>
+    separators=[<span class="st">"\n\n"</span>, <span class="st">"\n"</span>, <span class="st">". "</span>, <span class="st">" "</span>, <span class="st">""</span>],  <span class="cm"># split hierarchy</span>
+    add_start_index=<span class="kw">True</span>,    <span class="cm"># add char offset to metadata</span>
+    strip_whitespace=<span class="kw">True</span>,
+)
+
+<span class="cm"># Split documents</span>
+<span class="kw">from</span> langchain_core.documents <span class="kw">import</span> Document
+doc = Document(page_content=<span class="st">"..."</span> * <span class="nu">100</span>)  <span class="cm"># your long doc</span>
+chunks = splitter.split_documents([doc])
+<span class="kw">print</span>(<span class="st">f"{len(chunks)} chunks created"</span>)
+<span class="kw">for</span> chunk <span class="kw">in</span> chunks[:3]:
+    <span class="kw">print</span>(<span class="st">f"  [{chunk.metadata.get('start_index',0)}] {len(chunk.page_content)} chars"</span>)</pre>
+</div>
+            <h2>Token-Based Splitting</h2>
+            <p>Split by actual token count (not characters). Critical for staying within model context limits.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — token-aware splitting</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">import</span> tiktoken
+<span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter
+
+<span class="cm"># Use OpenAI's tokenizer</span>
+enc = tiktoken.encoding_for_model(<span class="st">"gpt-4o"</span>)
+
+<span class="kw">def</span> <span class="fn">token_count</span>(text: str) -> int:
+    <span class="kw">return</span> len(enc.encode(text))
+
+token_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=<span class="nu">512</span>,          <span class="cm"># 512 tokens per chunk</span>
+    chunk_overlap=<span class="nu">64</span>,         <span class="cm"># 64 token overlap</span>
+    length_function=token_count,
+)
+
+<span class="cm"># Or use the built-in TokenTextSplitter</span>
+<span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> TokenTextSplitter
+token_splitter2 = TokenTextSplitter(
+    model_name=<span class="st">"gpt-4o"</span>,
+    chunk_size=<span class="nu">512</span>,
+    chunk_overlap=<span class="nu">64</span>
+)</pre>
+</div>
+            <h2>Code-Aware Splitting</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — language-aware code splitting</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter, Language
+
+<span class="cm"># Python-aware: splits on class/function boundaries first</span>
+python_splitter = RecursiveCharacterTextSplitter.from_language(
+    language=Language.PYTHON,
+    chunk_size=<span class="nu">1000</span>,
+    chunk_overlap=<span class="nu">100</span>
+)
+
+python_code = <span class="st">&#34;&#34;&#34;
+class DataProcessor:
+    def __init__(self, data):
+        self.data = data
+
+    def process(self):
+        return [x * 2 for x in self.data]
+
+    def filter_evens(self):
+        return [x for x in self.data if x % 2 == 0]
+
+def standalone_function(x, y):
+    return x + y
+&#34;&#34;&#34;</span>
+
+chunks = python_splitter.create_documents([python_code])
+<span class="kw">for</span> chunk <span class="kw">in</span> chunks:
+    <span class="kw">print</span>(<span class="st">"---"</span>)
+    <span class="kw">print</span>(chunk.page_content)
+
+<span class="cm"># Other supported languages</span>
+js_splitter = RecursiveCharacterTextSplitter.from_language(Language.JS, chunk_size=<span class="nu">500</span>)
+md_splitter = RecursiveCharacterTextSplitter.from_language(Language.MARKDOWN, chunk_size=<span class="nu">800</span>)
+html_splitter = RecursiveCharacterTextSplitter.from_language(Language.HTML, chunk_size=<span class="nu">600</span>)</pre>
+</div>
+            <h2>Semantic Splitting</h2>
+            <p>Split based on semantic similarity, keeping related sentences together even across paragraph breaks.</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python — semantic chunking with embeddings</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> langchain_experimental.text_splitter <span class="kw">import</span> SemanticChunker
+<span class="kw">from</span> langchain_openai <span class="kw">import</span> OpenAIEmbeddings
+
+<span class="cm"># Splits when semantic similarity drops below threshold</span>
+semantic_splitter = SemanticChunker(
+    OpenAIEmbeddings(),
+    breakpoint_threshold_type=<span class="st">"percentile"</span>,  <span class="cm"># or "standard_deviation", "interquartile"</span>
+    breakpoint_threshold_amount=<span class="nu">95</span>             <span class="cm"># 95th percentile breakpoints</span>
+)
+
+long_text = <span class="st">&#34;&#34;&#34;Python is a versatile programming language known for its readability.
+It was created by Guido van Rossum and first released in 1991.
+
+Machine learning is transforming how we build software.
+Models like GPT-4 can write code, analyze data, and answer questions.
+
+The solar system contains eight planets. Mars is the fourth planet from the Sun.&#34;&#34;&#34;</span>
+
+chunks = semantic_splitter.create_documents([long_text])
+<span class="kw">print</span>(<span class="st">f"{len(chunks)} semantic chunks"</span>)
+<span class="kw">for</span> c <span class="kw">in</span> chunks:
+    <span class="kw">print</span>(<span class="st">f"\n[Chunk] {c.page_content[:100]}"</span>)</pre>
+</div>
+            <h2>Metadata Enrichment</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python — adding metadata to chunks</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">def</span> <span class="fn">enrich_chunks</span>(docs, splitter, source_name: str) -> list:
+    <span class="st">&#34;&#34;&#34;Split docs and add rich metadata to each chunk.&#34;&#34;&#34;</span>
+    chunks = splitter.split_documents(docs)
+    <span class="kw">for</span> i, chunk <span class="kw">in</span> enumerate(chunks):
+        chunk.metadata.update({
+            <span class="st">"chunk_id"</span>: i,
+            <span class="st">"source"</span>: source_name,
+            <span class="st">"chunk_size"</span>: len(chunk.page_content),
+            <span class="st">"total_chunks"</span>: len(chunks),
+        })
+    <span class="kw">return</span> chunks
+
+<span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> PyPDFLoader
+loader = PyPDFLoader(<span class="st">"manual.pdf"</span>)
+docs = loader.load()
+chunks = enrich_chunks(docs, splitter, <span class="st">"product_manual"</span>)
+<span class="kw">print</span>(chunks[<span class="nu">0</span>].metadata)</pre>
+</div>
+        </div>
+        <nav class="lesson-nav">
+            <a href="document-loading.html" class="prev">
+                <div class="lesson-nav-label">← Previous</div>
+                <div class="lesson-nav-title">Document Loading</div>
+            </a>
+            <a href="../../tutorials/openai/getting-started.html" class="next">
+                <div class="lesson-nav-label">Next →</div>
+                <div class="lesson-nav-title">OpenAI Getting Started</div>
+            </a>
+        </nav>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>The most comprehensive AI coding learning platform.</p>
+                </div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.closest('.code-block').querySelector('pre');
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                this.textContent = '✓ Copied';
+                setTimeout(() => this.textContent = 'Copy', 1500);
+            });
+        });
+    });
+    </script>
+</body>
+</html>

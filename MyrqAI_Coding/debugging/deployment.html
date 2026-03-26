@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugging AI App Deployment Issues | AI Coding Academy</title>
+    <meta name="description" content="Fix deployment errors for AI apps: Docker, Lambda, Vercel, and environment-specific production bugs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .lesson-header{margin-bottom:var(--space-3xl)}
+        .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
+        .lesson-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2}
+        .lesson-description{font-size:1.2rem;color:var(--text-secondary);line-height:1.7}
+        .lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}
+        .lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}
+        .lesson-content h2:first-child{margin-top:0}
+        .lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}
+        .lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}
+        .lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}
+        .lesson-content li{margin-bottom:var(--space-sm)}
+        .lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}
+        .code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}
+        .code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}
+        .copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}
+        .code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}
+        .cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}
+        .tip-box,.warn-box,.info-box,.error-example,.fix-example{border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}
+        .tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25)}
+        .tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .warn-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.25)}
+        .warn-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-warning);margin-bottom:var(--space-sm)}
+        .info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25)}
+        .info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}
+        .tip-box p,.warn-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .error-example{background:#1a0a0a;border:1px solid rgba(239,68,68,.3)}
+        .error-example-title{font-family:var(--font-heading);color:#ef4444;font-weight:600;margin-bottom:var(--space-sm)}
+        .fix-example{background:#0a1a0a;border:1px solid rgba(34,197,94,.3)}
+        .fix-example-title{font-family:var(--font-heading);color:#22c55e;font-weight:600;margin-bottom:var(--space-sm)}
+        .lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}
+        .lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}
+        .lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
+        .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
+        .lesson-nav .next{text-align:right}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+    </style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+            <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <div class="breadcrumb"><a href="../index.html">Home</a><span class="separator">/</span><a href="index.html">Debugging</a><span class="separator">/</span><span>Deployment Errors</span></div>
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <span class="badge badge-advanced">Advanced</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 35 min</span>
+            </div>
+            <h1 class="lesson-title">Debugging AI App Deployment Issues</h1>
+            <p class="lesson-description">Fix deployment errors for AI apps: Docker, Lambda, Vercel, and environment-specific production bugs.</p>
+        </header>
+<div class="lesson-content"><h2>Why AI Apps Fail in Production but Work Locally</h2><p>AI apps depend on network calls, API keys, large model files, and sometimes GPU drivers. This guide covers the most common production deployment failures.</p><h2>Bug 1: API Key Not Available in Container</h2><div class="error-example"><div class="error-example-title">❌ AuthenticationError in Docker but works locally</div><div class="code-block"><div class="code-block-label"><span>Dockerfile - broken</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># WRONG: hardcoding key in image is a security risk</span>
+FROM python:3.12-slim
+ENV OPENAI_API_KEY=sk-abc123...  <span class="cm"># Never do this!</span>
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python", "app.py"]</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Pass secrets at runtime, never bake into image</div><div class="code-block"><div class="code-block-label"><span>bash - correct Docker deployment</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Pass at runtime</span>
+docker run -e OPENAI_API_KEY=$OPENAI_API_KEY myapp:latest
+
+<span class="cm"># Or use .env file</span>
+docker run --env-file .env myapp:latest
+
+<span class="cm"># Verify inside container</span>
+docker exec -it myapp python -c \
+  "import os; print(os.environ.get('OPENAI_API_KEY', 'NOT SET')[:10])"</pre></div></div><h2>Bug 2: Lambda Timeout on Long LLM Calls</h2><div class="error-example"><div class="error-example-title">❌ Task timed out after 29.00 seconds</div><div class="code-block"><div class="code-block-label"><span>Python - Lambda hitting default 3s timeout</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">handler</span>(event, context):
+    client = OpenAI()
+    <span class="cm"># gpt-4o can take 20-60s for long outputs</span>
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o"</span>,
+        max_tokens=<span class="nu">4096</span>  <span class="cm"># slow + too long for Lambda timeout</span>
+    )
+    <span class="kw">return</span> {"answer": resp.choices[0].message.content}</pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Use faster model, limit tokens, raise Lambda timeout to 60s</div><div class="code-block"><div class="code-block-label"><span>Python - Lambda-friendly approach</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">handler</span>(event, context):
+    client = OpenAI()
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,  <span class="cm"># 3-5x faster</span>
+        messages=[{"role": "user", "content": event["prompt"]}],
+        max_tokens=<span class="nu">512</span>  <span class="cm"># hard limit</span>
+    )
+    <span class="kw">return</span> {"answer": resp.choices[0].message.content}
+
+<span class="cm"># For long jobs: use SQS + async Lambda pattern</span>
+<span class="cm"># Lambda 1: queue to SQS, return job_id immediately</span>
+<span class="cm"># Lambda 2: triggered by SQS, runs LLM, stores in DynamoDB</span>
+<span class="cm"># Client: polls GET /result/{job_id}</span></pre></div></div><h2>Bug 3: Missing Dependencies in Production</h2><div class="error-example"><div class="error-example-title">❌ ModuleNotFoundError: No module named tiktoken</div><div class="code-block"><div class="code-block-label"><span>Python - incomplete requirements.txt</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># requirements.txt is missing AI packages</span>
+fastapi==0.115.0
+uvicorn==0.32.0
+<span class="cm"># Missing: openai, tiktoken, langchain, anthropic, etc.</span></pre></div></div><div class="fix-example"><div class="fix-example-title">✅ Pin all dependencies with pip freeze</div><div class="code-block"><div class="code-block-label"><span>bash - generate complete requirements</span><button class="copy-btn">Copy</button></div><pre><span class="cm"># Capture ALL installed packages with exact versions</span>
+pip freeze > requirements.txt
+
+<span class="cm"># Or use pip-compile for cleaner dep resolution</span>
+pip install pip-tools
+pip-compile requirements.in
+
+<span class="cm"># Minimal requirements.in</span>
+<span class="cm"># openai>=1.52</span>
+<span class="cm"># anthropic>=0.39</span>
+<span class="cm"># langchain>=0.3</span>
+<span class="cm"># fastapi>=0.115</span>
+<span class="cm"># uvicorn[standard]>=0.32</span></pre></div></div><h2>Bug 4: Cold Start Latency</h2><div class="fix-example"><div class="fix-example-title">✅ Initialize client at module level for reuse across Lambda invocations</div><div class="code-block"><div class="code-block-label"><span>Python - warm connection pool</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+<span class="kw">import</span> os
+
+<span class="cm"># Module-level init runs ONCE per container, reused every invocation</span>
+client = OpenAI(
+    api_key=os.environ["OPENAI_API_KEY"],
+    max_retries=<span class="nu">3</span>,
+    timeout=<span class="nu">30.0</span>
+)
+
+<span class="kw">def</span> <span class="fn">handler</span>(event, context):
+    <span class="cm"># Reuses existing client - no cold init cost</span>
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,
+        messages=[{"role": "user", "content": event["prompt"]}]
+    )
+    <span class="kw">return</span> {"result": resp.choices[0].message.content}</pre></div></div><div class="warn-box"><div class="warn-box-title">⚠️ CORS in production</div><p>If your frontend gets CORS errors, add <code>CORSMiddleware</code> to FastAPI with your specific production domain. Never use <code>allow_origins=["*"]</code> in production.</p></div></div>
+        <nav class="lesson-nav">
+            <a href="configuration.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Configuration Errors</div></a>
+            <a href="index.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Debugging Home</div></a>
+        </nav>
+    </div>
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+        <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
+</body></html>

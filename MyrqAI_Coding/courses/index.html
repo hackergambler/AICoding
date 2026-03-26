@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
+     crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Coding Courses | Complete Learning Paths | AI Coding Academy</title>
+    <meta name="description" content="Structured AI coding courses: OpenAI, Claude, LangChain, RAG, Agents, and more. From beginner to expert.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .page-hero {
+            padding: calc(140px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            text-align: center;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.05) 0%, transparent 100%);
+        }
+        .page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: var(--space-md); }
+        .page-hero h1 span { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-hero p { color: var(--text-secondary); font-size: 1.2rem; max-width: 700px; margin: 0 auto; }
+        .courses-section { padding: var(--space-4xl) var(--space-xl); }
+        .courses-container { max-width: 1440px; margin: 0 auto; }
+        .course-category { margin-bottom: var(--space-4xl); }
+        .category-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: var(--space-xl); display: flex; align-items: center; gap: var(--space-md); }
+        .category-title .count { font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-primary); background: rgba(0,255,170,0.1); padding: var(--space-xs) var(--space-sm); border-radius: var(--radius-sm); }
+        .courses-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); }
+        .course-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition-base);
+            text-decoration: none;
+            display: block;
+        }
+        .course-card:hover { transform: translateY(-5px); border-color: rgba(0,255,170,0.3); box-shadow: var(--shadow-glow); }
+        .course-card-header {
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(0,255,170,0.1) 0%, rgba(0,212,255,0.1) 100%);
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+        .course-icon { font-size: 3rem; }
+        .course-card-header h3 { font-family: var(--font-heading); font-size: 1.3rem; color: var(--text-primary); margin-bottom: var(--space-xs); }
+        .course-card-header p { font-size: 0.9rem; color: var(--text-muted); }
+        .course-card-body { padding: var(--space-xl); }
+        .course-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); margin-bottom: var(--space-lg); }
+        .course-stat { text-align: center; }
+        .course-stat-value { font-family: var(--font-mono); font-size: 1.2rem; color: var(--accent-primary); }
+        .course-stat-label { font-size: 0.75rem; color: var(--text-muted); }
+        .course-modules { margin-bottom: var(--space-lg); }
+        .course-modules h4 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: var(--space-sm); text-transform: uppercase; letter-spacing: 1px; }
+        .course-modules ul { list-style: none; }
+        .course-modules li { font-size: 0.9rem; color: var(--text-secondary); padding: var(--space-xs) 0; display: flex; align-items: center; gap: var(--space-sm); }
+        .course-modules li::before { content: '✓'; color: var(--accent-primary); }
+        .course-card-footer { display: flex; justify-content: space-between; align-items: center; }
+        .course-levels { display: flex; gap: var(--space-xs); }
+        .featured-courses { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); margin-bottom: var(--space-4xl); }
+        .featured-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: var(--transition-base);
+            text-decoration: none;
+            position: relative;
+        }
+        .featured-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-main); }
+        .featured-card:hover { transform: translateY(-5px); border-color: rgba(0,255,170,0.3); }
+        .featured-card .icon { font-size: 2.5rem; margin-bottom: var(--space-md); }
+        .featured-card h3 { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-primary); margin-bottom: var(--space-sm); }
+        .featured-card .lessons { font-family: var(--font-mono); color: var(--accent-primary); font-size: 1rem; margin-bottom: var(--space-xs); }
+        .featured-card p { font-size: 0.85rem; color: var(--text-muted); }
+        @media (max-width: 1200px) { .courses-grid { grid-template-columns: 1fr; } .featured-courses { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .featured-courses { grid-template-columns: 1fr; } }
+    </style>
+<style>
+    /* Top Bar - MYRQAI Network Links */
+    .top-bar {
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
+        position: relative;
+        z-index: 1002;
+    }
+    .top-bar-container {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar-links {
+        display: flex;
+        gap: var(--space-xl);
+    }
+    .top-bar-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+    .top-bar-links a:hover {
+        color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
+    }
+    .top-bar-links a .link-icon {
+        font-size: 1rem;
+    }
+    .top-bar-right {
+        color: var(--text-dim);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+    @media (max-width: 768px) {
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
+        .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-bar-links">
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
+            </div>
+            <div class="top-bar-right">Part of MYRQAI Network</div>
+        </div>
+    </div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <ul class="nav-menu">
+                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
+                <li><a href="index.html" class="nav-link active">Courses</a></li>
+                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search courses..."><kbd>⌘K</kbd></div>
+                <a href="https://www.myrqai.com" target="_blank" class="btn btn-primary">Start Free</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <h1>Structured <span>Learning Paths</span></h1>
+        <p>Complete courses designed to take you from zero to mastery. Each course builds progressively with hands-on projects and real-world applications.</p>
+    </section>
+
+    <div class="ad-container ad-container-horizontal">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8668540803235423"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+    <section class="courses-section">
+        <div class="courses-container">
+            
+            <!-- Featured Quick Links -->
+            <div class="featured-courses">
+                <a href="openai.html" class="featured-card reveal">
+                    <div class="icon">🤖</div>
+                    <h3>OpenAI API</h3>
+                    <div class="lessons">12,500+ lessons</div>
+                    <p>GPT-4o, Assistants, Function Calling</p>
+                </a>
+                <a href="claude.html" class="featured-card reveal reveal-delay-1">
+                    <div class="icon">🧠</div>
+                    <h3>Claude API</h3>
+                    <div class="lessons">8,200+ lessons</div>
+                    <p>Anthropic API, Tool Use</p>
+                </a>
+                <a href="langchain.html" class="featured-card reveal reveal-delay-2">
+                    <div class="icon">🦜</div>
+                    <h3>LangChain</h3>
+                    <div class="lessons">15,000+ lessons</div>
+                    <p>Chains, Agents, LCEL</p>
+                </a>
+                <a href="rag.html" class="featured-card reveal reveal-delay-3">
+                    <div class="icon">📚</div>
+                    <h3>RAG Systems</h3>
+                    <div class="lessons">18,000+ lessons</div>
+                    <p>Vector DBs, Embeddings</p>
+                </a>
+            </div>
+
+            <!-- API Mastery Courses -->
+            <div class="course-category">
+                <h2 class="category-title">🔌 API Mastery <span class="count">28,500+ lessons total</span></h2>
+                <div class="courses-grid">
+                    <a href="openai.html" class="course-card reveal">
+                        <div class="course-card-header">
+                            <div class="course-icon">🤖</div>
+                            <div>
+                                <h3>OpenAI API Complete Mastery</h3>
+                                <p>Master GPT-4o, GPT-4, Assistants API, and more</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">12,500+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">150+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">All</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Chat Completions API from scratch</li>
+                                    <li>Function Calling & Tools</li>
+                                    <li>Assistants API & Threads</li>
+                                    <li>Vision, Audio, and Embeddings</li>
+                                    <li>Fine-tuning & Optimization</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels">
+                                    <span class="badge badge-beginner">Beginner</span>
+                                    <span class="badge badge-advanced">Expert</span>
+                                </div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="claude.html" class="course-card reveal reveal-delay-1">
+                        <div class="course-card-header">
+                            <div class="course-icon">🧠</div>
+                            <div>
+                                <h3>Claude API Deep Dive</h3>
+                                <p>Master Anthropic's Claude models and capabilities</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">8,200+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">80+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">All</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Messages API fundamentals</li>
+                                    <li>Tool Use & Function Calling</li>
+                                    <li>Computer Use capabilities</li>
+                                    <li>Vision and document analysis</li>
+                                    <li>Best practices & optimization</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels">
+                                    <span class="badge badge-beginner">Beginner</span>
+                                    <span class="badge badge-advanced">Expert</span>
+                                </div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="gemini.html" class="course-card reveal">
+                        <div class="course-card-header">
+                            <div class="course-icon">✨</div>
+                            <div>
+                                <h3>Google Gemini API</h3>
+                                <p>Master Google's multimodal AI capabilities</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">7,800+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">60+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">All</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Gemini Pro & Ultra models</li>
+                                    <li>Multimodal inputs (text, image, video)</li>
+                                    <li>Vertex AI integration</li>
+                                    <li>Function calling & tools</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-beginner">Beginner</span><span class="badge badge-advanced">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Framework Courses -->
+            <div class="course-category">
+                <h2 class="category-title">🛠️ Frameworks & Tools <span class="count">24,500+ lessons total</span></h2>
+                <div class="courses-grid">
+                    <a href="langchain.html" class="course-card reveal">
+                        <div class="course-card-header">
+                            <div class="course-icon">🦜</div>
+                            <div>
+                                <h3>LangChain Complete Guide</h3>
+                                <p>Build powerful LLM applications with LangChain</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">15,000+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">120+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">Int-Exp</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Chains and sequential processing</li>
+                                    <li>LCEL (LangChain Expression Language)</li>
+                                    <li>Memory systems & conversation</li>
+                                    <li>Tools and agent creation</li>
+                                    <li>Production deployment</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-intermediate">Intermediate</span><span class="badge badge-expert">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="local-llms.html" class="course-card reveal reveal-delay-1">
+                        <div class="course-card-header">
+                            <div class="course-icon">🦙</div>
+                            <div>
+                                <h3>Local LLMs & Open Source</h3>
+                                <p>Run AI models locally without API costs</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">9,500+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">70+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">Int-Exp</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Ollama setup & management</li>
+                                    <li>LLaMA, Mistral, and more models</li>
+                                    <li>Quantization & optimization</li>
+                                    <li>Fine-tuning on custom data</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-intermediate">Intermediate</span><span class="badge badge-expert">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Advanced Topics -->
+            <div class="course-category">
+                <h2 class="category-title">🚀 Advanced Topics <span class="count">40,000+ lessons total</span></h2>
+                <div class="courses-grid">
+                    <a href="rag.html" class="course-card reveal">
+                        <div class="course-card-header">
+                            <div class="course-icon">📚</div>
+                            <div>
+                                <h3>RAG Systems Mastery</h3>
+                                <p>Build retrieval-augmented generation systems</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">18,000+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">100+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">Int-Exp</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Vector databases (Pinecone, Chroma, etc.)</li>
+                                    <li>Embedding models & strategies</li>
+                                    <li>Chunking & retrieval optimization</li>
+                                    <li>Hybrid search & reranking</li>
+                                    <li>Production RAG architectures</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-intermediate">Intermediate</span><span class="badge badge-expert">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="agents.html" class="course-card reveal reveal-delay-1">
+                        <div class="course-card-header">
+                            <div class="course-icon">🤖</div>
+                            <div>
+                                <h3>AI Agents Complete Course</h3>
+                                <p>Build autonomous AI agents that reason and act</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">14,000+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">80+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">Adv-Exp</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Agent architectures & design</li>
+                                    <li>LangGraph & state machines</li>
+                                    <li>Tool creation & management</li>
+                                    <li>Multi-agent collaboration</li>
+                                    <li>Safety & control mechanisms</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-advanced">Advanced</span><span class="badge badge-expert">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="prompting.html" class="course-card reveal">
+                        <div class="course-card-header">
+                            <div class="course-icon">✍️</div>
+                            <div>
+                                <h3>Prompt Engineering Mastery</h3>
+                                <p>Write prompts that get the best results</p>
+                            </div>
+                        </div>
+                        <div class="course-card-body">
+                            <div class="course-stats">
+                                <div class="course-stat"><div class="course-stat-value">8,000+</div><div class="course-stat-label">Lessons</div></div>
+                                <div class="course-stat"><div class="course-stat-value">50+</div><div class="course-stat-label">Projects</div></div>
+                                <div class="course-stat"><div class="course-stat-value">All</div><div class="course-stat-label">Levels</div></div>
+                            </div>
+                            <div class="course-modules">
+                                <h4>What You'll Learn</h4>
+                                <ul>
+                                    <li>Prompt structure & formatting</li>
+                                    <li>Chain-of-thought prompting</li>
+                                    <li>Few-shot learning techniques</li>
+                                    <li>System prompts & personas</li>
+                                </ul>
+                            </div>
+                            <div class="course-card-footer">
+                                <div class="course-levels"><span class="badge badge-beginner">Beginner</span><span class="badge badge-expert">Expert</span></div>
+                                <span class="btn btn-sm btn-outline">Start Course →</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="ad-container ad-container-horizontal">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8668540803235423"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+                    <p>The most comprehensive AI coding learning platform. 100,000+ tutorials from beginner to expert.</p>
+                    <div style="margin-top: var(--space-md);">
+                        <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary); font-size: 0.85rem;">Part of MYRQAI Network →</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="../tutorials/index.html">All Tutorials</a></li>
+                        <li><a href="../courses/index.html">Courses</a></li>
+                        <li><a href="../projects/index.html">Projects</a></li>
+                        <li><a href="../debugging/index.html">Debugging</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Topics</h4>
+                    <ul>
+                        <li><a href="../courses/openai.html">OpenAI API</a></li>
+                        <li><a href="../courses/claude.html">Claude API</a></li>
+                        <li><a href="../courses/langchain.html">LangChain</a></li>
+                        <li><a href="../courses/rag.html">RAG Systems</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>MYRQAI Network</h4>
+                    <ul>
+                        <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+                        <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+                        <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+                        <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+                        <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/terms" target="_blank">Terms</a>
+                    <span>•</span>
+                    <a href="https://www.myrqai.com/admin/contact" target="_blank">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

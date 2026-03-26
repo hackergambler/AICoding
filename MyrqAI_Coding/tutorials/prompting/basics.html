@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Basics | AI Coding Academy</title>
+    <meta name="description" content="Master the fundamentals of prompt engineering: clarity, context, few-shot examples, and output control.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
+        .lesson-header { margin-bottom: var(--space-3xl); }
+        .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
+        .lesson-meta-item { display: flex; align-items: center; gap: var(--space-xs); font-size: 0.9rem; color: var(--text-muted); }
+        .lesson-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: var(--space-lg); line-height: 1.2; }
+        .lesson-description { font-size: 1.2rem; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-content { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-2xl); margin-bottom: var(--space-2xl); }
+        .lesson-content h2 { font-family: var(--font-heading); font-size: 1.5rem; margin: var(--space-2xl) 0 var(--space-lg); color: var(--accent-primary); }
+        .lesson-content h2:first-child { margin-top: 0; }
+        .lesson-content h3 { font-family: var(--font-heading); font-size: 1.2rem; margin: var(--space-xl) 0 var(--space-md); color: var(--accent-secondary); }
+        .lesson-content p { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); }
+        .lesson-content ul, .lesson-content ol { color: var(--text-secondary); line-height: 1.8; margin-bottom: var(--space-lg); padding-left: var(--space-xl); }
+        .lesson-content li { margin-bottom: var(--space-sm); }
+        .lesson-content code { background: rgba(0,255,170,0.1); color: var(--accent-primary); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85em; }
+        .code-block { background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; overflow-x: auto; }
+        .code-block-label { font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: var(--space-sm); display: flex; justify-content: space-between; }
+        .code-block-label .copy-btn { cursor: pointer; color: var(--accent-primary); border: 1px solid var(--accent-primary); background: transparent; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+        .code-block pre { margin: 0; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.65; color: #e6edf3; white-space: pre; }
+        .cm { color: #8b949e; } .kw { color: #ff7b72; } .st { color: #a5d6ff; }
+        .fn { color: #d2a8ff; } .nu { color: #79c0ff; } .cl { color: #ffa657; }
+        .tip-box { background: rgba(0,255,170,0.08); border: 1px solid rgba(0,255,170,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .tip-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-primary); margin-bottom: var(--space-sm); }
+        .warn-box { background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .warn-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-warning); margin-bottom: var(--space-sm); }
+        .info-box { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.25); border-radius: var(--radius-md); padding: var(--space-lg); margin: var(--space-lg) 0; }
+        .info-box-title { font-family: var(--font-heading); font-weight: 600; color: var(--accent-secondary); margin-bottom: var(--space-sm); }
+        .tip-box p, .warn-box p, .info-box p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+        .lesson-nav { display: flex; justify-content: space-between; gap: var(--space-lg); margin-top: var(--space-3xl); }
+        .lesson-nav a { flex: 1; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-lg); padding: var(--space-lg); text-decoration: none; transition: var(--transition-base); }
+        .lesson-nav a:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+        .lesson-nav-label { font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xs); }
+        .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); }
+        .lesson-nav .next { text-align: right; }
+        @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
+    </style>
+</head><body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/prompting.html">Prompting</a><span class="separator">/</span><span>Basics</span></div>
+        <header class="lesson-header">
+            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 25 min</span><span class="lesson-meta-item">📚 Lesson 1</span></div>
+            <h1 class="lesson-title">Prompt Engineering Fundamentals</h1>
+            <p class="lesson-description">Write prompts that consistently get the output you want. Learn the core techniques: role assignment, output format control, few-shot examples, and chain-of-thought.</p>
+        </header>
+        <div class="lesson-content">
+            <h2>The Anatomy of a Great Prompt</h2>
+            <p>Every effective prompt has 4 components: <strong>Role</strong> (who is the AI?), <strong>Context</strong> (what background is needed?), <strong>Task</strong> (what exactly should it do?), and <strong>Format</strong> (how should it respond?).</p>
+<div class="code-block">
+<div class="code-block-label"><span>Python - bad vs good prompt comparison</span><button class="copy-btn">Copy</button></div>
+<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+client = OpenAI()
+
+<span class="kw">def</span> <span class="fn">ask</span>(system: str, user: str) -> str:
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: system},
+                  {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user}],
+        max_tokens=<span class="nu">300</span>
+    )
+    <span class="kw">return</span> resp.choices[<span class="nu">0</span>].message.content
+
+<span class="cm"># ❌ Bad: vague, no format, no context</span>
+bad = ask(<span class="st">"You are helpful."</span>, <span class="st">"Tell me about Python."</span>)
+
+<span class="cm"># ✅ Good: role + context + task + format</span>
+good = ask(
+    <span class="st">&#34;&#34;&#34;You are a senior Python engineer with 10 years experience.
+Your audience is developers who know JavaScript but are new to Python.
+Always give concrete code examples. Be concise - max 3 paragraphs.&#34;&#34;&#34;</span>,
+    <span class="st">&#34;&#34;&#34;Compare Python lists vs JavaScript arrays.
+Focus on: mutability, methods, and performance differences.
+Format as: Similarities, Key Differences, Code Example.&#34;&#34;&#34;</span>
+)
+<span class="kw">print</span>(<span class="st">"GOOD:\n"</span>, good)</pre></div>
+            <h2>Output Format Control</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python - force specific output formats</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Force JSON output</span>
+json_response = ask(
+    <span class="st">"Return ONLY valid JSON. No markdown, no prose, no code fences."</span>,
+    <span class="st">"Extract: name=Alice, role=Engineer, years=5, skills=Python,AWS,Docker"</span>
+)
+<span class="kw">import</span> json
+data = json.loads(json_response)
+
+<span class="cm"># Force a specific structure</span>
+structured = ask(
+    <span class="st">&#34;&#34;&#34;Respond EXACTLY in this format, no deviations:
+SUMMARY: [one sentence]
+PROS:
+- [point 1]
+- [point 2]  
+- [point 3]
+CONS:
+- [point 1]
+- [point 2]
+VERDICT: [one word: Recommended/Avoid/Neutral]&#34;&#34;&#34;</span>,
+    <span class="st">"Evaluate: using SQLite for a production web app with 10k daily users"</span>
+)
+<span class="kw">print</span>(structured)
+
+<span class="cm"># Force numbered list</span>
+steps = ask(
+    <span class="st">"Respond ONLY with a numbered list. Each step on its own line. No prose."</span>,
+    <span class="st">"How do I deploy a FastAPI app to AWS Lambda?"</span>
+)</pre></div>
+            <h2>Few-Shot Prompting</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python - teach by example</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># Show 3 examples, then ask for the real thing</span>
+few_shot_prompt = <span class="st">&#34;&#34;&#34;Convert informal text to formal business English.
+
+Informal: "hey can u send the report asap its rly urgent"
+Formal: "Could you please send the report at your earliest convenience? This matter is time-sensitive."
+
+Informal: "the meeting got pushed back cuz john cant make it"  
+Formal: "The meeting has been rescheduled due to John's unavailability."
+
+Informal: "we need to fix this bug its breaking everything"
+Formal: "We need to address this critical bug immediately, as it is causing significant system disruption."
+
+Informal: {text}
+Formal:&#34;&#34;&#34;</span>
+
+<span class="kw">def</span> <span class="fn">formalize</span>(text: str) -> str:
+    resp = client.chat.completions.create(
+        model=<span class="st">"gpt-4o-mini"</span>,
+        messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: few_shot_prompt.format(text=text)}],
+        max_tokens=<span class="nu">100</span>
+    )
+    <span class="kw">return</span> resp.choices[<span class="nu">0</span>].message.content.strip()
+
+<span class="kw">print</span>(formalize(<span class="st">"gonna be late 2 the standup sry"</span>))</pre></div>
+            <h2>Chain-of-Thought</h2>
+<div class="code-block">
+<div class="code-block-label"><span>Python - force step-by-step reasoning</span><button class="copy-btn">Copy</button></div>
+<pre><span class="cm"># CoT dramatically improves accuracy on complex problems</span>
+cot_system = <span class="st">&#34;&#34;&#34;Solve problems by thinking step by step.
+Always structure your response as:
+Step 1: [first step]
+Step 2: [second step]
+...
+Therefore: [final answer]&#34;&#34;&#34;</span>
+
+result = ask(cot_system, <span class="st">&#34;&#34;&#34;A store sells apples for $0.50 each and oranges for $0.75 each.
+Alice buys 6 apples and 4 oranges. She pays with a $10 bill.
+How much change does she receive?&#34;&#34;&#34;</span>)
+<span class="kw">print</span>(result)
+
+<span class="cm"># Zero-shot CoT: just add "Let's think step by step"</span>
+zero_shot_cot = ask(
+    <span class="st">"You are a logical reasoner."</span>,
+    <span class="st">"If all Bloops are Razzies, and all Razzies are Lazzies, are all Bloops definitely Lazzies? Let's think step by step."</span>
+)</pre></div><div class="tip-box"><div class="tip-box-title">💡 Magic Phrase</div><p>Adding "Let's think step by step" or "Think carefully before answering" to any prompt significantly improves accuracy on reasoning tasks — even without few-shot examples.</p></div>
+        </div><nav class="lesson-nav">
+        <a href="../../courses/prompting.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Prompting Course</div></a>
+        <a href="advanced-techniques.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Advanced Techniques</div></a>
+    </nav>
+    </div>    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most comprehensive AI coding learning platform.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+            <li><a href="../../debugging/index.html">Debugging</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul>
+            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul>
+            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
+            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+        </ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    </div></footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+    <script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
+</body></html>
