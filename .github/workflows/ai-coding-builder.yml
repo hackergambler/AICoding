@@ -13,7 +13,9 @@ jobs:
       issues: write
     steps:
       - uses: actions/checkout@v4
-      
+        with:
+          fetch-depth: 0 # Ensures full history for stable pushing
+
       - name: Setup Git
         run: |
           git config --global user.name "Claude-Bot"
@@ -27,15 +29,19 @@ jobs:
           until [ -f finished.txt ]; do
             echo "Claude is starting a new task..."
             
-            # --yes: Auto-approves file writes
-            # --dangerously-skip-permissions: Bypasses the manual approval prompts
-            npx @anthropic-ai/claude-code --yes --dangerously-skip-permissions --print "Read CLAUDE.md. Fix the next broken link or missing content gap. After each fix, exit so I can commit the changes. If 100% done, create finished.txt." || {
-              echo "API Limit or Credit issue. Sleeping 5 mins..."
+            # Use 'yes |' to bypass the approval prompt since '--yes' was unrecognized
+            # Removed the problematic '--yes' flag
+            yes | npx @anthropic-ai/claude-code --dangerously-skip-permissions --print "Read CLAUDE.md. Fix the next broken link or missing content gap in index.html. After each fix, exit so I can commit. If 100% done, create finished.txt." || {
+              echo "API Limit or Credit issue detected. Sleeping 5 mins..."
               sleep 300
             }
 
-            # Commit progress after every single fix so you never lose work
+            # Commit and Push progress after every single fix
+            echo "Syncing changes to GitHub..."
             git add .
-            git commit -m "Claude: Fixed a link/added content" || echo "No changes to commit"
-            git push
+            if git commit -m "Claude: Autonomous update to AI Coding Academy"; then
+              git push origin HEAD
+            else
+              echo "No changes were made in this iteration."
+            fi
           done
