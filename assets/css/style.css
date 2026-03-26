@@ -189,11 +189,71 @@ button { font-family: inherit; }
 }
 
 /* ============================================
+   TOP BAR - MYRQAI NETWORK
+============================================ */
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+    border-bottom: 1px solid rgba(0,255,170,0.1);
+    padding: 10px var(--space-xl);
+    z-index: 1002;
+}
+
+.top-bar-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar-links {
+    display: flex;
+    gap: var(--space-xl);
+}
+
+.top-bar-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.top-bar-links a:hover {
+    color: var(--accent-primary);
+    background: rgba(0,255,170,0.08);
+    border-color: rgba(0,255,170,0.2);
+}
+
+.top-bar-links a .link-icon {
+    font-size: 1rem;
+}
+
+.top-bar-right {
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
    NAVIGATION
 ============================================ */
 .nav {
     position: fixed;
-    top: 0;
+    top: 42px;
     left: 0;
     right: 0;
     z-index: 1000;
@@ -935,4 +995,24 @@ footer {
     .page-layout { grid-template-columns: 1fr; }
     .page-layout.with-right { grid-template-columns: 1fr; }
     .sidebar { display: none; }
+}
+
+/* Top Bar Responsive */
+@media (max-width: 768px) {
+    .top-bar {
+        padding: 8px var(--space-md);
+    }
+    .top-bar-links {
+        gap: var(--space-sm);
+    }
+    .top-bar-links a {
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    .top-bar-links a .link-text {
+        display: none;
+    }
+    .top-bar-right {
+        display: none;
+    }
 }

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .page-hero {
-            padding: calc(100px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            padding: calc(140px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
             text-align: center;
             background: linear-gradient(180deg, rgba(168, 85, 247, 0.05) 0%, transparent 100%);
         }
@@ -110,41 +110,13 @@
         @media (max-width: 768px) { .featured-grid, .projects-grid { grid-template-columns: 1fr; } .stats-bar { grid-template-columns: repeat(2, 1fr); } }
     </style>
 <style>
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal {
-        min-height: 90px;
-    }
-    .ad-container-square {
-        min-height: 250px;
-    }
-    .ad-container-vertical {
-        min-height: 600px;
-    }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    /* Top bar for external links */
+    /* Top Bar - MYRQAI Network Links */
     .top-bar {
-        background: linear-gradient(90deg, rgba(0,255,170,0.05) 0%, rgba(167,139,250,0.05) 100%);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding: 8px var(--space-xl);
-        font-size: 0.8rem;
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
         position: relative;
-        z-index: 1001;
+        z-index: 1002;
     }
     .top-bar-container {
         max-width: 1440px;
@@ -155,35 +127,64 @@
     }
     .top-bar-links {
         display: flex;
-        gap: var(--space-lg);
+        gap: var(--space-xl);
     }
     .top-bar-links a {
         color: var(--text-muted);
         text-decoration: none;
         font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        transition: color 0.2s;
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
     }
     .top-bar-links a:hover {
         color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
     }
     .top-bar-links a .link-icon {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     .top-bar-right {
-        color: var(--text-muted);
+        color: var(--text-dim);
         font-family: var(--font-mono);
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
     }
     @media (max-width: 768px) {
-        .top-bar { padding: 6px var(--space-md); }
-        .top-bar-links { gap: var(--space-md); }
-        .top-bar-links a span:not(.link-icon) { display: none; }
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
         .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
     }
     </style>
 </head>
@@ -191,9 +192,18 @@
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span>AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span>AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span>MYRQAI</span></a>
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
             </div>
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
@@ -213,7 +223,6 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search projects..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-ghost">Sign In</a>
                 <a href="#" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
@@ -353,8 +362,7 @@
                         <p>Your first AI chatbot in the terminal. Learn API basics.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 30 min</span>
-                            <span>💰 ~$0.05</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
@@ -365,8 +373,7 @@
                         <p>Summarize articles and documents with AI.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 45 min</span>
-                            <span>💰 ~$0.10</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
@@ -377,8 +384,7 @@
                         <p>Build a multi-language translator using GPT.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 1 hour</span>
-                            <span>💰 ~$0.15</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
@@ -389,8 +395,7 @@
                         <p>Analyze text sentiment: positive, negative, neutral.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 45 min</span>
-                            <span>💰 ~$0.08</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
@@ -401,8 +406,7 @@
                         <p>Generate blog posts from topics and outlines.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 1 hour</span>
-                            <span>💰 ~$0.20</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
@@ -413,8 +417,7 @@
                         <p>Draft professional emails with AI help.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 1 hour</span>
-                            <span>💰 ~$0.10</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -435,8 +438,7 @@
                         <p>Chat with any PDF document using embeddings.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 3 hours</span>
-                            <span>💰 ~$1.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
@@ -447,8 +449,7 @@
                         <p>Build a search engine using vector embeddings.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 4 hours</span>
-                            <span>💰 ~$2.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
@@ -459,8 +460,7 @@
                         <p>Transcribe and respond to voice commands.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 3 hours</span>
-                            <span>💰 ~$1.50</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal">
                         <div class="project-card-mini-header">
@@ -471,8 +471,7 @@
                         <p>AI agent that analyzes CSV files and generates insights.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 4 hours</span>
-                            <span>💰 ~$2.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
@@ -483,8 +482,7 @@
                         <p>Recommend products based on preferences.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 5 hours</span>
-                            <span>💰 ~$3.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
@@ -495,8 +493,7 @@
                         <p>AI-powered code review with suggestions.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 4 hours</span>
-                            <span>💰 ~$2.50</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -517,8 +514,7 @@
                         <p>Full RAG system with authentication and admin.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 12 hours</span>
-                            <span>💰 ~$10.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-1">
                         <div class="project-card-mini-header">
@@ -529,8 +525,7 @@
                         <p>AI that writes, tests, and deploys code.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 20 hours</span>
-                            <span>💰 ~$25.00</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="project-card-mini reveal reveal-delay-2">
                         <div class="project-card-mini-header">
@@ -541,8 +536,7 @@
                         <p>Fine-tune and deploy a custom LLM.</p>
                         <div class="project-card-mini-meta">
                             <span>⏱️ 15 hours</span>
-                            <span>💰 ~$50.00</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>

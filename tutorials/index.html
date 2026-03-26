@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .page-hero {
-            padding: calc(100px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            padding: calc(140px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
             text-align: center;
             background: linear-gradient(180deg, rgba(0, 255, 170, 0.05) 0%, transparent 100%);
         }
@@ -149,41 +149,13 @@
         @media (max-width: 768px) { .tutorials-grid, .level-cards { grid-template-columns: 1fr; } .filter-container { flex-direction: column; align-items: flex-start; } }
     </style>
 <style>
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal {
-        min-height: 90px;
-    }
-    .ad-container-square {
-        min-height: 250px;
-    }
-    .ad-container-vertical {
-        min-height: 600px;
-    }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    /* Top bar for external links */
+    /* Top Bar - MYRQAI Network Links */
     .top-bar {
-        background: linear-gradient(90deg, rgba(0,255,170,0.05) 0%, rgba(167,139,250,0.05) 100%);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding: 8px var(--space-xl);
-        font-size: 0.8rem;
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
         position: relative;
-        z-index: 1001;
+        z-index: 1002;
     }
     .top-bar-container {
         max-width: 1440px;
@@ -194,35 +166,64 @@
     }
     .top-bar-links {
         display: flex;
-        gap: var(--space-lg);
+        gap: var(--space-xl);
     }
     .top-bar-links a {
         color: var(--text-muted);
         text-decoration: none;
         font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        transition: color 0.2s;
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
     }
     .top-bar-links a:hover {
         color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
     }
     .top-bar-links a .link-icon {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     .top-bar-right {
-        color: var(--text-muted);
+        color: var(--text-dim);
         font-family: var(--font-mono);
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
     }
     @media (max-width: 768px) {
-        .top-bar { padding: 6px var(--space-md); }
-        .top-bar-links { gap: var(--space-md); }
-        .top-bar-links a span:not(.link-icon) { display: none; }
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
         .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
     }
     </style>
 </head>
@@ -230,9 +231,18 @@
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span>AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span>AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span>MYRQAI</span></a>
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
             </div>
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
@@ -255,7 +265,6 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-ghost">Sign In</a>
                 <a href="#" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
@@ -358,7 +367,6 @@
                         <p>Set up your environment, get an API key, and make your first successful API call in under 10 minutes.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 10 min</span>
-                            <span>💰 ~$0.001</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -371,7 +379,6 @@
                         <p>Learn Anthropic's Claude API from scratch. Set up authentication and send your first message.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 12 min</span>
-                            <span>💰 ~$0.002</span>
                             <span>📚 Claude</span>
                         </div>
                     </a>
@@ -384,7 +391,6 @@
                         <p>Complete environment setup: Python, pip, virtual environments, and essential packages for AI coding.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Setup</span>
                         </div>
                     </a>
@@ -397,7 +403,6 @@
                         <p>Create a working chatbot with conversation history in Python. Includes complete code and explanations.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.01</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -410,7 +415,6 @@
                         <p>Secure your API keys properly. Environment variables, .env files, and avoiding common security mistakes.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 8 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Security</span>
                         </div>
                     </a>
@@ -423,7 +427,6 @@
                         <p>What are tokens? How to count them, estimate costs, and optimize your API usage to save money.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 10 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Concepts</span>
                         </div>
                     </a>
@@ -446,7 +449,6 @@
                         <p>Real-time token streaming for better UX. Handle chunks, display progressively, and manage connections.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.01</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -459,7 +461,6 @@
                         <p>Let GPT call your functions. Define schemas, handle responses, and build tool-using AI agents.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 25 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -472,7 +473,6 @@
                         <p>Analyze images with GPT-4o. Upload images, ask questions, extract data, and build vision applications.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.05</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -495,7 +495,6 @@
                         <p>Create a document Q&A system from scratch. Load PDFs, create embeddings, and query with LLMs.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 45 min</span>
-                            <span>💰 ~$0.10</span>
                             <span>📚 RAG</span>
                         </div>
                     </a>
@@ -508,7 +507,6 @@
                         <p>Pinecone vs Chroma vs Weaviate vs Qdrant. Benchmarks, setup guides, and when to use each.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 30 min</span>
-                            <span>💰 ~$0.05</span>
                             <span>📚 RAG</span>
                         </div>
                     </a>
@@ -521,7 +519,6 @@
                         <p>Beyond basic splitting. Semantic chunking, overlapping windows, parent-child, and recursive strategies.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 35 min</span>
-                            <span>💰 ~$0.08</span>
                             <span>📚 RAG</span>
                         </div>
                     </a>
@@ -544,7 +541,6 @@
                         <p>Understand LangChain's core concepts. Build your first chain and connect multiple LLM calls.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 25 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📚 LangChain</span>
                         </div>
                     </a>
@@ -557,7 +553,6 @@
                         <p>Add memory to your chains. Buffer memory, summary memory, and conversation management.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.03</span>
                             <span>📚 LangChain</span>
                         </div>
                     </a>
@@ -570,7 +565,6 @@
                         <p>Master the new declarative syntax. Compose chains, handle streaming, and build complex pipelines.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 40 min</span>
-                            <span>💰 ~$0.05</span>
                             <span>📚 LangChain</span>
                         </div>
                     </a>
@@ -593,7 +587,6 @@
                         <p>Create an autonomous agent that can reason, plan, and execute tasks using tools and memory.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 60 min</span>
-                            <span>💰 ~$0.50</span>
                             <span>📚 Agents</span>
                         </div>
                     </a>
@@ -606,7 +599,6 @@
                         <p>Build complex agent workflows with LangGraph. Cycles, branches, and stateful conversations.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 45 min</span>
-                            <span>💰 ~$0.20</span>
                             <span>📚 Agents</span>
                         </div>
                     </a>
@@ -619,7 +611,6 @@
                         <p>Multiple AI agents working together. Coordination, delegation, and building agent teams.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 90 min</span>
-                            <span>💰 ~$1.00</span>
                             <span>📚 Agents</span>
                         </div>
                     </a>

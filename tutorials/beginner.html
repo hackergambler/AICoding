@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .level-hero {
-            padding: calc(100px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
+            padding: calc(140px + var(--space-3xl)) var(--space-xl) var(--space-3xl);
             text-align: center;
             background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, transparent 100%);
             border-bottom: 3px solid var(--level-beginner);
@@ -74,41 +74,13 @@
         @media (max-width: 768px) { .tutorials-grid { grid-template-columns: 1fr; } .path-intro ul { grid-template-columns: 1fr; } }
     </style>
 <style>
-    /* AdSense Ad Containers */
-    .ad-container {
-        background: rgba(255,255,255,0.02);
-        border: 1px dashed rgba(255,255,255,0.1);
-        border-radius: var(--radius-md);
-        padding: var(--space-md);
-        margin: var(--space-xl) 0;
-        text-align: center;
-        min-height: 90px;
-    }
-    .ad-container-horizontal {
-        min-height: 90px;
-    }
-    .ad-container-square {
-        min-height: 250px;
-    }
-    .ad-container-vertical {
-        min-height: 600px;
-    }
-    .ad-label {
-        font-size: 10px;
-        color: var(--text-muted);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: var(--space-xs);
-        opacity: 0.5;
-    }
-    /* Top bar for external links */
+    /* Top Bar - MYRQAI Network Links */
     .top-bar {
-        background: linear-gradient(90deg, rgba(0,255,170,0.05) 0%, rgba(167,139,250,0.05) 100%);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        padding: 8px var(--space-xl);
-        font-size: 0.8rem;
+        background: linear-gradient(90deg, #0a0d12 0%, #0d1117 100%);
+        border-bottom: 1px solid rgba(0,255,170,0.1);
+        padding: 10px var(--space-xl);
         position: relative;
-        z-index: 1001;
+        z-index: 1002;
     }
     .top-bar-container {
         max-width: 1440px;
@@ -119,35 +91,64 @@
     }
     .top-bar-links {
         display: flex;
-        gap: var(--space-lg);
+        gap: var(--space-xl);
     }
     .top-bar-links a {
         color: var(--text-muted);
         text-decoration: none;
         font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.05em;
-        transition: color 0.2s;
+        font-size: 0.8rem;
+        letter-spacing: 0.03em;
+        transition: all 0.2s;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: var(--radius-sm);
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.05);
     }
     .top-bar-links a:hover {
         color: var(--accent-primary);
+        background: rgba(0,255,170,0.08);
+        border-color: rgba(0,255,170,0.2);
     }
     .top-bar-links a .link-icon {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
     .top-bar-right {
-        color: var(--text-muted);
+        color: var(--text-dim);
         font-family: var(--font-mono);
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
     }
     @media (max-width: 768px) {
-        .top-bar { padding: 6px var(--space-md); }
-        .top-bar-links { gap: var(--space-md); }
-        .top-bar-links a span:not(.link-icon) { display: none; }
+        .top-bar { padding: 8px var(--space-md); }
+        .top-bar-links { gap: var(--space-sm); }
+        .top-bar-links a { padding: 4px 8px; font-size: 0.7rem; }
+        .top-bar-links a .link-text { display: none; }
         .top-bar-right { display: none; }
+    }
+    
+    /* AdSense Ad Containers */
+    .ad-container {
+        background: rgba(255,255,255,0.02);
+        border: 1px dashed rgba(255,255,255,0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-md);
+        margin: var(--space-xl) 0;
+        text-align: center;
+        min-height: 90px;
+    }
+    .ad-container-horizontal { min-height: 90px; }
+    .ad-container-square { min-height: 250px; }
+    .ad-label {
+        font-size: 10px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: var(--space-xs);
+        opacity: 0.5;
     }
     </style>
 </head>
@@ -155,9 +156,18 @@
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span>AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span>AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span>MYRQAI</span></a>
+                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">AI Library</span>
+                </a>
+                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🪜</span>
+                    <span class="link-text">AI Ladder</span>
+                </a>
+                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                    <span class="link-icon">🏠</span>
+                    <span class="link-text">MYRQAI</span>
+                </a>
             </div>
             <div class="top-bar-right">Part of MYRQAI Network</div>
         </div>
@@ -177,7 +187,6 @@
             </ul>
             <div class="nav-actions">
                 <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="#" class="btn btn-ghost">Sign In</a>
                 <a href="#" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
@@ -246,7 +255,6 @@
                         <p>Understand the basics of AI, machine learning, and large language models in plain English.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Concepts</span>
                         </div>
                     </a>
@@ -259,7 +267,6 @@
                         <p>Install Python, pip, create virtual environments, and get your system ready for AI coding.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Setup</span>
                         </div>
                     </a>
@@ -272,7 +279,6 @@
                         <p>What is an API? How do you use one? A complete beginner's guide with real examples.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Concepts</span>
                         </div>
                     </a>
@@ -285,7 +291,6 @@
                         <p>Create accounts with OpenAI, Anthropic, and Google. Set up API keys securely.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 10 min</span>
-                            <span>💰 Free</span>
                             <span>📚 Setup</span>
                         </div>
                     </a>
@@ -298,7 +303,6 @@
                         <p>Write your first Python code that talks to an AI. Send a message, get a response!</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.001</span>
                             <span>📚 OpenAI</span>
                         </div>
                     </a>
@@ -311,7 +315,6 @@
                         <p>Create a working chatbot with conversation history. Your first real AI project!</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 30 min</span>
-                            <span>💰 ~$0.01</span>
                             <span>📚 Project</span>
                         </div>
                     </a>
@@ -334,8 +337,7 @@
                         <p>Strings, integers, floats, lists, and dictionaries - the building blocks of Python.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -346,8 +348,7 @@
                         <p>Write reusable code with functions. Essential for working with AI APIs.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 25 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -358,8 +359,7 @@
                         <p>AI APIs use JSON. Learn to parse, create, and manipulate JSON data.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -380,8 +380,7 @@
                         <p>Understand the Chat Completions API - the foundation of OpenAI interactions.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.005</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -392,8 +391,7 @@
                         <p>Learn the message structure and how to use different roles effectively.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.003</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -404,8 +402,7 @@
                         <p>Control AI creativity and responses with temperature, top_p, and more.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.01</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal">
                         <div class="tutorial-card-header">
@@ -416,8 +413,7 @@
                         <p>Learn how tokens work, estimate costs, and optimize your API spending.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -428,8 +424,7 @@
                         <p>Compare models, understand tradeoffs, and choose the right model for your task.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.02</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -440,8 +435,7 @@
                         <p>Try/catch patterns, error types, and building robust API interactions.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 25 min</span>
-                            <span>💰 ~$0.01</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -462,8 +456,7 @@
                         <p>Get started with Anthropic's Claude API - setup, authentication, and your first message.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.005</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -474,8 +467,7 @@
                         <p>Understand the Messages API structure - roles, content types, and best practices.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.003</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -486,8 +478,7 @@
                         <p>Write effective system prompts to shape Claude's behavior and responses.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 ~$0.01</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal">
                         <div class="tutorial-card-header">
@@ -498,8 +489,7 @@
                         <p>Choose between Claude models based on speed, cost, and capability needs.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.02</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -510,8 +500,7 @@
                         <p>Understand input/output tokens, context windows, and cost optimization.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -522,8 +511,7 @@
                         <p>Control response length and define stopping points for Claude's output.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 ~$0.01</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -544,8 +532,7 @@
                         <p>Set up Google AI Studio, get your API key, and make your first Gemini call.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 20 min</span>
-                            <span>💰 Free tier</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -556,8 +543,7 @@
                         <p>Learn the core content generation method and its parameters.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free tier</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -568,8 +554,7 @@
                         <p>Send images to Gemini and get text descriptions - your first multimodal app.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 25 min</span>
-                            <span>💰 Free tier</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal">
                         <div class="tutorial-card-header">
@@ -580,8 +565,7 @@
                         <p>Understand rate limits, quotas, and how to maximize your free usage.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 10 min</span>
-                            <span>💰 Free</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-1">
                         <div class="tutorial-card-header">
@@ -592,8 +576,7 @@
                         <p>Configure content safety filters and understand Gemini's moderation system.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free tier</span>
-                        </div>
+                            </div>
                     </a>
                     <a href="#" class="tutorial-card reveal reveal-delay-2">
                         <div class="tutorial-card-header">
@@ -604,8 +587,7 @@
                         <p>Compare Google's flagship models for speed, quality, and cost.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 15 min</span>
-                            <span>💰 Free tier</span>
-                        </div>
+                            </div>
                     </a>
                 </div>
             </div>
@@ -626,7 +608,6 @@
                         <p>Create a terminal-based chatbot with conversation history using any API.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 45 min</span>
-                            <span>💰 ~$0.05</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
@@ -639,7 +620,6 @@
                         <p>Generate catchy email subject lines from body text using AI.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 30 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
@@ -652,7 +632,6 @@
                         <p>Build a tool that summarizes long articles into key points.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 35 min</span>
-                            <span>💰 ~$0.03</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
@@ -665,7 +644,6 @@
                         <p>Translate text between languages with automatic language detection.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 40 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
@@ -678,7 +656,6 @@
                         <p>Build a tool that checks and corrects grammar in text.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 30 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
@@ -691,7 +668,6 @@
                         <p>Analyze text for positive, negative, or neutral sentiment.</p>
                         <div class="tutorial-card-meta">
                             <span class="time">⏱️ 35 min</span>
-                            <span>💰 ~$0.02</span>
                             <span>📁 Full code</span>
                         </div>
                     </a>
