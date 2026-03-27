@@ -12,7 +12,6 @@ jobs:
       contents: write
       issues: write
     env:
-      # Forces GitHub to use the latest stable Node version to avoid warnings
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true 
     steps:
       - uses: actions/checkout@v4
@@ -24,29 +23,29 @@ jobs:
           git config --global user.name "Claude-Bot"
           git config --global user.email "claude-bot@myrqai.com"
       
-      - name: Pre-install Claude Code
-        run: npm install -g @anthropic-ai/claude-code
-
       - name: Claude Continuous Worker
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          # This loop runs until 'finished.txt' is created
           until [ -f finished.txt ]; do
-            echo "Claude is starting a new task..."
+            echo "--- STARTING NEW ITERATION ---"
             
-            # Added a 1-hour session timeout to prevent orphan process errors
-            timeout 3600s sh -c "yes | claude --dangerously-skip-permissions --print 'Read CLAUDE.md. Fix the next broken link or missing content gap in index.html. After each fix, exit so I can commit. If 100% done, create finished.txt.'" || {
-              echo "Task paused or Limit reached. Sleeping 5 mins..."
+            # Using npx directly with --yes to force the install and run
+            # Added '2>&1' to force all hidden errors to show up in your logs
+            yes | npx -y @anthropic-ai/claude-code@latest --dangerously-skip-permissions --print "Read CLAUDE.md. Fix one broken link in index.html. Exit immediately after. If done, create finished.txt." 2>&1 || {
+              echo "!!! ERROR OR LIMIT DETECTED !!!"
               sleep 300
             }
 
-            # Sync progress back to the repo immediately
-            echo "Syncing changes to GitHub..."
+            echo "Checking for changes..."
             git add .
-            if git commit -m "Claude: Autonomous update to AI Coding Academy"; then
+            if git commit -m "Claude: Autonomous update"; then
               git push origin HEAD
+              echo "Successfully pushed changes."
             else
-              echo "No changes detected in this cycle."
+              echo "No changes found in this cycle."
             fi
+            
+            # Small 10-second break to prevent 'Double Triggering'
+            sleep 10
           done
