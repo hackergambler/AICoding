@@ -274,7 +274,7 @@
         .lesson-nav-title { font-family: var(--font-heading); font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
 
         /* ── Loading skeleton ── */
-        .ce-skeleton {
+        .ce-sk {
             background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
             background-size: 200% 100%;
             animation: ceSkeleton 1.5s infinite;
@@ -351,13 +351,13 @@
         <!-- Sticky Sidebar — populated by ContentEngine -->
         <aside class="lesson-sidebar" id="ce-sidebar">
             <!-- Skeleton while loading -->
-            <div class="ce-skeleton" style="width:60%;height:1rem"></div>
-            <div class="ce-skeleton" style="width:100%;height:4px;margin-bottom:1.5rem"></div>
-            <div class="ce-skeleton" style="width:90%;height:.9rem"></div>
-            <div class="ce-skeleton" style="width:80%;height:.9rem"></div>
-            <div class="ce-skeleton" style="width:95%;height:.9rem"></div>
-            <div class="ce-skeleton" style="width:75%;height:.9rem"></div>
-            <div class="ce-skeleton" style="width:88%;height:.9rem"></div>
+            <div class="ce-sk" style="width:60%;height:1rem"></div>
+            <div class="ce-sk" style="width:100%;height:4px;margin-bottom:1.5rem"></div>
+            <div class="ce-sk" style="width:90%;height:.9rem"></div>
+            <div class="ce-sk" style="width:80%;height:.9rem"></div>
+            <div class="ce-sk" style="width:95%;height:.9rem"></div>
+            <div class="ce-sk" style="width:75%;height:.9rem"></div>
+            <div class="ce-sk" style="width:88%;height:.9rem"></div>
         </aside>
 
         <!-- Main lesson area -->
@@ -375,30 +375,42 @@
             <!-- Dynamic header (title, badge, duration) -->
             <header id="ce-header">
                 <div class="lesson-meta">
-                    <div class="ce-skeleton" style="width:80px;height:22px;border-radius:20px"></div>
-                    <div class="ce-skeleton" style="width:60px;height:16px"></div>
+                    <div class="ce-sk" style="width:80px;height:22px;border-radius:20px"></div>
+                    <div class="ce-sk" style="width:60px;height:16px"></div>
                 </div>
-                <div class="ce-skeleton" style="width:80%;height:2.5rem;margin-bottom:1rem"></div>
-                <div class="ce-skeleton" style="width:100%;height:1rem"></div>
-                <div class="ce-skeleton" style="width:70%;height:1rem"></div>
+                <div class="ce-sk" style="width:80%;height:2.5rem;margin-bottom:1rem"></div>
+                <div class="ce-sk" style="width:100%;height:1rem"></div>
+                <div class="ce-sk" style="width:70%;height:1rem"></div>
             </header>
 
-            <!-- Dynamic body sections (h2 + code blocks) -->
+
+            <!-- AdSense — top of lesson content -->
+            <div style="margin:1.5rem 0;text-align:center">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-8668540803235423"
+                     data-ad-slot="auto"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+                        <!-- Dynamic body sections (h2 + code blocks) -->
             <div id="ce-body">
                 <div class="lesson-content">
-                    <div class="ce-skeleton" style="width:50%;height:1.4rem;margin-bottom:1rem"></div>
-                    <div class="ce-skeleton"></div>
-                    <div class="ce-skeleton" style="width:90%"></div>
-                    <div class="ce-skeleton" style="width:75%"></div>
-                    <div class="ce-skeleton" style="width:100%;height:200px;margin-top:1rem"></div>
+                    <div class="ce-sk" style="width:50%;height:1.4rem;margin-bottom:1rem"></div>
+                    <div class="ce-sk"></div>
+                    <div class="ce-sk" style="width:90%"></div>
+                    <div class="ce-sk" style="width:75%"></div>
+                    <div class="ce-sk" style="width:100%;height:200px;margin-top:1rem"></div>
                 </div>
             </div>
 
             <!-- Lesson navigation (prev / mark complete / next) -->
             <div id="ce-lesson-nav" class="lesson-nav">
-                <div class="ce-skeleton" style="flex:1;height:70px"></div>
-                <div class="ce-skeleton" style="width:140px;height:44px"></div>
-                <div class="ce-skeleton" style="flex:1;height:70px"></div>
+                <div class="ce-sk" style="flex:1;height:70px"></div>
+                <div class="ce-sk" style="width:140px;height:44px"></div>
+                <div class="ce-sk" style="flex:1;height:70px"></div>
             </div>
 
         </main>
