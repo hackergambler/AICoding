@@ -1,0 +1,113 @@
+{
+    "metadata": {
+        "version": "1.0",
+        "total_lessons": 100000
+    },
+    "tiers": {
+        "level_1_foundations": [
+            "python_for_ai",
+            "math_for_ml",
+            "data_prep"
+        ],
+        "level_2_ml": [
+            "supervised_learning",
+            "unsupervised_learning",
+            "evaluation_metrics"
+        ],
+        "level_3_dl": [
+            "architectures_cnn_rnn",
+            "frameworks_pytorch_tf",
+            "optimization"
+        ],
+        "level_4_modern_ai": [
+            "transformers_gpt",
+            "llm_engineering",
+            "agentic_ai_langchain",
+            "mlops"
+        ]
+    },
+    "lessons": {
+        "python_for_ai": {
+            "title": "Python for AI Foundations",
+            "difficulty": "Beginner",
+            "content_path": "learn/lesson.html?id=python_for_ai"
+        },
+        "agentic_ai_langchain": {
+            "title": "Agentic AI with LangChain",
+            "difficulty": "Expert",
+            "content_path": "learn/lesson.html?id=agentic_ai"
+        },
+        "py-001": {
+            "title": "Tensors vs Lists in Python",
+            "difficulty": "Beginner",
+            "tier": "foundations",
+            "url": "/learn/lesson.html?id=py-001"
+        },
+        "math-001": {
+            "title": "Gradients and Backpropagation Math",
+            "difficulty": "Intermediate",
+            "tier": "foundations",
+            "url": "/learn/lesson.html?id=math-001"
+        },
+        "data-001": {
+            "title": "Pandas Vectorization Techniques",
+            "difficulty": "Beginner",
+            "tier": "foundations",
+            "url": "/learn/lesson.html?id=data-001"
+        },
+        "ml-001": {
+            "title": "XGBoost Hyperparameter Tuning",
+            "difficulty": "Intermediate",
+            "tier": "machine_learning",
+            "url": "/learn/lesson.html?id=ml-001"
+        },
+        "ml-002": {
+            "title": "Random Forest Feature Importance",
+            "difficulty": "Intermediate",
+            "tier": "machine_learning",
+            "url": "/learn/lesson.html?id=ml-002"
+        },
+        "eval-001": {
+            "title": "ROC Curves and Precision-Recall",
+            "difficulty": "Advanced",
+            "tier": "machine_learning",
+            "url": "/learn/lesson.html?id=eval-001"
+        },
+        "dl-001": {
+            "title": "Building CNNs from Scratch",
+            "difficulty": "Advanced",
+            "tier": "deep_learning",
+            "url": "/learn/lesson.html?id=dl-001"
+        },
+        "dl-002": {
+            "title": "PyTorch Autograd Explained",
+            "difficulty": "Advanced",
+            "tier": "deep_learning",
+            "url": "/learn/lesson.html?id=dl-002"
+        },
+        "dl-003": {
+            "title": "GANs for Synthetic Data Gen",
+            "difficulty": "Expert",
+            "tier": "deep_learning",
+            "url": "/learn/lesson.html?id=dl-003"
+        },
+        "llm-001": {
+            "title": "LoRA Fine-tuning for Llama 3",
+            "difficulty": "Expert",
+            "tier": "modern_ai",
+            "url": "/learn/lesson.html?id=llm-001"
+        },
+        "agent-001": {
+            "title": "CrewAI Multi-Agent Workflows",
+            "difficulty": "Expert",
+            "tier": "modern_ai",
+            "url": "/learn/lesson.html?id=agent-001"
+        },
+        "rag-001": {
+            "title": "Hybrid Search with Pinecone & LangChain",
+            "difficulty": "Advanced",
+            "tier": "modern_ai",
+            "url": "/learn/lesson.html?id=rag-001"
+        }
+    }
+}
