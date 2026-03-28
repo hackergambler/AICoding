@@ -79,10 +79,31 @@ const Library={
   countLessons(){return this._ml?this._ml.tracks.reduce((s,t)=>s+t.lessons.length,0):0;},
 
   async search(query){
-    const q=query.toLowerCase(),lessons=await this.getAllLessons();
-    return lessons.filter(l=>
+    const q=query.toLowerCase();
+    const lessons=await this.getAllLessons();
+    const lessonHits=lessons.filter(l=>
       l.title.toLowerCase().includes(q)||l.desc.toLowerCase().includes(q)||
-      l.sections.some(s=>s.h2.toLowerCase().includes(q)||(s.body||'').toLowerCase().includes(q)));
+      l.sections.some(s=>s.h2.toLowerCase().includes(q)||(s.body||'').toLowerCase().includes(q)))
+      .map(l=>({...l,contentType:'lesson'}));
+    const projects=(await this.loadProjects()).filter(p=>
+      p.title.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||
+      (p.category||'').toLowerCase().includes(q)||
+      (p.stack||[]).some(s=>String(s).toLowerCase().includes(q))||
+      (p.sections||[]).some(s=>s.h2.toLowerCase().includes(q)||(s.body||'').toLowerCase().includes(q)))
+      .map(p=>({...p,contentType:'project',badge:p.difficulty||'Project',trackId:'projects',trackTitle:p.category||'Projects'}));
+    return [...lessonHits,...projects];
+  },
+
+  async getTrackByLessonId(id){
+    const ml=await this.load();
+    return ml.tracks.find(t=>t.lessons.some(l=>l.id===id))||null;
+  },
+
+  async getLessonPosition(id){
+    const track=await this.getTrackByLessonId(id);
+    if(!track)return {index:0,total:0,track:null};
+    const index=track.lessons.findIndex(l=>l.id===id);
+    return {index:index+1,total:track.lessons.length,track};
   }
 };
 
@@ -192,13 +213,17 @@ const Renderer={
       <a href="/tutorials/index.html#tier-${data.trackTier}">${data.trackTitle||''}</a><span class="separator">/</span>
       <span>${data.title}</span>`;
     const hdr=document.getElementById('ce-header');
-    if(hdr)hdr.innerHTML=`<div class="lesson-meta">
-      <span class="badge badge-${(data.badge||'beginner').toLowerCase()}">${data.badge||'Beginner'}</span>
-      <span class="lesson-meta-item">⏱️ ${data.duration||'30 min'}</span>
-      ${Progress.isComplete(data.id)?'<span class="lesson-meta-item" style="color:var(--accent-success)">✅ Completed</span>':''}
-    </div>
-    <h1 class="lesson-title">${data.title}</h1>
-    <p class="lesson-description">${data.desc}</p>`;
+    Library.getLessonPosition(data.id).then(({index,total,track})=>{
+      if(hdr)hdr.innerHTML=`<div class="lesson-meta">
+        <span class="badge badge-${(data.badge||'beginner').toLowerCase()}">${data.badge||'Beginner'}</span>
+        <span class="lesson-meta-item">⏱️ ${data.duration||'30 min'}</span>
+        <span class="lesson-meta-item">🧭 ${track?.title||data.trackTitle||'Track'} · Lesson ${index||1} of ${total||1}</span>
+        <span class="lesson-meta-item">🧱 ${(data.sections||[]).length} sections</span>
+        ${Progress.isComplete(data.id)?'<span class="lesson-meta-item" style="color:var(--accent-success)">✅ Completed</span>':''}
+      </div>
+      <h1 class="lesson-title">${data.title}</h1>
+      <p class="lesson-description">${data.desc}</p>`;
+    });
     const body=document.getElementById('ce-body');
     if(body)body.innerHTML=this._sections(data.sections);
     const nav=document.getElementById('ce-lesson-nav');
@@ -211,7 +236,9 @@ const Renderer={
         ${Progress.isComplete(data.id)?'✅ Completed':'Mark Complete'}</button>
       ${data.next?`<a href="?id=${data.next}&type=lesson" class="next">
         <div class="lesson-nav-label">Next →</div>
-        <div class="lesson-nav-title" id="ce-nt">…</div></a>`:'<span></span>'}`;
+        <div class="lesson-nav-title" id="ce-nt">…</div></a>`:`<a href="/courses/${data.trackId}.html" class="next">
+        <div class="lesson-nav-label">Track Roadmap →</div>
+        <div class="lesson-nav-title">Open ${data.trackTitle||'track'} overview</div></a>`}`;
     if(data.prev)Library.findLesson(data.prev).then(l=>{const e=document.getElementById('ce-pt');if(e&&l)e.textContent=l.title;});
     if(data.next)Library.findLesson(data.next).then(l=>{const e=document.getElementById('ce-nt');if(e&&l)e.textContent=l.title;});
     this._adSlot('ce-body');},
@@ -280,7 +307,7 @@ const Search={
     if(this.modal){this.modal.remove();this.modal=null;}
     this.modal=document.createElement('div');this.modal.id='ce-sm';
     this.modal.innerHTML=`<div class="ce-sb2"></div><div class="ce-sbox2">
-      <input id="ce-si2" type="text" placeholder="Search 125+ lessons…" autocomplete="off">
+      <input id="ce-si2" type="text" placeholder="Search lessons, tracks, and projects…" autocomplete="off">
       <div id="ce-sr2"></div><div class="ce-sh2">↑↓ navigate · ↵ open · esc close</div></div>`;
     this._css();document.body.appendChild(this.modal);
     const inp=document.getElementById('ce-si2'),res=document.getElementById('ce-sr2');
@@ -294,12 +321,19 @@ const Search={
       selectedIdx=-1;
       const q=inp.value.trim();if(q.length<2){res.innerHTML='';return;}
       const hits=(await Library.search(q)).slice(0,9);
-      res.innerHTML=hits.length?hits.map(h=>`
-        <a href="/learn/lesson.html?id=${h.id}&type=lesson" class="ce-sri2">
-          <span class="ce-sri-badge badge-${(h.badge||'beginner').toLowerCase()}">${h.badge||'Beginner'}</span>
-          <span style="flex:1;color:var(--text-primary);font-size:.95rem">${h.title}</span>
-          <span style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">${h.trackId}</span>
-        </a>`).join(''):`<div style="padding:1.5rem;text-align:center;color:var(--text-muted);font-style:italic">No results for "${q}"</div>`;});
+      res.innerHTML=hits.length?hits.map(h=>{
+        const isProject=h.contentType==='project';
+        const href=isProject?`/learn/project.html?id=${h.id}&type=project`:`/learn/lesson.html?id=${h.id}&type=lesson`;
+        const complete=!isProject&&Progress.isComplete(h.id);
+        return `
+        <a href="${href}" class="ce-sri2">
+          <span class="ce-sri-badge badge-${(h.badge||'beginner').toLowerCase()}">${isProject?'Project':(h.badge||'Beginner')}</span>
+          <span style="flex:1;display:flex;flex-direction:column;gap:.2rem">
+            <span style="color:var(--text-primary);font-size:.95rem">${h.title}</span>
+            <span style="font-size:.72rem;color:var(--text-muted)">${isProject?(h.category||h.trackTitle||'Project path'):(h.trackTitle||h.trackId||'Track')} · ${h.duration||'30 min'}${complete?' · completed':''}</span>
+          </span>
+          <span style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">${isProject?'build':(h.trackId||'track')}</span>
+        </a>`;}).join(''):`<div style="padding:1.5rem;text-align:center;color:var(--text-muted);font-style:italic">No results for "${q}"</div>`;});
     inp.addEventListener('keydown',e=>{
       const items=getItems();
       if(e.key==='ArrowDown'){e.preventDefault();highlight(Math.min(selectedIdx+1,items.length-1));}
@@ -349,6 +383,7 @@ const TrackIndex={
     const done=track.lessons.filter(l=>Progress.isComplete(l.id)).length;
     const total=track.lessons.length;
     const pct=total?Math.round(done/total*100):0;
+    const nextLesson=track.lessons.find(l=>!Progress.isComplete(l.id))||track.lessons[0];
     return`<div class="ce-tc" style="border-top:3px solid ${track.color}">
       <div class="ce-th"><span style="font-size:2.2rem">${track.icon}</span>
         <div><div style="font-family:var(--font-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:${track.color}">Tier ${track.tier}</div>
@@ -357,7 +392,8 @@ const TrackIndex={
       <p style="font-size:.87rem;color:var(--text-secondary);line-height:1.6;margin:.75rem 0">${track.description}</p>
       <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin:.5rem 0 .25rem">
         <div style="height:100%;width:${pct}%;background:${track.color};border-radius:2px;transition:width .5s"></div></div>
-      <div style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:.75rem">${done}/${total} completed</div>
+      <div style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:.35rem">${done}/${total} completed</div>
+      <div style="font-size:.78rem;color:var(--text-secondary);margin-bottom:.75rem">Next unlock: ${nextLesson.title} · ${nextLesson.duration||'30 min'}</div>
       <ul class="ce-tl">${track.lessons.slice(0,5).map(l=>`
         <li data-lesson-id="${l.id}" class="${Progress.isComplete(l.id)?'ce-done':''}">
           <a href="/learn/lesson.html?id=${l.id}&type=lesson">
@@ -365,9 +401,12 @@ const TrackIndex={
             <span style="margin-left:auto;font-size:.7rem;color:var(--text-muted);font-family:var(--font-mono)">${l.duration}</span>
           </a></li>`).join('')}
         ${total>5?`<li style="padding:.35rem .4rem;color:var(--text-muted);font-size:.8rem">+${total-5} more lessons…</li>`:''}</ul>
-      <a href="/learn/lesson.html?id=${track.lessons[0].id}&type=lesson"
-         class="btn btn-primary" style="display:block;text-align:center;margin-top:1.25rem;width:100%">
-        ${done>0?'Continue Track →':'Start Track →'}</a></div>`;},
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:1.25rem">
+        <a href="/learn/lesson.html?id=${nextLesson.id}&type=lesson"
+           class="btn btn-primary" style="display:block;text-align:center;width:100%">
+          ${done>0?'Resume →':'Start →'}</a>
+        <a href="/courses/${track.id}.html" class="btn btn-outline" style="display:block;text-align:center;width:100%">Roadmap</a>
+      </div></div>`;},
 
   _css(){
     if(document.getElementById('ce-ti-css'))return;

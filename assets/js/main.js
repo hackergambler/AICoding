@@ -49,6 +49,43 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Search functionality (keyboard shortcut + Enter to search)
+function getRootPrefix() {
+    const path = window.location.pathname || '/';
+    if (path === '/' || path === '') return '';
+    const parts = path.split('/').filter(Boolean);
+    if (!parts.length) return '';
+    const last = parts[parts.length - 1];
+    const depth = last.includes('.') ? parts.length - 1 : parts.length;
+    return depth > 0 ? '../'.repeat(depth) : '';
+}
+
+function buildSiteUrl(relativePath) {
+    return new URL(getRootPrefix() + relativePath, window.location.href).toString();
+}
+
+function ensureDiscoverNavLink() {
+    document.querySelectorAll('.nav-menu').forEach(menu => {
+        const hasDiscover = Array.from(menu.querySelectorAll('a')).some(a => /discover\.html/.test(a.getAttribute('href') || ''));
+        if (hasDiscover) return;
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.className = 'nav-link';
+        link.href = getRootPrefix() + 'discover.html';
+        link.textContent = 'Discover';
+        if ((window.location.pathname || '').includes('discover.html')) {
+            link.classList.add('active');
+        }
+        item.appendChild(link);
+        menu.appendChild(item);
+    });
+
+    document.querySelectorAll('.nav-search input').forEach(input => {
+        if ((input.getAttribute('placeholder') || '').toLowerCase().includes('tutorial')) {
+            input.setAttribute('placeholder', 'Search lessons or projects...');
+        }
+    });
+}
+
 document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -63,17 +100,13 @@ const navSearchInputEl = document.querySelector('.nav-search input');
 if (navSearchInputEl) {
     navSearchInputEl.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            // If already on the tutorials page, let the inline script handle in-place filtering
             if (window.location.pathname.includes('/tutorials/index')) return;
             const query = navSearchInputEl.value.trim();
-            // Find the tutorials nav link to get the correct relative path
-            const tutorialsLink = document.querySelector('a[href*="tutorials/index.html"]');
-            const base = tutorialsLink ? tutorialsLink.href : 'tutorials/index.html';
-            const tutorialsUrl = new URL(base);
+            const discoveryUrl = new URL(buildSiteUrl('discover.html'));
             if (query) {
-                tutorialsUrl.searchParams.set('q', query);
+                discoveryUrl.searchParams.set('q', query);
             }
-            window.location.href = tutorialsUrl.toString();
+            window.location.href = discoveryUrl.toString();
         }
     });
 }
@@ -247,6 +280,7 @@ window.copyCode = copyCode;
 // Initialize on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
     reveal();
+    ensureDiscoverNavLink();
     
     // Update any progress displays
     const progressCounters = document.querySelectorAll('[data-progress-count]');
