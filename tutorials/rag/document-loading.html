@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG Document Loading — PDFs, Web, Code & Databases | AI Coding Academy</title>
-    <meta name="description" content="Load documents into your RAG pipeline from PDFs, websites, Word docs, code, and databases.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAG Document Loading — PDFs, Web, Code &amp; Databases | AI Coding Academy</title>
+<meta content="Load PDFs, HTML, Markdown, and directories for RAG, preserve useful metadata, clean raw text, and debug ingestion issues early." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,221 +64,160 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>Document Loading</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 25 min</span>
-            </div>
-            <h1 class="lesson-title">Document Loading for RAG</h1>
-            <p class="lesson-description">Load documents from any source into your RAG pipeline: PDFs, websites, Word docs, Notion, GitHub, databases, and custom loaders.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>PDF Loading</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — PDF loading options</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> (
-    PyPDFLoader,
-    PDFMinerLoader,
-    UnstructuredPDFLoader,
-)
-
-<span class="cm"># Option 1: PyPDF (fast, basic)</span>
-loader = PyPDFLoader(<span class="st">"document.pdf"</span>)
-pages = loader.load()
-<span class="kw">print</span>(<span class="st">f"{len(pages)} pages loaded"</span>)
-<span class="kw">print</span>(pages[<span class="nu">0</span>].page_content[:<span class="nu">500</span>])
-
-<span class="cm"># Option 2: PDFMiner (better text extraction)</span>
-loader2 = PDFMinerLoader(<span class="st">"document.pdf"</span>)
-docs = loader2.load()
-
-<span class="cm"># Option 3: Unstructured (best, handles tables/images)</span>
-loader3 = UnstructuredPDFLoader(<span class="st">"document.pdf"</span>, mode=<span class="st">"elements"</span>)
-elements = loader3.load()
-<span class="kw">for</span> el <span class="kw">in</span> elements[:5]:
-    <span class="kw">print</span>(el.metadata.get(<span class="st">"category"</span>), el.page_content[:<span class="nu">100</span>])
-
-<span class="cm"># Load all PDFs in a directory</span>
-<span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> DirectoryLoader
-dir_loader = DirectoryLoader(<span class="st">"./docs"</span>, glob=<span class="st">"**/*.pdf"</span>, loader_cls=PyPDFLoader)
-all_docs = dir_loader.load()
-<span class="kw">print</span>(<span class="st">f"Loaded {len(all_docs)} documents"</span>)</pre>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
 </div>
-            <h2>Web & URL Loading</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — web scraping loaders</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> (
-    WebBaseLoader,
-    RecursiveUrlLoader,
-    SitemapLoader,
-)
-<span class="kw">import</span> bs4
-
-<span class="cm"># Single URL</span>
-loader = WebBaseLoader(
-    web_paths=[<span class="st">"https://docs.python.org/3/library/asyncio.html"</span>],
-    bs_kwargs={<span class="st">"parse_only"</span>: bs4.SoupStrainer(<span class="st">"article"</span>)}
-)
-docs = loader.load()
-
-<span class="cm"># Crawl an entire docs site recursively</span>
-recursive = RecursiveUrlLoader(
-    url=<span class="st">"https://docs.python.org/3/"</span>,
-    max_depth=<span class="nu">2</span>,
-    extractor=<span class="kw">lambda</span> x: bs4.BeautifulSoup(x, <span class="st">"html.parser"</span>).get_text()
-)
-crawled = recursive.load()
-<span class="kw">print</span>(<span class="st">f"Crawled {len(crawled)} pages"</span>)
-
-<span class="cm"># Load from sitemap</span>
-sitemap = SitemapLoader(<span class="st">"https://example.com/sitemap.xml"</span>, filter_urls=[<span class="st">"docs"</span>])
-sitemap_docs = sitemap.load()</pre>
+<div class="top-bar-right">Part of MYRQAI Network</div>
 </div>
-            <h2>Office Documents</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — Word, Excel, and PowerPoint</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> (
-    Docx2txtLoader,
-    UnstructuredWordDocumentLoader,
-    UnstructuredExcelLoader,
-    UnstructuredPowerPointLoader,
-)
-
-<span class="cm"># Word documents</span>
-word_loader = Docx2txtLoader(<span class="st">"report.docx"</span>)
-word_docs = word_loader.load()
-
-<span class="cm"># Excel files</span>
-excel_loader = UnstructuredExcelLoader(<span class="st">"data.xlsx"</span>, mode=<span class="st">"elements"</span>)
-excel_docs = excel_loader.load()
-
-<span class="cm"># PowerPoint</span>
-pptx_loader = UnstructuredPowerPointLoader(<span class="st">"slides.pptx"</span>)
-slides = pptx_loader.load()</pre>
 </div>
-            <h2>Code & GitHub</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — load source code for RAG</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> (
-    GenericLoader,
-    GitLoader,
-    PythonLoader,
-)
-<span class="kw">from</span> langchain_community.document_loaders.parsers <span class="kw">import</span> LanguageParser
-<span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> Language
-
-<span class="cm"># Load Python files with code-aware splitting</span>
-loader = GenericLoader.from_filesystem(
-    <span class="st">"./my_project"</span>,
-    glob=<span class="st">"**/*.py"</span>,
-    suffixes=[<span class="st">".py"</span>],
-    parser=LanguageParser(language=Language.PYTHON, parser_threshold=<span class="nu">500</span>),
-)
-code_docs = loader.load()
-
-<span class="cm"># Clone and load a GitHub repo</span>
-git_loader = GitLoader(
-    clone_url=<span class="st">"https://github.com/langchain-ai/langchain"</span>,
-    repo_path=<span class="st">"./langchain_repo"</span>,
-    branch=<span class="st">"master"</span>,
-    file_filter=<span class="kw">lambda</span> f: f.endswith(<span class="st">".py"</span>)
-)
-repo_docs = git_loader.load()
-<span class="kw">print</span>(<span class="st">f"Loaded {len(repo_docs)} Python files"</span>)</pre>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
 </div>
-            <h2>Custom Loader</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — build your own document loader</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_core.document_loaders <span class="kw">import</span> BaseLoader
-<span class="kw">from</span> langchain_core.documents <span class="kw">import</span> Document
-<span class="kw">from</span> typing <span class="kw">import</span> Iterator
-<span class="kw">import</span> json, pathlib
-
-<span class="kw">class</span> <span class="cl">JSONLLoader</span>(BaseLoader):
-    <span class="st">&#34;&#34;&#34;Load documents from a JSON Lines file.&#34;&#34;&#34;</span>
-    <span class="kw">def</span> <span class="fn">__init__</span>(self, file_path: str, content_key: str, metadata_keys: list = <span class="kw">None</span>):
-        self.file_path = pathlib.Path(file_path)
-        self.content_key = content_key
-        self.metadata_keys = metadata_keys <span class="kw">or</span> []
-
-    <span class="kw">def</span> <span class="fn">lazy_load</span>(self) -> Iterator[Document]:
-        <span class="kw">with</span> self.file_path.open() <span class="kw">as</span> f:
-            <span class="kw">for</span> i, line <span class="kw">in</span> enumerate(f):
-                obj = json.loads(line.strip())
-                metadata = {k: obj.get(k) <span class="kw">for</span> k <span class="kw">in</span> self.metadata_keys}
-                metadata[<span class="st">"source"</span>] = str(self.file_path)
-                metadata[<span class="st">"line"</span>] = i
-                <span class="kw">yield</span> Document(page_content=obj.get(self.content_key, <span class="st">""</span>), metadata=metadata)
-
-<span class="cm"># Use it</span>
-loader = JSONLLoader(<span class="st">"reviews.jsonl"</span>, content_key=<span class="st">"text"</span>, metadata_keys=[<span class="st">"rating"</span>, <span class="st">"product_id"</span>])
-docs = list(loader.lazy_load())
-<span class="kw">print</span>(<span class="st">f"Loaded {len(docs)} reviews"</span>)</pre>
+<button class="mobile-menu-btn">☰</button>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="introduction.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">RAG Introduction</div>
-            </a>
-            <a href="text-splitting.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Text Splitting</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>Document Loading</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 33 min</span>
+</div>
+<h1 class="lesson-title">Document Loading for RAG</h1>
+<p class="lesson-description">Load documents for RAG with the right parser, preserve metadata, normalize content, and debug ingestion before retrieval quality collapses.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Document loading is where retrieval quality starts</h2>
+<p>RAG systems often fail before they ever reach the vector database. If the document loader loses structure, drops metadata, mangles tables, or ingests noisy boilerplate, the retrieval layer will struggle no matter how good the embedding model is.</p>
+<p>Your first goal is not “load the file somehow.” It is to extract text in a form that still makes sense after chunking.</p>
+<div class="tip-box"><div class="tip-box-title">First principle</div><p>Ingestion quality beats retrieval cleverness. If the source text is broken, the answer layer inherits the damage.</p></div>
+<h2>2. Choose the loader by document type</h2>
+<ul>
+<li><strong>PDFs</strong>: start with a fast text loader, then escalate to richer parsing when layout matters.</li>
+<li><strong>Markdown and plain text</strong>: preserve headings and file paths.</li>
+<li><strong>HTML</strong>: strip navigation chrome and repeated boilerplate.</li>
+<li><strong>Directories</strong>: load in batches but tag every chunk with source metadata.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — load a directory of PDFs</span><button class="copy-btn">Copy</button></div><pre>from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
+
+loader = DirectoryLoader(
+    "./docs",
+    glob="**/*.pdf",
+    loader_cls=PyPDFLoader,
+)
+
+documents = loader.load()
+print(len(documents))
+print(documents[0].metadata)
+</pre></div>
+<h2>3. Preserve metadata so retrieved chunks stay explainable</h2>
+<p>Every loaded document should carry enough metadata to answer three questions later:</p>
+<ol>
+<li>Where did this text come from?</li>
+<li>What part of the source was it?</li>
+<li>Can I cite or re-open the exact origin?</li>
+</ol>
+<div class="code-block"><div class="code-block-label"><span>Python — normalize document metadata</span><button class="copy-btn">Copy</button></div><pre>def normalize_document(doc, source_type: str):
+    doc.metadata["source_type"] = source_type
+    doc.metadata["source_path"] = doc.metadata.get("source")
+    doc.metadata["page"] = doc.metadata.get("page")
+    return doc
+</pre></div>
+<p>Without metadata, retrieval might still look good in a demo, but the system becomes much harder to debug and trust in production.</p>
+<h2>4. Clean and normalize before chunking</h2>
+<p>Raw document text often contains repeated whitespace, broken line wraps, headers, footers, or irrelevant boilerplate. Clean that early so chunking and embeddings operate on usable content.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — simple cleanup pass</span><button class="copy-btn">Copy</button></div><pre>import re
+
+def clean_text(text: str) -&gt; str:
+    text = re.sub(r"\s+", " ", text)
+    text = text.replace("Page 1 of 10", "")
+    return text.strip()
+</pre></div>
+<p>Do not over-clean. Removing every line break can destroy structure. The aim is to remove noise while preserving meaning.</p>
+<h2>5. Build an ingestion pipeline you can inspect</h2>
+<p>A healthy RAG ingestion pipeline is observable at each stage:</p>
+<ul>
+<li>raw files discovered,</li>
+<li>documents loaded,</li>
+<li>documents cleaned,</li>
+<li>chunks created,</li>
+<li>vectors stored,</li>
+<li>retrieval verified.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — ingestion outline</span><button class="copy-btn">Copy</button></div><pre>loaded_docs = loader.load()
+cleaned_docs = []
+
+for doc in loaded_docs:
+    doc.page_content = clean_text(doc.page_content)
+    cleaned_docs.append(normalize_document(doc, source_type="pdf"))
+
+print(f"Loaded {len(cleaned_docs)} cleaned documents")
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">What to inspect manually</div><p>Open five random chunks after ingestion. If a human would not trust those chunks as standalone evidence, your retrieval system probably should not either.</p></div>
+<h2>6. Common ingestion failures and next routes</h2>
+<ul>
+<li><strong>Scanned PDFs return garbage</strong>: you may need OCR or a richer unstructured pipeline.</li>
+<li><strong>Chunks contain duplicate headers and footers</strong>: clean before splitting.</li>
+<li><strong>Metadata disappears</strong>: normalize documents into a consistent internal schema.</li>
+<li><strong>RAG answers cite the wrong source</strong>: chunk IDs or page metadata are not stable enough.</li>
+</ul>
+<ul>
+<li><a href="text-splitting.html">Continue into chunking and text splitting</a></li>
+<li><a href="rag-evaluation.html">Evaluate whether retrieval is actually helping</a></li>
+<li><a href="../../debugging/data.html">Fix ingestion and data-quality issues</a></li>
+<li><a href="../../debugging/vectordb.html">Debug vector-store insertion and search problems</a></li>
+<li><a href="../../projects/research-crew.html">Use retrieval in a real research workflow</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="introduction.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">RAG Introduction</div>
+</a>
+<a class="next" href="text-splitting.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Text Splitting</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

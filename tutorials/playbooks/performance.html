@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Optimization Playbook | AI Coding Academy</title>
+    <meta name="description" content="Use these pages to translate latency, throughput, and cost topics into concrete implementation work.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    
+    <style>
+        .playbook-container{max-width:1080px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .playbook-hero{margin-bottom:var(--space-3xl)}
+        .playbook-hero p{font-size:1.1rem;color:var(--text-secondary);max-width:860px;line-height:1.8}
+        .hero-badge-inline{display:inline-flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;background:rgba(0,255,170,.12);border:1px solid rgba(0,255,170,.18);color:var(--accent-primary);font-weight:700;margin-bottom:var(--space-lg)}
+        .quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-2xl) 0 var(--space-3xl)}
+        .quick-links a{display:block;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .quick-links a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .quick-links strong{display:block;margin-bottom:6px}
+        .quick-links span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .topic-section{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl);margin-bottom:var(--space-xl)}
+        .topic-section h2{font-family:var(--font-display);font-size:1.8rem;margin-bottom:var(--space-md)}
+        .topic-section p{color:var(--text-secondary);line-height:1.8}
+        .topic-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-xl);margin-top:var(--space-xl)}
+        .topic-card-list,.practice-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-xl)}
+        .topic-card-list h3,.practice-card h3{font-size:1.05rem;margin-bottom:var(--space-md)}
+        .resource-list{display:grid;gap:var(--space-md)}
+        .resource-item{display:block;padding:14px 16px;border-radius:var(--radius-md);background:rgba(0,255,170,.05);border:1px solid rgba(0,255,170,.14);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .resource-item:hover{transform:translateY(-1px);border-color:rgba(0,255,170,.3)}
+        .resource-item strong{display:block;margin-bottom:4px}
+        .resource-item span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .practice-card ul{padding-left:1.1rem;color:var(--text-secondary);line-height:1.8}
+        .playbook-footer-cta{margin-top:var(--space-3xl);background:linear-gradient(135deg, rgba(0,255,170,.12), rgba(0,212,255,.10));border:1px solid rgba(0,255,170,.18);border-radius:var(--radius-2xl);padding:var(--space-2xl)}
+        .playbook-footer-cta p{max-width:760px}
+        .path-list{display:grid;gap:var(--space-xl)}
+        .path-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl)}
+        .path-card ol{padding-left:1.2rem;color:var(--text-secondary);line-height:1.8}
+        .path-card li+li{margin-top:8px}
+        @media(max-width:860px){.topic-grid{grid-template-columns:1fr}}
+    </style>
+
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">All Tutorials</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    
+    <main class="playbook-container">
+        <div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../advanced.html">Advanced</a><span class="separator">/</span><span>Performance Optimization Playbook</span></div>
+        <header class="playbook-hero">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h1 class="lesson-title">Performance Optimization Playbook</h1>
+            <p>Use these pages to translate latency, throughput, and cost topics into concrete implementation work.</p>
+        </header>
+        <section class="quick-links"><a href="#inference-optimization-techniques"><strong>Inference Optimization Techniques</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#smart-batching-strategies"><strong>Smart Batching Strategies</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#semantic-caching-for-llms"><strong>Semantic Caching for LLMs</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#cost-optimization-strategies"><strong>Cost Optimization Strategies</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#gpu-memory-optimization"><strong>GPU Memory Optimization</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#streaming-response-optimization"><strong>Streaming Response Optimization</strong><span>Jump to the recommended lessons and practice routes.</span></a></section>
+        
+        <section class="topic-section" id="inference-optimization-techniques">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>Inference Optimization Techniques</h2>
+            <p>Reduce latency with quantization, pruning, knowledge distillation, and optimized inference engines.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/local-llms/llama-cpp.html"><strong>llama.cpp Local Inference</strong><span>A grounded path for faster inference on local or constrained hardware.</span></a><a class="resource-item" href="../../tutorials/local-llms/fine-tuning.html"><strong>Fine-Tuning Local Models</strong><span>Understand the trade-offs between adapting a model and optimizing serving.</span></a><a class="resource-item" href="../../tutorials/agents/scaling-agents.html"><strong>Scaling Agents</strong><span>Tie model performance to system-level throughput and capacity planning.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="smart-batching-strategies">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>Smart Batching Strategies</h2>
+            <p>Implement dynamic batching, continuous batching, and request scheduling for optimal throughput.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/openai/streaming.html"><strong>Streaming Responses</strong><span>Balance batching with interactive UX and partial response delivery.</span></a><a class="resource-item" href="../../debugging/async.html"><strong>Async Debugging</strong><span>Catch concurrency bugs that appear when batching and queueing meet production traffic.</span></a><a class="resource-item" href="../../tutorials/agents/scaling-agents.html"><strong>Scaling Agents</strong><span>Think through throughput, worker pools, and request scheduling.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="semantic-caching-for-llms">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>Semantic Caching for LLMs</h2>
+            <p>Build layered caches for prompts, retrieval, and completions to reduce cost and latency.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/claude/prompt-caching.html"><strong>Claude Prompt Caching</strong><span>The clearest existing lesson on cache-aware request design.</span></a><a class="resource-item" href="../../tutorials/rag/hybrid-search.html"><strong>Hybrid Search</strong><span>Combine retrieval tuning with cache strategy to reduce repeated work.</span></a><a class="resource-item" href="../../tutorials/rag/rag-evaluation.html"><strong>RAG Evaluation</strong><span>Measure whether caching is improving usefulness instead of only speed.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="cost-optimization-strategies">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>Cost Optimization Strategies</h2>
+            <p>Lower inference spend with routing, caching, rate controls, and model selection policies.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/openai/tokens-and-models.html"><strong>Tokens and Models</strong><span>Start here for model sizing, token budgets, and pricing-sensitive design.</span></a><a class="resource-item" href="../../tutorials/claude/prompt-caching.html"><strong>Claude Prompt Caching</strong><span>A direct lever for cutting repeat prompt costs.</span></a><a class="resource-item" href="../../debugging/api-keys.html"><strong>API Key Management</strong><span>Keep usage segmented and observable while you optimize spend.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="gpu-memory-optimization">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>GPU Memory Optimization</h2>
+            <p>Fit larger workloads onto limited hardware through careful memory management and runtime choices.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/local-llms/ollama.html"><strong>Running Ollama</strong><span>A practical local-serving starting point before deeper low-level tuning.</span></a><a class="resource-item" href="../../tutorials/local-llms/llama-cpp.html"><strong>llama.cpp Local Inference</strong><span>A better fit for memory-constrained deployment strategies.</span></a><a class="resource-item" href="../../tutorials/local-llms/fine-tuning.html"><strong>Fine-Tuning Local Models</strong><span>Understand how quantization and adaptation affect memory footprints.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="streaming-response-optimization">
+            <div class="hero-badge-inline">⚡ Advanced Playbook</div>
+            <h2>Streaming Response Optimization</h2>
+            <p>Improve perceived speed with token streaming, chunk delivery, and responsive frontend behavior.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/openai/streaming.html"><strong>Streaming Responses</strong><span>The core lesson for building responsive streaming interfaces.</span></a><a class="resource-item" href="../../tutorials/claude/messages-api.html"><strong>Claude Messages API</strong><span>Compare provider behavior and message lifecycle choices.</span></a><a class="resource-item" href="../../debugging/network.html"><strong>Network Debugging</strong><span>Solve transport and timeout issues that often break streaming in production.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="playbook-footer-cta">
+            <h2>Start with Streaming Responses</h2>
+            <p>It is the fastest way to make advanced systems feel faster before deeper infra work.</p>
+            <a class="btn btn-primary" href="../../tutorials/openai/streaming.html">Open recommended starting page</a>
+        </section>
+    </main>
+    
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most practical AI coding learning platform for real tutorials, debugging, and build-ready projects.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Support</h4><ul>
+            <li><a href="../../docs.html">Docs</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Company</h4><ul>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../privacy.html">Privacy</a></li>
+            <li><a href="../../terms.html">Terms</a></li>
+        </ul></div>
+    </div></div></footer>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

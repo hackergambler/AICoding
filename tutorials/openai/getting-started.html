@@ -209,15 +209,15 @@
     <div class="top-bar">
         <div class="top-bar-container">
             <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener">
+                <a href="https://library.myrqai.com" target="_blank" rel="noopener">
                     <span class="link-icon">📚</span>
                     <span class="link-text">AI Library</span>
                 </a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener">
+                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener">
                     <span class="link-icon">🪜</span>
                     <span class="link-text">AI Ladder</span>
                 </a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener">
+                <a href="https://myrqai.com" target="_blank" rel="noopener">
                     <span class="link-icon">🏠</span>
                     <span class="link-text">MYRQAI</span>
                 </a>
@@ -237,7 +237,7 @@
                 <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
             </ul>
             <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
                 <a href="../index.html" class="btn btn-primary">Start Free</a>
             </div>
             <button class="mobile-menu-btn">☰</button>
@@ -258,7 +258,7 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 15 min read</span>
+                <span class="lesson-meta-item">⏱️ 28 min read</span>
                 <span class="lesson-meta-item">📚 Module 1, Lesson 1</span>
             </div>
             <h1 class="lesson-title">Getting Started with OpenAI API</h1>
@@ -266,134 +266,129 @@
         </header>
 
         <div class="toc">
-            <div class="toc-title">📑 In This Lesson</div>
-            <ul class="toc-list">
-                <li><a href="#create-account">1. Create an OpenAI Account</a></li>
-                <li><a href="#get-api-key">2. Generate Your API Key</a></li>
-                <li><a href="#setup-environment">3. Set Up Your Environment</a></li>
-                <li><a href="#first-call">4. Make Your First API Call</a></li>
-                <li><a href="#understanding-response">5. Understanding the Response</a></li>
-                <li><a href="#next-steps">6. Next Steps</a></li>
-            </ul>
-        </div>
+    <div class="toc-title">📑 In This Lesson</div>
+    <ul class="toc-list">
+        <li><a href="#mental-model">1. The OpenAI API mental model</a></li>
+        <li><a href="#create-account">2. Create your account and project</a></li>
+        <li><a href="#setup-environment">3. Set up a clean local environment</a></li>
+        <li><a href="#first-call">4. Make your first successful call</a></li>
+        <li><a href="#understanding-response">5. Read the response object like an engineer</a></li>
+        <li><a href="#starter-models">6. Choose a sensible starter model</a></li>
+        <li><a href="#common-failures">7. Fix common beginner failures</a></li>
+        <li><a href="#next-steps">8. Build the next layer intentionally</a></li>
+    </ul>
+</div>
 
-        <div class="lesson-content">
-            <h2 id="create-account">1. Create an OpenAI Account</h2>
-            <p>Before you can use the OpenAI API, you need to create an account. Here's how:</p>
-            <ol>
-                <li>Go to <strong>platform.openai.com</strong></li>
-                <li>Click "Sign Up" in the top right corner</li>
-                <li>You can sign up with your email, Google account, Microsoft account, or Apple ID</li>
-                <li>Verify your email address</li>
-                <li>Complete phone verification (required for API access)</li>
-            </ol>
+        <div class="lesson-content"><h2 id="mental-model">1. The OpenAI API mental model</h2>
+<p>Before you write code, keep the flow simple in your head: your app sends a request, OpenAI processes it with the model you choose, and you get back text, structured output, tool calls, or embeddings. Almost every later lesson is just a deeper version of this same cycle.</p>
+<ul>
+    <li><strong>Client</strong> — your Python, JavaScript, or backend code</li>
+    <li><strong>Model</strong> — the engine that generates text or decides tool calls</li>
+    <li><strong>Messages or input</strong> — the instructions and context you send</li>
+    <li><strong>Response object</strong> — content, tool calls, usage, and metadata</li>
+</ul>
+<div class="info-box"><div class="info-box-title">ℹ️ Good beginner path</div><p>Start with one reliable model, one short prompt, and one success case. Do not begin with streaming, tools, memory, and a web UI all at once. Production systems are built by stacking small known-good steps.</p></div>
 
-            <div class="tip-box">
-                <div class="tip-box-title">💡 Pro Tip</div>
-                <p>New accounts typically receive free credits to get started. Check your usage page to see your current balance.</p>
-            </div>
+<h2 id="create-account">2. Create your account and project</h2>
+<p>Create an account on the OpenAI platform, verify it, and make sure you are working inside the correct project. In practice, teams often create separate projects or keys for development, staging, and production so usage is easier to track and keys can be rotated safely.</p>
+<ol>
+    <li>Create the account and finish verification</li>
+    <li>Open the API dashboard and choose the right project</li>
+    <li>Create a descriptive key name such as <code>academy-local-dev</code></li>
+    <li>Copy it once and store it in your password manager or secret store</li>
+</ol>
+<div class="warning-box"><div class="warning-box-title">⚠️ Never hardcode keys</div><p>Do not paste API keys directly into source files, screenshots, or public repos. If a key is exposed, revoke it and create a new one immediately. The dedicated <a href="../../debugging/api-keys.html">API keys debugging guide</a> is the first place to go if authentication fails.</p></div>
 
-            <h2 id="get-api-key">2. Generate Your API Key</h2>
-            <p>Your API key is like a password that identifies you to OpenAI's servers. Here's how to get one:</p>
-            <ol>
-                <li>Log in to <strong>platform.openai.com</strong></li>
-                <li>Click on your profile icon in the top right</li>
-                <li>Select "View API Keys" or go directly to <strong>platform.openai.com/api-keys</strong></li>
-                <li>Click "Create new secret key"</li>
-                <li>Give it a descriptive name (e.g., "My First Project")</li>
-                <li>Copy the key immediately - you won't be able to see it again!</li>
-            </ol>
+<h2 id="setup-environment">3. Set up a clean local environment</h2>
+<p>A clean environment solves most beginner problems before they happen. Use a virtual environment, install the SDK, and load secrets from the environment instead of the code.</p>
+<div class="code-block"><div class="code-block-label"><span>bash - create a clean Python environment</span><button class="copy-btn">Copy</button></div><pre>python -m venv .venv
 
-            <div class="warning-box">
-                <div class="warning-box-title">⚠️ Important Security Note</div>
-                <p>Never share your API key publicly or commit it to version control. Treat it like a password. If you accidentally expose it, delete it immediately and create a new one.</p>
-            </div>
+<span class="comment"># macOS / Linux</span>
+source .venv/bin/activate
 
-            <h2 id="setup-environment">3. Set Up Your Environment</h2>
-            <p>We'll use Python for this tutorial. First, make sure you have Python 3.8+ installed, then install the OpenAI library:</p>
+<span class="comment"># Windows PowerShell</span>
+.\.venv\Scripts\Activate.ps1
 
-            <div class="code-block">
-<pre><span class="comment"># Install the OpenAI Python library</span>
-pip install openai</pre>
-            </div>
+pip install --upgrade pip openai python-dotenv</pre></div>
+<div class="code-block"><div class="code-block-label"><span>.env - local development only</span><button class="copy-btn">Copy</button></div><pre>OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini</pre></div>
+<div class="code-block"><div class="code-block-label"><span>Python - load config safely</span><button class="copy-btn">Copy</button></div><pre><span class="keyword">import</span> os
+<span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv
+<span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
 
-            <p>Next, set your API key as an environment variable. This is the safest way to use your key:</p>
+load_dotenv()
+client = OpenAI(api_key=os.getenv(<span class="string">"OPENAI_API_KEY"</span>))
+model = os.getenv(<span class="string">"OPENAI_MODEL"</span>, <span class="string">"gpt-4o-mini"</span>)</pre></div>
 
-            <div class="code-block">
-<pre><span class="comment"># On macOS/Linux (add to ~/.bashrc or ~/.zshrc)</span>
-<span class="keyword">export</span> OPENAI_API_KEY=<span class="string">"your-api-key-here"</span>
+<h2 id="first-call">4. Make your first successful call</h2>
+<p>Your first goal is not a fancy app. It is a request that succeeds consistently. Keep the prompt short, print the reply, and print token usage so you begin building cost awareness from day one.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - your first reliable chat request</span><button class="copy-btn">Copy</button></div><pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
 
-<span class="comment"># On Windows (Command Prompt)</span>
-<span class="keyword">set</span> OPENAI_API_KEY=<span class="string">your-api-key-here</span>
+client = OpenAI()
 
-<span class="comment"># On Windows (PowerShell)</span>
-<span class="variable">$env</span>:OPENAI_API_KEY=<span class="string">"your-api-key-here"</span></pre>
-            </div>
-
-            <h2 id="first-call">4. Make Your First API Call</h2>
-            <p>Now for the exciting part! Let's make your first API call to GPT-4:</p>
-
-            <div class="code-block">
-<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
-
-<span class="comment"># Initialize the client (automatically uses OPENAI_API_KEY env variable)</span>
-client = <span class="function">OpenAI</span>()
-
-<span class="comment"># Make a chat completion request</span>
-response = client.chat.completions.<span class="function">create</span>(
-    model=<span class="string">"gpt-4o-mini"</span>,  <span class="comment"># Fast and cost-effective model</span>
+response = client.chat.completions.create(
+    model=<span class="string">"gpt-4o-mini"</span>,
     messages=[
-        {
-            <span class="string">"role"</span>: <span class="string">"system"</span>,
-            <span class="string">"content"</span>: <span class="string">"You are a helpful assistant."</span>
-        },
-        {
-            <span class="string">"role"</span>: <span class="string">"user"</span>,
-            <span class="string">"content"</span>: <span class="string">"Hello! What can you help me with?"</span>
-        }
-    ]
+        {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a concise programming tutor."</span>},
+        {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Explain what a Python list comprehension is in 3 bullet points."</span>}
+    ],
+    temperature=<span class="variable">0.2</span>
 )
 
-<span class="comment"># Print the assistant's response</span>
-<span class="function">print</span>(response.choices[<span class="variable">0</span>].message.content)</pre>
-            </div>
+<span class="function">print</span>(response.choices[<span class="variable">0</span>].message.content)
+<span class="function">print</span>(response.usage)</pre></div>
+<div class="code-block"><div class="code-block-label"><span>curl - useful when debugging SDK issues</span><button class="copy-btn">Copy</button></div><pre>curl https://api.openai.com/v1/chat/completions \
+  -H <span class="string">"Authorization: Bearer $OPENAI_API_KEY"</span> \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d '{
+    "model": "gpt-4o-mini",
+    "messages": [
+      {"role": "system", "content": "You are a concise assistant."},
+      {"role": "user", "content": "Say hello in one sentence."}
+    ]
+  }'</pre></div>
 
-            <p>Save this code as <code>first_call.py</code> and run it:</p>
+<h2 id="understanding-response">5. Read the response object like an engineer</h2>
+<p>Beginners often only print the assistant text. That is useful, but the rest of the response tells you what happened and how much it cost.</p>
+<ul>
+    <li><code>response.choices[0].message.content</code> — the actual answer</li>
+    <li><code>response.model</code> — confirms which model served the request</li>
+    <li><code>response.usage.prompt_tokens</code> — how much input you sent</li>
+    <li><code>response.usage.completion_tokens</code> — how much output you paid for</li>
+    <li><code>response.usage.total_tokens</code> — total billable token count</li>
+    <li><code>finish_reason</code> — useful later for tools, length limits, or truncation</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">💡 Print usage from day one</div><p>The fastest way to control cost is to measure it. During development, log model name, total tokens, latency, and whether the request succeeded. That one habit makes later optimization much easier.</p></div>
 
-            <div class="code-block">
-<pre>python first_call.py</pre>
-            </div>
+<h2 id="starter-models">6. Choose a sensible starter model</h2>
+<p>You do not need the most powerful model to learn the API. Start with a fast, lower-cost model for tutorials and only move up when the task genuinely needs more reasoning depth, bigger context, or better quality.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - switch models with one variable</span><button class="copy-btn">Copy</button></div><pre>MODEL = <span class="string">"gpt-4o-mini"</span>  <span class="comment"># good default for tutorials and prototypes</span>
 
-            <p>You should see a friendly response from the AI! 🎉</p>
+response = client.chat.completions.create(
+    model=MODEL,
+    messages=[{<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Summarize this Python function."</span>}]
+)</pre></div>
+<p>Later, the <a href="tokens-and-models.html">Tokens and Models</a> lesson helps you choose more intentionally. For now, optimize for fast feedback and stable experimentation.</p>
 
-            <h2 id="understanding-response">5. Understanding the Response</h2>
-            <p>The API returns a response object with several useful fields:</p>
+<h2 id="common-failures">7. Fix the five failures beginners hit most</h2>
+<ol>
+    <li><strong>401 / authentication errors</strong> — wrong key, wrong environment variable, or expired secret. Use <a href="../../debugging/api-keys.html">API key triage</a>.</li>
+    <li><strong>Connection or timeout issues</strong> — local network restrictions, corporate firewall, or unstable connection. Use <a href="../../debugging/network.html">network debugging</a>.</li>
+    <li><strong>Package import problems</strong> — mixed virtual environments or old SDK versions. Use <a href="../../debugging/configuration.html">configuration debugging</a>.</li>
+    <li><strong>Unexpected cost</strong> — prompts too long, chat history too large, or repeated retries without limits.</li>
+    <li><strong>Confusing outputs</strong> — weak system prompt or vague user request. The next lesson on <a href="chat-completions.html">chat completions</a> fixes this.</li>
+</ol>
+<div class="info-box"><div class="info-box-title">ℹ️ Beginner debugging rule</div><p>When something breaks, change one variable at a time: first the key, then the environment, then the request body, then the model. Randomly changing everything at once hides the real cause.</p></div>
 
-            <div class="code-block">
-<pre><span class="comment"># The response object contains:</span>
-response.id                              <span class="comment"># Unique identifier for this request</span>
-response.model                           <span class="comment"># The model that was used</span>
-response.choices[<span class="variable">0</span>].message.content     <span class="comment"># The actual response text</span>
-response.choices[<span class="variable">0</span>].message.role        <span class="comment"># Always "assistant"</span>
-response.usage.prompt_tokens             <span class="comment"># Tokens in your input</span>
-response.usage.completion_tokens         <span class="comment"># Tokens in the response</span>
-response.usage.total_tokens              <span class="comment"># Total tokens used</span></pre>
-            </div>
-
-            <div class="tip-box">
-                <div class="tip-box-title">💡 What are Tokens?</div>
-                <p>Tokens are pieces of words. On average, 1 token ≈ 4 characters or ¾ of a word. The API charges based on tokens used. We'll cover this in detail in the next lesson.</p>
-            </div>
-
-            <h2 id="next-steps">6. Next Steps</h2>
-            <p>Congratulations! You've made your first OpenAI API call. Here's what to learn next:</p>
-            <ul>
-                <li><strong>Chat Completions Deep Dive</strong> - Learn about messages, roles, and conversation history</li>
-                <li><strong>Understanding Tokens & Pricing</strong> - Know how costs work</li>
-                <li><strong>Model Selection Guide</strong> - Choose the right model for your task</li>
-                <li><strong>Error Handling</strong> - Handle API errors gracefully</li>
-            </ul>
-        </div>
+<h2 id="next-steps">8. Build the next layer intentionally</h2>
+<p>Once your first request works, your strongest next step is not "build a giant app." It is to add one new capability at a time:</p>
+<ul>
+    <li><a href="chat-completions.html">Chat Completions Deep Dive</a> — understand messages and roles properly</li>
+    <li><a href="tokens-and-models.html">Tokens and Models</a> — control cost and choose the right model</li>
+    <li><a href="function-calling.html">Function Calling</a> — connect the model to tools and code</li>
+    <li><a href="streaming.html">Streaming Responses</a> — improve UX for longer outputs</li>
+    <li><a href="../../projects/personal-assistant.html">Personal Assistant project</a> — use the basics in a real build</li>
+</ul></div>
 
         <nav class="lesson-nav">
             <a href="../../courses/openai.html" class="prev">
@@ -426,28 +421,28 @@ response.usage.total_tokens              <span class="comment"># Total tokens us
                 <div class="footer-column">
                     <h4>MYRQAI Network</h4>
                     <ul>
-                        <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-                        <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-                        <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+                        <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+                        <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+                        <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-                        <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-                        <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+                        <li><a href="../../privacy.html">Privacy Policy</a></li>
+                        <li><a href="../../terms.html">Terms of Service</a></li>
+                        <li><a href="../../contact.html">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
+                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
                 <div class="footer-links">
-                    <a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy</a>
+                    <a href="../../privacy.html">Privacy</a>
                     <span>•</span>
-                    <a href="https://www.myrqai.com/admin/terms" target="_blank">Terms</a>
+                    <a href="../../terms.html">Terms</a>
                     <span>•</span>
-                    <a href="https://www.myrqai.com/admin/contact" target="_blank">Contact</a>
+                    <a href="../../contact.html">Contact</a>
                 </div>
             </div>
         </div>

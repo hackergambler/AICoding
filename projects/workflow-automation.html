@@ -5,7 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project: Workflow Automation Agent | AI Coding Academy</title>
-    <meta name="description" content="Automate business workflows with AI: read data, generate insights, write reports on a schedule.">
+    <meta name="description" content="Build an automation agent that ingests business data, runs repeatable prompts and tools, and produces reviewable reports on a schedule.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,15 +47,27 @@
         .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
         .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
         .lesson-nav .next{text-align:right}
+
+        .step-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .step-card,.resource-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-lg)}
+        .step-card h3,.resource-card h3{font-family:var(--font-heading);font-size:1.05rem;margin:0 0 var(--space-sm);color:var(--text-primary)}
+        .step-card p,.resource-card p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .resource-card{display:block;text-decoration:none;transition:var(--transition-base)}
+        .resource-card:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .resource-label{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .output-checklist{margin:var(--space-lg) 0 0;padding-left:var(--space-xl)}
+        .output-checklist li{margin-bottom:var(--space-sm)}
+        @media(max-width:768px){.step-grid,.resource-grid{grid-template-columns:1fr}}
         @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
     </style>
 </head>
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -66,10 +78,10 @@
             <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
             <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
             <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
-            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            <li><a href="../projects/index.html" class="nav-link active">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search projects..."><kbd>⌘K</kbd></div>
             <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -79,71 +91,85 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-advanced">Advanced</span>
-                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 75 min</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 95 min</span>
             </div>
             <h1 class="lesson-title">Project: Workflow Automation Agent</h1>
-            <p class="lesson-description">Automate business workflows with AI: read data, generate insights, write reports on a schedule.</p>
+            <p class="lesson-description">Build a workflow automation agent that ingests business data, runs repeatable steps, handles failures, and produces reviewable outputs on a schedule.</p>
         </header>
-<div class="lesson-content"><h2>What You Will Build</h2><p>An automation agent that reads CSV data, generates an AI-written report with insights, and saves it on a schedule. The foundation for any data pipeline with AI analysis.</p><div class="code-block"><div class="code-block-label"><span>Python - scheduled data analysis and reporting agent</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> schedule, time, json, csv, os
-<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">from</span> datetime <span class="kw">import</span> datetime
-<span class="kw">from</span> pathlib <span class="kw">import</span> Path
+<div class="lesson-content">
+<h2>What You Will Build</h2>
+<p>An automation agent that pulls structured inputs, applies a repeatable processing flow, drafts a result, validates it, and delivers a reviewable output. This is the kind of system teams use for recurring reports, inbox triage, content ops, or internal summaries.</p>
+<div class="tip-box"><div class="tip-box-title">Automation rule</div><p>If a workflow runs on a schedule, the output should be reviewable after every run. The system must tell you what data it used, what decisions it made, and where it was unsure.</p></div>
+<h2>Workflow Layers</h2>
+<div class="step-grid">
+  <div class="step-card"><h3>Ingestion</h3><p>Read CSVs, APIs, or inbox data and normalize the fields before any prompt is sent.</p></div>
+  <div class="step-card"><h3>Decision policy</h3><p>Use simple rules first, then let the model handle classification, drafting, or summarization inside those rules.</p></div>
+  <div class="step-card"><h3>Validation</h3><p>Check required fields, confidence thresholds, and formatting before the run is considered complete.</p></div>
+  <div class="step-card"><h3>Delivery</h3><p>Create a report, email draft, or task artifact with a clear run summary and failure notes.</p></div>
+</div>
+<div class="code-block"><div class="code-block-label"><span>Python - scheduled workflow run summary</span><button class="copy-btn">Copy</button></div><pre>def run_workflow(records):
+    summary = {&quot;processed&quot;: 0, &quot;succeeded&quot;: 0, &quot;failed&quot;: 0, &quot;errors&quot;: []}
+    outputs = []
 
-client = OpenAI()
+    for record in records:
+        summary[&quot;processed&quot;] += 1
+        try:
+            result = process_record(record)
+            outputs.append(result)
+            summary[&quot;succeeded&quot;] += 1
+        except Exception as exc:
+            summary[&quot;failed&quot;] += 1
+            summary[&quot;errors&quot;].append({&quot;id&quot;: record.get(&quot;id&quot;), &quot;error&quot;: str(exc)})
 
-<span class="kw">def</span> <span class="fn">read_csv</span>(path: str) -> str:
-    <span class="kw">try</span>:
-        <span class="kw">with</span> open(path) <span class="kw">as</span> f: rows = list(csv.DictReader(f))
-        <span class="kw">return</span> json.dumps(rows[:50], indent=2)
-    <span class="kw">except Exception</span> <span class="kw">as</span> e: <span class="kw">return</span> f"Error: {e}"
-
-<span class="kw">def</span> <span class="fn">analyze_data</span>(data_json: str, question: str) -> str:
-    resp = client.chat.completions.create(
-        model=<span class="st">"gpt-4o-mini"</span>,
-        messages=[
-            {"role":"system","content":"You are a data analyst. Answer concisely."},
-            {"role":"user","content":f"Data:\n{data_json}\n\nQuestion: {question}"}
-        ]
-    )
-    <span class="kw">return</span> resp.choices[0].message.content
-
-<span class="kw">def</span> <span class="fn">daily_report</span>(data_file: str):
-    print(f"[{datetime.now():%H:%M}] Running daily report...")
-    data = read_csv(data_file)
-    <span class="kw">if</span> "Error" <span class="kw">in</span> data: print(f"Data error: {data}"); <span class="kw">return</span>
-
-    insights = analyze_data(data,
-        <span class="st">"5-bullet executive summary: key metrics, trends, anomalies, actions."</span>)
-
-    report = f"""# Daily Report - {datetime.now():%Y-%m-%d}
-
-## Executive Summary
-{insights}
-
-Generated: {datetime.now():%Y-%m-%d %H:%M:%S}"""
-
-    out_path = Path("reports") / f"report_{datetime.now():%Y%m%d}.md"
-    out_path.parent.mkdir(exist_ok=<span class="kw">True</span>)
-    out_path.write_text(report)
-    print(f"  Saved: {out_path}")
-
-<span class="cm"># Run now for testing</span>
-daily_report(<span class="st">"sales.csv"</span>)
-
-<span class="cm"># Schedule for production</span>
-schedule.every().day.at(<span class="st">"08:00"</span>).do(daily_report, data_file=<span class="st">"sales.csv"</span>)
-<span class="cm"># while True: schedule.run_pending(); time.sleep(60)</span></pre></div><div class="tip-box"><div class="tip-box-title">💡 Deploy as a cron job</div><p>Run this on a Linux server with <code>crontab -e</code> and add: <code>0 8 * * * /usr/bin/python3 /app/daily_report.py</code>. Or use AWS Lambda with EventBridge for serverless scheduling.</p></div></div>
+    return {&quot;summary&quot;: summary, &quot;outputs&quot;: outputs}</pre></div>
+<h2>Build Sequence</h2>
+<h3>Milestone 1: Deterministic preprocessing</h3>
+<p>Normalize dates, currencies, IDs, and missing values before you invoke the model. Many automation bugs blamed on the model are really input-quality problems.</p>
+<h3>Milestone 2: Bounded prompt step</h3>
+<p>Use the model only for the part that benefits from language understanding: classification, summarization, drafting, or extraction. Keep everything else in normal code.</p>
+<h3>Milestone 3: Reviewable delivery</h3>
+<p>Finish each run with a report that includes processed count, failures, retries, and links to the raw records that need human review.</p>
+<h2>Design Choices That Pay Off Later</h2>
+<ul>
+  <li><strong>Idempotency:</strong> rerunning the job should not duplicate side effects.</li>
+  <li><strong>Run logs:</strong> every run should have a stable run ID, counts, and error summary.</li>
+  <li><strong>Retry policy:</strong> retry transient upstream failures, not bad inputs.</li>
+  <li><strong>Escalation queue:</strong> uncertain records should go to review instead of forcing a confident-but-wrong output.</li>
+</ul>
+<div class="warn-box"><div class="warn-box-title">Common failure mode</div><p>Teams automate the pretty output step but forget auditability. Weeks later, nobody can explain why record 184 was classified a certain way. Store the run context and model decision summary.</p></div>
+<h2>Study Before You Build</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../tutorials/agents/function-calling-basics.html"><span class="resource-label">Tools</span><h3>Function Calling Basics</h3><p>Use tools to structure inputs and outputs around the model step.</p></a>
+  <a class="resource-card" href="../tutorials/agents/plan-execute.html"><span class="resource-label">Flow</span><h3>Plan and Execute</h3><p>Useful for workflows with more than one model-assisted step.</p></a>
+  <a class="resource-card" href="../tutorials/agents/error-recovery.html"><span class="resource-label">Recovery</span><h3>Error Recovery</h3><p>Decide when to retry, skip, or escalate a failed item.</p></a>
+  <a class="resource-card" href="../tutorials/agents/agent-monitoring.html"><span class="resource-label">Observability</span><h3>Agent Monitoring</h3><p>Track workflow health over repeated scheduled runs.</p></a>
+</div>
+<h2>When This Project Breaks</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../debugging/data.html"><span class="resource-label">Inputs</span><h3>Data Debugging</h3><p>Use this when malformed records or broken transforms poison the workflow.</p></a>
+  <a class="resource-card" href="../debugging/deployment.html"><span class="resource-label">Scheduling</span><h3>Deployment Debugging</h3><p>Fix cron runs, environment drift, and missing secrets in production.</p></a>
+  <a class="resource-card" href="../debugging/network.html"><span class="resource-label">Upstream</span><h3>Network Debugging</h3><p>Handle flaky APIs and partial provider outages without losing whole runs.</p></a>
+  <a class="resource-card" href="../tutorials/playbooks/mlops.html"><span class="resource-label">Playbook</span><h3>MLOps Playbook</h3><p>Use rollout, metrics, and runbook thinking for recurring workflows.</p></a>
+</div>
+<h2>Final Output Checklist</h2>
+<ol class="output-checklist">
+  <li>Every run has a summary with processed, succeeded, failed, and escalated items.</li>
+  <li>The model step is bounded and surrounded by deterministic preprocessing and validation.</li>
+  <li>Retries are selective, not blind repeats of every failure.</li>
+  <li>Outputs are reviewable and traceable back to the input records.</li>
+  <li>You can operate the workflow on a schedule without guessing what happened overnight.</li>
+</ol></div>
         <nav class="lesson-nav">
             <a href="dev-agent.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Coding Agent</div></a>
-            <a href="index.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">All Projects</div></a>
+            <a href="personal-assistant.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Personal Assistant</div></a>
         </nav>
     </div>
     <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
         <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
     <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>

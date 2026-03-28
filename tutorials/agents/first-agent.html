@@ -49,9 +49,9 @@
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -65,7 +65,7 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -78,91 +78,98 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 30 min</span>
+                <span class="lesson-meta-item">⏱️ 40 min</span>
             </div>
             <h1 class="lesson-title">Build Your First Agent</h1>
             <p class="lesson-description">Learn Build Your First Agent in the AI Agents course. Practical Python code and real-world examples.</p>
         </header>
-        <div class="lesson-content">
-<h2>Your First Complete Agent</h2>
-<p>We'll build a research agent from scratch using OpenAI function calling. It can search the web, do math, and give a final answer. No frameworks — raw Python so you understand every piece.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python - complete first agent</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">import</span> json, httpx
+        <div class="lesson-content"><h2>Your first agent architecture</h2>
+<p>For a first serious build, keep the architecture brutally simple: one model, a small tool set, a max-step loop, and logs for every decision. That is enough to build something useful without creating a debugging nightmare.</p>
+<ul>
+    <li><strong>Model</strong> decides whether to answer or call a tool</li>
+    <li><strong>Tool registry</strong> maps names to real Python functions</li>
+    <li><strong>Execution loop</strong> runs until the model stops or the step limit is hit</li>
+    <li><strong>Trace log</strong> records what happened at each step</li>
+</ul>
+
+<h2>1. Start with narrow tools</h2>
+<p>The fastest way to make a first agent unreliable is to give it tools that are vague, overlapping, or overly powerful. Start with tools that do one clear thing and return compact results.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - narrow tools are easier to control</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">search_web</span>(query: str) -> str:
+    <span class="st">"""Search the web for public facts and return the top snippets."""</span>
+    <span class="kw">return</span> <span class="st">"Top snippets for: "</span> + query
+
+<span class="kw">def</span> <span class="fn">calculator</span>(expression: str) -> str:
+    <span class="st">"""Evaluate a safe arithmetic expression."""</span>
+    <span class="kw">return</span> <span class="kw">str</span>(eval(expression, {<span class="st">"__builtins__"</span>: {}}, {}))</pre></div>
+<p>These are imperfect toy tools, but they are easy to inspect and easy to reason about.</p>
+
+<h2>2. Run a complete tool-calling loop</h2>
+<p>The core idea is simple: ask the model, inspect tool calls, run them, append the results, and ask again. The code below is intentionally explicit so you can see the loop clearly.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - first complete agent loop</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> json
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
 
 client = OpenAI()
 
-<span class="cm"># ---- TOOLS ----</span>
-<span class="kw">def</span> <span class="fn">web_search</span>(query: str) -> str:
-    r = httpx.get(
-        <span class="st">f"https://api.duckduckgo.com/?q={{query}}&format=json"</span>,
-        timeout=<span class="nu">8</span>
-    )
-    data = r.json()
-    abstract = data.get(<span class="st">"AbstractText"</span>, <span class="st">""</span>)
-    <span class="kw">return</span> abstract[:<span class="nu">500</span>] <span class="kw">if</span> abstract <span class="kw">else</span> <span class="st">"No results found."</span>
-
-<span class="kw">def</span> <span class="fn">calculate</span>(expression: str) -> str:
-    <span class="kw">try</span>:
-        result = eval(expression, {{<span class="st">"__builtins__"</span>: {{}}}})
-        <span class="kw">return</span> str(result)
-    <span class="kw">except Exception</span> <span class="kw">as</span> e:
-        <span class="kw">return</span> <span class="st">f"Error: {{e}}"</span>
-
-TOOLS_DEF = [
-    {{<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {{
-        <span class="st">"name"</span>: <span class="st">"web_search"</span>,
-        <span class="st">"description"</span>: <span class="st">"Search the web for current factual information."</span>,
-        <span class="st">"parameters"</span>: {{<span class="st">"type"</span>: <span class="st">"object"</span>,
-            <span class="st">"properties"</span>: {{<span class="st">"query"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>}}}},
-            <span class="st">"required"</span>: [<span class="st">"query"</span>]}}
-    }}}}  ,
-    {{<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {{
-        <span class="st">"name"</span>: <span class="st">"calculate"</span>,
-        <span class="st">"description"</span>: <span class="st">"Evaluate a math expression. E.g. '2 ** 10' or '144 / 12'."</span>,
-        <span class="st">"parameters"</span>: {{<span class="st">"type"</span>: <span class="st">"object"</span>,
-            <span class="st">"properties"</span>: {{<span class="st">"expression"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>}}}},
-            <span class="st">"required"</span>: [<span class="st">"expression"</span>]}}
-    }}}}
+TOOLS = [
+    {<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {<span class="st">"name"</span>: <span class="st">"search_web"</span>, <span class="st">"description"</span>: <span class="st">"Search public web facts."</span>, <span class="st">"parameters"</span>: {<span class="st">"type"</span>: <span class="st">"object"</span>, <span class="st">"properties"</span>: {<span class="st">"query"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>}}, <span class="st">"required"</span>: [<span class="st">"query"</span>]}}},
+    {<span class="st">"type"</span>: <span class="st">"function"</span>, <span class="st">"function"</span>: {<span class="st">"name"</span>: <span class="st">"calculator"</span>, <span class="st">"description"</span>: <span class="st">"Evaluate arithmetic expressions."</span>, <span class="st">"parameters"</span>: {<span class="st">"type"</span>: <span class="st">"object"</span>, <span class="st">"properties"</span>: {<span class="st">"expression"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>}}, <span class="st">"required"</span>: [<span class="st">"expression"</span>]}}}
 ]
 
-TOOL_FNS = {{"web_search": web_search, "calculate": calculate}}
+TOOL_FNS = {<span class="st">"search_web"</span>: search_web, <span class="st">"calculator"</span>: calculator}
 
-<span class="cm"># ---- AGENT LOOP ----</span>
-<span class="kw">def</span> <span class="fn">run_agent</span>(goal: str, max_steps: int = <span class="nu">10</span>) -> str:
+<span class="kw">def</span> <span class="fn">run_agent</span>(user_query, max_steps=<span class="nu">5</span>):
     messages = [
-        {{<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">"You are a research agent. Use tools to find information and answer questions accurately."</span>}},
-        {{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: goal}}
+        {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">"You are a research assistant. Use tools when needed and stop when you can answer clearly."</span>},
+        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user_query}
     ]
-    
+
     <span class="kw">for</span> step <span class="kw">in</span> range(max_steps):
-        resp = client.chat.completions.create(
-            model=<span class="st">"gpt-4o-mini"</span>, messages=messages,
-            tools=TOOLS_DEF, tool_choice=<span class="st">"auto"</span>
-        )
-        msg = resp.choices[0].message
+        response = client.chat.completions.create(model=<span class="st">"gpt-4o-mini"</span>, messages=messages, tools=TOOLS)
+        msg = response.choices[<span class="nu">0</span>].message
         messages.append(msg)
-        
-        <span class="kw">if</span> resp.choices[0].finish_reason == <span class="st">"stop"</span>:
-            <span class="kw">return</span> msg.content  <span class="cm"># done</span>
-        
-        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls <span class="kw">or</span> []:
-            fn = TOOL_FNS[tc.function.name]
+
+        <span class="kw">if</span> <span class="kw">not</span> msg.tool_calls:
+            <span class="kw">return</span> msg.content
+
+        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls:
             args = json.loads(tc.function.arguments)
-            result = fn(**args)
-            print(<span class="st">f"  [{tc.function.name}] {{args}} → {{result[:80]}}"</span>)
-            messages.append({{
+            result = TOOL_FNS[tc.function.name](**args)
+            messages.append({
                 <span class="st">"role"</span>: <span class="st">"tool"</span>,
                 <span class="st">"tool_call_id"</span>: tc.id,
                 <span class="st">"content"</span>: result
-            }})
-    
-    <span class="kw">return</span> <span class="st">"Max steps reached."</span>
+            })
 
-<span class="cm"># ---- RUN IT ----</span>
-print(run_agent(<span class="st">"What is the population of Japan? Calculate how many people per square km (area: 377975 km2)"</span>))</pre></div>
-<div class="tip-box"><div class="tip-box-title">💡 Max steps guard</div><p>Always set a maximum step limit. Without it, a buggy agent can loop forever, burning tokens and money.</p></div></div>
+    <span class="kw">return</span> <span class="st">"Stopped after max steps."</span></pre></div>
+
+<h2>3. Add traces so you can trust the loop</h2>
+<p>Agents feel impressive when they work and frustrating when they fail. Add a tiny trace object now so every run records the question, tool calls, arguments, and final answer.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - lightweight trace logging</span><button class="copy-btn">Copy</button></div><pre>trace = []
+
+trace.append({<span class="st">"step"</span>: step, <span class="st">"tool"</span>: tc.function.name, <span class="st">"args"</span>: args, <span class="st">"result_preview"</span>: result[:120]})
+
+<span class="kw">for</span> event <span class="kw">in</span> trace:
+    <span class="kw">print</span>(event)</pre></div>
+<div class="tip-box"><div class="tip-box-title">💡 Make logs human-readable</div><p>You do not need full observability infrastructure on day one. Even a simple list of step events is enough to reveal bad tool choices, argument errors, or loops.</p></div>
+
+<h2>4. Failure patterns you should expect</h2>
+<ol>
+    <li><strong>Infinite or wasteful loops</strong> — fix with max steps and better stopping prompts</li>
+    <li><strong>Wrong tool selected</strong> — your tool descriptions overlap too much</li>
+    <li><strong>Tool output is too verbose</strong> — return compact, relevant results only</li>
+    <li><strong>Unsafe execution</strong> — validation is missing before the tool runs</li>
+</ol>
+<p>Use <a href="../../debugging/lab.html">Debug Lab</a> for runtime triage and <a href="../../debugging/configuration.html">Configuration Debugging</a> when the environment or SDK is the real issue.</p>
+
+<h2>5. Expand the first agent the right way</h2>
+<p>Do not jump straight into ten tools and memory. Add one layer at a time:</p>
+<ul>
+    <li><a href="function-calling-basics.html">Function Calling Basics</a> — tighter tool contract design</li>
+    <li><a href="react-loop.html">ReAct Loop</a> — better reasoning/action pattern</li>
+    <li><a href="plan-execute.html">Plan and Execute</a> — multi-step tasks with stronger structure</li>
+    <li><a href="../../projects/dev-agent.html">Dev Agent project</a> — apply the whole stack in a larger build</li>
+</ul></div>
+
         <nav class="lesson-nav">
             <a href="agent-components.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Agent Components: LLM, Tools & Memory</div></a>
             <a href="function-calling-basics.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Function Calling Basics</div></a>
@@ -180,17 +187,17 @@ print(run_agent(<span class="st">"What is the population of Japan? Calculate how
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

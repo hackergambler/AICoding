@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Multi-turn Chat | AI Coding Academy</title>
-    <meta name="description" content="Build stateful conversations with Gemini using ChatSession, history management, and streaming.">
+    <title>Gemini Chat — Stateful Sessions & Context Control | AI Coding Academy</title>
+    <meta name="description" content="Learn how to build Gemini chat systems with session memory, summarization, token control, and safer application-level state management.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
 </head><body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -64,117 +64,116 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div></nav>
     <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/gemini.html">Gemini</a><span class="separator">/</span><span>Multi-turn Chat</span></div>
         <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 20 min</span><span class="lesson-meta-item">📚 Lesson 3</span></div>
+            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 34 min</span><span class="lesson-meta-item">📚 Lesson 3</span></div>
             <h1 class="lesson-title">Gemini Multi-turn Chat</h1>
-            <p class="lesson-description">Build stateful conversations using Gemini's ChatSession API, manage history, stream responses, and handle context limits.</p>
+            <p class="lesson-description">Build Gemini chat systems that keep useful context, trim bad history, and stay controllable as conversations grow longer.</p>
         </header>
-        <div class="lesson-content">
-            <h2>ChatSession Basics</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — stateful chat with history</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
+        
+<div class="lesson-content">
+    <h2>Objective &amp; what “chat” really means</h2>
+    <p>A chat model is not a magical memory engine. A Gemini chat session is still an application pattern: you decide what history to keep, what to summarize, what to redact, and what belongs in durable product memory versus short-lived conversation state.</p>
+    <ul>
+        <li><strong>Conversation history</strong> helps continuity, but can also carry mistakes forward.</li>
+        <li><strong>Summaries</strong> compress old turns into a smaller state representation.</li>
+        <li><strong>App memory</strong> stores durable facts such as user preferences or ticket IDs outside the raw chat log.</li>
+    </ul>
 
-model = genai.GenerativeModel(
-    <span class="st">"gemini-1.5-flash"</span>,
-    system_instruction=<span class="st">"You are a friendly Python tutor. Give short, clear answers."</span>
-)
+    <div class="code-block"><div class="code-block-label"><span>Python — application-managed Gemini chat with rolling summary</span><button class="copy-btn">Copy</button></div><pre>from google import genai
+from google.genai import types
+import os
 
-<span class="cm"># Start a chat session — it keeps history automatically</span>
-chat = model.start_chat(history=[])
+client = genai.Client(api_key=os.environ[&quot;GEMINI_API_KEY&quot;])
+MODEL = &quot;gemini-1.5-flash&quot;
 
-<span class="kw">def</span> <span class="fn">ask</span>(question: str) -> str:
-    response = chat.send_message(question)
-    <span class="kw">return</span> response.text
+history = []
+summary = &quot;&quot;
 
-<span class="kw">print</span>(ask(<span class="st">"What is a Python decorator?"</span>))
-<span class="kw">print</span>(ask(<span class="st">"Can you show me a real example?"</span>))  <span class="cm"># remembers context</span>
-<span class="kw">print</span>(ask(<span class="st">"When should I use @functools.wraps?"</span>))  <span class="cm"># still in context</span>
 
-<span class="cm"># Inspect history</span>
-<span class="kw">for</span> msg <span class="kw">in</span> chat.history:
-    <span class="kw">print</span>(<span class="st">f"{msg.role}: {msg.parts[0].text[:80]}"</span>)</pre></div><div class="code-block">
-<div class="code-block-label"><span>Python — pre-load history</span><button class="copy-btn">Copy</button></div>
-<pre><span class="cm"># Start with existing conversation history</span>
-history = [
-    {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"parts"</span>: [<span class="st">"Hi, I'm learning Python."</span>]},
-    {<span class="st">"role"</span>: <span class="st">"model"</span>, <span class="st">"parts"</span>: [<span class="st">"Great! Python is a fantastic language to start with. What would you like to learn?"</span>]},
-]
+def ask(question: str) -&gt; str:
+    global summary, history
 
-chat = model.start_chat(history=history)
-response = chat.send_message(<span class="st">"Tell me about list comprehensions."</span>)
-<span class="kw">print</span>(response.text)</pre></div>
-            <h2>Streaming Chat</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - stream chat responses</span><button class="copy-btn">Copy</button></div>
-<pre><span class="cm"># Stream tokens as they arrive</span>
-chat = model.start_chat()
-response = chat.send_message(
-    <span class="st">"Write a 200-word story about a programmer who discovers their code is sentient."</span>,
-    stream=<span class="kw">True</span>
-)
+    if len(history) &gt; 8:
+        summary_response = client.models.generate_content(
+            model=MODEL,
+            contents=[
+                &quot;Summarize the conversation for future turns in under 120 words.&quot;,
+                *history
+            ],
+            config=types.GenerateContentConfig(temperature=0.1)
+        )
+        summary = summary_response.text
+        history = history[-4:]
 
-<span class="kw">for</span> chunk <span class="kw">in</span> response:
-    <span class="kw">print</span>(chunk.text, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
+    prompt_parts = []
+    if summary:
+        prompt_parts.append(f&quot;Conversation summary: {summary}&quot;)
+    prompt_parts.extend(history)
+    prompt_parts.append(question)
 
-<span class="cm"># Access final result after streaming</span>
-response.resolve()
-<span class="kw">print</span>(<span class="st">f"\nTotal tokens: {response.usage_metadata.total_token_count}"</span>)</pre></div>
-            <h2>Async Chat for Web Apps</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - async Gemini chat</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> asyncio
-<span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
+    response = client.models.generate_content(
+        model=MODEL,
+        contents=prompt_parts,
+        config=types.GenerateContentConfig(temperature=0.4)
+    )
 
-model = genai.GenerativeModel(<span class="st">"gemini-1.5-flash"</span>)
+    history.append(question)
+    history.append(response.text)
+    return response.text</pre></div>
 
-<span class="kw">async def</span> <span class="fn">chat_stream</span>(messages: list[str]):
-    chat = model.start_chat()
-    <span class="kw">for</span> msg <span class="kw">in</span> messages:
-        response = <span class="kw">await</span> chat.send_message_async(msg, stream=<span class="kw">True</span>)
-        <span class="kw">async for</span> chunk <span class="kw">in</span> response:
-            <span class="kw">yield</span> chunk.text
+    <h2>Step-by-step breakdown</h2>
+    <ol>
+        <li><strong>Separate durable memory from chat history.</strong> User profile, account status, and saved preferences should live in your application store, not only in prior messages.</li>
+        <li><strong>Keep a rolling window.</strong> Raw transcripts grow quickly and increase cost. Trim aggressively after the critical context is summarized.</li>
+        <li><strong>Protect system instructions.</strong> The assistant role and product rules should be re-applied every turn, not inferred from prior chat behavior.</li>
+        <li><strong>Log conversation state transitions.</strong> When a chat assistant behaves strangely, you need to know which summary or prior turn distorted the answer.</li>
+    </ol>
 
-<span class="kw">async def</span> <span class="fn">main</span>():
-    <span class="kw">async for</span> token <span class="kw">in</span> chat_stream([
-        <span class="st">"What is asyncio?"</span>,
-        <span class="st">"How is it different from threading?"</span>
-    ]):
-        <span class="kw">print</span>(token, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
+    <div class="tip-box"><div class="tip-box-title">💡 Strong chat products use layered memory</div><p>Short-term history helps the current turn. Long-term memory belongs in your app database. Retrieval belongs in a document system. Mixing all three into one growing prompt is the fastest way to make a chat app expensive and unreliable.</p></div>
 
-asyncio.run(main())</pre></div>
-            <h2>Safety Settings</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - configure safety filters</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> google.generativeai.types <span class="kw">import</span> HarmCategory, HarmBlockThreshold
+    <h2>Common chat failure modes</h2>
+    <ul>
+        <li><strong>History pollution:</strong> one incorrect assistant answer becomes part of the context and steers later turns.</li>
+        <li><strong>Token drift:</strong> chat quality degrades because important earlier turns are buried under irrelevant chatter.</li>
+        <li><strong>Memory confusion:</strong> the system acts as if previous messages are durable product facts.</li>
+        <li><strong>No reset or escalation path:</strong> users need a way to restart, summarize, or hand off the conversation.</li>
+    </ul>
 
-safety_settings = {
-    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_HIGH_AND_ABOVE,
-    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    <div class="code-block"><div class="code-block-label"><span>Python — durable facts belong in app state, not transcript only</span><button class="copy-btn">Copy</button></div><pre>user_profile = {
+    &quot;name&quot;: &quot;Asha&quot;,
+    &quot;plan&quot;: &quot;pro&quot;,
+    &quot;preferred_language&quot;: &quot;English&quot;,
+    &quot;team&quot;: &quot;support-ops&quot;
 }
 
-model = genai.GenerativeModel(
-    <span class="st">"gemini-1.5-flash"</span>,
-    safety_settings=safety_settings
-)
+system_context = f&quot;&quot;&quot;
+You are the support copilot.
+Always answer in {user_profile[&#x27;preferred_language&#x27;]}.
+Respect the current plan: {user_profile[&#x27;plan&#x27;]}.
+Use the account facts supplied by the application as ground truth.
+&quot;&quot;&quot;</pre></div>
 
-<span class="cm"># Check if content was blocked</span>
-response = model.generate_content(<span class="st">"Your prompt here"</span>)
-<span class="kw">if</span> response.candidates[<span class="nu">0</span>].finish_reason.name == <span class="st">"SAFETY"</span>:
-    <span class="kw">print</span>(<span class="st">"Blocked by safety filter"</span>)
-    <span class="kw">for</span> rating <span class="kw">in</span> response.candidates[<span class="nu">0</span>].safety_ratings:
-        <span class="kw">print</span>(<span class="st">f"  {rating.category.name}: {rating.probability.name}"</span>)
-<span class="kw">else</span>:
-    <span class="kw">print</span>(response.text)</pre></div>
-        </div><nav class="lesson-nav">
+    <h2>Hands-on exercise</h2>
+    <p>Build a <strong>customer-success chat assistant</strong> with three layers of state:</p>
+    <ul>
+        <li>a rolling transcript for the last few turns</li>
+        <li>a summary field for older context</li>
+        <li>an application record for durable facts such as customer ID, plan, and recent ticket status</li>
+    </ul>
+    <p>Then test what happens when the transcript contains a mistaken answer. Does the durable application state override it?</p>
+
+    <h2>Real-world use case</h2>
+    <p>Internal copilots, support agents, and coaching assistants all need stateful interaction. The best products do not simply “remember everything.” They keep only the context that improves the next turn, compress old discussion, and retrieve durable facts from reliable storage when needed.</p>
+
+    <div class="info-box"><div class="info-box-title">Where to go next</div><p>Continue with <a href="advanced-features.html">Advanced Features</a> for structured output and caching, or connect chat to a knowledge layer using <a href="../../tutorials/rag/introduction.html">RAG Introduction</a> and <a href="../../tutorials/agents/long-term-memory.html">Long-Term Memory for Agents</a>.</p></div>
+</div>
+        <nav class="lesson-nav">
         <a href="multimodal.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Multimodal</div></a>
         <a href="function-calling.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Function Calling</div></a>
     </nav>
@@ -190,17 +189,17 @@ response = model.generate_content(<span class="st">"Your prompt here"</span>)
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

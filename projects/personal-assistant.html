@@ -5,7 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project: Personal AI Assistant | AI Coding Academy</title>
-    <meta name="description" content="Build a personal assistant with persistent memory, note-taking, and tool use. Remembers your preferences across sessions.">
+    <meta name="description" content="Build a personal AI assistant with short-term and long-term memory, retrieval, preference storage, and human-controlled actions.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,15 +47,27 @@
         .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
         .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
         .lesson-nav .next{text-align:right}
+
+        .step-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .step-card,.resource-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-lg)}
+        .step-card h3,.resource-card h3{font-family:var(--font-heading);font-size:1.05rem;margin:0 0 var(--space-sm);color:var(--text-primary)}
+        .step-card p,.resource-card p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .resource-card{display:block;text-decoration:none;transition:var(--transition-base)}
+        .resource-card:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .resource-label{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .output-checklist{margin:var(--space-lg) 0 0;padding-left:var(--space-xl)}
+        .output-checklist li{margin-bottom:var(--space-sm)}
+        @media(max-width:768px){.step-grid,.resource-grid{grid-template-columns:1fr}}
         @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
     </style>
 </head>
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -66,10 +78,10 @@
             <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
             <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
             <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
-            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            <li><a href="../projects/index.html" class="nav-link active">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search projects..."><kbd>⌘K</kbd></div>
             <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -79,86 +91,93 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-advanced">Advanced</span>
-                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 90 min</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 105 min</span>
             </div>
             <h1 class="lesson-title">Project: Personal AI Assistant</h1>
-            <p class="lesson-description">Build a personal assistant with persistent memory, note-taking, and tool use. Remembers your preferences across sessions.</p>
+            <p class="lesson-description">Build a personal assistant with memory, retrieval, preference storage, safe tool use, and a practical daily-workflow loop.</p>
         </header>
-<div class="lesson-content"><h2>What You Will Build</h2><p>A fully functional personal assistant with persistent memory, tool use, and natural conversation. It remembers your preferences, takes notes, and uses the current date/time.</p><div class="code-block"><div class="code-block-label"><span>Python - personal assistant with memory and tools</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">from</span> datetime <span class="kw">import</span> datetime
-<span class="kw">import</span> json, os
+<div class="lesson-content">
+<h2>What You Will Build</h2>
+<p>A personal assistant that remembers preferences, stores notes, retrieves relevant history, drafts helpful responses, and uses tools only when the user asks for them. The goal is not a flashy demo. The goal is a system that becomes more useful across days and weeks.</p>
+<div class="info-box"><div class="info-box-title">Core design principle</div><p>Memory should increase usefulness without increasing creepiness. Store what helps the user complete tasks, not everything the system can technically capture.</p></div>
+<h2>System Architecture</h2>
+<div class="step-grid">
+  <div class="step-card"><h3>Conversation memory</h3><p>Recent turns stay in the active context window so the assistant can answer naturally right now.</p></div>
+  <div class="step-card"><h3>Preference store</h3><p>Stable user preferences are written to a durable store with explicit categories such as writing style, timezone, or project stack.</p></div>
+  <div class="step-card"><h3>Memory retrieval</h3><p>Before the model answers, retrieve only the memories relevant to the current request instead of replaying an entire history.</p></div>
+  <div class="step-card"><h3>Action layer</h3><p>Allow bounded tools such as note creation, reminder drafting, or task summarization with confirmation for anything user-visible.</p></div>
+</div>
+<div class="code-block"><div class="code-block-label"><span>Python - simple memory write contract</span><button class="copy-btn">Copy</button></div><pre>from datetime import datetime
 
-client = OpenAI()
-MEMORY_FILE = <span class="st">"assistant_memory.json"</span>
+ALLOWED_MEMORY_TYPES = {&quot;preference&quot;, &quot;project_context&quot;, &quot;task_state&quot;}
 
-<span class="kw">def</span> <span class="fn">load_memory</span>() -> dict:
-    <span class="kw">if</span> os.path.exists(MEMORY_FILE):
-        <span class="kw">with</span> open(MEMORY_FILE) <span class="kw">as</span> f: <span class="kw">return</span> json.load(f)
-    <span class="kw">return</span> {"preferences": {}, "notes": []}
+def store_memory(user_id, memory_type, content, source):
+    if memory_type not in ALLOWED_MEMORY_TYPES:
+        raise ValueError(&quot;unsupported memory type&quot;)
+    return {
+        &quot;user_id&quot;: user_id,
+        &quot;memory_type&quot;: memory_type,
+        &quot;content&quot;: content,
+        &quot;source&quot;: source,
+        &quot;created_at&quot;: datetime.utcnow().isoformat()
+    }</pre></div>
+<h2>Build Sequence</h2>
+<h3>Milestone 1: Trustworthy memory writes</h3>
+<p>Do not let the assistant write arbitrary long-term memory on every turn. Add a clear memory policy: what kinds of facts are worth saving, what requires confirmation, and what should never be stored.</p>
+<h3>Milestone 2: Retrieval before response</h3>
+<p>Query memories using the current task, then pass only the top relevant memories into the model. This is usually more effective than stuffing the full chat history into the prompt.</p>
+<h3>Milestone 3: Controlled actions</h3>
+<p>Once memory retrieval works, add actions like note creation, task summaries, or reminder drafts. Make tool output explicit so the user sees what happened.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - retrieval before response</span><button class="copy-btn">Copy</button></div><pre>def build_context(query, memories, top_k=5):
+    scored = []
+    for memory in memories:
+        score = similarity(query, memory[&quot;content&quot;])
+        scored.append((score, memory))
+    top = [m for _, m in sorted(scored, reverse=True)[:top_k]]
+    return {&quot;query&quot;: query, &quot;relevant_memories&quot;: top}
 
-<span class="kw">def</span> <span class="fn">save_memory</span>(m): 
-    <span class="kw">with</span> open(MEMORY_FILE, <span class="st">"w"</span>) <span class="kw">as</span> f: json.dump(m, f, indent=2)
-
-<span class="kw">def</span> <span class="fn">remember</span>(key: str, value: str) -> str:
-    m = load_memory(); m["preferences"][key] = value; save_memory(m)
-    <span class="kw">return</span> f"Remembered: {key} = {value}"
-
-<span class="kw">def</span> <span class="fn">add_note</span>(note: str) -> str:
-    m = load_memory()
-    m["notes"].append({"text": note, "time": datetime.now().isoformat()})
-    save_memory(m); <span class="kw">return</span> f"Note saved: {note}"
-
-<span class="kw">def</span> <span class="fn">get_notes</span>() -> str:
-    m = load_memory()
-    <span class="kw">return</span> "\n".join(f"- {n['text']} ({n['time'][:10]})" <span class="kw">for</span> n <span class="kw">in</span> m["notes"][-10:]) <span class="kw">or</span> "No notes."
-
-TOOLS = [
-    {"type":"function","function":{"name":"remember","description":"Store a user preference.",
-     "parameters":{"type":"object","properties":{"key":{"type":"string"},"value":{"type":"string"}},"required":["key","value"]}}},
-    {"type":"function","function":{"name":"add_note","description":"Save a note or reminder.",
-     "parameters":{"type":"object","properties":{"note":{"type":"string"}},"required":["note"]}}},
-    {"type":"function","function":{"name":"get_notes","description":"Retrieve saved notes.",
-     "parameters":{"type":"object","properties":{}}}},
-]
-FNS = {"remember": remember, "add_note": add_note, "get_notes": get_notes}
-
-memory = load_memory()
-prefs = json.dumps(memory["preferences"]) <span class="kw">if</span> memory["preferences"] <span class="kw">else</span> "none yet"
-SYSTEM = f"You are a personal assistant. User preferences: {prefs}. Today: {datetime.now():%A %B %d %Y}."
-
-conversation = [{"role": "system", "content": SYSTEM}]
-
-<span class="kw">def</span> <span class="fn">chat</span>(user_input: str) -> str:
-    conversation.append({"role": "user", "content": user_input})
-    <span class="kw">while True</span>:
-        resp = client.chat.completions.create(
-            model=<span class="st">"gpt-4o"</span>, messages=conversation,
-            tools=TOOLS, tool_choice=<span class="st">"auto"</span>
-        )
-        msg = resp.choices[0].message
-        conversation.append(msg)
-        <span class="kw">if</span> resp.choices[0].finish_reason == <span class="st">"stop"</span>:
-            <span class="kw">return</span> msg.content
-        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls <span class="kw">or</span> []:
-            result = FNS[tc.function.name](**json.loads(tc.function.arguments))
-            conversation.append({"role":"tool","tool_call_id":tc.id,"content":result})
-
-<span class="cm"># Interactive session</span>
-<span class="kw">while True</span>:
-    user = input(<span class="st">"You: "</span>).strip()
-    <span class="kw">if</span> user.lower() == <span class="st">"quit"</span>: <span class="kw">break</span>
-    print(f"Assistant: {chat(user)}")</pre></div><div class="tip-box"><div class="tip-box-title">💡 Extend it</div><p>Add web_search(), draft_email(), set_reminder() tools. Each tool makes the assistant more capable without changing the core loop.</p></div></div>
+context = build_context(&quot;Draft a status update for my AI project&quot;, memory_store)</pre></div>
+<h2>Where Personal Assistants Usually Fail</h2>
+<ul>
+  <li><strong>Memory spam:</strong> everything gets saved, so retrieval quality collapses.</li>
+  <li><strong>Unsafe assumptions:</strong> the assistant acts on stale preferences as if they are always current.</li>
+  <li><strong>Poor retrieval:</strong> the right memory exists but never gets surfaced at the right time.</li>
+  <li><strong>Too much automation:</strong> the assistant takes actions the user expected to review first.</li>
+</ul>
+<div class="warn-box"><div class="warn-box-title">Keep this human-centered</div><p>The best personal assistants feel calm and helpful because they ask for confirmation when needed and keep memory categories understandable to the user.</p></div>
+<h2>Study Before You Build</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../tutorials/agents/memory-types.html"><span class="resource-label">Memory</span><h3>Memory Types</h3><p>Understand short-term, semantic, episodic, and preference memory patterns.</p></a>
+  <a class="resource-card" href="../tutorials/agents/long-term-memory.html"><span class="resource-label">Durability</span><h3>Long-Term Memory</h3><p>Learn when and how to persist information across sessions.</p></a>
+  <a class="resource-card" href="../tutorials/agents/episodic-memory.html"><span class="resource-label">Session history</span><h3>Episodic Memory</h3><p>Capture useful task history without bloating the prompt.</p></a>
+  <a class="resource-card" href="../tutorials/prompting/system-prompts.html"><span class="resource-label">Behavior</span><h3>System Prompts</h3><p>Use stable instructions to define tone, privacy boundaries, and tool behavior.</p></a>
+</div>
+<h2>When This Project Breaks</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../debugging/memory.html"><span class="resource-label">Memory</span><h3>Memory Debugging</h3><p>Use this when memory writes, retrieval, or state persistence behaves strangely.</p></a>
+  <a class="resource-card" href="../debugging/vectordb.html"><span class="resource-label">Retrieval</span><h3>Vector DB Debugging</h3><p>Fix irrelevant recall or low-quality semantic retrieval.</p></a>
+  <a class="resource-card" href="../debugging/configuration.html"><span class="resource-label">Setup</span><h3>Configuration Debugging</h3><p>Use this when stores, env vars, or provider wiring drift between environments.</p></a>
+  <a class="resource-card" href="../tutorials/playbooks/enterprise.html"><span class="resource-label">Playbook</span><h3>Enterprise Playbook</h3><p>Review consent, retention, and audit assumptions before handling real user data.</p></a>
+</div>
+<h2>Final Output Checklist</h2>
+<ol class="output-checklist">
+  <li>The assistant stores only approved memory categories.</li>
+  <li>Relevant memories are retrieved before answers, not sprayed into every prompt.</li>
+  <li>User-visible actions require confirmation or create a reviewable draft.</li>
+  <li>You can inspect what memory influenced a given answer.</li>
+  <li>The assistant becomes more useful over time without becoming opaque or intrusive.</li>
+</ol></div>
         <nav class="lesson-nav">
-            <a href="index.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">All Projects</div></a>
+            <a href="workflow-automation.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Workflow Automation</div></a>
             <a href="research-crew.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Research Crew Agent</div></a>
         </nav>
     </div>
     <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
         <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
     <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>

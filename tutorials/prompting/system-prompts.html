@@ -1,56 +1,112 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>System Prompts — Persona, Rules & Constraints | AI Coding Academy</title><meta name="description" content="Master system prompts: set personas, enforce output formats, add guardrails, and create consistent AI assistants."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/style.css"><style>.lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}.lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}.lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}.lesson-content h2:first-child{margin-top:0}.lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}.lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}.lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}.lesson-content li{margin-bottom:var(--space-sm)}.lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}.code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}.code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}.copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}.code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}.cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}.tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}.info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}.tip-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}.lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}.lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}.lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}.lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}.lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}.lesson-nav .next{text-align:right}@media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}</style></head><body><div class="top-bar"><div class="top-bar-container"><div class="top-bar-links"><a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a><a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a><a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a></div><div class="top-bar-right">Part of MYRQAI Network</div></div></div><div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div><nav class="nav"><div class="nav-container"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><ul class="nav-menu"><li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li><li><a href="../../courses/index.html" class="nav-link">Courses</a></li><li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li><li><a href="../../projects/index.html" class="nav-link">Projects</a></li></ul><div class="nav-actions"><div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div><a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a></div><button class="mobile-menu-btn">☰</button></div></nav><div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/prompting.html">Prompting</a><span class="separator">/</span><span>System Prompts</span></div><header class="lesson-header" style="margin-bottom:var(--space-3xl)"><div class="lesson-meta" style="display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap"><span class="badge badge-beginner">Beginner</span><span style="font-size:.9rem;color:var(--text-muted)">⏱️ 20 min</span></div><h1 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2">System Prompts — Persona, Rules & Constraints</h1><p style="font-size:1.2rem;color:var(--text-secondary);line-height:1.7">Master system prompts: set personas, enforce output formats, add guardrails, and create consistent AI assistants.</p></header><div class="lesson-content"><h2>What Are System Prompts?</h2><p>A system prompt is instructions given to the LLM before the user speaks. It sets the persona, rules, output format, and constraints that apply to every response. It's your most powerful tool for controlling LLM behavior.</p><div class="code-block"><div class="code-block-label"><span>Python - basic system prompt patterns</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-client = OpenAI()
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>System Prompts — Persona, Rules & Constraints | AI Coding Academy</title><meta name="description" content="Master system prompts: set personas, enforce output formats, add guardrails, and create consistent AI assistants."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/style.css"><style>.lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}.lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}.lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}.lesson-content h2:first-child{margin-top:0}.lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}.lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}.lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}.lesson-content li{margin-bottom:var(--space-sm)}.lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}.code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}.code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}.copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}.code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}.cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}.tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}.info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}.tip-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}.lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}.lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}.lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}.lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}.lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}.lesson-nav .next{text-align:right}@media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}</style></head><body><div class="top-bar"><div class="top-bar-container"><div class="top-bar-links"><a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a><a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a><a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a></div><div class="top-bar-right">Part of MYRQAI Network</div></div></div><div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div><nav class="nav"><div class="nav-container"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><ul class="nav-menu"><li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li><li><a href="../../courses/index.html" class="nav-link">Courses</a></li><li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li><li><a href="../../projects/index.html" class="nav-link">Projects</a></li></ul><div class="nav-actions"><div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div><a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a></div><button class="mobile-menu-btn">☰</button></div></nav><div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/prompting.html">Prompting</a><span class="separator">/</span><span>System Prompts</span></div><header class="lesson-header" style="margin-bottom:var(--space-3xl)"><div class="lesson-meta" style="display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap"><span class="badge badge-beginner">Beginner</span><span style="font-size:.9rem;color:var(--text-muted)">⏱️ 34 min</span></div><h1 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2">System Prompts — Persona, Rules & Constraints</h1><p style="font-size:1.2rem;color:var(--text-secondary);line-height:1.7">Master system prompts: set personas, enforce output formats, add guardrails, and create consistent AI assistants.</p></header><div class="lesson-content"><h2>What system prompts actually control</h2>
+<p>A system prompt is the operating policy for the model inside your application. It should define role, tone, rules, output shape, and what the model should do when information is missing or the request is unsafe. Good systems feel consistent because the prompt gives them a stable center of gravity.</p>
+<ul>
+    <li><strong>Role</strong> — what the assistant is and is not</li>
+    <li><strong>Intent</strong> — what outcomes matter most</li>
+    <li><strong>Constraints</strong> — rules, safety, boundaries, and refusal behavior</li>
+    <li><strong>Execution</strong> — how the response should be shaped</li>
+</ul>
 
-<span class="kw">def</span> <span class="fn">ask</span>(system: str, user: str) -> str:
-    resp = client.chat.completions.create(
-        model=<span class="st">"gpt-4o-mini"</span>,
-        messages=[
-            {"role":"system","content":system},
-            {"role":"user","content":user}
-        ]
-    )
-    <span class="kw">return</span> resp.choices[0].message.content
+<h2>1. Start with a strong prompt skeleton</h2>
+<div class="code-block"><div class="code-block-label"><span>Python - durable system prompt skeleton</span><button class="copy-btn">Copy</button></div><pre><span class="kw">SYSTEM</span> = <span class="st">"""
+You are MYRQ Support AI, a senior product support assistant.
 
-<span class="cm"># 1. Persona assignment</span>
-print(ask(
-    <span class="st">"You are a senior Python engineer at Google. You give expert advice with production-ready code."</span>,
-    <span class="st">"How should I handle errors in async code?"</span>
-))
+Goals:
+- Resolve the user's issue accurately.
+- Ask at most one clarifying question when critical information is missing.
+- Prefer practical steps over theory.
 
-<span class="cm"># 2. Format enforcement</span>
-print(ask(
-    <span class="st">"You are a technical writer. Always respond with: SUMMARY (1 sentence), DETAILS (3 bullets), CODE (if applicable)."</span>,
-    <span class="st">"Explain Python context managers."</span>
-))
+Rules:
+- Never invent account data or tool results.
+- If policy or facts are missing, say what is unknown.
+- Use short sections and bullet points when the answer has multiple steps.
 
-<span class="cm"># 3. Constraints and rules</span>
-print(ask(
-    <span class="st">"You are a customer support agent for PyShop. Rules: 1) Never reveal pricing without authorization. 2) Always apologize first. 3) Escalate billing issues to billing@pyshop.com."</span>,
-    <span class="st">"Why was I charged twice?"</span>
-))</pre></div><h2>The RICE Framework for System Prompts</h2><ul><li><strong>R</strong>ole — who the AI is (<em>You are an expert Python engineer...</em>)</li><li><strong>I</strong>nstructions — what it should do (<em>Always include type hints...</em>)</li><li><strong>C</strong>onstraints — what it must NOT do (<em>Never output untested code...</em>)</li><li><strong>E</strong>xamples — show the exact output format you want</li></ul><div class="code-block"><div class="code-block-label"><span>Python - production-quality system prompt using RICE</span><button class="copy-btn">Copy</button></div><pre>SYSTEM = """You are CodeReview-AI, a senior software engineer specializing in Python.
+Output contract:
+- Start with the direct answer.
+- Then give steps.
+- End with one next action.
+"""</span></pre></div>
+<p>This kind of structure is more reliable than a vague instruction like "be helpful and professional." Specific beats poetic almost every time.</p>
 
-ROLE: Expert code reviewer with 10+ years Python experience.
+<h2>2. Use the RICE framework on every serious prompt</h2>
+<p>RICE is a practical checklist for strong system prompts:</p>
+<ul>
+    <li><strong>Role</strong> — who the assistant is</li>
+    <li><strong>Intent</strong> — what success looks like</li>
+    <li><strong>Constraints</strong> — what not to do</li>
+    <li><strong>Execution</strong> — how the response should be shaped</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python - RICE example for code review</span><button class="copy-btn">Copy</button></div><pre>SYSTEM = <span class="st">"""You are CodeReview-AI, a senior Python reviewer.
 
-INSTRUCTIONS:
-- Review code for: correctness, security, performance, readability
-- Always show the improved version after your critique
-- Use Python type hints in all code examples
-- Reference PEP 8 and PEP 484 where relevant
+Role:
+- Review Python code for correctness, readability, and security.
 
-CONSTRAINTS:
-- Never say a solution "looks fine" without checking edge cases
-- Never omit error handling in production code examples
-- Do not suggest third-party libraries without noting install command
+Intent:
+- Find the most important issues first.
+- Prefer fixes that are easy to apply.
 
-FORMAT:
-Issues Found:
-1. [Issue] — [Why it matters]
+Constraints:
+- Do not rewrite entire files unless necessary.
+- Do not invent runtime behavior you cannot infer from the code.
 
-Improved Code:
-```python
-[improved code here]
-```
-"""
+Execution:
+- Return sections named: Risks, Fixes, Cleaned Snippet, Follow-up Check.
+"""</span></pre></div>
 
-review = ask(SYSTEM, "def get_user(id): return db.query(f'SELECT * FROM users WHERE id={id}')")
-print(review)</pre></div><div class="tip-box"><div class="tip-box-title">💡 System prompt length</div><p>System prompts can be thousands of tokens. Use them to encode detailed instructions, examples, and business rules. This is far cheaper than including instructions in every user message — especially with prompt caching.</p></div></div><nav class="lesson-nav"><a href="advanced-techniques.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Advanced Techniques</div></a><a href="few-shot.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Few-Shot Prompting</div></a></nav></div><footer><div class="footer-container"><div class="footer-grid"><div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div><div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div><div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div><div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div></div></footer><script src="../../assets/js/main.js"></script><script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script></body></html>
+<h2>3. Separate instructions from user data clearly</h2>
+<p>Many prompting failures come from mixing instructions and raw user content together. Use delimiters and explicit labels so the model knows what is policy and what is just input to analyze.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - delimiters reduce confusion</span><button class="copy-btn">Copy</button></div><pre>messages = [
+    {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: SYSTEM},
+    {
+        <span class="st">"role"</span>: <span class="st">"user"</span>,
+        <span class="st">"content"</span>: <span class="st">"Analyze the report inside &lt;report&gt; tags and summarize only the root cause.\n&lt;report&gt;...raw text here...&lt;/report&gt;"</span>
+    }
+]</pre></div>
+<div class="info-box"><div class="info-box-title">ℹ️ Why delimiters help</div><p>They reduce accidental instruction bleed. The model can more reliably distinguish the application's rules from the user's data or pasted documents.</p></div>
+
+<h2>4. Add an output contract, not just a persona</h2>
+<p>Personas are useful, but output contracts are what make systems feel stable in production. Tell the model the sections you want, whether JSON is required, and how uncertainty should be expressed.</p>
+<div class="code-block"><div class="code-block-label"><span>System prompt fragment - enforce response shape</span><button class="copy-btn">Copy</button></div><pre>Return your answer in this structure:
+1. Direct answer
+2. Key reasons
+3. Recommended next step
+4. Risks or unknowns
+
+If you are uncertain, say "Unknown" rather than guessing.</pre></div>
+<p>Once you need reusable examples, combine this lesson with <a href="few-shot.html">Few-Shot Prompting</a>. When you need structured reasoning, continue to <a href="chain-of-thought.html">Chain-of-Thought</a>.</p>
+
+<h2>5. Guardrails belong in the system prompt too</h2>
+<p>The system prompt should describe what the assistant must refuse, what requires confirmation, and when it should ask a follow-up question instead of making assumptions.</p>
+<ul>
+    <li>Refuse unsafe or restricted actions</li>
+    <li>Do not invent tool or database results</li>
+    <li>Ask for missing identifiers before acting on an account</li>
+    <li>Prefer concise clarifying questions over long speculative answers</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">💡 Good refusal rules sound calm, not dramatic</div><p>Write refusal behavior the same way you write product requirements: plainly, specifically, and without overexplaining. The goal is consistent behavior, not theatrical safety language.</p></div>
+
+<h2>6. Evaluate system prompts like product code</h2>
+<p>Do not trust a prompt because it "feels good." Test it against a small suite of realistic cases: straightforward requests, ambiguous cases, refusal cases, long inputs, and formatting checks.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - tiny prompt evaluation harness</span><button class="copy-btn">Copy</button></div><pre>tests = [
+    <span class="st">"Reset my password and keep the reply under 5 bullet points."</span>,
+    <span class="st">"Summarize this policy and note anything unknown."</span>,
+    <span class="st">"Use account 12345 and issue a refund immediately."</span>
+]
+
+<span class="kw">for</span> prompt <span class="kw">in</span> tests:
+    answer = run_with_system(prompt)
+    <span class="kw">print</span>(<span class="st">"PROMPT:"</span>, prompt)
+    <span class="kw">print</span>(answer)
+    <span class="kw">print</span>(<span class="st">"-"</span> * <span class="nu">60</span>)</pre></div>
+
+<h2>7. The most common system-prompt mistakes</h2>
+<ol>
+    <li><strong>Too vague</strong> — strong tone, weak behavior rules</li>
+    <li><strong>Too long and repetitive</strong> — bloated instructions that fight themselves</li>
+    <li><strong>No output contract</strong> — responses vary wildly from request to request</li>
+    <li><strong>No uncertainty policy</strong> — the model guesses instead of admitting what it does not know</li>
+</ol>
+<p>The best next routes after this lesson are <a href="few-shot.html">Few-Shot Prompting</a>, <a href="chain-of-thought.html">Chain-of-Thought</a>, and <a href="../openai/chat-completions.html">Chat Completions Deep Dive</a>.</p></div>
+
+        <nav class="lesson-nav"><a href="basics.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Prompt Engineering Basics</div></a><a href="few-shot.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Few-Shot Prompting</div></a></nav></div><footer><div class="footer-container"><div class="footer-grid"><div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div><div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div><div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div><div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div></div></footer><script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script><script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script></body></html>

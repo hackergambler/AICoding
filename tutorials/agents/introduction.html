@@ -49,9 +49,9 @@
 </head><body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -64,90 +64,102 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div></nav>
     <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/agents.html">Agents</a><span class="separator">/</span><span>Introduction</span></div>
         <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 25 min</span><span class="lesson-meta-item">📚 Lesson 1</span></div>
+            <div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 34 min</span><span class="lesson-meta-item">📚 Lesson 1</span></div>
             <h1 class="lesson-title">Introduction to AI Agents</h1>
             <p class="lesson-description">Agents are LLMs that can take actions — calling tools, running code, browsing the web. Learn the ReAct loop, tool design principles, and build your first agent from scratch.</p>
         </header>
-        <div class="lesson-content">
-            <h2>What Makes an Agent?</h2>
-            <p>A <strong>chatbot</strong> responds to a single message. An <strong>agent</strong> autonomously plans and executes a sequence of actions to complete a goal. The core loop is: <strong>Think → Act → Observe → Repeat</strong>.</p>
-            <ul>
-                <li><strong>LLM</strong> — the reasoning engine (GPT-4o, Claude, Gemini)</li>
-                <li><strong>Tools</strong> — functions the LLM can call (web search, code execution, APIs)</li>
-                <li><strong>Memory</strong> — conversation history + vector stores for long-term context</li>
-                <li><strong>Orchestrator</strong> — the loop that connects them all</li>
-            </ul><div class="info-box"><div class="info-box-title">ℹ️ ReAct Pattern</div><p>ReAct = Reasoning + Acting. The LLM writes a Thought, then an Action, observes the Result, and repeats until it has a final answer. This is the foundation of most production agents.</p></div>
-            <h2>Your First ReAct Agent from Scratch</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - minimal ReAct agent</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">import</span> json, re
+        <div class="lesson-content"><h2>What makes something an agent</h2>
+<p>An agent is not just "an LLM with a fancy name." It is a loop that can reason, take an action, inspect the result, and decide what to do next. That extra loop is what lets it search, call tools, write code, browse, or continue a workflow instead of giving a one-shot answer.</p>
+<ul>
+    <li><strong>Think</strong> — interpret the goal and choose the next step</li>
+    <li><strong>Act</strong> — call a tool, fetch data, run code, or ask a follow-up</li>
+    <li><strong>Observe</strong> — read the result from the environment</li>
+    <li><strong>Repeat</strong> — continue until it can answer or safely stop</li>
+</ul>
+<div class="info-box"><div class="info-box-title">ℹ️ Workflows beat agents more often than people think</div><p>If your process is fixed and predictable, a workflow with clear steps is usually cheaper and easier to debug than a free-form agent. Use agents when the path itself needs reasoning.</p></div>
+
+<h2>1. When to use an agent vs a workflow</h2>
+<ul>
+    <li><strong>Use a workflow</strong> for forms, known pipelines, and deterministic automation</li>
+    <li><strong>Use an agent</strong> for research, diagnosis, tool routing, or problems with many possible paths</li>
+    <li><strong>Use a hybrid</strong> when most of the flow is fixed but one or two steps need model judgment</li>
+</ul>
+<p>This distinction saves money, reduces failure modes, and makes debugging much easier later.</p>
+
+<h2>2. The core pieces of every production agent</h2>
+<p>Most real agents share the same building blocks:</p>
+<ul>
+    <li><strong>LLM</strong> — chooses what to do next</li>
+    <li><strong>Tools</strong> — search, compute, retrieve, call APIs, update systems</li>
+    <li><strong>Memory</strong> — conversation state, scratchpad, or persistent user context</li>
+    <li><strong>Guardrails</strong> — limits, approvals, and safety boundaries</li>
+    <li><strong>Observability</strong> — logs, traces, and token usage</li>
+</ul>
+<p>The dedicated lesson on <a href="agent-components.html">Agent Components</a> goes deeper, but you should already start thinking in this shape.</p>
+
+<h2>3. A minimal ReAct agent from scratch</h2>
+<p>The ReAct pattern is a clean mental model for first agents: reason, act, observe. The code below is intentionally small so you can see the loop, not hide it behind a framework.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - minimal ReAct agent</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
 
 client = OpenAI()
 
-<span class="cm"># Tools</span>
-<span class="kw">def</span> <span class="fn">search</span>(query: str) -> str:
-    <span class="kw">return</span> <span class="st">f"Search results for '{query}': [Python 3.12 released Oct 2023, adds type parameter syntax]"</span>
+SYSTEM = <span class="st">"""You are an agent. Think step by step.
+Use the format:
+Thought: ...
+Action: search[query] or finish[answer]
+"""</span>
 
-<span class="kw">def</span> <span class="fn">calculate</span>(expression: str) -> str:
-    <span class="kw">try</span>: <span class="kw">return</span> str(eval(expression, {<span class="st">"__builtins__"</span>: {}}))
-    <span class="kw">except Exception</span> <span class="kw">as</span> e: <span class="kw">return</span> <span class="st">f"Error: {e}"</span>
+<span class="kw">def</span> <span class="fn">search</span>(query):
+    <span class="kw">return</span> <span class="st">f"Mock result for: {query}"</span>
 
-TOOLS = {<span class="st">"search"</span>: search, <span class="st">"calculate"</span>: calculate}
+messages = [{<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: SYSTEM}]
+question = <span class="st">"What is retrieval augmented generation?"</span>
+messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: question})
 
-SYSTEM = <span class="st">&#34;&#34;&#34;You are an agent. Solve tasks step-by-step using this format:
+<span class="kw">for</span> step <span class="kw">in</span> range(<span class="nu">4</span>):
+    resp = client.chat.completions.create(model=<span class="st">"gpt-4o-mini"</span>, messages=messages)
+    text = resp.choices[<span class="nu">0</span>].message.content
+    messages.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: text})
 
-Thought: [your reasoning]
-Action: tool_name
-Action Input: the input to the tool
+    <span class="kw">if</span> <span class="st">"finish["</span> <span class="kw">in</span> text:
+        <span class="kw">print</span>(text)
+        <span class="kw">break</span>
 
-After seeing a result:
-Observation: [tool result]
-... repeat as needed ...
+    <span class="kw">if</span> <span class="st">"Action: search["</span> <span class="kw">in</span> text:
+        query = text.split(<span class="st">"Action: search["</span>)[<span class="nu">1</span>].split(<span class="st">"]"</span>)[<span class="nu">0</span>]
+        observation = search(query)
+        messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">f"Observation: {observation}"</span>})</pre></div>
+<div class="tip-box"><div class="tip-box-title">💡 First-agent rule</div><p>Keep the first version observable and fake-friendly. Mock tools are fine. Hidden complexity is not. You want to understand the loop before you optimize it.</p></div>
 
-Final Answer: [your answer]
+<h2>4. Failure modes to expect immediately</h2>
+<ol>
+    <li><strong>Looping forever</strong> — no max steps or no stopping rule</li>
+    <li><strong>Hallucinated observations</strong> — the model invents tool results instead of waiting</li>
+    <li><strong>Bad tool choices</strong> — weak tool descriptions or weak system prompt</li>
+    <li><strong>No audit trail</strong> — you cannot tell why it made a decision</li>
+</ol>
+<p>The paired debugging routes you will use a lot are <a href="../../debugging/lab.html">debug lab</a> and <a href="../../debugging/memory.html">memory debugging</a>.</p>
 
-Available tools: search, calculate&#34;&#34;&#34;</span>
+<h2>5. Where to go next</h2>
+<p>The strongest next steps are deliberately ordered:</p>
+<ul>
+    <li><a href="what-are-agents.html">What Are Agents?</a> — sharpen the concept</li>
+    <li><a href="function-calling-basics.html">Function Calling Basics</a> — the core tool loop</li>
+    <li><a href="first-agent.html">Build Your First Agent</a> — complete tool-using example</li>
+    <li><a href="react-loop.html">ReAct Loop</a> and <a href="plan-execute.html">Plan and Execute</a> — stronger coordination patterns</li>
+    <li><a href="../../projects/dev-agent.html">Dev Agent project</a> — put the lessons into a real system</li>
+</ul></div>
 
-<span class="kw">def</span> <span class="fn">run_agent</span>(task: str, max_steps: int = <span class="nu">8</span>) -> str:
-    messages = [
-        {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: SYSTEM},
-        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task}
-    ]
-    <span class="kw">for</span> step <span class="kw">in</span> range(max_steps):
-        resp = client.chat.completions.create(
-            model=<span class="st">"gpt-4o-mini"</span>, messages=messages,
-            stop=[<span class="st">"Observation:"</span>]  <span class="cm"># stop before hallucinating the result</span>
-        )
-        text = resp.choices[<span class="nu">0</span>].message.content
-        messages.append({<span class="st">"role"</span>: <span class="st">"assistant"</span>, <span class="st">"content"</span>: text})
-
-        <span class="kw">if</span> <span class="st">"Final Answer:"</span> <span class="kw">in</span> text:
-            <span class="kw">return</span> text.split(<span class="st">"Final Answer:"</span>)[<span class="nu">1</span>].strip()
-
-        <span class="cm"># Parse action</span>
-        action_match = re.search(<span class="st">r"Action: (\w+)
-Action Input: (.+)"</span>, text, re.DOTALL)
-        <span class="kw">if not</span> action_match: <span class="kw">break</span>
-        tool_name, tool_input = action_match.group(<span class="nu">1</span>), action_match.group(<span class="nu">2</span>).strip()
-
-        result = TOOLS.get(tool_name, <span class="kw">lambda</span> x: <span class="st">"Tool not found"</span>)(tool_input)
-        messages.append({<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">f"Observation: {result}"</span>})
-        <span class="kw">print</span>(<span class="st">f"Step {step+1}: {tool_name}({tool_input[:40]}) → {result[:60]}"</span>)
-
-    <span class="kw">return</span> <span class="st">"Max steps reached"</span>
-
-<span class="kw">print</span>(run_agent(<span class="st">"What is the square root of the year Python 3.12 was released?"</span>))</pre></div><div class="tip-box"><div class="tip-box-title">💡 Stop Sequences</div><p>Using <code>stop=["Observation:"]</code> prevents the LLM from hallucinating tool results. Always let your code provide the observation.</p></div>
-        </div><nav class="lesson-nav">
+        <nav class="lesson-nav">
         <a href="../../courses/agents.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Agents Course Overview</div></a>
-        <a href="tool-design.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Tool Design</div></a>
+        <a href="what-are-agents.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">What Are Agents?</div></a>
     </nav>
     </div>    <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand">
@@ -161,17 +173,17 @@ Action Input: (.+)"</span>, text, re.DOTALL)
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

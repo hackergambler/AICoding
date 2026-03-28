@@ -1,17 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"
-     crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Completions Deep Dive | OpenAI API | AI Coding Academy</title>
-    <meta name="description" content="Master the OpenAI Chat Completions API - learn about messages, roles, system prompts, and building conversation history.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chat Completions Deep Dive | OpenAI API | AI Coding Academy</title>
+<meta content="Learn how to structure Chat Completions requests, manage history, set parameters, and turn a simple prompt into a production-ready chat workflow." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -53,254 +53,221 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a>
+<span class="separator">/</span>
+<a href="../index.html">Tutorials</a>
+<span class="separator">/</span>
+<a href="../../courses/openai.html">OpenAI API</a>
+<span class="separator">/</span>
+<span>Chat Completions</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-beginner">Beginner</span>
+<span class="lesson-meta-item">⏱️ 28 min read</span>
+<span class="lesson-meta-item">📚 Module 2, Lesson 1</span>
+</div>
+<h1 class="lesson-title">Chat Completions Deep Dive</h1>
+<p class="lesson-description">Learn how to structure messages, design strong system prompts, manage conversation state, and ship reliable Chat Completions flows.</p>
+</header>
+<div class="toc">
+<div class="toc-title">📑 In This Lesson</div>
+<ul class="toc-list">
+<li><a href="#understanding-messages">1. Understanding the Messages Array</a></li>
+<li><a href="#three-roles">2. The Three Roles Explained</a></li>
+<li><a href="#system-prompts">3. Crafting Effective System Prompts</a></li>
+<li><a href="#conversation-history">4. Building Conversation History</a></li>
+<li><a href="#parameters">5. Key Parameters</a></li>
+<li><a href="#practice">6. Practice Exercise</a></li>
+</ul>
+</div>
+<div class="lesson-content">
+<h2 id="understanding-messages">1. Understand the request lifecycle</h2>
+<p>Chat Completions works best when you think of every request as a complete snapshot of the conversation so far. The model does not remember earlier API calls unless you include the relevant turns again. Your job is to decide what context belongs in the window, what should be summarized, and what can be left out.</p>
+<p>A strong first mental model is: <strong>system instructions define behavior</strong>, <strong>user messages define the task</strong>, and <strong>assistant messages preserve prior reasoning or prior answers that matter for continuity</strong>. If the model sounds inconsistent, the issue is often missing or bloated context rather than the model itself.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — minimal chat completion request</span><button class="copy-btn">Copy</button></div><pre>from openai import OpenAI
 
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
+client = OpenAI()
 
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a>
-            <span class="separator">/</span>
-            <a href="../index.html">Tutorials</a>
-            <span class="separator">/</span>
-            <a href="../../courses/openai.html">OpenAI API</a>
-            <span class="separator">/</span>
-            <span>Chat Completions</span>
-        </div>
-
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 20 min read</span>
-                <span class="lesson-meta-item">📚 Module 2, Lesson 1</span>
-            </div>
-            <h1 class="lesson-title">Chat Completions Deep Dive</h1>
-            <p class="lesson-description">The Chat Completions API is the core of OpenAI's GPT models. Learn how messages work, understand the three roles, and build multi-turn conversations.</p>
-        </header>
-
-        <div class="toc">
-            <div class="toc-title">📑 In This Lesson</div>
-            <ul class="toc-list">
-                <li><a href="#understanding-messages">1. Understanding the Messages Array</a></li>
-                <li><a href="#three-roles">2. The Three Roles Explained</a></li>
-                <li><a href="#system-prompts">3. Crafting Effective System Prompts</a></li>
-                <li><a href="#conversation-history">4. Building Conversation History</a></li>
-                <li><a href="#parameters">5. Key Parameters</a></li>
-                <li><a href="#practice">6. Practice Exercise</a></li>
-            </ul>
-        </div>
-
-        <div class="lesson-content">
-            <h2 id="understanding-messages">1. Understanding the Messages Array</h2>
-            <p>Every Chat Completions request contains a <code>messages</code> array. This array represents the conversation history and tells GPT the context of your request:</p>
-
-            <div class="code-block">
-<pre>messages = [
-    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a helpful coding assistant."</span>},
-    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"How do I read a file in Python?"</span>},
-    {<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: <span class="string">"Here's how to read a file..."</span>},
-    {<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: <span class="string">"Can you show me with error handling?"</span>}
-]</pre>
-            </div>
-
-            <p>The API processes this entire conversation to understand context and generate an appropriate response.</p>
-
-            <h2 id="three-roles">2. The Three Roles Explained</h2>
-            
-            <div class="role-card">
-                <div class="role-card-title">🎯 System Role</div>
-                <p>Sets the behavior, personality, and constraints for the AI. Think of it as the "configuration" for the assistant. Only include one system message at the start.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="role-card-title">👤 User Role</div>
-                <p>Represents messages from the human user. These are the questions, requests, or inputs that the AI should respond to.</p>
-            </div>
-
-            <div class="role-card">
-                <div class="role-card-title">🤖 Assistant Role</div>
-                <p>Represents previous AI responses. Include these to give the model context about what it has already said in the conversation.</p>
-            </div>
-
-            <h2 id="system-prompts">3. Crafting Effective System Prompts</h2>
-            <p>The system prompt is incredibly powerful. Here are examples for different use cases:</p>
-
-            <div class="code-block">
-<pre><span class="comment"># For a coding assistant:</span>
-system_prompt = <span class="string">"""You are an expert Python developer. 
-- Always provide working, tested code
-- Include comments explaining the code
-- Mention potential edge cases
-- Suggest improvements when relevant"""</span>
-
-<span class="comment"># For a customer service bot:</span>
-system_prompt = <span class="string">"""You are a friendly customer service representative for TechCorp.
-- Be helpful and empathetic
-- If you don't know something, say so
-- For billing issues, direct users to billing@techcorp.com
-- Keep responses concise but complete"""</span>
-
-<span class="comment"># For a creative writing assistant:</span>
-system_prompt = <span class="string">"""You are a creative writing coach.
-- Help users develop their stories and characters
-- Give constructive feedback
-- Suggest techniques from famous authors
-- Encourage experimentation"""</span></pre>
-            </div>
-
-            <h2 id="conversation-history">4. Building Conversation History</h2>
-            <p>For multi-turn conversations, you need to maintain and send the full history:</p>
-
-            <div class="code-block">
-<pre><span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
-
-client = <span class="function">OpenAI</span>()
-
-<span class="comment"># Initialize conversation with system prompt</span>
-conversation = [
-    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"You are a helpful assistant."</span>}
+messages = [
+    {"role": "system", "content": "You are a concise backend mentor. Explain with one code sample and one warning."},
+    {"role": "user", "content": "How do I read JSON from a file in Python?"}
 ]
 
-<span class="keyword">def</span> <span class="function">chat</span>(user_message):
-    <span class="comment"># Add user message to history</span>
-    conversation.<span class="function">append</span>({<span class="string">"role"</span>: <span class="string">"user"</span>, <span class="string">"content"</span>: user_message})
-    
-    <span class="comment"># Get response</span>
-    response = client.chat.completions.<span class="function">create</span>(
-        model=<span class="string">"gpt-4o-mini"</span>,
-        messages=conversation
-    )
-    
-    assistant_message = response.choices[<span class="variable">0</span>].message.content
-    
-    <span class="comment"># Add assistant response to history</span>
-    conversation.<span class="function">append</span>({<span class="string">"role"</span>: <span class="string">"assistant"</span>, <span class="string">"content"</span>: assistant_message})
-    
-    <span class="keyword">return</span> assistant_message
-
-<span class="comment"># Example conversation</span>
-<span class="function">print</span>(<span class="function">chat</span>(<span class="string">"My name is Alex"</span>))
-<span class="function">print</span>(<span class="function">chat</span>(<span class="string">"What's my name?"</span>))  <span class="comment"># It remembers!</span></pre>
-            </div>
-
-            <div class="tip-box">
-                <div class="tip-box-title">💡 Managing Long Conversations</div>
-                <p>As conversations grow, you'll hit token limits. Strategies include: summarizing older messages, using a sliding window of recent messages, or storing conversation in a database and retrieving relevant parts.</p>
-            </div>
-
-            <h2 id="parameters">5. Key Parameters</h2>
-            <p>Beyond messages, these parameters control the output:</p>
-
-            <div class="code-block">
-<pre>response = client.chat.completions.<span class="function">create</span>(
-    model=<span class="string">"gpt-4o-mini"</span>,
+response = client.chat.completions.create(
+    model="gpt-4o-mini",
     messages=messages,
-    
-    <span class="comment"># Temperature: 0-2, controls randomness</span>
-    <span class="comment"># 0 = deterministic, 1 = balanced, 2 = very random</span>
-    temperature=<span class="variable">0.7</span>,
-    
-    <span class="comment"># Max tokens: limit response length</span>
-    max_tokens=<span class="variable">500</span>,
-    
-    <span class="comment"># Top P: alternative to temperature (use one or the other)</span>
-    <span class="comment"># 0.1 = consider top 10% probable tokens</span>
-    top_p=<span class="variable">1.0</span>,
-    
-    <span class="comment"># Stop sequences: stop generation at these strings</span>
-    stop=[<span class="string">"END"</span>, <span class="string">"---"</span>],
-    
-    <span class="comment"># Presence penalty: -2 to 2, discourages repetition of topics</span>
-    presence_penalty=<span class="variable">0</span>,
-    
-    <span class="comment"># Frequency penalty: -2 to 2, discourages repetition of words</span>
-    frequency_penalty=<span class="variable">0</span>
-)</pre>
-            </div>
+    temperature=0.2,
+    max_tokens=300,
+)
 
-            <h2 id="practice">6. Practice Exercise</h2>
-            <p>Build a simple chatbot that:</p>
-            <ol>
-                <li>Has a custom system prompt for a specific domain (cooking, fitness, etc.)</li>
-                <li>Maintains conversation history</li>
-                <li>Runs in a loop until the user types "quit"</li>
-            </ol>
+print(response.choices[0].message.content)
+print(response.usage)
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Why beginners get unstable answers</div><p>They keep changing the hidden rules. If the system message, output format, and examples drift from call to call, the assistant will also drift.</p></div>
+<h2 id="three-roles">2. Use the three roles intentionally</h2>
+<p>Each role has a distinct job. When you mix them up, the model loses signal.</p>
+<ul>
+<li><strong>system</strong>: permanent behavior, tone, safety boundaries, output contract, and non-negotiable rules.</li>
+<li><strong>user</strong>: the current request, the source material, and any constraints supplied by the human.</li>
+<li><strong>assistant</strong>: prior replies that are worth keeping because they preserve continuity or a previous structured answer.</li>
+</ul>
+<p>Do not dump logs, documents, and tool payloads directly into a system prompt. Put large task inputs into the user turn. Keep the system prompt compact and durable.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — structured role design</span><button class="copy-btn">Copy</button></div><pre>messages = [
+    {
+        "role": "system",
+        "content": (
+            "You are a code reviewer. Always respond with: "
+            "1) risk summary, 2) exact fix, 3) quick test plan."
+        ),
+    },
+    {
+        "role": "user",
+        "content": (
+            "Review this FastAPI endpoint and tell me where validation is weak.
 
-            <div class="code-block">
-<pre><span class="comment"># Your turn! Complete this code:</span>
-<span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
-
-client = <span class="function">OpenAI</span>()
-
-conversation = [
-    {<span class="string">"role"</span>: <span class="string">"system"</span>, <span class="string">"content"</span>: <span class="string">"Your custom prompt here..."</span>}
+"
+            "&lt;paste endpoint code here&gt;"
+        ),
+    },
 ]
+</pre></div>
+<h2 id="system-prompts">3. Write a system prompt the model can actually follow</h2>
+<p>Strong system prompts are short, specific, and testable. They describe role, audience, output shape, and hard constraints. They do not try to encode the entire product spec in one giant paragraph.</p>
+<ul>
+<li>Start with the assistant identity: <code>You are a debugging copilot for Python web apps.</code></li>
+<li>Add the audience: <code>Assume the reader is a junior engineer.</code></li>
+<li>Add the response contract: <code>Return three bullets, one code block, and one verification step.</code></li>
+<li>Add hard boundaries: <code>Do not invent environment variables or package names.</code></li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>System prompt skeleton you can reuse</span><button class="copy-btn">Copy</button></div><pre>system_prompt = """
+You are an AI coding tutor for backend developers.
+Audience: engineers who know Python basics but are new to API design.
+Response contract:
+- Start with a 2 sentence explanation.
+- Then show one working code snippet.
+- End with one likely mistake and how to test the fix.
+Constraints:
+- Be concrete.
+- Do not mention tools the user did not ask about.
+- Do not invent file paths or env vars.
+""".strip()
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">A useful test</div><p>Ask the same question three times with slightly different user wording. If the answer shape changes wildly, your system prompt is still too vague.</p></div>
+<h2 id="conversation-history">4. Manage conversation history like a product engineer</h2>
+<p>In real apps you cannot keep appending messages forever. Cost rises, latency rises, and the model starts paying attention to stale context. Good chat products trim, summarize, and pin only what matters.</p>
+<p>A practical strategy is to keep:</p>
+<ul>
+<li>the system prompt,</li>
+<li>the latest task turn,</li>
+<li>the last few user/assistant exchanges,</li>
+<li>and a summary of older context when the thread grows long.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — trim long histories safely</span><button class="copy-btn">Copy</button></div><pre>def build_history(system_prompt: str, recent_turns: list[dict], summary: str | None = None) -&gt; list[dict]:
+    messages = [{"role": "system", "content": system_prompt}]
 
-<span class="keyword">while</span> <span class="variable">True</span>:
-    user_input = <span class="function">input</span>(<span class="string">"You: "</span>)
-    <span class="keyword">if</span> user_input.lower() == <span class="string">"quit"</span>:
-        <span class="keyword">break</span>
-    
-    <span class="comment"># Add your code here...</span>
-    
-<span class="function">print</span>(<span class="string">"Goodbye!"</span>)</pre>
-            </div>
-        </div>
+    if summary:
+        messages.append(
+            {
+                "role": "system",
+                "content": f"Conversation summary so far: {summary}",
+            }
+        )
 
-        <nav class="lesson-nav">
-            <a href="getting-started.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Getting Started</div>
-            </a>
-            <a href="tokens-and-models.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Tokens & Model Selection</div>
-            </a>
-        </nav>
-    </div>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
+    messages.extend(recent_turns[-8:])
+    return messages
+</pre></div>
+<p>Store raw history in your database, but send a carefully chosen subset to the model. That distinction is what makes production chat systems feel coherent instead of expensive and noisy.</p>
+<h2 id="parameters">5. Tune the parameters that actually matter</h2>
+<p>Most teams over-focus on exotic settings and under-focus on three fundamentals:</p>
+<ul>
+<li><strong>temperature</strong>: lower for deterministic coding help, higher for brainstorming.</li>
+<li><strong>max_tokens</strong>: cap output so a runaway answer does not burn budget.</li>
+<li><strong>message quality</strong>: the clearest lever of all. Bad prompts create bad answers no matter how you tune temperature.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — preflight a coding request</span><button class="copy-btn">Copy</button></div><pre>def create_code_reply(client, messages: list[dict]):
+    return client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
+        temperature=0.1,
+        max_tokens=500,
+    )
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Parameter rule of thumb</div><p>For code generation, start at temperature 0 to 0.2. Raise it only when you deliberately want alternative approaches or naming ideas.</p></div>
+<h2 id="practice">6. Turn it into a real feature</h2>
+<p>A solid practice project is a tiny coding copilot with persistent chat history, history trimming, and a repeatable answer shape. Build it in four steps:</p>
+<ol>
+<li>Create a message builder that separates system prompt, recent turns, and summary memory.</li>
+<li>Log usage and latency on every call.</li>
+<li>Add a guardrail that rejects empty prompts and overlong pasted payloads.</li>
+<li>Add a follow-up route that can continue the same conversation safely.</li>
+</ol>
+<p>Once that works, your next improvements are not more prompt tricks. They are observability, caching, and better context selection.</p>
+<ul>
+<li><a href="streaming.html">Continue with streaming responses</a></li>
+<li><a href="function-calling.html">Move into tool and function calling</a></li>
+<li><a href="../../debugging/async.html">Debug slow or broken response streaming</a></li>
+<li><a href="../../debugging/api-keys.html">Fix auth and key failures</a></li>
+<li><a href="../../projects/personal-assistant.html">Build a real assistant project</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="getting-started.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Getting Started</div>
+</a>
+<a class="next" href="embeddings.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Embeddings</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
 </body>
 </html>

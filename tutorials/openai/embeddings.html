@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI Embeddings — Semantic Search & Similarity | AI Coding Academy</title>
-    <meta name="description" content="Master OpenAI embeddings: text-embedding-3, semantic search, clustering, and RAG integration.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenAI Embeddings — Semantic Search &amp; Similarity | AI Coding Academy</title>
+<meta content="Generate embeddings, build semantic search, choose chunking strategy, and fix the retrieval mistakes that make vector search feel inaccurate." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,217 +64,184 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
-            <span>Embeddings</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 30 min</span>
-            </div>
-            <h1 class="lesson-title">OpenAI Embeddings</h1>
-            <p class="lesson-description">Generate embeddings with text-embedding-3 models, build semantic search, classify text, detect duplicates, and power RAG pipelines.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>Generating Embeddings</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — basic embedding generation</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">import</span> numpy <span class="kw">as</span> np
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
+<span>Embeddings</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 32 min</span>
+</div>
+<h1 class="lesson-title">OpenAI Embeddings</h1>
+<p class="lesson-description">Learn how to generate embeddings, choose chunking and metadata strategy, build semantic retrieval, and debug weak search quality.</p>
+</header>
+<div class="lesson-content">
+<h2>1. What embeddings are actually for</h2>
+<p>An embedding turns text into a numeric vector so you can compare meaning rather than exact wording. That is why embeddings power semantic search, deduplication, clustering, and retrieval pipelines. They do <strong>not</strong> replace a language model. They help you decide <em>which</em> information the language model should read next.</p>
+<p>The quality of an embedding system depends on more than the model. Chunk boundaries, metadata, normalization, filtering, and evaluation matter just as much.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — generate one embedding and inspect the shape</span><button class="copy-btn">Copy</button></div><pre>from openai import OpenAI
 
 client = OpenAI()
 
-<span class="cm"># Single text</span>
 response = client.embeddings.create(
-    model=<span class="st">"text-embedding-3-small"</span>,   <span class="cm"># 1536 dims, cheaper</span>
-    input=<span class="st">"Python is a great programming language"</span>
+    model="text-embedding-3-small",
+    input="Rate limiting prevents a client from overloading your API.",
 )
-vector = response.data[<span class="nu">0</span>].embedding
-<span class="kw">print</span>(len(vector))  <span class="cm"># 1536</span>
 
-<span class="cm"># Batch (more efficient - up to 2048 strings)</span>
-texts = [<span class="st">"Hello world"</span>, <span class="st">"Machine learning"</span>, <span class="st">"Python functions"</span>]
-response = client.embeddings.create(
-    model=<span class="st">"text-embedding-3-large"</span>,    <span class="cm"># 3072 dims, more accurate</span>
-    input=texts,
-    dimensions=<span class="nu">512</span>                      <span class="cm"># optionally reduce dims</span>
-)
-vectors = [d.embedding <span class="kw">for</span> d <span class="kw">in</span> response.data]
-<span class="kw">print</span>(<span class="st">f"Cost: ${response.usage.total_tokens / 1_000_000 * 0.13:.6f}"</span>)</pre>
-</div>
-            <h2>Semantic Search from Scratch</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — build a semantic search engine</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
-<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+vector = response.data[0].embedding
+print(len(vector))
+print(vector[:5])
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Key mental model</div><p>Embeddings answer “what is similar to this text?” They do not answer the user directly. A retrieval layer still needs ranking, filtering, and answer generation.</p></div>
+<h2>2. Build the text before you build the vector</h2>
+<p>Poor source text creates poor embeddings. Before you vectorize anything, decide how documents will be chunked and what metadata each chunk must carry. A strong chunk usually contains:</p>
+<ul>
+<li>one coherent idea,</li>
+<li>enough surrounding context to stand on its own,</li>
+<li>metadata like source, section, title, and timestamp,</li>
+<li>and a stable document or chunk identifier.</li>
+</ul>
+<p>If your chunks are too large, the vectors become vague. If they are too small, they lose context and retrieval becomes fragmentary.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — prepare documents before embedding</span><button class="copy-btn">Copy</button></div><pre>def prepare_chunk(text: str, *, source: str, section: str, chunk_id: str) -&gt; dict:
+    cleaned = " ".join(text.split())
+    return {
+        "id": chunk_id,
+        "text": cleaned,
+        "metadata": {
+            "source": source,
+            "section": section,
+        },
+    }
+</pre></div>
+<h2>3. Generate vectors in batches and store metadata beside them</h2>
+<p>Batch requests are cheaper to manage and easier to retry. More importantly, never store vectors without metadata. Retrieval quality depends on what you can filter and explain later.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — batch embedding pipeline</span><button class="copy-btn">Copy</button></div><pre>def embed_texts(client, texts: list[str]):
+    response = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts,
+    )
+    return [row.embedding for row in response.data]
 
-client = OpenAI()
-
-<span class="kw">class</span> <span class="cl">SemanticSearchEngine</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(self, model=<span class="st">"text-embedding-3-small"</span>):
-        self.model = model
-        self.documents = []
-        self.embeddings = []
-
-    <span class="kw">def</span> <span class="fn">_embed</span>(self, texts: list[str]) -> np.ndarray:
-        res = client.embeddings.create(model=self.model, input=texts)
-        return np.array([d.embedding for d in res.data])
-
-    <span class="kw">def</span> <span class="fn">add_documents</span>(self, docs: list[str]):
-        vecs = self._embed(docs)
-        self.documents.extend(docs)
-        if len(self.embeddings) == 0:
-            self.embeddings = vecs
-        else:
-            self.embeddings = np.vstack([self.embeddings, vecs])
-
-    <span class="kw">def</span> <span class="fn">search</span>(self, query: str, k: int = 5) -> list[tuple[float, str]]:
-        q_vec = self._embed([query])
-        <span class="cm"># Cosine similarity via dot product on L2-normalized vectors</span>
-        norms = np.linalg.norm(self.embeddings, axis=1, keepdims=True)
-        normed = self.embeddings / norms
-        q_normed = q_vec / np.linalg.norm(q_vec)
-        scores = (normed @ q_normed.T).flatten()
-        top_k = np.argsort(scores)[::-1][:k]
-        return [(scores[i], self.documents[i]) for i in top_k]
-
-<span class="cm"># Demo</span>
-engine = SemanticSearchEngine()
-engine.add_documents([
-    <span class="st">"Python list comprehensions create concise loops"</span>,
-    <span class="st">"FastAPI builds REST APIs with type hints"</span>,
-    <span class="st">"NumPy arrays are faster than Python lists"</span>,
-    <span class="st">"Django includes an ORM and admin panel"</span>,
-    <span class="st">"asyncio enables concurrent I/O operations"</span>,
-])
-
-results = engine.search(<span class="st">"How do I make async HTTP requests?"</span>, k=<span class="nu">2</span>)
-<span class="kw">for</span> score, doc <span class="kw">in</span> results:
-    <span class="kw">print</span>(<span class="st">f"[{score:.3f}] {doc}"</span>)</pre>
-</div>
-            <h2>Text Classification with Embeddings</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — zero-shot classification</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> numpy <span class="kw">as</span> np
-
-<span class="kw">def</span> <span class="fn">classify_zeroshot</span>(text: str, labels: list[str]) -> str:
-    <span class="st">&#34;&#34;&#34;Classify text into one of the given labels using embeddings.&#34;&#34;&#34;</span>
-    all_texts = [text] + labels
-    res = client.embeddings.create(model=<span class="st">"text-embedding-3-small"</span>, input=all_texts)
-    vecs = np.array([d.embedding <span class="kw">for</span> d <span class="kw">in</span> res.data])
-
-    text_vec = vecs[<span class="nu">0</span>]
-    label_vecs = vecs[<span class="nu">1</span>:]
-
-    <span class="cm"># Cosine similarity</span>
-    scores = []
-    <span class="kw">for</span> lv <span class="kw">in</span> label_vecs:
-        score = np.dot(text_vec, lv) / (np.linalg.norm(text_vec) * np.linalg.norm(lv))
-        scores.append(score)
-
-    best = np.argmax(scores)
-    <span class="kw">return</span> labels[best], scores
-
-<span class="cm"># Test it</span>
-text = <span class="st">"My laptop keeps crashing after the latest update"</span>
-labels = [<span class="st">"billing"</span>, <span class="st">"technical_support"</span>, <span class="st">"account"</span>, <span class="st">"sales"</span>]
-category, scores = classify_zeroshot(text, labels)
-<span class="kw">print</span>(<span class="st">f"Category: {category}"</span>)
-<span class="kw">for</span> label, score <span class="kw">in</span> zip(labels, scores):
-    <span class="kw">print</span>(<span class="st">f"  {label}: {score:.3f}"</span>)</pre>
-</div>
-            <h2>Duplicate Detection</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — find near-duplicate content</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> itertools <span class="kw">import</span> combinations
-<span class="kw">import</span> numpy <span class="kw">as</span> np
-
-<span class="kw">def</span> <span class="fn">find_duplicates</span>(texts: list[str], threshold: float = <span class="nu">0.95</span>) -> list[tuple]:
-    res = client.embeddings.create(model=<span class="st">"text-embedding-3-small"</span>, input=texts)
-    vecs = np.array([d.embedding <span class="kw">for</span> d <span class="kw">in</span> res.data])
-
-    <span class="cm"># Normalize</span>
-    norms = np.linalg.norm(vecs, axis=1, keepdims=True)
-    vecs = vecs / norms
-
-    <span class="cm"># Compare all pairs</span>
-    duplicates = []
-    <span class="kw">for</span> i, j <span class="kw">in</span> combinations(range(len(texts)), <span class="nu">2</span>):
-        sim = np.dot(vecs[i], vecs[j])
-        <span class="kw">if</span> sim >= threshold:
-            duplicates.append((i, j, sim, texts[i][:50], texts[j][:50]))
-    <span class="kw">return</span> duplicates
-
-texts = [
-    <span class="st">"How do I install Python?"</span>,
-    <span class="st">"What's the best way to install Python on Windows?"</span>,
-    <span class="st">"Python installation guide"</span>,
-    <span class="st">"What is machine learning?"</span>,
+chunks = [
+    "Rate limiting protects APIs from bursty traffic.",
+    "Caching reduces repeated database reads.",
+    "Vector search finds semantically similar chunks.",
 ]
-dupes = find_duplicates(texts, threshold=<span class="nu">0.85</span>)
-<span class="kw">print</span>(<span class="st">f"Found {len(dupes)} near-duplicates"</span>)</pre>
+
+vectors = embed_texts(client, chunks)
+print(len(vectors), len(vectors[0]))
+</pre></div>
+<p>When you write into a vector store, persist both the vector and the descriptive metadata. You will need that metadata later for filtering, debugging, and citation quality.</p>
+<h2>4. Retrieval quality comes from ranking, not just cosine similarity</h2>
+<p>A minimal semantic search flow looks like this:</p>
+<ol>
+<li>Embed the query.</li>
+<li>Fetch the top <em>k</em> nearest chunks.</li>
+<li>Filter by metadata where needed.</li>
+<li>Optionally rerank or compress the candidates.</li>
+<li>Only then send the best chunks into your answer model.</li>
+</ol>
+<div class="code-block"><div class="code-block-label"><span>Python — cosine similarity from scratch</span><button class="copy-btn">Copy</button></div><pre>import math
+
+def cosine_similarity(a: list[float], b: list[float]) -&gt; float:
+    dot = sum(x * y for x, y in zip(a, b))
+    mag_a = math.sqrt(sum(x * x for x in a))
+    mag_b = math.sqrt(sum(y * y for y in b))
+    return dot / (mag_a * mag_b)
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Why good chunks still retrieve badly</div><p>The query itself may be too vague. Try query rewriting, metadata filters, or returning more candidates before final ranking.</p></div>
+<h2>5. Evaluate the retrieval layer before you trust it</h2>
+<p>Do not evaluate embeddings only by “the app feels decent.” Create a small gold set of user questions and the chunks that should appear for each one. Then measure whether your pipeline actually retrieves them.</p>
+<ul>
+<li>Track hit rate at top 3 or top 5.</li>
+<li>Inspect false positives and ask why they looked similar.</li>
+<li>Try chunk-size experiments one variable at a time.</li>
+<li>Keep difficult queries as regression tests.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — retrieval evaluation sketch</span><button class="copy-btn">Copy</button></div><pre>gold = {
+    "How do I secure an API key?": ["security-01", "env-vars-02"],
+    "What chunk size should I use for docs?": ["rag-05", "rag-06"],
+}
+
+def hit_at_k(retrieved_ids: list[str], relevant_ids: list[str], k: int = 5) -&gt; int:
+    return int(any(doc_id in retrieved_ids[:k] for doc_id in relevant_ids))
+</pre></div>
+<h2>6. Common failure patterns and the next route</h2>
+<ul>
+<li><strong>Duplicate chunks dominate results</strong>: deduplicate at ingest time.</li>
+<li><strong>All results are vaguely related</strong>: your chunks are too broad or your query rewrite is weak.</li>
+<li><strong>Correct results exist but rank too low</strong>: increase <em>k</em>, filter better, or add a reranking step.</li>
+<li><strong>Answers hallucinate anyway</strong>: retrieval helped, but the generation prompt still needs citations and answer constraints.</li>
+</ul>
+<p>Once embeddings work, the next leap in quality comes from chunk design and evaluation discipline.</p>
+<ul>
+<li><a href="../../tutorials/rag/text-splitting.html">Tune chunking with text splitting</a></li>
+<li><a href="../../tutorials/rag/hybrid-search.html">Add keyword + vector hybrid search</a></li>
+<li><a href="../../debugging/vectordb.html">Debug vector database failures</a></li>
+<li><a href="../../debugging/data.html">Fix data quality and ingestion bugs</a></li>
+<li><a href="../../projects/research-crew.html">Use retrieval inside a real project</a></li>
+</ul>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="chat-completions.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Chat Completions</div>
-            </a>
-            <a href="function-calling.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Function Calling</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<nav class="lesson-nav">
+<a class="prev" href="chat-completions.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Chat Completions</div>
+</a>
+<a class="next" href="function-calling.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Function Calling</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

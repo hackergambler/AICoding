@@ -47,15 +47,26 @@
         .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
         .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
         .lesson-nav .next{text-align:right}
-        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+        @media(max-width:900px){.step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}.resource-grid,.step-grid{grid-template-columns:1fr}}
+        .step-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+        .step-card,.resource-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-lg)}
+        .step-card h3,.resource-card h3{font-family:var(--font-heading);font-size:1rem;margin:0 0 var(--space-sm);color:var(--text-primary)}
+        .step-card p,.resource-card p{margin:0;color:var(--text-secondary);line-height:1.7;font-size:.95rem}
+        .resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .resource-kicker{display:inline-block;font-size:.75rem;font-family:var(--font-mono);color:var(--accent-primary);margin-bottom:var(--space-sm);letter-spacing:.04em;text-transform:uppercase}
+        .resource-card a{color:var(--accent-primary);text-decoration:none;font-weight:600}
+        .resource-card a:hover{text-decoration:underline}
+        .route-checklist{margin:var(--space-lg) 0 0;padding-left:var(--space-xl);color:var(--text-secondary);line-height:1.8}
+        .route-checklist li+li{margin-top:6px}
     </style>
 </head>
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -65,11 +76,11 @@
         <ul class="nav-menu">
             <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
             <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
-            <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../debugging/index.html" class="nav-link active">Debugging</a></li>
             <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search debugging..."><kbd>⌘K</kbd></div>
             <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -138,24 +149,56 @@ client = AzureOpenAI(
 OPENAI = ["gpt-4o", "gpt-4o-mini", "o1", "o3-mini"]
 
 <span class="cm"># Anthropic</span>
-ANTHROPIC = ["claude-opus-4-5", "claude-sonnet-4-6", "claude-haiku-4-5-20251001"]
+ANTHROPIC = ["claude-opus-4-6", "claude-sonnet-4-6", "claude-haiku-4-5-20251001"]
 
 <span class="cm"># Google</span>
 GOOGLE = ["gemini-2.0-flash", "gemini-1.5-pro", "gemini-1.5-flash"]
 
 <span class="cm"># Ollama local</span>
-OLLAMA = ["llama3.2", "llama3.1:8b", "mistral", "codellama:13b"]</pre></div></div><div class="tip-box"><div class="tip-box-title">💡 Config validation on startup</div><p>Run a config check at app startup that validates all env vars and tests connectivity. Fail fast with a clear error rather than crashing at request time.</p></div></div>
+OLLAMA = ["llama3.2", "llama3.1:8b", "mistral", "codellama:13b"]</pre></div></div><div class="tip-box"><div class="tip-box-title">💡 Config validation on startup</div><p>Run a config check at app startup that validates all env vars and tests connectivity. Fail fast with a clear error rather than crashing at request time.</p></div>
+        <h2>Triage Flow for Configuration Failures</h2>
+        <div class="step-grid">
+            <div class="step-card"><h3>1. Print what exists</h3><p>Log variable names, active provider, and base URL at startup without leaking secrets into output.</p></div>
+            <div class="step-card"><h3>2. Check load order</h3><p>Verify when <code>load_dotenv()</code>, secret managers, or runtime config wrappers actually run.</p></div>
+            <div class="step-card"><h3>3. Compare environments</h3><p>Diff local, staging, CI, and production settings. Many "SDK bugs" are environment drift.</p></div>
+            <div class="step-card"><h3>4. Fail fast</h3><p>Move missing-key and invalid-endpoint checks to startup so broken deploys stop immediately.</p></div>
+        </div>
+
+        <h2>Study Before You Fix</h2>
+        <div class="resource-grid">
+            <div class="resource-card"><span class="resource-kicker">Provider basics</span><h3><a href="../tutorials/openai/getting-started.html">OpenAI setup</a></h3><p>Useful when you need to confirm the expected environment variables and first-call pattern.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Provider basics</span><h3><a href="../tutorials/claude/getting-started.html">Claude setup</a></h3><p>Compare provider-specific key names, headers, and model selection assumptions.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Provider basics</span><h3><a href="../tutorials/gemini/getting-started.html">Gemini setup</a></h3><p>Helpful when switching providers and validating SDK initialization patterns.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Local stack</span><h3><a href="../tutorials/local-llms/ollama.html">Ollama local models</a></h3><p>Use this when the bug is really a wrong host, model name, or local-runtime assumption.</p></div>
+        </div>
+
+        <h2>Escalate Through These Routes</h2>
+        <div class="resource-grid">
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="api-keys.html">API key errors</a></h3><p>Go here when auth failures are mixed into broader configuration problems.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="deployment.html">Deployment errors</a></h3><p>Use this when everything works locally but breaks after containerization or cloud rollout.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="network.html">Network errors</a></h3><p>DNS, proxy, and SSL issues often look like config bugs until you test the transport layer.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Project system</span><h3><a href="../projects/workflow-automation.html">Workflow automation project</a></h3><p>See how environment validation fits into a multi-step production automation build.</p></div>
+        </div>
+
+        <h2>Release Checklist</h2>
+        <ul class="route-checklist">
+            <li>Startup validation checks every required variable before the first user request lands.</li>
+            <li>Secrets are injected by environment, not hardcoded into notebooks, scripts, or source files.</li>
+            <li>Base URLs, model names, and provider toggles are visible in logs without exposing private values.</li>
+            <li>Local, staging, and production all use a documented config contract with the same variable names.</li>
+        </ul>
+</div>
         <nav class="lesson-nav">
             <a href="async.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Async Errors</div></a>
-            <a href="deployment.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Deployment Errors</div></a>
+            <a href="data.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Data Format Issues</div></a>
         </nav>
     </div>
     <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
         <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
     <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>

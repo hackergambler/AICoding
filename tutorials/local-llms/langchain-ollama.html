@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LangChain with Local LLMs | AI Coding Academy</title>
-    <meta name="description" content="Use Ollama models in LangChain pipelines: LCEL chains, RAG, and embedding with local models.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LangChain with Local LLMs | AI Coding Academy</title>
+<meta content="Connect LangChain to Ollama, build local chains and retrieval flows, and debug the common issues in local orchestration." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -47,132 +48,124 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
     </style>
 </head><body>
-    <div class="top-bar"><div class="top-bar-container">
-        <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-        </div>
-        <div class="top-bar-right">Part of MYRQAI Network</div>
-    </div></div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav"><div class="nav-container">
-        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-        <ul class="nav-menu">
-            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-        </ul>
-        <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-        </div>
-        <button class="mobile-menu-btn">☰</button>
-    </div></nav>
-    <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/local-llms.html">Local LLMs</a><span class="separator">/</span><span>LangChain + Ollama</span></div>
-        <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 30 min</span><span class="lesson-meta-item">📚 Lesson 2</span></div>
-            <h1 class="lesson-title">LangChain with Local LLMs</h1>
-            <p class="lesson-description">Run completely local AI pipelines: LangChain + Ollama for text generation, and Nomic/mxbai embeddings for fully private RAG systems.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>LangChain + Ollama Setup</h2>
-<div class="code-block">
-<div class="code-block-label"><span>bash + Python — install and configure</span><button class="copy-btn">Copy</button></div>
-<pre><span class="cm"># Install LangChain Ollama integration</span>
-pip install langchain-ollama
+<div class="top-bar"><div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div></div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav"><div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div></nav>
+<div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/local-llms.html">Local LLMs</a><span class="separator">/</span><span>LangChain + Ollama</span></div>
+<header class="lesson-header">
+<div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 31 min</span><span class="lesson-meta-item">📚 Lesson 2</span></div>
+<h1 class="lesson-title">LangChain with Local LLMs</h1>
+<p class="lesson-description">Use LangChain with Ollama for local chat, retrieval, and structured workflows without losing control of latency or debugging visibility.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Know when LangChain helps and when it is extra weight</h2>
+<p>LangChain is useful when you want composable prompts, retrievers, chains, structured outputs, and interchangeable model backends. It is less useful when your app only needs one direct model call. Use it when orchestration complexity is real, not just because it is popular.</p>
+<div class="tip-box"><div class="tip-box-title">Healthy rule</div><p>First prove the model works through raw Ollama. Then add LangChain so you know whether later bugs come from the runtime or the orchestration layer.</p></div>
+<h2>2. Start with a clean local chat chain</h2>
+<div class="code-block"><div class="code-block-label"><span>Python — minimal LangChain + Ollama chain</span><button class="copy-btn">Copy</button></div><pre>from langchain_ollama import ChatOllama
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
 
-<span class="cm"># Pull embedding model too</span>
-ollama pull nomic-embed-text   <span class="cm"># fast local embeddings</span>
-ollama pull mxbai-embed-large  <span class="cm"># higher quality embeddings</span></pre></div><div class="code-block">
-<div class="code-block-label"><span>Python - local LLM chain</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_ollama <span class="kw">import</span> ChatOllama, OllamaEmbeddings
-<span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
-<span class="kw">from</span> langchain_core.output_parsers <span class="kw">import</span> StrOutputParser
-
-<span class="cm"># Local LLM — no API key needed</span>
-llm = ChatOllama(model=<span class="st">"llama3.1:8b"</span>, temperature=<span class="nu">0.7</span>)
+llm = ChatOllama(model="llama3.1:8b", temperature=0.2)
 
 prompt = ChatPromptTemplate.from_messages([
-    (<span class="st">"system"</span>, <span class="st">"You are a concise technical writer. Answer in 2-3 sentences max."</span>),
-    (<span class="st">"human"</span>, <span class="st">"{question}"</span>)
+    ("system", "You are a concise backend mentor."),
+    ("human", "{question}"),
 ])
 
 chain = prompt | llm | StrOutputParser()
+print(chain.invoke({"question": "Explain Python generators with one example."}))
+</pre></div>
+<p>This pattern matters because it separates prompt design, model invocation, and output parsing. That separation becomes very valuable once you add retrieval or structured responses.</p>
+<h2>3. Add local embeddings and retrieval without leaving the machine</h2>
+<p>One of the strongest reasons to use LangChain with Ollama is to keep both generation and embeddings local. That gives you privacy and a consistent local workflow for RAG experiments.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — local embeddings for retrieval</span><button class="copy-btn">Copy</button></div><pre>from langchain_ollama import OllamaEmbeddings
 
-<span class="kw">print</span>(chain.invoke({<span class="st">"question"</span>: <span class="st">"What is a Python generator?"</span>}))
-
-<span class="cm"># Streaming</span>
-<span class="kw">for</span> chunk <span class="kw">in</span> chain.stream({<span class="st">"question"</span>: <span class="st">"Explain async/await"</span>}):
-    <span class="kw">print</span>(chunk, end=<span class="st">""</span>, flush=<span class="kw">True</span>)</pre></div>
-            <h2>Fully Local RAG Pipeline</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - 100% local RAG with Ollama + FAISS</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_ollama <span class="kw">import</span> ChatOllama, OllamaEmbeddings
-<span class="kw">from</span> langchain_community.vectorstores <span class="kw">import</span> FAISS
-<span class="kw">from</span> langchain_core.documents <span class="kw">import</span> Document
-<span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
-<span class="kw">from</span> langchain_core.output_parsers <span class="kw">import</span> StrOutputParser
-<span class="kw">from</span> langchain_core.runnables <span class="kw">import</span> RunnablePassthrough
-
-<span class="cm"># Local embeddings (completely private)</span>
-embeddings = OllamaEmbeddings(model=<span class="st">"nomic-embed-text"</span>)
-
-<span class="cm"># Your private documents</span>
-docs = [
-    Document(page_content=<span class="st">"Our Q1 revenue was $4.2M, up 23% YoY."</span>, metadata={<span class="st">"source"</span>: <span class="st">"q1_report"</span>}),
-    Document(page_content=<span class="st">"The product roadmap includes: mobile app (Q2), API v2 (Q3), enterprise (Q4)."</span>),
-    Document(page_content=<span class="st">"Employee headcount: 47 full-time, 12 contractors. Growing 15% QoQ."</span>),
-]
-
-<span class="cm"># Build local vector store</span>
-vectorstore = FAISS.from_documents(docs, embeddings)
-retriever = vectorstore.as_retriever(search_kwargs={<span class="st">"k"</span>: <span class="nu">2</span>})
-
-<span class="cm"># Local LLM for generation</span>
-llm = ChatOllama(model=<span class="st">"llama3.1:8b"</span>)
-
-prompt = ChatPromptTemplate.from_template(<span class="st">&#34;&#34;&#34;Answer using only this context:
-{context}
-Question: {question}&#34;&#34;&#34;</span>)
-
-rag_chain = (
-    {<span class="st">"context"</span>: retriever, <span class="st">"question"</span>: RunnablePassthrough()}
-    | prompt | llm | StrOutputParser()
-)
-
-<span class="cm"># Your data never leaves your machine!</span>
-<span class="kw">print</span>(rag_chain.invoke(<span class="st">"What was Q1 revenue growth?"</span>))
-<span class="kw">print</span>(rag_chain.invoke(<span class="st">"When is the mobile app launching?"</span>))</pre></div><div class="tip-box"><div class="tip-box-title">💡 Privacy Guarantee</div><p>With Ollama + FAISS + local embeddings, your data never leaves your machine. Perfect for healthcare records, legal documents, and confidential business data.</p></div>
-        </div><nav class="lesson-nav">
-        <a href="ollama.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Ollama Setup</div></a>
-        <a href="../../courses/local-llms.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Back to Local LLMs Course</div></a>
-    </nav>
-    </div>    <footer><div class="footer-container"><div class="footer-grid">
-        <div class="footer-brand">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <p>The most comprehensive AI coding learning platform.</p>
-        </div>
-        <div class="footer-column"><h4>Learn</h4><ul>
-            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
-            <li><a href="../../courses/index.html">Courses</a></li>
-            <li><a href="../../projects/index.html">Projects</a></li>
-            <li><a href="../../debugging/index.html">Debugging</a></li>
-        </ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
-        </ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
-        </ul></div>
-    </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
-    </div></footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
+embeddings = OllamaEmbeddings(model="nomic-embed-text")
+vector = embeddings.embed_query("How does rate limiting work?")
+print(len(vector))
+</pre></div>
+<div class="code-block"><div class="code-block-label"><span>Python — retrieval outline</span><button class="copy-btn">Copy</button></div><pre># Split docs -&gt; embed locally -&gt; store vectors -&gt; retrieve top chunks
+# Then feed chunks into a prompt chain
+</pre></div>
+<p>Keep the retrieval step observable. Log what chunks were selected, their metadata, and the final prompt length. Otherwise local RAG failures feel mysterious.</p>
+<h2>4. Use structured outputs and small components</h2>
+<p>When you build larger local workflows, resist the temptation to create giant chains. Compose small parts:</p>
+<ul>
+<li>prompt formatting,</li>
+<li>retrieval,</li>
+<li>model call,</li>
+<li>parser or validator,</li>
+<li>and optional fallback logic.</li>
+</ul>
+<p>Smaller components make it easier to swap local models, inspect intermediate state, and debug bad outputs.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — add streaming for local UX</span><button class="copy-btn">Copy</button></div><pre>for chunk in chain.stream({"question": "Explain async IO in simple terms."}):
+    print(chunk, end="", flush=True)
+</pre></div>
+<h2>5. Debug the local orchestration layer explicitly</h2>
+<ul>
+<li><strong>Chain works in code but feels slow</strong>: measure whether the bottleneck is retrieval, model generation, or parsing.</li>
+<li><strong>RAG answers ignore context</strong>: inspect retrieved chunks before blaming the model.</li>
+<li><strong>Outputs are inconsistent</strong>: shrink the prompt and simplify the parser.</li>
+<li><strong>Model works in Ollama CLI but not in LangChain</strong>: compare raw runtime settings and stop token behavior.</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">A practical habit</div><p>Keep one raw Ollama test script beside the LangChain version. It gives you a fast control case whenever orchestration starts behaving strangely.</p></div>
+<h2>6. Next routes in the local orchestration path</h2>
+<ul>
+<li><a href="ollama.html">Deepen your Ollama runtime knowledge</a></li>
+<li><a href="../../tutorials/rag/introduction.html">Combine local generation with RAG</a></li>
+<li><a href="../../debugging/vectordb.html">Fix retrieval and vector-store issues</a></li>
+<li><a href="../../debugging/memory.html">Debug state and context problems in chained apps</a></li>
+<li><a href="../../projects/workflow-automation.html">Build a real workflow around local model orchestration</a></li>
+</ul>
+</div><nav class="lesson-nav">
+<a class="prev" href="ollama.html"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Ollama Setup</div></a>
+<a class="next" href="llama-cpp.html"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">llama.cpp</div></a>
+</nav>
+</div> <footer><div class="footer-container"><div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul>
+<li><a href="../../tutorials/index.html">All Tutorials</a></li>
+<li><a href="../../courses/index.html">Courses</a></li>
+<li><a href="../../projects/index.html">Projects</a></li>
+<li><a href="../../debugging/index.html">Debugging</a></li>
+</ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul>
+<li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+<li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+<li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
+</ul></div>
+<div class="footer-column"><h4>Legal</h4><ul>
+<li><a href="../../privacy.html">Privacy Policy</a></li>
+<li><a href="../../terms.html">Terms of Service</a></li>
+<li><a href="../../contact.html">Contact Us</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color:var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p></div>
+</div></footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>document.querySelectorAll('.copy-btn').forEach(b=>{b.addEventListener('click',function(){navigator.clipboard.writeText(this.closest('.code-block').querySelector('pre').innerText).then(()=>{this.textContent='✓ Copied';setTimeout(()=>this.textContent='Copy',1500)})})});</script>
 </body></html>

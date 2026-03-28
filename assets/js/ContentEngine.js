@@ -2,7 +2,7 @@
  * ContentEngine.js — AI Coding Academy v4.0.0
  * library.myrqai.com
  *
- * Loads MasterLibrary.json once, caches all 50 lessons.
+ * Loads MasterLibrary.json once, caches all 125 lessons.
  * Single router: ?id=<lessonId>&type=lesson|project
  * Sidebar sticky, ⌘K search, AdSense slot injection,
  * 4-tier TrackIndex for tutorials/index.html.
@@ -161,6 +161,16 @@ const Renderer={
 
   _tip(t){return t?`<div class="tip-box"><div class="tip-box-title">💡 Pro Tip</div><p>${t}</p></div>`:'';},
 
+  _exercise(e){
+    if(!e)return'';
+    const steps=(e.steps||[]).map(s=>`<li>${s}</li>`).join('');
+    return`<div class="exercise-box">
+      <div class="exercise-box-title">🏋️ Exercise: ${e.title||'Practice'}</div>
+      <p>${e.description||''}</p>
+      ${steps?`<ol>${steps}</ol>`:''}
+      ${e.hint?`<details class="exercise-hint"><summary>Hint</summary><p>${e.hint}</p></details>`:''}
+    </div>`;},
+
   _sections(sections){
     return(sections||[]).map(s=>`
       <div class="lesson-content">
@@ -169,6 +179,7 @@ const Renderer={
         ${this._tip(s.tip||'')}
         ${this._cb(s.code||null)}
         ${this._cb(s.code2||null)}
+        ${this._exercise(s.exercise||null)}
       </div>`).join('');},
 
   renderLesson(data){
@@ -223,10 +234,15 @@ const Renderer={
     const c=document.getElementById(cid);if(!c)return;
     const secs=c.querySelectorAll('.lesson-content');if(secs.length<2)return;
     const ad=document.createElement('div');ad.style.cssText='margin:1.5rem 0;text-align:center';
-    ad.innerHTML=`<ins class="adsbygoogle" style="display:block"
-      data-ad-client="ca-pub-8668540803235423" data-ad-slot="auto"
-      data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle=window.adsbygoogle||[]).push({});<\/script>`;
+    const ins=document.createElement('ins');
+    ins.className='adsbygoogle';ins.style.display='block';
+    ins.dataset.adClient='ca-pub-8668540803235423';
+    ins.dataset.adSlot='auto';ins.dataset.adFormat='auto';
+    ins.dataset.fullWidthResponsive='true';
+    ad.appendChild(ins);
+    const s=document.createElement('script');
+    s.textContent='(adsbygoogle=window.adsbygoogle||[]).push({});';
+    ad.appendChild(s);
     secs[1].after(ad);}
 };
 
@@ -264,12 +280,18 @@ const Search={
     if(this.modal){this.modal.remove();this.modal=null;}
     this.modal=document.createElement('div');this.modal.id='ce-sm';
     this.modal.innerHTML=`<div class="ce-sb2"></div><div class="ce-sbox2">
-      <input id="ce-si2" type="text" placeholder="Search 50+ tutorials…" autocomplete="off">
+      <input id="ce-si2" type="text" placeholder="Search 125+ lessons…" autocomplete="off">
       <div id="ce-sr2"></div><div class="ce-sh2">↑↓ navigate · ↵ open · esc close</div></div>`;
     this._css();document.body.appendChild(this.modal);
     const inp=document.getElementById('ce-si2'),res=document.getElementById('ce-sr2');
     inp.focus();
+    let selectedIdx=-1;
+    const getItems=()=>res.querySelectorAll('.ce-sri2');
+    const highlight=(idx)=>{
+      getItems().forEach((el,i)=>{el.style.background=i===idx?'rgba(0,255,170,.12)':'';});
+      selectedIdx=idx;};
     inp.addEventListener('input',async()=>{
+      selectedIdx=-1;
       const q=inp.value.trim();if(q.length<2){res.innerHTML='';return;}
       const hits=(await Library.search(q)).slice(0,9);
       res.innerHTML=hits.length?hits.map(h=>`
@@ -278,6 +300,11 @@ const Search={
           <span style="flex:1;color:var(--text-primary);font-size:.95rem">${h.title}</span>
           <span style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)">${h.trackId}</span>
         </a>`).join(''):`<div style="padding:1.5rem;text-align:center;color:var(--text-muted);font-style:italic">No results for "${q}"</div>`;});
+    inp.addEventListener('keydown',e=>{
+      const items=getItems();
+      if(e.key==='ArrowDown'){e.preventDefault();highlight(Math.min(selectedIdx+1,items.length-1));}
+      else if(e.key==='ArrowUp'){e.preventDefault();highlight(Math.max(selectedIdx-1,0));}
+      else if(e.key==='Enter'&&selectedIdx>=0){e.preventDefault();items[selectedIdx].click();}});
     this.modal.querySelector('.ce-sb2').addEventListener('click',()=>this.close());
     document.addEventListener('keydown',e=>e.key==='Escape'&&this.close(),{once:true});},
   close(){if(this.modal){this.modal.remove();this.modal=null;}},
@@ -293,7 +320,7 @@ const Search={
       color:var(--text-primary);font-size:1.1rem;font-family:var(--font-mono);outline:none}
     .ce-sri2{display:flex;align-items:center;gap:.75rem;padding:.7rem 1.5rem;
       text-decoration:none;border-top:1px solid rgba(255,255,255,.04);transition:background .15s}
-    .ce-sri2:hover{background:rgba(0,255,170,.06)}
+    .ce-sri2:hover,.ce-sri2:focus{background:rgba(0,255,170,.06)}
     .ce-sri-badge{font-size:.62rem;padding:2px 8px;border-radius:20px;font-weight:700;
       text-transform:uppercase;flex-shrink:0}
     .badge-beginner{background:rgba(0,255,170,.15);color:var(--accent-primary)}

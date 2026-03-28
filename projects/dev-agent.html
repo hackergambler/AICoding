@@ -5,7 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project: Coding Agent | AI Coding Academy</title>
-    <meta name="description" content="Build an agent that reads files, writes code, runs tests, and iterates until they pass.">
+    <meta name="description" content="Build a production-minded coding agent with repository maps, patch planning, sandboxed execution, test loops, and release checklists.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,15 +47,27 @@
         .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
         .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
         .lesson-nav .next{text-align:right}
+
+        .step-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .step-card,.resource-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-lg)}
+        .step-card h3,.resource-card h3{font-family:var(--font-heading);font-size:1.05rem;margin:0 0 var(--space-sm);color:var(--text-primary)}
+        .step-card p,.resource-card p{margin:0;color:var(--text-secondary);line-height:1.7}
+        .resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .resource-card{display:block;text-decoration:none;transition:var(--transition-base)}
+        .resource-card:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .resource-label{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--accent-primary);margin-bottom:var(--space-sm)}
+        .output-checklist{margin:var(--space-lg) 0 0;padding-left:var(--space-xl)}
+        .output-checklist li{margin-bottom:var(--space-sm)}
+        @media(max-width:768px){.step-grid,.resource-grid{grid-template-columns:1fr}}
         @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
     </style>
 </head>
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -66,10 +78,10 @@
             <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
             <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
             <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
-            <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
+            <li><a href="../projects/index.html" class="nav-link active">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search projects..."><kbd>⌘K</kbd></div>
             <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -79,70 +91,109 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-advanced">Advanced</span>
-                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 90 min</span>
+                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 110 min</span>
             </div>
             <h1 class="lesson-title">Project: Coding Agent</h1>
-            <p class="lesson-description">Build an agent that reads files, writes code, runs tests, and iterates until they pass.</p>
+            <p class="lesson-description">Build a production-minded coding agent that reads a repository, plans safe patches, runs tests in a sandbox, and reports exactly what changed.</p>
         </header>
-<div class="lesson-content"><h2>What You Will Build</h2><p>An agent that reads your files, writes code, executes it in a sandboxed subprocess, interprets errors, and iterates until the code passes tests. The foundation of tools like Devin and GitHub Copilot Workspace.</p><div class="code-block"><div class="code-block-label"><span>Python - coding agent with file I/O and test execution</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">import</span> json, subprocess, os, tempfile
+<div class="lesson-content">
+<h2>What You Will Build</h2>
+<p>A capstone coding agent that can inspect a repository, choose the smallest useful patch, edit only the files it needs, run checks in a sandbox, and return a structured change report. Think of it as a disciplined engineering assistant rather than a magical autonomous coder.</p>
+<div class="info-box"><div class="info-box-title">Why this capstone matters</div><p>If you can build a coding agent that respects repo boundaries, budgets tokens, handles failing tests, and explains its edits, you understand a huge amount of modern agent engineering: tool schemas, sandboxes, planning, evals, and observability.</p></div>
+<h2>Capstone Architecture</h2>
+<div class="step-grid">
+  <div class="step-card"><h3>1. Repository mapper</h3><p>Read file trees, ignore generated folders, and create a compact repo map the model can reason over without dumping the whole codebase into context.</p></div>
+  <div class="step-card"><h3>2. Task planner</h3><p>Convert the user request into a patch plan with target files, risk notes, acceptance tests, and an explicit stop condition.</p></div>
+  <div class="step-card"><h3>3. Editing tools</h3><p>Use read, write, search, and apply-patch style tools with strict path validation so the agent cannot wander outside the workspace.</p></div>
+  <div class="step-card"><h3>4. Sandbox runner</h3><p>Execute tests and formatters in a constrained subprocess, then feed back only the relevant traces instead of the entire terminal log.</p></div>
+</div>
+<div class="code-block"><div class="code-block-label"><span>Python - repository map and patch-plan contract</span><button class="copy-btn">Copy</button></div><pre>from pathlib import Path
+import json
 
-client = OpenAI()
+ALLOWED_EXTS = {&quot;.py&quot;, &quot;.js&quot;, &quot;.ts&quot;, &quot;.md&quot;, &quot;.json&quot;}
+SKIP_DIRS = {&quot;.git&quot;, &quot;node_modules&quot;, &quot;.next&quot;, &quot;dist&quot;, &quot;build&quot;, &quot;venv&quot;}
 
-<span class="kw">def</span> <span class="fn">read_file</span>(path: str) -> str:
-    <span class="kw">try</span>:
-        <span class="kw">with</span> open(path) <span class="kw">as</span> f: <span class="kw">return</span> f.read()
-    <span class="kw">except</span> FileNotFoundError: <span class="kw">return</span> f"File not found: {path}"
+def build_repo_map(root: str) -&gt; list[dict]:
+    entries = []
+    for path in Path(root).rglob(&quot;*&quot;):
+        if path.is_dir():
+            continue
+        if any(part in SKIP_DIRS for part in path.parts):
+            continue
+        if path.suffix not in ALLOWED_EXTS:
+            continue
+        rel = path.relative_to(root).as_posix()
+        entries.append({&quot;path&quot;: rel, &quot;size&quot;: path.stat().st_size})
+    return entries
 
-<span class="kw">def</span> <span class="fn">write_file</span>(path: str, content: str) -> str:
-    <span class="kw">with</span> open(path, <span class="st">"w"</span>) <span class="kw">as</span> f: f.write(content)
-    <span class="kw">return</span> f"Written {len(content)} chars to {path}"
+PATCH_PLAN_SCHEMA = {
+    &quot;goal&quot;: &quot;string&quot;,
+    &quot;files_to_edit&quot;: [&quot;src/app.py&quot;],
+    &quot;tests_to_run&quot;: [&quot;pytest tests/test_app.py -q&quot;],
+    &quot;risk_notes&quot;: [&quot;Do not rename public functions&quot;],
+    &quot;done_when&quot;: [&quot;All targeted tests pass&quot;, &quot;No syntax errors&quot;]
+}
 
-<span class="kw">def</span> <span class="fn">run_code</span>(code: str) -> str:
-    <span class="kw">with</span> tempfile.NamedTemporaryFile(mode=<span class="st">"w"</span>, suffix=<span class="st">".py"</span>, delete=<span class="kw">False</span>) <span class="kw">as</span> f:
-        f.write(code); tmp = f.name
-    <span class="kw">try</span>:
-        r = subprocess.run(["python3", tmp], capture_output=<span class="kw">True</span>, text=<span class="kw">True</span>, timeout=<span class="nu">10</span>)
-        <span class="kw">return</span> f"EXIT {r.returncode}\nSTDOUT:\n{r.stdout[-1500:]}\nSTDERR:\n{r.stderr[-500:]}"
-    <span class="kw">except</span> subprocess.TimeoutExpired: <span class="kw">return</span> "Error: timed out"
-    <span class="kw">finally</span>: os.unlink(tmp)
+print(json.dumps({&quot;repo_map&quot;: build_repo_map(&quot;.&quot;), &quot;schema&quot;: PATCH_PLAN_SCHEMA}, indent=2))</pre></div>
+<h2>Build Sequence</h2>
+<h3>Milestone 1: Safe read-only understanding</h3>
+<p>Start with a read-only pass. Let the agent inspect the tree, open the top candidate files, and produce a patch plan before it writes anything. This is where most bad coding agents fail: they edit before they understand.</p>
+<h3>Milestone 2: Minimal patch generation</h3>
+<p>Require the model to propose the <em>smallest viable change</em>. If the task needs one function edit, do not let it rewrite five files. Small diffs are easier to test, review, and roll back.</p>
+<h3>Milestone 3: Test loop</h3>
+<p>After the first patch, run the narrowest test command possible, summarize the error, and let the agent attempt one focused repair. Keep the loop bounded with max attempts, timeouts, and explicit abort rules.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - bounded edit / test loop</span><button class="copy-btn">Copy</button></div><pre>MAX_ATTEMPTS = 3
 
-<span class="kw">def</span> <span class="fn">run_tests</span>(test_file: str) -> str:
-    r = subprocess.run(["python3", "-m", "pytest", test_file, "-v", "--tb=short"],
-                       capture_output=<span class="kw">True</span>, text=<span class="kw">True</span>, timeout=<span class="nu">30</span>)
-    <span class="kw">return</span> (r.stdout + r.stderr)[-3000:]
+for attempt in range(1, MAX_ATTEMPTS + 1):
+    plan = plan_patch(task, repo_map, previous_errors)
+    apply_patch(plan[&quot;patch&quot;])
+    test_result = run_command(plan[&quot;tests_to_run&quot;][0], timeout=90)
 
-TOOLS = [
-    {"type":"function","function":{"name":"read_file","description":"Read a file.",
-     "parameters":{"type":"object","properties":{"path":{"type":"string"}},"required":["path"]}}},
-    {"type":"function","function":{"name":"write_file","description":"Write content to a file.",
-     "parameters":{"type":"object","properties":{"path":{"type":"string"},"content":{"type":"string"}},"required":["path","content"]}}},
-    {"type":"function","function":{"name":"run_code","description":"Execute Python code.",
-     "parameters":{"type":"object","properties":{"code":{"type":"string"}},"required":["code"]}}},
-    {"type":"function","function":{"name":"run_tests","description":"Run pytest.",
-     "parameters":{"type":"object","properties":{"test_file":{"type":"string"}},"required":["test_file"]}}},
-]
-FNS = {"read_file":read_file,"write_file":write_file,"run_code":run_code,"run_tests":run_tests}
+    if test_result[&quot;returncode&quot;] == 0:
+        return {&quot;status&quot;: &quot;passed&quot;, &quot;attempt&quot;: attempt, &quot;summary&quot;: test_result[&quot;stdout&quot;]}
 
-<span class="kw">def</span> <span class="fn">coding_agent</span>(task: str, max_steps: int = <span class="nu">15</span>) -> str:
-    msgs = [
-        {"role":"system","content":"You are an expert coding agent. Write code, test it, iterate."},
-        {"role":"user","content":task}
-    ]
-    <span class="kw">for</span> step <span class="kw">in</span> range(max_steps):
-        resp = client.chat.completions.create(
-            model=<span class="st">"gpt-4o"</span>, messages=msgs, tools=TOOLS, tool_choice=<span class="st">"auto"</span>
-        )
-        msg = resp.choices[0].message; msgs.append(msg)
-        <span class="kw">if</span> resp.choices[0].finish_reason == <span class="st">"stop"</span>: <span class="kw">return</span> msg.content
-        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls <span class="kw">or</span> []:
-            args = json.loads(tc.function.arguments)
-            result = FNS[tc.function.name](**args)
-            print(f"  step {step+1}: {tc.function.name}({list(args.keys())})")
-            msgs.append({"role":"tool","tool_call_id":tc.id,"content":str(result)})
-    <span class="kw">return</span> "Max steps reached."
+    previous_errors = summarize_failure(test_result)
 
-print(coding_agent(<span class="st">"Write a Sieve of Eratosthenes function. Write pytest tests. Run them and ensure they pass."</span>))</pre></div><div class="warn-box"><div class="warn-box-title">⚠️ Sandbox safety</div><p>Never run this agent on untrusted code. The subprocess runs with your user permissions. In production, use Docker containers or a proper sandbox like e2b.dev.</p></div></div>
+return {&quot;status&quot;: &quot;needs-human-review&quot;, &quot;errors&quot;: previous_errors}</pre></div>
+<h2>Guardrails That Make This Production-Friendly</h2>
+<ul>
+  <li><strong>Path allow-list:</strong> never let the agent read or write outside the workspace root.</li>
+  <li><strong>Command policy:</strong> allow lint/test/build commands, block package installs, network fetches, and destructive shell actions by default.</li>
+  <li><strong>Patch size caps:</strong> reject edits beyond a safe line threshold unless a human approves.</li>
+  <li><strong>Human review gates:</strong> if public APIs, migrations, or auth code change, escalate before applying.</li>
+</ul>
+<div class="warn-box"><div class="warn-box-title">Common failure mode</div><p>The agent passes a narrow test but quietly breaks adjacent behavior. That is why your acceptance contract needs both targeted tests and one broader smoke test before you accept the patch.</p></div>
+<h2>How to Evaluate the Agent</h2>
+<p>Do not evaluate only on “did it eventually pass.” Track:</p>
+<ul>
+  <li>first-pass success rate</li>
+  <li>average patch size</li>
+  <li>attempts per successful task</li>
+  <li>percentage of tasks requiring human escalation</li>
+  <li>regressions introduced after a green check</li>
+</ul>
+<h2>Study Before You Build</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../tutorials/agents/coding-agent.html"><span class="resource-label">Agent lesson</span><h3>Coding Agent Patterns</h3><p>Planning, file editing, patch loops, and repo-safe tool design.</p></a>
+  <a class="resource-card" href="../tutorials/agents/tool-schemas.html"><span class="resource-label">Contracts</span><h3>Tool Schemas</h3><p>Design tools that are strict enough for reliable execution.</p></a>
+  <a class="resource-card" href="../tutorials/agents/unit-testing-agents.html"><span class="resource-label">Validation</span><h3>Unit Testing Agents</h3><p>Build repeatable tests for agent decisions and tool calls.</p></a>
+  <a class="resource-card" href="../tutorials/agents/stress-testing.html"><span class="resource-label">Hardening</span><h3>Stress Testing Agents</h3><p>Probe brittle cases before you trust the agent in bigger repos.</p></a>
+</div>
+<h2>When This Project Breaks</h2>
+<div class="resource-grid">
+  <a class="resource-card" href="../debugging/lab.html"><span class="resource-label">Sandbox</span><h3>Debugging Lab Issues</h3><p>Use this when subprocess runs, env wiring, or local execution behaves inconsistently.</p></a>
+  <a class="resource-card" href="../debugging/configuration.html"><span class="resource-label">Setup</span><h3>Configuration Debugging</h3><p>Fix missing keys, wrong models, broken config, and path confusion.</p></a>
+  <a class="resource-card" href="../debugging/async.html"><span class="resource-label">Concurrency</span><h3>Async Debugging</h3><p>Use this when streaming, tool queues, or parallel calls race each other.</p></a>
+  <a class="resource-card" href="../tutorials/playbooks/security.html"><span class="resource-label">Playbook</span><h3>Security Playbook</h3><p>Review sandbox and command-policy assumptions before broader rollout.</p></a>
+</div>
+<h2>Final Output Checklist</h2>
+<ol class="output-checklist">
+  <li>The agent can map a repo without overflowing context or reading forbidden paths.</li>
+  <li>Every patch comes with files touched, tests run, and a done-when contract.</li>
+  <li>All commands execute inside a bounded sandbox with timeouts and logs.</li>
+  <li>The system has a human-escalation path for risky or ambiguous changes.</li>
+  <li>You can explain <em>why</em> the agent changed each file, not just that it changed them.</li>
+</ol></div>
         <nav class="lesson-nav">
             <a href="research-crew.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Research Crew</div></a>
             <a href="workflow-automation.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Workflow Automation</div></a>
@@ -151,9 +202,9 @@ print(coding_agent(<span class="st">"Write a Sieve of Eratosthenes function. Wri
     <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
         <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
     <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>

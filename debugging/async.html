@@ -47,15 +47,26 @@
         .lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}
         .lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}
         .lesson-nav .next{text-align:right}
-        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}
+        @media(max-width:900px){.step-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}.resource-grid,.step-grid{grid-template-columns:1fr}}
+        .step-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-md);margin:var(--space-lg) 0 var(--space-2xl)}
+        .step-card,.resource-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-md);padding:var(--space-lg)}
+        .step-card h3,.resource-card h3{font-family:var(--font-heading);font-size:1rem;margin:0 0 var(--space-sm);color:var(--text-primary)}
+        .step-card p,.resource-card p{margin:0;color:var(--text-secondary);line-height:1.7;font-size:.95rem}
+        .resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-lg);margin:var(--space-lg) 0 var(--space-xl)}
+        .resource-kicker{display:inline-block;font-size:.75rem;font-family:var(--font-mono);color:var(--accent-primary);margin-bottom:var(--space-sm);letter-spacing:.04em;text-transform:uppercase}
+        .resource-card a{color:var(--accent-primary);text-decoration:none;font-weight:600}
+        .resource-card a:hover{text-decoration:underline}
+        .route-checklist{margin:var(--space-lg) 0 0;padding-left:var(--space-xl);color:var(--text-secondary);line-height:1.8}
+        .route-checklist li+li{margin-top:6px}
     </style>
 </head>
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -65,11 +76,11 @@
         <ul class="nav-menu">
             <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
             <li><a href="../courses/index.html" class="nav-link">Courses</a></li>
-            <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../debugging/index.html" class="nav-link active">Debugging</a></li>
             <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search debugging..."><kbd>⌘K</kbd></div>
             <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -259,6 +270,38 @@ results = <span class="kw">await</span> asyncio.gather(task1(), task2(), task3()
 task = asyncio.create_task(some_job())
 task.add_done_callback(log_task_errors)  <span class="cm"># always log failures</span></pre></div>
         </div>
+
+        <h2>Triage Flow for Async Failures</h2>
+        <div class="step-grid">
+            <div class="step-card"><h3>1. Reproduce one request</h3><p>Strip the bug down to one coroutine and one model call before you test concurrency, retries, or agent loops.</p></div>
+            <div class="step-card"><h3>2. Add timing + task IDs</h3><p>Log task name, timeout boundary, retry count, and queue depth so you can see where the loop stalls or duplicates work.</p></div>
+            <div class="step-card"><h3>3. Cap concurrency</h3><p>Use semaphores or worker pools before scaling load. Many async failures are really hidden rate-limit or memory failures.</p></div>
+            <div class="step-card"><h3>4. Surface every exception</h3><p>Background tasks, gather calls, and streaming callbacks should all report failures clearly instead of vanishing silently.</p></div>
+        </div>
+
+        <h2>Study Before You Fix</h2>
+        <div class="resource-grid">
+            <div class="resource-card"><span class="resource-kicker">Tutorial</span><h3><a href="../tutorials/openai/streaming.html">Streaming responses</a></h3><p>Use this when async bugs only show up while tokens are streamed incrementally.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Tutorial</span><h3><a href="../tutorials/agents/error-recovery.html">Agent error recovery</a></h3><p>Good for retry loops, tool retries, and workflows that partially fail under load.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Tutorial</span><h3><a href="../tutorials/agents/unit-testing-agents.html">Testing agent behavior</a></h3><p>Turn async regressions into repeatable tests instead of waiting for production to break again.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Project</span><h3><a href="../projects/dev-agent.html">Dev agent project</a></h3><p>See how async orchestration interacts with tools, retries, and structured agent loops in a bigger build.</p></div>
+        </div>
+
+        <h2>Escalate Through These Routes</h2>
+        <div class="resource-grid">
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="network.html">Network errors</a></h3><p>Use this when timeouts, retries, or dropped streams may actually be transport failures.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="configuration.html">Configuration errors</a></h3><p>Check this when async workers behave differently across environments or secrets are missing in some tasks.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Related route</span><h3><a href="memory.html">Memory issues</a></h3><p>Async fan-out often looks like a logic bug when the real issue is growing RAM or GPU pressure.</p></div>
+            <div class="resource-card"><span class="resource-kicker">Guided practice</span><h3><a href="lab.html">Debugging lab</a></h3><p>Practice isolated broken cases before returning to the full system.</p></div>
+        </div>
+
+        <h2>Ship-Ready Checklist</h2>
+        <ul class="route-checklist">
+            <li>No fire-and-forget task runs without an error callback or structured logging.</li>
+            <li>Timeouts and cancellation paths are tested under real latency, not only on localhost.</li>
+            <li>Concurrency limits are explicit and documented close to the worker or agent orchestration code.</li>
+            <li>Streaming handlers can recover from partial failure without leaving half-written state behind.</li>
+        </ul>
 </div>
         <nav class="lesson-nav">
             <a href="network.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Network Errors</div></a>
@@ -268,9 +311,9 @@ task.add_done_callback(log_task_errors)  <span class="cm"># always log failures<
     <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand"><a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
         <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
+        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+        <div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li></ul></div>
+    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/donation-widget.js" defer></script>
     <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>

@@ -49,9 +49,9 @@
 </head><body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -64,88 +64,125 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div></nav>
     <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/gemini.html">Gemini</a><span class="separator">/</span><span>Function Calling</span></div>
         <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 30 min</span><span class="lesson-meta-item">📚 Lesson 4</span></div>
+            <div class="lesson-meta"><span class="badge badge-intermediate">Intermediate</span><span class="lesson-meta-item">⏱️ 38 min</span><span class="lesson-meta-item">📚 Lesson 4</span></div>
             <h1 class="lesson-title">Gemini Function Calling</h1>
             <p class="lesson-description">Give Gemini access to real-world tools: define functions, parse tool calls, execute code, and build complete agentic workflows.</p>
         </header>
-        <div class="lesson-content">
-            <h2>Defining Tools</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - tool definitions for Gemini</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
+        <div class="lesson-content"><h2>Why function calling matters</h2>
+<p>Function calling turns Gemini from a text generator into a decision maker. Instead of guessing the weather, searching your product catalog from memory, or pretending it saved a file, the model can request real code execution and wait for your application to send the result back.</p>
+<ul>
+    <li><strong>Model decides</strong> which tool to call and with what arguments</li>
+    <li><strong>Your code validates</strong> those arguments before anything runs</li>
+    <li><strong>Your tool executes</strong> the side effect or lookup</li>
+    <li><strong>The result returns</strong> to Gemini for the final grounded answer</li>
+</ul>
+<div class="info-box"><div class="info-box-title">ℹ️ Use tools for facts and actions</div><p>Good tool calls are for fresh data, private data, or side effects: weather, tickets, orders, SQL, files, calendar, email, and internal workflows. If the answer is already in the prompt, a normal completion is simpler.</p></div>
 
-<span class="cm"># Define Python functions — Gemini reads the docstrings!</span>
-<span class="kw">def</span> <span class="fn">get_weather</span>(city: str, units: str = <span class="st">"celsius"</span>) -> dict:
-    <span class="st">&#34;&#34;&#34;Get current weather for a city.
+<h2>1. Design tools with strict, boring schemas</h2>
+<p>The best tool definitions are boring. They avoid ambiguity, keep field names obvious, and make validation easy. Gemini does better when your tools look like clean APIs, not like clever one-off helpers.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - explicit tool schema</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
 
-    Args:
-        city: City name, e.g. 'London' or 'New York'
-        units: Temperature units - 'celsius' or 'fahrenheit'
+weather_tool = {
+    <span class="st">"name"</span>: <span class="st">"get_weather"</span>,
+    <span class="st">"description"</span>: <span class="st">"Get the latest weather for a city."</span>,
+    <span class="st">"parameters"</span>: {
+        <span class="st">"type"</span>: <span class="st">"object"</span>,
+        <span class="st">"properties"</span>: {
+            <span class="st">"city"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"description"</span>: <span class="st">"City name"</span>},
+            <span class="st">"units"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"enum"</span>: [<span class="st">"celsius"</span>, <span class="st">"fahrenheit"</span>]}
+        },
+        <span class="st">"required"</span>: [<span class="st">"city"</span>]
+    }
+}</pre></div>
+<p>Prefer small tools that do one clear thing. A tool called <code>search_orders</code> is easier to reason about than a giant <code>business_helper</code> tool with twenty optional fields.</p>
 
-    Returns:
-        Dict with temperature, condition, humidity
-    &#34;&#34;&#34;</span>
-    <span class="cm"># In production: call a real weather API</span>
-    <span class="kw">return</span> {<span class="st">"city"</span>: city, <span class="st">"temp"</span>: <span class="nu">18</span>, <span class="st">"condition"</span>: <span class="st">"Cloudy"</span>, <span class="st">"humidity"</span>: <span class="nu">72</span>}
+<h2>2. Give Gemini a clear execution contract</h2>
+<p>Tell the model exactly when to use tools, when not to use them, and how to behave after a tool result comes back. This is where many "function calling is unreliable" complaints actually begin.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - system instruction for predictable tool use</span><button class="copy-btn">Copy</button></div><pre>system_instruction = <span class="st">"""You are an operations assistant.
+Use tools whenever the user asks for live data, account-specific data, or a workflow action.
+Do not invent tool results.
+If a required parameter is missing, ask a short follow-up question.
+After receiving a tool result, answer in plain English and mention only the useful fields.
+"""</span>
 
-<span class="kw">def</span> <span class="fn">search_database</span>(query: str, limit: int = <span class="nu">5</span>) -> dict:
-    <span class="st">&#34;&#34;&#34;Search the product database for items matching a query.
-
-    Args:
-        query: Search term
-        limit: Max results to return (1-20)
-    &#34;&#34;&#34;</span>
-    <span class="kw">return</span> {<span class="st">"results"</span>: [{<span class="st">"id"</span>: <span class="nu">1</span>, <span class="st">"name"</span>: <span class="st">"Python Book"</span>, <span class="st">"price"</span>: <span class="nu">29.99</span>}]}
-
-<span class="cm"># Pass functions directly — Gemini extracts schema from docstrings</span>
 model = genai.GenerativeModel(
-    <span class="st">"gemini-1.5-flash"</span>,
-    tools=[get_weather, search_database]
-)</pre></div><div class="code-block">
-<div class="code-block-label"><span>Python — complete function call loop</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> json
+    model_name=<span class="st">"gemini-1.5-flash"</span>,
+    tools=[weather_tool],
+    system_instruction=system_instruction
+)</pre></div>
 
-TOOLS_MAP = {<span class="st">"get_weather"</span>: get_weather, <span class="st">"search_database"</span>: search_database}
+<h2>3. Run the loop: model → tool → model</h2>
+<p>The full pattern is always two-stage. Gemini first decides whether to call a tool. Your app executes it. Then Gemini uses the returned data to produce the final answer.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - minimal Gemini tool loop</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">get_weather</span>(city, units=<span class="st">"celsius"</span>):
+    <span class="kw">return</span> {<span class="st">"city"</span>: city, <span class="st">"temp"</span>: <span class="nu">27</span>, <span class="st">"condition"</span>: <span class="st">"Sunny"</span>, <span class="st">"units"</span>: units}
 
-<span class="kw">def</span> <span class="fn">agent</span>(prompt: str) -> str:
-    chat = model.start_chat()
-    response = chat.send_message(prompt)
+chat = model.start_chat()
+first = chat.send_message(<span class="st">"What is the weather in Hyderabad right now?"</span>)
 
-    <span class="kw">while True</span>:
-        <span class="cm"># Check if Gemini wants to call a function</span>
-        fn_calls = [p <span class="kw">for</span> p <span class="kw">in</span> response.candidates[<span class="nu">0</span>].content.parts
-                    <span class="kw">if</span> p.function_call.name]
-        <span class="kw">if not</span> fn_calls:
-            <span class="kw">break</span>
+part = first.candidates[<span class="nu">0</span>].content.parts[<span class="nu">0</span>]
+args = dict(part.function_call.args)
+result = get_weather(**args)
 
-        <span class="cm"># Execute all requested functions</span>
-        fn_results = []
-        <span class="kw">for</span> part <span class="kw">in</span> fn_calls:
-            fc = part.function_call
-            fn = TOOLS_MAP.get(fc.name)
-            result = fn(**dict(fc.args)) <span class="kw">if</span> fn <span class="kw">else</span> {<span class="st">"error"</span>: <span class="st">"unknown function"</span>}
-            fn_results.append(genai.protos.Part(
-                function_response=genai.protos.FunctionResponse(
-                    name=fc.name,
-                    response={<span class="st">"result"</span>: result}
-                )
-            ))
+second = chat.send_message({
+    <span class="st">"function_response"</span>: {
+        <span class="st">"name"</span>: part.function_call.name,
+        <span class="st">"response"</span>: result
+    }
+})
 
-        response = chat.send_message(fn_results)
+<span class="kw">print</span>(second.text)</pre></div>
+<div class="tip-box"><div class="tip-box-title">💡 Log every tool call in development</div><p>Store the tool name, arguments, validation result, latency, and output size. Tool systems feel magical until they fail. Logs are what make them fixable.</p></div>
 
-    <span class="kw">return</span> response.text
+<h2>4. Validate arguments before execution</h2>
+<p>Never trust model-generated arguments blindly. Gemini is good, but it is still a probabilistic system. Your application should reject invalid values, clamp limits, and sanitize anything that touches a database, shell, or third-party API.</p>
+<ul>
+    <li>Check types and required fields</li>
+    <li>Whitelist enums such as units, status, or sort order</li>
+    <li>Set safe bounds like <code>limit &lt;= 20</code></li>
+    <li>Reject raw SQL, file paths, or arbitrary code strings</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python - simple validation guard</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">validate_weather_args</span>(args):
+    city = args.get(<span class="st">"city"</span>, <span class="st">""</span>).strip()
+    units = args.get(<span class="st">"units"</span>, <span class="st">"celsius"</span>)
 
-<span class="kw">print</span>(agent(<span class="st">"What's the weather in Tokyo and search for 'Python' products?"</span>))</pre></div>
-        </div><nav class="lesson-nav">
+    <span class="kw">if</span> <span class="kw">not</span> city:
+        <span class="kw">raise</span> ValueError(<span class="st">"city is required"</span>)
+    <span class="kw">if</span> units <span class="kw">not</span> <span class="kw">in</span> {<span class="st">"celsius"</span>, <span class="st">"fahrenheit"</span>}:
+        <span class="kw">raise</span> ValueError(<span class="st">"units must be celsius or fahrenheit"</span>)
+
+    <span class="kw">return</span> {<span class="st">"city"</span>: city, <span class="st">"units"</span>: units}</pre></div>
+
+<h2>5. Multi-tool workflows need routing, not chaos</h2>
+<p>Once you add more than one tool, start thinking in routes: lookup tools, reasoning tools, and action tools. Do not give every tool every permission. A common production split is:</p>
+<ul>
+    <li><strong>Read-only tools</strong> — search, fetch, retrieve, summarize</li>
+    <li><strong>State-changing tools</strong> — create ticket, send email, update record</li>
+    <li><strong>High-risk tools</strong> — payments, account changes, destructive actions</li>
+</ul>
+<p>Use confirmations or human review before executing high-risk tools. This lesson connects naturally with <a href="../agents/function-calling-basics.html">Function Calling Basics</a> and the broader <a href="../../courses/agents.html">AI Agents course</a>.</p>
+
+<h2>6. Common Gemini tool-use failures</h2>
+<ol>
+    <li><strong>The model answers without calling a tool</strong> — your system instruction is too weak or the question sounds answerable from general knowledge.</li>
+    <li><strong>Wrong argument names</strong> — your schema and your execution function drifted apart.</li>
+    <li><strong>Tool loops forever</strong> — no max step limit or no stopping condition after the result returns.</li>
+    <li><strong>Bad downstream action</strong> — missing validation or missing permission boundaries.</li>
+</ol>
+<p>For failures around environment or runtime behavior, route into <a href="../../debugging/configuration.html">configuration debugging</a> or <a href="../../debugging/network.html">network debugging</a>. For more Gemini-specific capabilities, continue to <a href="advanced-features.html">Advanced Features</a> and <a href="embeddings.html">Gemini Embeddings</a>.</p>
+
+<h2>7. Build the next real project</h2>
+<p>After one working tool loop, the strongest next step is a small workflow project, not a giant agent. Try a single operational assistant that can answer account questions and perform one action safely. The best follow-on build here is <a href="../../projects/workflow-automation.html">Workflow Automation</a>.</p></div>
+
+        <nav class="lesson-nav">
         <a href="chat.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Multi-turn Chat</div></a>
-        <a href="../../courses/gemini.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Gemini Course</div></a>
+        <a href="embeddings.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Embeddings</div></a>
     </nav>
     </div>    <footer><div class="footer-container"><div class="footer-grid">
         <div class="footer-brand">
@@ -159,17 +196,17 @@ TOOLS_MAP = {<span class="st">"get_weather"</span>: get_weather, <span class="st
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

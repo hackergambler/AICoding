@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Getting Started with Claude API | AI Coding Academy</title>
-    <meta name="description" content="Install Anthropic SDK, make your first Claude call, use system prompts, manage multi-turn conversations, and stream responses.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Getting Started with Claude API | AI Coding Academy</title>
+<meta content="Install the Anthropic SDK, send your first Claude message, structure system prompts correctly, stream responses, and debug the first integration failures." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
         .lesson-header{margin-bottom:var(--space-3xl)}
         .lesson-meta{display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap}
@@ -51,97 +52,127 @@
     </style>
 </head>
 <body>
-    <div class="top-bar"><div class="top-bar-container">
-        <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-        </div>
-        <div class="top-bar-right">Part of MYRQAI Network</div>
-    </div></div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-    <nav class="nav"><div class="nav-container">
-        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-        <ul class="nav-menu">
-            <li><a href="../../tutorials/index.html" class="nav-link">Tutorials</a></li>
-            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-        </ul>
-        <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-            <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-        </div>
-        <button class="mobile-menu-btn">☰</button>
-    </div></nav>
-    <div class="lesson-container">
-        <div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/claude.html">Claude API</a><span class="separator">/</span><span>Getting Started</span></div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 20 min</span>
-            </div>
-            <h1 class="lesson-title">Getting Started with Claude API</h1>
-            <p class="lesson-description">Install Anthropic SDK, make your first Claude call, use system prompts, manage multi-turn conversations, and stream responses.</p>
-        </header>
-<div class="lesson-content"><h2>1. Install and Configure</h2><div class="code-block"><div class="code-block-label"><span>bash</span><button class="copy-btn">Copy</button></div><pre>pip install anthropic
-export ANTHROPIC_API_KEY="sk-ant-..."</pre></div><h2>2. Your First Claude Message</h2><div class="code-block"><div class="code-block-label"><span>Python - minimal Claude API call</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> anthropic
+<div class="top-bar"><div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div></div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<nav class="nav"><div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div></nav>
+<div class="lesson-container">
+<div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/claude.html">Claude API</a><span class="separator">/</span><span>Getting Started</span></div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-beginner">Beginner</span>
+<span class="lesson-meta-item" style="font-size:.9rem;color:var(--text-muted)">⏱️ 28 min</span>
+</div>
+<h1 class="lesson-title">Getting Started with Claude API</h1>
+<p class="lesson-description">Set up the Claude API cleanly, understand the messages model, write durable system instructions, and avoid the mistakes that break first integrations.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Start with a clean integration shape</h2>
+<p>Claude works best when you treat the API as one layer inside your application, not as scattered calls across multiple files. Put the client setup, environment loading, request builder, and logging in one place first. That gives you one clean boundary for retries, metrics, and future tool use.</p>
+<div class="code-block"><div class="code-block-label"><span>bash — install and configure</span><button class="copy-btn">Copy</button></div><pre>pip install anthropic
+export ANTHROPIC_API_KEY="sk-ant-..."</pre></div>
+<div class="code-block"><div class="code-block-label"><span>Python — create a reusable client</span><button class="copy-btn">Copy</button></div><pre>import anthropic
 
-<span class="cm"># Reads ANTHROPIC_API_KEY from environment automatically</span>
 client = anthropic.Anthropic()
 
-message = client.messages.create(
-    model=<span class="st">"claude-opus-4-5"</span>,
-    max_tokens=<span class="nu">1024</span>,
-    messages=[{"role": "user", "content": "Explain recursion in 3 sentences."}]
+def ask_claude(messages, *, system=None, max_tokens=512):
+    return client.messages.create(
+        model="claude-sonnet",
+        max_tokens=max_tokens,
+        system=system,
+        messages=messages,
+    )
+</pre></div>
+<h2>2. Understand the Claude messages model</h2>
+<p>The biggest conceptual difference for many beginners is that Claude uses a top-level <code>system</code> field rather than a system message inside the messages array. Keep that separation clear:</p>
+<ul>
+<li><strong>system</strong> defines behavior and rules,</li>
+<li><strong>messages</strong> carry the conversation turns,</li>
+<li><strong>content blocks</strong> can later include text, images, or tool results in more advanced lessons.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — first reliable Claude request</span><button class="copy-btn">Copy</button></div><pre>message = client.messages.create(
+    model="claude-sonnet",
+    max_tokens=300,
+    system="You are a concise Python tutor. Explain in two short paragraphs.",
+    messages=[
+        {"role": "user", "content": "Explain list comprehensions with one example."}
+    ],
 )
 
 print(message.content[0].text)
-print(f"Model: {message.model}")
-print(f"Input tokens: {message.usage.input_tokens}")
-print(f"Output tokens: {message.usage.output_tokens}")
-print(f"Stop reason: {message.stop_reason}")</pre></div><h2>3. System Prompts</h2><p>Claude uses a top-level <code>system</code> parameter - not a system message in the messages array.</p><div class="code-block"><div class="code-block-label"><span>Python - system prompt</span><button class="copy-btn">Copy</button></div><pre>message = client.messages.create(
-    model=<span class="st">"claude-opus-4-5"</span>,
-    max_tokens=<span class="nu">512</span>,
-    system=<span class="st">"You are a concise Python tutor. Give short code examples. No preambles."</span>,
-    messages=[{"role": "user", "content": "How do I open a file?"}]
-)
-print(message.content[0].text)</pre></div><h2>4. Multi-turn Conversations</h2><div class="code-block"><div class="code-block-label"><span>Python - conversation history</span><button class="copy-btn">Copy</button></div><pre>messages = [
-    {"role": "user", "content": "What is a Python generator?"},
-    {"role": "assistant", "content": "A generator is a function that uses yield to produce values lazily."},
-    {"role": "user", "content": "Show me a real example."}  <span class="cm"># remembers prior turns</span>
-]
+print(message.usage)
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">What to keep separate</div><p>Do not bury user data inside the system prompt. Put stable rules in system, task inputs in the user turn, and let the API shape stay predictable.</p></div>
+<h2>3. Build multi-turn conversations with intent, not accumulation</h2>
+<p>Claude will only use the conversation history you send. That means a good app decides which turns to keep and which older context to summarize. Do not replay every prior message forever.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — keep the last few turns</span><button class="copy-btn">Copy</button></div><pre>def build_messages(user_message: str, history: list[dict]) -&gt; list[dict]:
+    messages = history[-6:]
+    messages.append({"role": "user", "content": user_message})
+    return messages
+</pre></div>
+<p>For tutoring or support flows, preserve the recent thread plus a compact summary of older facts. That gives you continuity without flooding the window.</p>
+<h2>4. Stream responses and prepare for tool-ready architecture</h2>
+<p>Streaming makes the experience feel faster even when total generation time is the same. It also forces you to think about partial UI updates, cancellation, and logging.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — stream Claude output</span><button class="copy-btn">Copy</button></div><pre>with client.messages.stream(
+    model="claude-sonnet",
+    max_tokens=300,
+    messages=[{"role": "user", "content": "Draft a release note for a bug-fix deploy."}],
+) as stream:
+    for text in stream.text_stream:
+        print(text, end="", flush=True)
 
-resp = client.messages.create(
-    model=<span class="st">"claude-opus-4-5"</span>, max_tokens=<span class="nu">512</span>, messages=messages
-)
-print(resp.content[0].text)</pre></div><h2>5. Streaming</h2><div class="code-block"><div class="code-block-label"><span>Python - streaming response tokens</span><button class="copy-btn">Copy</button></div><pre><span class="kw">with</span> client.messages.stream(
-    model=<span class="st">"claude-opus-4-5"</span>,
-    max_tokens=<span class="nu">512</span>,
-    messages=[{"role": "user", "content": "Write a haiku about programming."}]
-) <span class="kw">as</span> stream:
-    <span class="kw">for</span> text <span class="kw">in</span> stream.text_stream:
-        print(text, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
-
-final = stream.get_final_message()
-print(f"\nTotal tokens: {final.usage.input_tokens + final.usage.output_tokens}")</pre></div><h2>6. Model Selection Guide</h2><ul><li><strong>claude-opus-4-5</strong> - Most capable. Complex reasoning, long-form writing, analysis. $15/$75 per MTok.</li><li><strong>claude-sonnet-4-6</strong> - Balanced. Best for most production tasks. $3/$15 per MTok.</li><li><strong>claude-haiku-4-5-20251001</strong> - Fastest, cheapest. High-volume simple tasks. $0.25/$1.25 per MTok.</li></ul><div class="code-block"><div class="code-block-label"><span>Python - choose model based on task</span><button class="copy-btn">Copy</button></div><pre><span class="kw">def</span> <span class="fn">get_model</span>(complexity: str) -> str:
-    <span class="kw">return</span> {
-        <span class="st">"simple"</span>:  <span class="st">"claude-haiku-4-5-20251001"</span>,
-        <span class="st">"normal"</span>:  <span class="st">"claude-sonnet-4-6"</span>,
-        <span class="st">"complex"</span>: <span class="st">"claude-opus-4-5"</span>,
-    }.get(complexity, <span class="st">"claude-sonnet-4-6"</span>)</pre></div><div class="tip-box"><div class="tip-box-title">💡 Cost tip</div><p>Use Haiku for all prototyping and testing - it is 60x cheaper than Opus. Switch to Sonnet or Opus only when quality requires it.</p></div></div>
-        <nav class="lesson-nav">
-            <a href="../../courses/claude.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Claude Course Overview</div></a>
-            <a href="messages-api.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Messages API Deep Dive</div></a>
-        </nav>
-    </div>
-    <footer><div class="footer-container"><div class="footer-grid">
-        <div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
-        <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-        <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-        <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div>
-    </div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>.</p></div></div></footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
+final_message = stream.get_final_message()
+print(final_message.usage)
+</pre></div>
+<p>Once this works, the natural next steps are prompt caching, tool use, and multimodal content blocks. Those features are much easier to learn when your base request flow is already clean.</p>
+<h2>5. Fix the first failures before they become product bugs</h2>
+<ul>
+<li><strong>Auth errors</strong>: check the environment variable early and fail fast during app startup.</li>
+<li><strong>Prompt drift</strong>: keep one durable system prompt per feature rather than rebuilding it ad hoc every time.</li>
+<li><strong>Conversation bloat</strong>: trim or summarize history before requests grow expensive.</li>
+<li><strong>Streaming confusion</strong>: handle partial tokens separately from final message logging.</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">Best starter habit</div><p>Log the model, latency, and token usage on every request from day one. That discipline makes later debugging much easier.</p></div>
+<h2>6. Where to go next in the Claude path</h2>
+<ul>
+<li><a href="messages-api.html">Deepen the request model with the Messages API lesson</a></li>
+<li><a href="tool-use.html">Move into Claude tool use</a></li>
+<li><a href="prompt-caching.html">Add caching for repeated context</a></li>
+<li><a href="../../debugging/api-keys.html">Fix API-key and auth failures</a></li>
+<li><a href="../../projects/research-crew.html">Use Claude-style reasoning inside a larger project flow</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="../../courses/claude.html"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Claude Course Overview</div></a>
+<a class="next" href="messages-api.html"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Messages API Deep Dive</div></a>
+</nav>
+</div>
+<footer><div class="footer-container"><div class="footer-grid">
+<div class="footer-brand"><a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li></ul></div>
+</div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color:var(--accent-primary)" target="_blank">MYRQAI</a>.</p></div></div></footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script>
 </body></html>

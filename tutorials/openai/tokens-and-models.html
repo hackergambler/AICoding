@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI Tokens & Models — Pricing, Limits & Selection | AI Coding Academy</title>
-    <meta name="description" content="Understand GPT tokenization, model selection, context limits, and cost optimization.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenAI Tokens &amp; Models — Pricing, Limits &amp; Selection | AI Coding Academy</title>
+<meta content="Count tokens, budget context windows, route requests across models, and prevent truncation, latency spikes, and avoidable spend." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,177 +64,165 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
-            <span>Tokens & Models</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 20 min</span>
-            </div>
-            <h1 class="lesson-title">Tokens, Models & Cost Optimization</h1>
-            <p class="lesson-description">How tokenization works, how to count tokens before API calls, choose the right model, and minimize costs in production.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>What is a Token?</h2>
-            <p>Tokens are chunks of text — roughly 4 characters or 0.75 words in English. "Hello world" is 2 tokens. The entire works of Shakespeare is ~900,000 tokens.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python — count tokens with tiktoken</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> tiktoken
-
-<span class="kw">def</span> <span class="fn">count_tokens</span>(text: str, model: str = <span class="st">"gpt-4o"</span>) -> int:
-    enc = tiktoken.encoding_for_model(model)
-    <span class="kw">return</span> len(enc.encode(text))
-
-<span class="kw">def</span> <span class="fn">count_message_tokens</span>(messages: list[dict], model: str = <span class="st">"gpt-4o"</span>) -> int:
-    <span class="st">&#34;&#34;&#34;Count tokens in a messages array, including overhead.&#34;&#34;&#34;</span>
-    enc = tiktoken.encoding_for_model(model)
-    tokens_per_message = <span class="nu">3</span>    <span class="cm"># overhead per message</span>
-    tokens_per_name = <span class="nu">1</span>       <span class="cm"># overhead for name field</span>
-    total = <span class="nu">3</span>                  <span class="cm"># reply priming</span>
-    <span class="kw">for</span> msg <span class="kw">in</span> messages:
-        total += tokens_per_message
-        <span class="kw">for</span> key, val <span class="kw">in</span> msg.items():
-            total += len(enc.encode(str(val)))
-            <span class="kw">if</span> key == <span class="st">"name"</span>: total += tokens_per_name
-    <span class="kw">return</span> total
-
-<span class="cm"># Test it</span>
-msgs = [
-    {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: <span class="st">"You are a coding assistant."</span>},
-    {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is a Python generator?"</span>}
-]
-<span class="kw">print</span>(<span class="st">f"Estimated tokens: {count_message_tokens(msgs)}"</span>)</pre>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
 </div>
-            <h2>Model Comparison</h2>
-            <ul>
-                <li><strong>gpt-4o</strong> — Flagship multimodal model. Best quality, vision capable. $2.50/1M in · $10/1M out</li>
-                <li><strong>gpt-4o-mini</strong> — Affordable, fast. Great for most tasks. $0.15/1M in · $0.60/1M out</li>
-                <li><strong>o1</strong> — Extended thinking for complex reasoning. $15/1M in · $60/1M out</li>
-                <li><strong>o3-mini</strong> — Fast reasoning model. $1.10/1M in · $4.40/1M out</li>
-                <li><strong>gpt-3.5-turbo</strong> — Legacy. Use gpt-4o-mini instead.</li>
-            </ul>
-<div class="code-block">
-<div class="code-block-label"><span>Python — auto model selection by task</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">def</span> <span class="fn">select_model</span>(task_type: str, quality: str = <span class="st">"balanced"</span>) -> str:
-    <span class="st">&#34;&#34;&#34;Select optimal model based on task and quality requirement.&#34;&#34;&#34;</span>
-    MODELS = {
-        <span class="st">"simple"</span>: {<span class="st">"fast"</span>: <span class="st">"gpt-4o-mini"</span>, <span class="st">"balanced"</span>: <span class="st">"gpt-4o-mini"</span>, <span class="st">"best"</span>: <span class="st">"gpt-4o"</span>},
-        <span class="st">"reasoning"</span>: {<span class="st">"fast"</span>: <span class="st">"o3-mini"</span>, <span class="st">"balanced"</span>: <span class="st">"o3-mini"</span>, <span class="st">"best"</span>: <span class="st">"o1"</span>},
-        <span class="st">"vision"</span>: {<span class="st">"fast"</span>: <span class="st">"gpt-4o-mini"</span>, <span class="st">"balanced"</span>: <span class="st">"gpt-4o"</span>, <span class="st">"best"</span>: <span class="st">"gpt-4o"</span>},
-        <span class="st">"code"</span>: {<span class="st">"fast"</span>: <span class="st">"gpt-4o-mini"</span>, <span class="st">"balanced"</span>: <span class="st">"gpt-4o"</span>, <span class="st">"best"</span>: <span class="st">"o1"</span>},
-    }
-    <span class="kw">return</span> MODELS.get(task_type, MODELS[<span class="st">"simple"</span>])[quality]
-
-<span class="kw">print</span>(select_model(<span class="st">"code"</span>, <span class="st">"balanced"</span>))  <span class="cm"># gpt-4o</span>
-<span class="kw">print</span>(select_model(<span class="st">"simple"</span>, <span class="st">"fast"</span>))     <span class="cm"># gpt-4o-mini</span></pre>
+<div class="top-bar-right">Part of MYRQAI Network</div>
 </div>
-            <h2>Cost Tracking in Production</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — per-call and cumulative cost tracking</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> dataclasses <span class="kw">import</span> dataclass, field
-<span class="kw">from</span> threading <span class="kw">import</span> Lock
-
-PRICING = {
-    <span class="st">"gpt-4o"</span>:         {<span class="st">"in"</span>: <span class="nu">2.50</span>, <span class="st">"out"</span>: <span class="nu">10.0</span>},
-    <span class="st">"gpt-4o-mini"</span>:    {<span class="st">"in"</span>: <span class="nu">0.15</span>, <span class="st">"out"</span>: <span class="nu">0.60</span>},
-    <span class="st">"o1"</span>:             {<span class="st">"in"</span>: <span class="nu">15.0</span>, <span class="st">"out"</span>: <span class="nu">60.0</span>},
-    <span class="st">"text-embedding-3-small"</span>: {<span class="st">"in"</span>: <span class="nu">0.02</span>, <span class="st">"out"</span>: <span class="nu">0</span>},
-}
-
-<span class="kw">class</span> <span class="cl">CostTracker</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(self):
-        self.total_cost = <span class="nu">0.0</span>
-        self.calls = <span class="nu">0</span>
-        self._lock = Lock()
-
-    <span class="kw">def</span> <span class="fn">track</span>(self, model: str, in_tokens: int, out_tokens: int) -> float:
-        rates = PRICING.get(model, {<span class="st">"in"</span>: <span class="nu">0</span>, <span class="st">"out"</span>: <span class="nu">0</span>})
-        cost = (in_tokens * rates[<span class="st">"in"</span>] + out_tokens * rates[<span class="st">"out"</span>]) / <span class="nu">1_000_000</span>
-        <span class="kw">with</span> self._lock:
-            self.total_cost += cost
-            self.calls += <span class="nu">1</span>
-        <span class="kw">return</span> cost
-
-    <span class="kw">def</span> <span class="fn">report</span>(self):
-        <span class="kw">print</span>(<span class="st">f"Total: ${self.total_cost:.6f} over {self.calls} calls"</span>)
-
-tracker = CostTracker()
-
-<span class="kw">def</span> <span class="fn">tracked_call</span>(**kwargs):
-    resp = client.chat.completions.create(**kwargs)
-    cost = tracker.track(
-        kwargs[<span class="st">"model"</span>],
-        resp.usage.prompt_tokens,
-        resp.usage.completion_tokens
-    )
-    <span class="kw">print</span>(<span class="st">f"  Call cost: ${cost:.6f}"</span>)
-    <span class="kw">return</span> resp
-
-tracked_call(model=<span class="st">"gpt-4o-mini"</span>, messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"Hello"</span>}])
-tracker.report()</pre>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="streaming.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Streaming</div>
-            </a>
-            <a href="vision.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Vision API</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
+<span>Tokens &amp; Models</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-beginner">Beginner</span>
+<span class="lesson-meta-item">⏱️ 29 min</span>
+</div>
+<h1 class="lesson-title">Tokens, Models &amp; Cost Optimization</h1>
+<p class="lesson-description">Understand tokens, context budgeting, model routing, and how to control latency and cost before prompt size becomes a production problem.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Tokens are your real budget unit</h2>
+<p>In language-model systems, the true resource is not characters or words. It is tokens. Tokens influence cost, latency, and whether the model can even fit your prompt into its context window. This is why prompt design, retrieval chunking, and chat history trimming all connect back to token budgeting.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — estimate tokens with tiktoken</span><button class="copy-btn">Copy</button></div><pre>import tiktoken
+
+
+def count_tokens(text: str, model: str = "gpt-4o-mini") -&gt; int:
+    encoding = tiktoken.encoding_for_model(model)
+    return len(encoding.encode(text))
+
+sample = "Summarize this pull request in three bullets."
+print(count_tokens(sample))
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Practical rule</div><p>Count tokens before you send big prompts. Teams often debug “model quality” when the real issue is that the useful context never fit in the request.</p></div>
+<h2>2. Budget the window before you build the feature</h2>
+<p>A request competes for space between multiple components:</p>
+<ul>
+<li>system instructions,</li>
+<li>conversation history,</li>
+<li>retrieved documents,</li>
+<li>tool results,</li>
+<li>and the response you still want the model to generate.</li>
+</ul>
+<p>If you do not reserve room for the answer, the output gets clipped or the request fails. Build a budget explicitly instead of stuffing everything into the window and hoping for the best.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — reserve output budget</span><button class="copy-btn">Copy</button></div><pre>def prompt_budget(total_window: int, expected_output: int, safety_margin: int = 500) -&gt; int:
+    return total_window - expected_output - safety_margin
+
+usable_input_tokens = prompt_budget(total_window=128000, expected_output=1500)
+print(usable_input_tokens)
+</pre></div>
+<h2>3. Route tasks to the smallest model that can succeed</h2>
+<p>Do not send every request to the most capable model. Create a routing strategy based on task type:</p>
+<ul>
+<li>small model for classification, short rewrites, tagging, and guardrails,</li>
+<li>mid-tier model for normal chat and coding help,</li>
+<li>larger model only when reasoning depth or synthesis quality really matters.</li>
+</ul>
+<p>This single change often gives better cost control than any prompt tweak.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — simple model router</span><button class="copy-btn">Copy</button></div><pre>def choose_model(task: str) -&gt; str:
+    if task in {"classification", "rewrite", "extract"}:
+        return "gpt-4o-mini"
+    if task in {"chat", "code_help", "retrieval_answer"}:
+        return "gpt-4o"
+    return "gpt-4o"
+</pre></div>
+<h2>4. Prevent silent truncation and prompt bloat</h2>
+<p>Three problems show up repeatedly in production:</p>
+<ol>
+<li>The conversation history keeps growing forever.</li>
+<li>RAG pipelines inject too many chunks.</li>
+<li>Tool outputs are pasted back in verbatim instead of summarized.</li>
+</ol>
+<p>Every one of those problems steals space from the part the user actually cares about.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — trim retrieved context by budget</span><button class="copy-btn">Copy</button></div><pre>def take_chunks_with_budget(chunks: list[str], max_tokens: int, model: str) -&gt; list[str]:
+    chosen, used = [], 0
+    for chunk in chunks:
+        size = count_tokens(chunk, model=model)
+        if used + size &gt; max_tokens:
+            break
+        chosen.append(chunk)
+        used += size
+    return chosen
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Good habit</div><p>Summarize tool payloads and older conversation turns into compact state. Raw payload replay is one of the fastest ways to waste a context window.</p></div>
+<h2>5. Measure latency and usage as part of quality</h2>
+<p>A beautiful answer that takes too long or costs too much is still a bad product decision. Log model name, prompt tokens, completion tokens, and latency on every request. Then inspect which features are consuming the budget.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — log usage after each call</span><button class="copy-btn">Copy</button></div><pre>response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages,
+)
+
+print({
+    "model": response.model,
+    "prompt_tokens": response.usage.prompt_tokens,
+    "completion_tokens": response.usage.completion_tokens,
+    "total_tokens": response.usage.total_tokens,
+})
+</pre></div>
+<h2>6. Next routes for better control</h2>
+<p>Once you understand tokens and routing, you can make stronger decisions about retrieval, streaming, and caching.</p>
+<ul>
+<li><a href="streaming.html">Stream long answers to reduce perceived latency</a></li>
+<li><a href="embeddings.html">Use embeddings for retrieval instead of stuffing everything into context</a></li>
+<li><a href="../../tutorials/claude/prompt-caching.html">Study caching for repeated prompts</a></li>
+<li><a href="../../debugging/network.html">Debug latency and network bottlenecks</a></li>
+<li><a href="../../debugging/memory.html">Fix history and memory bloat</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="streaming.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Streaming</div>
+</a>
+<a class="next" href="vision.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Vision API</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

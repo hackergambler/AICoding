@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Architecture &amp; Scalability Playbook | AI Coding Academy</title>
+    <meta name="description" content="Bridge advanced architecture concepts to the strongest existing lessons, debugging guides, and projects in the academy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    
+    <style>
+        .playbook-container{max-width:1080px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .playbook-hero{margin-bottom:var(--space-3xl)}
+        .playbook-hero p{font-size:1.1rem;color:var(--text-secondary);max-width:860px;line-height:1.8}
+        .hero-badge-inline{display:inline-flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;background:rgba(0,255,170,.12);border:1px solid rgba(0,255,170,.18);color:var(--accent-primary);font-weight:700;margin-bottom:var(--space-lg)}
+        .quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-2xl) 0 var(--space-3xl)}
+        .quick-links a{display:block;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .quick-links a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .quick-links strong{display:block;margin-bottom:6px}
+        .quick-links span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .topic-section{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl);margin-bottom:var(--space-xl)}
+        .topic-section h2{font-family:var(--font-display);font-size:1.8rem;margin-bottom:var(--space-md)}
+        .topic-section p{color:var(--text-secondary);line-height:1.8}
+        .topic-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-xl);margin-top:var(--space-xl)}
+        .topic-card-list,.practice-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-xl)}
+        .topic-card-list h3,.practice-card h3{font-size:1.05rem;margin-bottom:var(--space-md)}
+        .resource-list{display:grid;gap:var(--space-md)}
+        .resource-item{display:block;padding:14px 16px;border-radius:var(--radius-md);background:rgba(0,255,170,.05);border:1px solid rgba(0,255,170,.14);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .resource-item:hover{transform:translateY(-1px);border-color:rgba(0,255,170,.3)}
+        .resource-item strong{display:block;margin-bottom:4px}
+        .resource-item span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .practice-card ul{padding-left:1.1rem;color:var(--text-secondary);line-height:1.8}
+        .playbook-footer-cta{margin-top:var(--space-3xl);background:linear-gradient(135deg, rgba(0,255,170,.12), rgba(0,212,255,.10));border:1px solid rgba(0,255,170,.18);border-radius:var(--radius-2xl);padding:var(--space-2xl)}
+        .playbook-footer-cta p{max-width:760px}
+        .path-list{display:grid;gap:var(--space-xl)}
+        .path-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl)}
+        .path-card ol{padding-left:1.2rem;color:var(--text-secondary);line-height:1.8}
+        .path-card li+li{margin-top:8px}
+        @media(max-width:860px){.topic-grid{grid-template-columns:1fr}}
+    </style>
+
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">All Tutorials</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    
+    <main class="playbook-container">
+        <div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../advanced.html">Advanced</a><span class="separator">/</span><span>System Architecture &amp; Scalability Playbook</span></div>
+        <header class="playbook-hero">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h1 class="lesson-title">System Architecture &amp; Scalability Playbook</h1>
+            <p>Bridge advanced architecture concepts to the strongest existing lessons, debugging guides, and projects in the academy.</p>
+        </header>
+        <section class="quick-links"><a href="#microservices-architecture-for-ai"><strong>Microservices Architecture for AI</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#event-driven-ai-architectures"><strong>Event-Driven AI Architectures</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#distributed-inference-at-scale"><strong>Distributed Inference at Scale</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#high-availability-ai-systems"><strong>High-Availability AI Systems</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#kubernetes-for-ai-workloads"><strong>Kubernetes for AI Workloads</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#multi-region-ai-deployment"><strong>Multi-Region AI Deployment</strong><span>Jump to the recommended lessons and practice routes.</span></a></section>
+        
+        <section class="topic-section" id="microservices-architecture-for-ai">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>Microservices Architecture for AI</h2>
+            <p>Design decomposed AI systems with proper service boundaries, API gateways, and inter-service communication patterns.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/agents/agent-architecture.html"><strong>Production Agent Architecture</strong><span>Start with service decomposition, boundaries, and orchestration patterns.</span></a><a class="resource-item" href="../../tutorials/agents/agent-communication.html"><strong>Agent Communication Protocols</strong><span>See concrete message-passing and coordination ideas.</span></a><a class="resource-item" href="../../debugging/configuration.html"><strong>Configuration Debugging</strong><span>Tighten config, env separation, and deployment hygiene for multi-service systems.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="event-driven-ai-architectures">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>Event-Driven AI Architectures</h2>
+            <p>Build reactive AI systems using event sourcing, CQRS, and message-driven patterns for real-time processing.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/agents/agent-communication.html"><strong>Agent Communication Protocols</strong><span>Use this for asynchronous coordination and event flow design.</span></a><a class="resource-item" href="../../debugging/async.html"><strong>Async Debugging</strong><span>Catch queueing, ordering, and concurrency issues early.</span></a><a class="resource-item" href="../../projects/workflow-automation.html"><strong>Workflow Automation Agent</strong><span>Apply event-driven patterns in a realistic business workflow project.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="distributed-inference-at-scale">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>Distributed Inference at Scale</h2>
+            <p>Scale model inference across workers, queues, and distributed serving layers.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/agents/scaling-agents.html"><strong>Scaling Agents</strong><span>A practical starting point for throughput, worker pools, and scaling strategy.</span></a><a class="resource-item" href="../../tutorials/openai/streaming.html"><strong>Streaming Responses</strong><span>Reduce perceived latency while your distributed stack does more work.</span></a><a class="resource-item" href="../../debugging/deployment.html"><strong>Deployment Debugging</strong><span>Work through rollout and infra failure modes before shipping.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="high-availability-ai-systems">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>High-Availability AI Systems</h2>
+            <p>Design fault-tolerant AI services with graceful degradation, retries, and fallback models.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/agents/error-recovery.html"><strong>Error Recovery for Agents</strong><span>Translate reliability theory into retry, fallback, and resilience patterns.</span></a><a class="resource-item" href="../../debugging/network.html"><strong>Network Debugging</strong><span>Stabilize transport, timeout, and connectivity problems.</span></a><a class="resource-item" href="../../debugging/deployment.html"><strong>Deployment Debugging</strong><span>Learn the operational side of keeping AI services online.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="kubernetes-for-ai-workloads">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>Kubernetes for AI Workloads</h2>
+            <p>Run AI applications on Kubernetes with autoscaling, GPU scheduling, and robust rollout practices.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../debugging/deployment.html"><strong>Deployment Debugging</strong><span>The best existing operational guide for rollout safety and infrastructure checks.</span></a><a class="resource-item" href="../../tutorials/agents/scaling-agents.html"><strong>Scaling Agents</strong><span>Use it to reason about scaling behavior before adding K8s complexity.</span></a><a class="resource-item" href="../../projects/dev-agent.html"><strong>Developer Agent Project</strong><span>A realistic target workload for containerization and deployment practice.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="multi-region-ai-deployment">
+            <div class="hero-badge-inline">🏗️ Advanced Playbook</div>
+            <h2>Multi-Region AI Deployment</h2>
+            <p>Serve AI globally with traffic steering, regional failover, and latency-aware routing.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../debugging/network.html"><strong>Network Debugging</strong><span>Start with the transport layer issues that appear first in multi-region systems.</span></a><a class="resource-item" href="../../tutorials/agents/scaling-agents.html"><strong>Scaling Agents</strong><span>Use this for capacity planning and horizontal scale considerations.</span></a><a class="resource-item" href="../../debugging/deployment.html"><strong>Deployment Debugging</strong><span>Close the loop with rollout, failover, and environment validation.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="playbook-footer-cta">
+            <h2>Practice on the Developer Agent project</h2>
+            <p>Use this project as the place to test your service boundaries, scaling, and deployment choices.</p>
+            <a class="btn btn-primary" href="../../projects/dev-agent.html">Open recommended starting page</a>
+        </section>
+    </main>
+    
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most practical AI coding learning platform for real tutorials, debugging, and build-ready projects.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Support</h4><ul>
+            <li><a href="../../docs.html">Docs</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Company</h4><ul>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../privacy.html">Privacy</a></li>
+            <li><a href="../../terms.html">Terms</a></li>
+        </ul></div>
+    </div></div></footer>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

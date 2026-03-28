@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI Function Calling | AI Coding Academy</title>
-    <meta name="description" content="Complete guide to OpenAI function calling: tool definitions, parallel calls, structured output, and agents.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenAI Function Calling | AI Coding Academy</title>
+<meta content="Design tools, validate arguments, execute a safe function-calling loop, and debug the most common tool-invocation failures." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,198 +64,187 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
-            <span>Function Calling</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 35 min</span>
-            </div>
-            <h1 class="lesson-title">OpenAI Function Calling</h1>
-            <p class="lesson-description">Define tools, handle function calls, use parallel tool calls, and build real agents with OpenAI's function calling API.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>Defining Tools</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — tool definition</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">import</span> json
-
-client = OpenAI()
-
-tools = [
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/openai.html">OpenAI</a><span class="separator">/</span>
+<span>Function Calling</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 34 min</span>
+</div>
+<h1 class="lesson-title">OpenAI Function Calling</h1>
+<p class="lesson-description">Learn the tool-calling loop, design strong schemas, validate arguments, and build reliable function-calling agents without hidden chaos.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Treat tool calling as a control loop</h2>
+<p>Function calling is not “the model magically runs code.” It is a loop with clear ownership boundaries:</p>
+<ol>
+<li>Your app sends the user request and the available tool schemas.</li>
+<li>The model decides whether a tool should be called and with what arguments.</li>
+<li>Your application validates those arguments and executes the tool.</li>
+<li>Your application sends the tool result back to the model.</li>
+<li>The model turns that result into the final answer.</li>
+</ol>
+<p>The model decides <em>what</em> to call. Your backend decides <em>whether</em> the call is valid and safe enough to run.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — one tool schema</span><button class="copy-btn">Copy</button></div><pre>tools = [
     {
-        <span class="st">"type"</span>: <span class="st">"function"</span>,
-        <span class="st">"function"</span>: {
-            <span class="st">"name"</span>: <span class="st">"search_products"</span>,
-            <span class="st">"description"</span>: <span class="st">"Search the product catalog by keyword and optional category."</span>,
-            <span class="st">"parameters"</span>: {
-                <span class="st">"type"</span>: <span class="st">"object"</span>,
-                <span class="st">"properties"</span>: {
-                    <span class="st">"query"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"description"</span>: <span class="st">"Search keyword"</span>},
-                    <span class="st">"category"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"enum"</span>: [<span class="st">"electronics"</span>, <span class="st">"clothing"</span>, <span class="st">"books"</span>]},
-                    <span class="st">"max_price"</span>: {<span class="st">"type"</span>: <span class="st">"number"</span>, <span class="st">"description"</span>: <span class="st">"Max price in USD"</span>},
-                    <span class="st">"limit"</span>: {<span class="st">"type"</span>: <span class="st">"integer"</span>, <span class="st">"default"</span>: <span class="nu">10</span>}
+        "type": "function",
+        "function": {
+            "name": "lookup_ticket",
+            "description": "Fetch a support ticket by ID.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "ticket_id": {"type": "string"},
                 },
-                <span class="st">"required"</span>: [<span class="st">"query"</span>]
-            }
-        }
-    },
-    {
-        <span class="st">"type"</span>: <span class="st">"function"</span>,
-        <span class="st">"function"</span>: {
-            <span class="st">"name"</span>: <span class="st">"get_order_status"</span>,
-            <span class="st">"description"</span>: <span class="st">"Get the current status of an order by order ID."</span>,
-            <span class="st">"parameters"</span>: {
-                <span class="st">"type"</span>: <span class="st">"object"</span>,
-                <span class="st">"properties"</span>: {
-                    <span class="st">"order_id"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>}
-                },
-                <span class="st">"required"</span>: [<span class="st">"order_id"</span>]
-            }
-        }
+                "required": ["ticket_id"],
+            },
+        },
     }
-]</pre>
-</div>
-            <h2>Complete Tool Call Loop</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — agentic tool call loop</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">def</span> <span class="fn">search_products</span>(query, category=None, max_price=None, limit=10):
-    <span class="cm"># Simulated product DB</span>
-    products = [
-        {<span class="st">"id"</span>: <span class="nu">1</span>, <span class="st">"name"</span>: <span class="st">"Python Handbook"</span>, <span class="st">"category"</span>: <span class="st">"books"</span>, <span class="st">"price"</span>: <span class="nu">29.99</span>},
-        {<span class="st">"id"</span>: <span class="nu">2</span>, <span class="st">"name"</span>: <span class="st">"Mechanical Keyboard"</span>, <span class="st">"category"</span>: <span class="st">"electronics"</span>, <span class="st">"price"</span>: <span class="nu">89.99</span>},
-    ]
-    results = [p <span class="kw">for</span> p <span class="kw">in</span> products <span class="kw">if</span> query.lower() <span class="kw">in</span> p[<span class="st">"name"</span>].lower()]
-    <span class="kw">if</span> category: results = [p <span class="kw">for</span> p <span class="kw">in</span> results <span class="kw">if</span> p[<span class="st">"category"</span>] == category]
-    <span class="kw">if</span> max_price: results = [p <span class="kw">for</span> p <span class="kw">in</span> results <span class="kw">if</span> p[<span class="st">"price"</span>] <= max_price]
-    <span class="kw">return</span> {<span class="st">"results"</span>: results[:limit]}
+]
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Keep schemas boring</div><p>Short names, explicit required fields, and narrow enums beat giant all-purpose tools almost every time.</p></div>
+<h2>2. Design tools around real backend capabilities</h2>
+<p>A good tool maps cleanly to a real action in your system. A bad tool asks the model to improvise too much. Prefer small, composable tools:</p>
+<ul>
+<li><code>lookup_order(order_id)</code> instead of <code>customer_support_everything(...)</code></li>
+<li><code>search_docs(query, product)</code> instead of one huge knowledge tool with dozens of optional fields</li>
+<li><code>create_calendar_event(...)</code> and <code>update_calendar_event(...)</code> as separate tools when semantics differ</li>
+</ul>
+<p>The tighter your tool contract, the less you will debug strange arguments later.</p>
+<h2>3. Validate arguments before you execute anything</h2>
+<p>Never execute model-suggested arguments blindly. Validate required fields, enum values, numeric ranges, and authorization. Tool calling feels powerful because the model can propose actions. It becomes safe only when your backend behaves like a strict gatekeeper.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — safe dispatch layer</span><button class="copy-btn">Copy</button></div><pre>import json
 
-<span class="kw">def</span> <span class="fn">get_order_status</span>(order_id):
-    <span class="kw">return</span> {<span class="st">"order_id"</span>: order_id, <span class="st">"status"</span>: <span class="st">"shipped"</span>, <span class="st">"eta"</span>: <span class="st">"2026-03-28"</span>}
+ALLOWED_TOOLS = {"lookup_ticket": lambda ticket_id: {"ticket_id": ticket_id, "status": "open"}}
 
-FN_MAP = {<span class="st">"search_products"</span>: search_products, <span class="st">"get_order_status"</span>: get_order_status}
+def dispatch_tool(tool_name: str, raw_arguments: str):
+    if tool_name not in ALLOWED_TOOLS:
+        raise ValueError(f"Unknown tool: {tool_name}")
 
-<span class="kw">def</span> <span class="fn">agent_loop</span>(user_message: str) -> str:
-    messages = [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user_message}]
+    arguments = json.loads(raw_arguments)
 
-    <span class="kw">while True</span>:
-        response = client.chat.completions.create(
-            model=<span class="st">"gpt-4o-mini"</span>,
-            messages=messages,
-            tools=tools,
-            tool_choice=<span class="st">"auto"</span>
-        )
-        msg = response.choices[<span class="nu">0</span>].message
-        messages.append(msg)
+    ticket_id = arguments.get("ticket_id")
+    if not ticket_id or not isinstance(ticket_id, str):
+        raise ValueError("ticket_id must be a non-empty string")
 
-        <span class="kw">if</span> response.choices[<span class="nu">0</span>].finish_reason == <span class="st">"stop"</span>:
-            <span class="kw">return</span> msg.content
-
-        <span class="cm"># Execute all requested tool calls</span>
-        <span class="kw">for</span> tc <span class="kw">in</span> msg.tool_calls <span class="kw">or</span> []:
-            fn = FN_MAP[tc.function.name]
-            args = json.loads(tc.function.arguments)
-            result = fn(**args)
-            messages.append({
-                <span class="st">"role"</span>: <span class="st">"tool"</span>,
-                <span class="st">"tool_call_id"</span>: tc.id,
-                <span class="st">"content"</span>: json.dumps(result)
-            })
-
-<span class="kw">print</span>(agent_loop(<span class="st">"Find me Python books under $50, and also check order ORD-12345"</span>))</pre>
-</div>
-            <h2>Structured Output (Strict Mode)</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — guaranteed JSON schema output</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> pydantic <span class="kw">import</span> BaseModel
-<span class="kw">from</span> typing <span class="kw">import</span> List
-
-<span class="kw">class</span> <span class="cl">ExtractedTask</span>(BaseModel):
-    title: str
-    priority: str  <span class="cm"># high, medium, low</span>
-    due_date: str  <span class="cm"># YYYY-MM-DD or "none"</span>
-    assignee: str
-
-<span class="kw">class</span> <span class="cl">TaskList</span>(BaseModel):
-    tasks: List[ExtractedTask]
-    total_count: int
-
-response = client.beta.chat.completions.parse(
-    model=<span class="st">"gpt-4o-mini"</span>,
-    messages=[{
-        <span class="st">"role"</span>: <span class="st">"user"</span>,
-        <span class="st">"content"</span>: <span class="st">"Extract tasks from: Alice must finish the API by Friday (high priority). Bob review the PRs sometime next week."</span>
-    }],
-    response_format=TaskList
+    return ALLOWED_TOOLS[tool_name](ticket_id=ticket_id)
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">Production rule</div><p>Validation belongs in your code, not in the prompt. Prompts reduce mistakes; validators prevent bad writes and unsafe side effects.</p></div>
+<h2>4. Run the full tool loop clearly</h2>
+<p>A robust function-calling app usually has an explicit loop rather than one giant helper. That loop makes logging, retries, and observability much easier.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — minimal function-calling loop</span><button class="copy-btn">Copy</button></div><pre>response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages,
+    tools=tools,
 )
-task_list = response.choices[<span class="nu">0</span>].message.parsed
-<span class="kw">print</span>(<span class="st">f"{task_list.total_count} tasks extracted"</span>)
-<span class="kw">for</span> task <span class="kw">in</span> task_list.tasks:
-    <span class="kw">print</span>(<span class="st">f"  [{task.priority}] {task.title} — {task.assignee} by {task.due_date}"</span>)</pre>
+
+choice = response.choices[0].message
+messages.append(choice.model_dump())
+
+for call in choice.tool_calls or []:
+    result = dispatch_tool(call.function.name, call.function.arguments)
+    messages.append(
+        {
+            "role": "tool",
+            "tool_call_id": call.id,
+            "content": json.dumps(result),
+        }
+    )
+
+final_response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=messages,
+)
+
+print(final_response.choices[0].message.content)
+</pre></div>
+<p>Notice the two important boundaries: the model does not execute the tool, and the final answer is generated only after the real tool result comes back.</p>
+<h2>5. Plan for the failures you will absolutely see</h2>
+<ul>
+<li><strong>Wrong tool chosen</strong>: improve descriptions, reduce overlap, and remove ambiguous multi-purpose tools.</li>
+<li><strong>Arguments almost right but not valid</strong>: tighten parameter descriptions and add backend validation messages.</li>
+<li><strong>The tool succeeds but the final answer ignores the result</strong>: feed the result back in a compact and explicit structure.</li>
+<li><strong>The model loops too much</strong>: cap tool iterations and fall back to a human-readable error.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — iteration guard</span><button class="copy-btn">Copy</button></div><pre>MAX_TOOL_STEPS = 3
+
+for step in range(MAX_TOOL_STEPS):
+    # call model
+    # execute tool calls
+    # break when no tool calls remain
+    pass
+</pre></div>
+<h2>6. Where this goes next</h2>
+<p>Function calling becomes truly valuable when it is combined with retrieval, memory, and observability. That is what turns a single tool demo into an actual agent workflow.</p>
+<ul>
+<li><a href="../../tutorials/agents/function-calling-basics.html">Continue into agent tool loops</a></li>
+<li><a href="../../tutorials/agents/first-agent.html">Build your first agent</a></li>
+<li><a href="../../debugging/configuration.html">Fix schema and config mistakes</a></li>
+<li><a href="../../debugging/data.html">Debug invalid tool payloads and malformed data</a></li>
+<li><a href="../../projects/workflow-automation.html">Use tools inside a real workflow project</a></li>
+</ul>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="embeddings.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Embeddings</div>
-            </a>
-            <a href="streaming.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Streaming</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<nav class="lesson-nav">
+<a class="prev" href="embeddings.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Embeddings</div>
+</a>
+<a class="next" href="streaming.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Streaming</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

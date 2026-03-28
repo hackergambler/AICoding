@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenAI API Complete Course — Full Course | AI Coding Academy</title>
-    <meta name="description" content="Master GPT-4o, embeddings, function calling, vision, and streaming.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenAI API Course | AI Coding Academy</title>
+<meta content="Learn the OpenAI API through a grounded course covering chat completions, streaming, embeddings, function calling, and vision." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -62,34 +63,53 @@
         .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
+
+<style id="phase2-course-support">
+.course-support{padding:0 var(--space-xl) var(--space-4xl)}
+.course-support-container{max-width:1080px;margin:0 auto;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:clamp(1.25rem,2vw,2rem);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.support-intro{max-width:760px;margin-bottom:1.5rem}
+.support-kicker{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(0,255,170,.28);background:rgba(0,255,170,.08);border-radius:999px;padding:.35rem .75rem;color:var(--accent-primary);font-size:.8rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.support-intro h2{margin:.85rem 0 .55rem;font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.5rem);line-height:1.08}
+.support-intro p{color:var(--text-secondary);font-size:1rem;line-height:1.7;margin:0}
+.support-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.support-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1rem 1.1rem}
+.support-card h3{margin:0 0 .85rem;font-size:1.05rem}
+.support-list{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+.support-list li{padding:.8rem .85rem;border-radius:var(--radius-md);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
+.support-list a{color:var(--text-primary);font-weight:600;text-decoration:none}
+.support-list a:hover{color:var(--accent-primary)}
+.support-list p{margin:.25rem 0 0;color:var(--text-muted);font-size:.92rem;line-height:1.6}
+.support-band{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.35rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)}
+@media (max-width:900px){.support-grid{grid-template-columns:1fr}}
+</style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
-                <li><a href="../courses/index.html" class="nav-link active">Courses</a></li>
-                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <style>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link" href="../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link active" href="../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search courses..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../tutorials/openai/getting-started.html">Start First Lesson</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<style>
         .course-hero { padding: calc(140px + var(--space-2xl)) var(--space-xl) var(--space-2xl); text-align: center; }
         .course-icon { font-size: 4rem; margin-bottom: var(--space-lg); }
         .course-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: var(--space-lg); }
@@ -113,115 +133,130 @@
         .lesson-desc { display: block; font-size: 0.82rem; color: var(--text-muted); }
         .lesson-time { font-size: 0.8rem; color: var(--text-muted); flex-shrink: 0; }
     </style>
-    <div class="course-hero">
-        <div class="course-icon">🤖</div>
-        <div class="lesson-meta" style="justify-content:center; margin-bottom: var(--space-lg);">
-            <span class="badge badge-intermediate">Intermediate</span>
-        </div>
-        <h1 class="course-title">OpenAI API Complete Course</h1>
-        <p class="course-subtitle">Master GPT-4o, embeddings, function calling, vision, and streaming.</p>
-        <div class="course-stats">
-            <div class="stat"><div class="stat-num">8</div><div class="stat-label">Lessons</div></div>
-            <div class="stat"><div class="stat-num">3</div><div class="stat-label">Modules</div></div>
-            <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Cost</div></div>
-        </div>
+<div class="course-hero">
+<div class="course-icon">🤖</div>
+<div class="lesson-meta" style="justify-content:center; margin-bottom: var(--space-lg);">
+<span class="badge badge-intermediate">Intermediate</span>
+</div>
+<h1 class="course-title">OpenAI API Complete Course</h1>
+<p class="course-subtitle">Master GPT-4o, embeddings, function calling, vision, and streaming.</p>
+<div class="course-stats">
+<div class="stat"><div class="stat-num">8</div><div class="stat-label">Lessons</div></div>
+<div class="stat"><div class="stat-num">3</div><div class="stat-label">Modules</div></div>
+<div class="stat"><div class="stat-num">Free</div><div class="stat-label">Cost</div></div>
+</div>
+</div>
+<div class="modules-container">
+<div class="module-card">
+<div class="module-header">
+<div class="module-num">01</div>
+<div><h3 class="module-title">Getting Started</h3><p class="module-desc">Set up the SDK, make your first call, and understand the API.</p></div>
+</div>
+<ul class="lesson-list"><li><a class="lesson-link" href="../tutorials/openai/getting-started.html">
+<span class="lesson-num">1.1</span>
+<span class="lesson-info">
+<span class="lesson-name">Installation &amp; Setup</span>
+<span class="lesson-desc">pip install, API keys, environment variables</span>
+</span>
+<span class="lesson-time">15 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/openai/chat-completions.html">
+<span class="lesson-num">1.2</span>
+<span class="lesson-info">
+<span class="lesson-name">Chat Completions</span>
+<span class="lesson-desc">Messages array, roles, system prompts, parameters</span>
+</span>
+<span class="lesson-time">20 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/openai/tokens-and-models.html">
+<span class="lesson-num">1.3</span>
+<span class="lesson-info">
+<span class="lesson-name">Tokens &amp; Models</span>
+<span class="lesson-desc">Tokenization, model selection, pricing &amp; limits</span>
+</span>
+<span class="lesson-time">20 min</span>
+</a></li></ul>
+</div><div class="module-card">
+<div class="module-header">
+<div class="module-num">02</div>
+<div><h3 class="module-title">Intermediate Features</h3><p class="module-desc">Streaming, function calling, and vision.</p></div>
+</div>
+<ul class="lesson-list"><li><a class="lesson-link" href="../tutorials/openai/streaming.html">
+<span class="lesson-num">2.1</span>
+<span class="lesson-info">
+<span class="lesson-name">Streaming Responses</span>
+<span class="lesson-desc">Real-time token streaming, FastAPI SSE, frontend</span>
+</span>
+<span class="lesson-time">25 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/openai/function-calling.html">
+<span class="lesson-num">2.2</span>
+<span class="lesson-info">
+<span class="lesson-name">Function Calling</span>
+<span class="lesson-desc">Tool definitions, agent loops, structured output</span>
+</span>
+<span class="lesson-time">35 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/openai/vision.html">
+<span class="lesson-num">2.3</span>
+<span class="lesson-info">
+<span class="lesson-name">Vision API</span>
+<span class="lesson-desc">Image analysis, OCR, multi-image comparisons</span>
+</span>
+<span class="lesson-time">25 min</span>
+</a></li></ul>
+</div><div class="module-card">
+<div class="module-header">
+<div class="module-num">03</div>
+<div><h3 class="module-title">Embeddings &amp; Search</h3><p class="module-desc">Semantic search, classification, and RAG foundation.</p></div>
+</div>
+<ul class="lesson-list"><li><a class="lesson-link" href="../tutorials/openai/embeddings.html">
+<span class="lesson-num">3.1</span>
+<span class="lesson-info">
+<span class="lesson-name">Embeddings</span>
+<span class="lesson-desc">text-embedding-3, semantic search, clustering</span>
+</span>
+<span class="lesson-time">30 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/rag/introduction.html">
+<span class="lesson-num">3.2</span>
+<span class="lesson-info">
+<span class="lesson-name">RAG with OpenAI</span>
+<span class="lesson-desc">Vector stores, retrieval, grounded generation</span>
+</span>
+<span class="lesson-time">35 min</span>
+</a></li></ul>
+</div>
+</div>
+
+<section class="course-support">
+  <div class="course-support-container">
+    <div class="support-intro">
+      <span class="support-kicker">Next routes</span>
+      <h2>Turn the OpenAI course into real builds</h2>
+      <p>Use these routes to move from API basics into production behavior, debugging, and project work.</p>
     </div>
-    <div class="modules-container">
-        <div class="module-card">
-            <div class="module-header">
-                <div class="module-num">01</div>
-                <div><h3 class="module-title">Getting Started</h3><p class="module-desc">Set up the SDK, make your first call, and understand the API.</p></div>
-            </div>
-            <ul class="lesson-list"><li><a href="../tutorials/openai/getting-started.html" class="lesson-link">
-                <span class="lesson-num">1.1</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Installation & Setup</span>
-                    <span class="lesson-desc">pip install, API keys, environment variables</span>
-                </span>
-                <span class="lesson-time">15 min</span>
-            </a></li><li><a href="../tutorials/openai/chat-completions.html" class="lesson-link">
-                <span class="lesson-num">1.2</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Chat Completions</span>
-                    <span class="lesson-desc">Messages array, roles, system prompts, parameters</span>
-                </span>
-                <span class="lesson-time">20 min</span>
-            </a></li><li><a href="../tutorials/openai/tokens-and-models.html" class="lesson-link">
-                <span class="lesson-num">1.3</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Tokens & Models</span>
-                    <span class="lesson-desc">Tokenization, model selection, pricing & limits</span>
-                </span>
-                <span class="lesson-time">20 min</span>
-            </a></li></ul>
-        </div><div class="module-card">
-            <div class="module-header">
-                <div class="module-num">02</div>
-                <div><h3 class="module-title">Intermediate Features</h3><p class="module-desc">Streaming, function calling, and vision.</p></div>
-            </div>
-            <ul class="lesson-list"><li><a href="../tutorials/openai/streaming.html" class="lesson-link">
-                <span class="lesson-num">2.1</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Streaming Responses</span>
-                    <span class="lesson-desc">Real-time token streaming, FastAPI SSE, frontend</span>
-                </span>
-                <span class="lesson-time">25 min</span>
-            </a></li><li><a href="../tutorials/openai/function-calling.html" class="lesson-link">
-                <span class="lesson-num">2.2</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Function Calling</span>
-                    <span class="lesson-desc">Tool definitions, agent loops, structured output</span>
-                </span>
-                <span class="lesson-time">35 min</span>
-            </a></li><li><a href="../tutorials/openai/vision.html" class="lesson-link">
-                <span class="lesson-num">2.3</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Vision API</span>
-                    <span class="lesson-desc">Image analysis, OCR, multi-image comparisons</span>
-                </span>
-                <span class="lesson-time">25 min</span>
-            </a></li></ul>
-        </div><div class="module-card">
-            <div class="module-header">
-                <div class="module-num">03</div>
-                <div><h3 class="module-title">Embeddings & Search</h3><p class="module-desc">Semantic search, classification, and RAG foundation.</p></div>
-            </div>
-            <ul class="lesson-list"><li><a href="../tutorials/openai/embeddings.html" class="lesson-link">
-                <span class="lesson-num">3.1</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Embeddings</span>
-                    <span class="lesson-desc">text-embedding-3, semantic search, clustering</span>
-                </span>
-                <span class="lesson-time">30 min</span>
-            </a></li><li><a href="../tutorials/rag/introduction.html" class="lesson-link">
-                <span class="lesson-num">3.2</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">RAG with OpenAI</span>
-                    <span class="lesson-desc">Vector stores, retrieval, grounded generation</span>
-                </span>
-                <span class="lesson-time">35 min</span>
-            </a></li></ul>
-        </div>
+    <div class="support-grid"><article class="support-card"><h3>Study before production</h3><ul class="support-list"><li><a href="../tutorials/openai/streaming.html">Streaming patterns</a><p>Handle token-by-token output before you wire the API into live interfaces.</p></li><li><a href="../tutorials/openai/function-calling.html">Function calling</a><p>Move from plain chat to tool-driven workflows and action-taking systems.</p></li><li><a href="../tutorials/prompting/basics.html">Prompt basics</a><p>Tighten instructions and outputs before you blame the model or the SDK.</p></li></ul></article><article class="support-card"><h3>When OpenAI flows break</h3><ul class="support-list"><li><a href="../debugging/api-keys.html">API key failures</a><p>Fix auth, quota, and provider configuration mistakes fast.</p></li><li><a href="../debugging/async.html">Async bugs</a><p>Untangle retries, concurrency bugs, and hanging streams.</p></li><li><a href="../debugging/network.html">Network failures</a><p>Trace rate limits, timeouts, and flaky upstream behavior.</p></li></ul></article><article class="support-card"><h3>Build next with this stack</h3><ul class="support-list"><li><a href="../projects/personal-assistant.html">Personal assistant project</a><p>Use OpenAI fundamentals inside a real assistant workflow.</p></li><li><a href="../projects/dev-agent.html">Developer agent project</a><p>Push function calling and tool use into a more serious build.</p></li><li><a href="../courses/agents.html">Continue to agents</a><p>Layer planning, memory, and orchestration on top of API basics.</p></li></ul></article></div>
+    <div class="support-band">
+      <a class="btn btn-primary" href="../projects/personal-assistant.html">Build the Personal Assistant</a>
+      <a class="btn btn-outline" href="../courses/agents.html">Continue to Agents</a>
     </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/donation-widget.js" defer></script>
-    <script>
+  </div>
+</section>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>A structured AI coding platform for lessons, debugging, and practical builds.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li><li><a href="../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../assets/js/main.js"></script>
+<script defer="" src="../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

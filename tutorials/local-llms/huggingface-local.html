@@ -1,57 +1,94 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>HuggingFace Transformers — Local Inference | AI Coding Academy</title><meta name="description" content="Run HuggingFace models locally with transformers, pipeline API, and optimized inference with bitsandbytes."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="../../assets/css/style.css"><style>.lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}.lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}.lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}.lesson-content h2:first-child{margin-top:0}.lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}.lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}.lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}.lesson-content li{margin-bottom:var(--space-sm)}.lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}.code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}.code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}.copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}.code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}.cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}.tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}.info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}.tip-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}.lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}.lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}.lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}.lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}.lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}.lesson-nav .next{text-align:right}@media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}</style></head><body><div class="top-bar"><div class="top-bar-container"><div class="top-bar-links"><a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a><a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a><a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a></div><div class="top-bar-right">Part of MYRQAI Network</div></div></div><div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div><nav class="nav"><div class="nav-container"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><ul class="nav-menu"><li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li><li><a href="../../courses/index.html" class="nav-link">Courses</a></li><li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li><li><a href="../../projects/index.html" class="nav-link">Projects</a></li></ul><div class="nav-actions"><div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div><a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a></div><button class="mobile-menu-btn">☰</button></div></nav><div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/local-llms.html">Local LLMs</a><span class="separator">/</span><span>HuggingFace Local</span></div><header class="lesson-header" style="margin-bottom:var(--space-3xl)"><div class="lesson-meta" style="display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap"><span class="badge badge-intermediate">Intermediate</span><span style="font-size:.9rem;color:var(--text-muted)">⏱️ 30 min</span></div><h1 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2">HuggingFace Transformers — Local Inference</h1><p style="font-size:1.2rem;color:var(--text-secondary);line-height:1.7">Run HuggingFace models locally with transformers, pipeline API, and optimized inference with bitsandbytes.</p></header><div class="lesson-content"><h2>Run Any HuggingFace Model Locally</h2><p>The <code>transformers</code> library lets you run thousands of open-source models locally with just a few lines of code.</p><div class="code-block"><div class="code-block-label"><span>bash - install</span><button class="copy-btn">Copy</button></div><pre>pip install transformers torch accelerate
-pip install bitsandbytes  <span class="cm"># for 4/8-bit quantization</span></pre></div><div class="code-block"><div class="code-block-label"><span>Python - pipeline API (simplest)</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> transformers <span class="kw">import</span> pipeline
+<!DOCTYPE html>
 
-<span class="cm"># Text generation with Llama 3.2</span>
-gen = pipeline(
-    <span class="st">"text-generation"</span>,
-    model=<span class="st">"meta-llama/Llama-3.2-3B-Instruct"</span>,
-    device_map=<span class="st">"auto"</span>,      <span class="cm"># auto-assign GPU/CPU</span>
-    torch_dtype=<span class="st">"auto"</span>
+<html lang="en"><head><meta charset="utf-8"/><script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script><meta content="width=device-width, initial-scale=1.0" name="viewport"/><title>HuggingFace Transformers — Local Inference | AI Coding Academy</title><meta content="Run HuggingFace models locally, choose between pipeline and manual loading, use quantization correctly, and debug memory and inference issues." name="description"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="../../assets/css/style.css" rel="stylesheet"/><style>.lesson-container{max-width:900px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}.lesson-content{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-2xl);margin-bottom:var(--space-2xl)}.lesson-content h2{font-family:var(--font-heading);font-size:1.5rem;margin:var(--space-2xl) 0 var(--space-lg);color:var(--accent-primary)}.lesson-content h2:first-child{margin-top:0}.lesson-content h3{font-family:var(--font-heading);font-size:1.2rem;margin:var(--space-xl) 0 var(--space-md);color:var(--accent-secondary)}.lesson-content p{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg)}.lesson-content ul,.lesson-content ol{color:var(--text-secondary);line-height:1.8;margin-bottom:var(--space-lg);padding-left:var(--space-xl)}.lesson-content li{margin-bottom:var(--space-sm)}.lesson-content code{background:rgba(0,255,170,.1);color:var(--accent-primary);padding:2px 6px;border-radius:4px;font-family:var(--font-mono);font-size:.85em}.code-block{background:#0d1117;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0;overflow-x:auto}.code-block-label{font-size:.75rem;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:var(--space-sm);display:flex;justify-content:space-between}.copy-btn{cursor:pointer;color:var(--accent-primary);border:1px solid var(--accent-primary);background:transparent;padding:2px 8px;border-radius:4px;font-size:.7rem}.code-block pre{margin:0;font-family:var(--font-mono);font-size:.88rem;line-height:1.65;color:#e6edf3;white-space:pre}.cm{color:#8b949e}.kw{color:#ff7b72}.st{color:#a5d6ff}.fn{color:#d2a8ff}.nu{color:#79c0ff}.cl{color:#ffa657}.tip-box{background:rgba(0,255,170,.08);border:1px solid rgba(0,255,170,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.tip-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-primary);margin-bottom:var(--space-sm)}.info-box{background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);border-radius:var(--radius-md);padding:var(--space-lg);margin:var(--space-lg) 0}.info-box-title{font-family:var(--font-heading);font-weight:600;color:var(--accent-secondary);margin-bottom:var(--space-sm)}.tip-box p,.info-box p{margin:0;color:var(--text-secondary);line-height:1.7}.lesson-nav{display:flex;justify-content:space-between;gap:var(--space-lg);margin-top:var(--space-3xl)}.lesson-nav a{flex:1;background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;transition:var(--transition-base)}.lesson-nav a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}.lesson-nav-label{font-size:.8rem;color:var(--text-muted);margin-bottom:var(--space-xs)}.lesson-nav-title{font-family:var(--font-heading);font-weight:600;color:var(--text-primary)}.lesson-nav .next{text-align:right}@media(max-width:768px){.lesson-nav{flex-direction:column}.lesson-nav .next{text-align:left}}</style></head><body><div class="top-bar"><div class="top-bar-container"><div class="top-bar-links"><a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a><a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a><a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a></div><div class="top-bar-right">Part of MYRQAI Network</div></div></div><div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div><nav class="nav"><div class="nav-container"><a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><ul class="nav-menu"><li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li><li><a class="nav-link" href="../../courses/index.html">Courses</a></li><li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li><li><a class="nav-link" href="../../projects/index.html">Projects</a></li></ul><div class="nav-actions"><div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div><a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a></div><button class="mobile-menu-btn">☰</button></div></nav><div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/local-llms.html">Local LLMs</a><span class="separator">/</span><span>HuggingFace Local</span></div><header class="lesson-header" style="margin-bottom:var(--space-3xl)"><div class="lesson-meta" style="display:flex;gap:var(--space-lg);margin-bottom:var(--space-lg);flex-wrap:wrap"><span class="badge badge-intermediate">Intermediate</span><span style="font-size:.9rem;color:var(--text-muted)">⏱️ 36 min</span></div><h1 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);margin-bottom:var(--space-lg);line-height:1.2">HuggingFace Transformers — Local Inference</h1><p style="font-size:1.2rem;color:var(--text-secondary);line-height:1.7">Run HuggingFace models locally with the right runtime path, quantization choice, chat template handling, and debugging habits for real inference work.</p></header><div class="lesson-content">
+<h2>1. Choose the right local inference path</h2>
+<p>The Hugging Face ecosystem gives you multiple ways to run a model locally. The right choice depends on whether you want simplicity, full control, or better performance.</p>
+<ul>
+<li><strong>pipeline</strong>: fastest way to get a model answering locally.</li>
+<li><strong>AutoModelForCausalLM</strong>: better when you need token-level control, streaming, or explicit generation settings.</li>
+<li><strong>quantized loading</strong>: necessary when hardware is limited.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>bash — install the local stack</span><button class="copy-btn">Copy</button></div><pre>pip install transformers torch accelerate
+pip install bitsandbytes</pre></div>
+<div class="tip-box"><div class="tip-box-title">Start small</div><p>Before testing a 7B or larger model, prove your local stack works with a much smaller instruct model. It isolates environment mistakes from hardware limits.</p></div>
+<h2>2. Pick a model that matches your hardware, not your ambition</h2>
+<p>Local inference is a hardware budgeting exercise. Bigger models are not automatically better if they barely fit or force unusable latency. In practice, a smaller instruct model that responds quickly is often the better development tool.</p>
+<ul>
+<li>Use small models to validate prompts, parsers, and UI logic.</li>
+<li>Use quantized mid-size models when you want better quality on limited hardware.</li>
+<li>Only push larger models when you already understand your memory and throughput limits.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — simplest pipeline path</span><button class="copy-btn">Copy</button></div><pre>from transformers import pipeline
+
+generator = pipeline(
+    "text-generation",
+    model="meta-llama/Llama-3.2-3B-Instruct",
+    device_map="auto",
+    torch_dtype="auto",
 )
 
-result = gen(
-    [{"role":"user","content":"Explain recursion briefly."}],
-    max_new_tokens=<span class="nu">256</span>,
-    temperature=<span class="nu">0.7</span>
-)
-<span class="kw">print</span>(result[0]["generated_text"][-1]["content"])</pre></div><h2>4-bit Quantization with bitsandbytes</h2><div class="code-block"><div class="code-block-label"><span>Python - load in 4-bit to save GPU memory</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> transformers <span class="kw">import</span> AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
-<span class="kw">import</span> torch
-
-quantization_config = BitsAndBytesConfig(
-    load_in_4bit=<span class="kw">True</span>,
-    bnb_4bit_compute_dtype=torch.float16,
-    bnb_4bit_use_double_quant=<span class="kw">True</span>
+result = generator(
+    [{"role": "user", "content": "Explain recursion in simple terms."}],
+    max_new_tokens=180,
+    temperature=0.4,
 )
 
-model_id = <span class="st">"mistralai/Mistral-7B-Instruct-v0.3"</span>
+print(result[0]["generated_text"][-1]["content"])
+</pre></div>
+<h2>3. Move to explicit loading when you need control</h2>
+<p>The pipeline API is great for quick starts, but most serious local work eventually needs explicit tokenizer and model control. That is where you manage chat templates, generation arguments, batching, and custom memory settings.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — explicit model loading</span><button class="copy-btn">Copy</button></div><pre>from transformers import AutoTokenizer, AutoModelForCausalLM
+import torch
+
+model_id = "mistralai/Mistral-7B-Instruct-v0.3"
+
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 model = AutoModelForCausalLM.from_pretrained(
     model_id,
-    quantization_config=quantization_config,
-    device_map=<span class="st">"auto"</span>
+    device_map="auto",
+    torch_dtype=torch.float16,
 )
 
-<span class="cm"># Generate</span>
-messages = [{"role":"user","content":"Write a Python decorator example."}]
-inputs = tokenizer.apply_chat_template(messages, return_tensors=<span class="st">"pt"</span>).to(model.device)
-outputs = model.generate(inputs, max_new_tokens=<span class="nu">256</span>)
-response = tokenizer.decode(outputs[0][inputs.shape[1]:], skip_special_tokens=<span class="kw">True</span>)
-<span class="kw">print</span>(response)</pre></div><h2>Streaming with HuggingFace</h2><div class="code-block"><div class="code-block-label"><span>Python - stream tokens as they generate</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> transformers <span class="kw">import</span> TextIteratorStreamer
-<span class="kw">from</span> threading <span class="kw">import</span> Thread
+messages = [{"role": "user", "content": "Write a Python decorator example."}]
+inputs = tokenizer.apply_chat_template(messages, return_tensors="pt").to(model.device)
+outputs = model.generate(inputs, max_new_tokens=220)
+print(tokenizer.decode(outputs[0][inputs.shape[1]:], skip_special_tokens=True))
+</pre></div>
+<p>Notice the use of <code>apply_chat_template</code>. Many local chat models depend on the correct template to behave properly. Skipping it is a common reason answers look broken or weirdly formatted.</p>
+<h2>4. Quantization is a product decision, not just a memory trick</h2>
+<p>Quantization lets larger models fit onto smaller hardware, but it also changes throughput and quality. Treat it as a trade-off you should evaluate, not as a checkbox you always turn on blindly.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — 4-bit loading sketch</span><button class="copy-btn">Copy</button></div><pre>from transformers import BitsAndBytesConfig
 
-streamer = TextIteratorStreamer(tokenizer, skip_prompt=<span class="kw">True</span>, skip_special_tokens=<span class="kw">True</span>)
+quant_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+)
 
-inputs = tokenizer.apply_chat_template(
-    [{"role":"user","content":"Tell me a story."}], return_tensors=<span class="st">"pt"</span>
-).to(model.device)
-
-<span class="cm"># Run generation in background thread</span>
-thread = Thread(target=model.generate, kwargs={
-    "input_ids": inputs, "streamer": streamer, "max_new_tokens": 256
-})
-thread.start()
-
-<span class="cm"># Stream tokens as they arrive</span>
-<span class="kw">for</span> token <span class="kw">in</span> streamer:
-    <span class="kw">print</span>(token, end=<span class="st">""</span>, flush=<span class="kw">True</span>)
-thread.join()</pre></div><div class="tip-box"><div class="tip-box-title">💡 Memory guide</div><p>A 7B model needs: FP16 = 14GB VRAM, INT8 = 7GB, INT4 = 4GB. If you have 8GB VRAM, use 4-bit quantization for 7B models or run 3B models in FP16.</p></div></div><nav class="lesson-nav"><a href="llama-cpp.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">llama.cpp</div></a><a href="fine-tuning.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Fine-tuning Local Models</div></a></nav></div><footer><div class="footer-container"><div class="footer-grid"><div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div><div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div><div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div><div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div></div></footer><script src="../../assets/js/main.js"></script><script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script></body></html>
+model = AutoModelForCausalLM.from_pretrained(
+    model_id,
+    quantization_config=quant_config,
+    device_map="auto",
+)
+</pre></div>
+<ul>
+<li>If the model fits comfortably without quantization, that simpler path may be easier to debug.</li>
+<li>If memory is tight, quantization often makes the difference between usable and impossible.</li>
+<li>Always compare latency and answer quality before committing to one deployment path.</li>
+</ul>
+<h2>5. Build a local inference debugging checklist</h2>
+<ul>
+<li><strong>The process crashes on load</strong>: the model is too large for available RAM or VRAM.</li>
+<li><strong>Outputs look nonsensical</strong>: the chat template or tokenizer path is wrong.</li>
+<li><strong>Generation is painfully slow</strong>: the model may have fallen back to CPU or paging.</li>
+<li><strong>Memory rises every request</strong>: inspect batching, retained tensors, and long-running notebook state.</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">A healthy workflow</div><p>Keep one repeatable benchmark prompt and one memory-heavy benchmark prompt. They make local model comparisons far more honest.</p></div>
+<h2>6. Next routes for the local stack</h2>
+<ul>
+<li><a href="ollama.html">Use Ollama when you want a simpler local runtime</a></li>
+<li><a href="llama-cpp.html">Study llama.cpp for a lightweight serving path</a></li>
+<li><a href="fine-tuning.html">Learn when local fine-tuning is worth it</a></li>
+<li><a href="../../debugging/deployment.html">Fix deployment and runtime issues</a></li>
+<li><a href="../../projects/dev-agent.html">Use a local model inside a real project flow</a></li>
+</ul>
+</div><nav class="lesson-nav"><a class="prev" href="llama-cpp.html"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">llama.cpp</div></a><a class="next" href="fine-tuning.html"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Fine-tuning Local Models</div></a></nav></div><footer><div class="footer-container"><div class="footer-grid"><div class="footer-brand"><a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div><div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div><div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div><div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color:var(--accent-primary)" target="_blank">MYRQAI</a>. All rights reserved.</p></div></div></footer><script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script><script>document.querySelectorAll(".copy-btn").forEach(b=>{b.addEventListener("click",function(){navigator.clipboard.writeText(this.closest(".code-block").querySelector("pre").innerText).then(()=>{this.textContent="Copied";setTimeout(()=>this.textContent="Copy",1500)})})})</script></body></html>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini Multimodal — Images, Audio & Video | AI Coding Academy</title>
-    <meta name="description" content="Send images, audio, and video to Gemini. Analyze screenshots, transcribe audio, and describe video frames.">
+    <title>Gemini Multimodal — Images, PDFs & Mixed Inputs | AI Coding Academy</title>
+    <meta name="description" content="Build Gemini multimodal workflows with images, PDFs, and structured responses. Learn prompt design, validation, and failure handling for mixed-input applications.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
 </head><body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -64,129 +64,107 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div></nav>
     <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/gemini.html">Gemini</a><span class="separator">/</span><span>Multimodal</span></div>
         <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 25 min</span><span class="lesson-meta-item">📚 Lesson 2</span></div>
+            <div class="lesson-meta"><span class="badge badge-beginner">Beginner</span><span class="lesson-meta-item">⏱️ 38 min</span><span class="lesson-meta-item">📚 Lesson 2</span></div>
             <h1 class="lesson-title">Gemini Multimodal — Images, Audio & Video</h1>
-            <p class="lesson-description">Gemini is natively multimodal. Send images, audio clips, and video to analyze visuals, transcribe speech, summarize videos, and extract structured data.</p>
+            <p class="lesson-description">Learn how to build reliable Gemini multimodal flows for images, documents, and mixed prompts without turning the model into a black box.</p>
         </header>
-        <div class="lesson-content">
-            <h2>Sending Images</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — analyze image from URL</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
-<span class="kw">import</span> httpx, PIL.Image
-<span class="kw">from</span> io <span class="kw">import</span> BytesIO
+        
+<div class="lesson-content">
+    <h2>Objective &amp; multimodal mental model</h2>
+    <p>Multimodal prompting is not just “attach an image and ask a question.” Production multimodal systems need a clear contract for <strong>what the model should look at</strong>, <strong>what format the answer must follow</strong>, and <strong>how the app should recover when the visual evidence is weak</strong>.</p>
+    <ul>
+        <li><strong>Images</strong> are good for classification, OCR-like extraction, layout understanding, and scene reasoning.</li>
+        <li><strong>PDFs / screenshots</strong> are good for document review, invoice extraction, and policy comparison.</li>
+        <li><strong>Mixed prompts</strong> work best when the text explains exactly which fields or visual regions matter.</li>
+    </ul>
 
-model = genai.GenerativeModel(<span class="st">"gemini-1.5-flash"</span>)
+    <div class="code-block"><div class="code-block-label"><span>Python — Gemini image workflow with structured extraction</span><button class="copy-btn">Copy</button></div><pre>from google import genai
+from google.genai import types
+from PIL import Image
+import os
 
-<span class="cm"># From URL: download and pass PIL image</span>
-img_bytes = httpx.get(<span class="st">"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/280px-PNG_transparency_demonstration_1.png"</span>).content
-img = PIL.Image.open(BytesIO(img_bytes))
+client = genai.Client(api_key=os.environ[&quot;GEMINI_API_KEY&quot;])
+invoice = Image.open(&quot;invoice.png&quot;)
 
-response = model.generate_content([
-    img,
-    <span class="st">"Describe this image in detail. What do you see?"</span>
-])
-<span class="kw">print</span>(response.text)</pre></div><div class="code-block">
-<div class="code-block-label"><span>Python — analyze local image file</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> PIL.Image
-
-<span class="cm"># From local file</span>
-img = PIL.Image.open(<span class="st">"screenshot.png"</span>)
-
-response = model.generate_content([
-    <span class="st">"Extract all text visible in this screenshot."</span>,
-    img
-])
-<span class="kw">print</span>(response.text)
-
-<span class="cm"># Multiple images in one prompt</span>
-img1 = PIL.Image.open(<span class="st">"before.jpg"</span>)
-img2 = PIL.Image.open(<span class="st">"after.jpg"</span>)
-
-response = model.generate_content([
-    <span class="st">"What changed between image 1 and image 2?"</span>,
-    <span class="st">"Image 1:"</span>, img1,
-    <span class="st">"Image 2:"</span>, img2
-])
-<span class="kw">print</span>(response.text)</pre></div><div class="code-block">
-<div class="code-block-label"><span>Python — extract structured data from image</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> json
-
-<span class="cm"># Force JSON output from an image</span>
-model_json = genai.GenerativeModel(
-    <span class="st">"gemini-1.5-flash"</span>,
-    generation_config=genai.GenerationConfig(response_mime_type=<span class="st">"application/json"</span>)
+schema = types.Schema(
+    type=types.Type.OBJECT,
+    properties={
+        &quot;vendor&quot;: types.Schema(type=types.Type.STRING),
+        &quot;invoice_number&quot;: types.Schema(type=types.Type.STRING),
+        &quot;currency&quot;: types.Schema(type=types.Type.STRING),
+        &quot;line_total&quot;: types.Schema(type=types.Type.NUMBER),
+        &quot;confidence_note&quot;: types.Schema(type=types.Type.STRING)
+    },
+    required=[&quot;vendor&quot;, &quot;invoice_number&quot;, &quot;currency&quot;, &quot;line_total&quot;, &quot;confidence_note&quot;]
 )
 
-img = PIL.Image.open(<span class="st">"receipt.jpg"</span>)
-response = model_json.generate_content([
-    <span class="st">&#34;&#34;&#34;Extract receipt data as JSON with keys:
-    store_name, date, items (list of {name, price}), total, tax&#34;&#34;&#34;</span>,
-    img
-])
-data = json.loads(response.text)
-<span class="kw">print</span>(<span class="st">f"Store: {data['store_name']}, Total: ${data['total']}"</span>)</pre></div>
-            <h2>Audio Transcription</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — transcribe audio file</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> google.generativeai <span class="kw">as</span> genai
+response = client.models.generate_content(
+    model=&quot;gemini-1.5-pro&quot;,
+    contents=[
+        &quot;Extract the invoice header fields. If a value is unclear, state that explicitly in confidence_note.&quot;,
+        invoice,
+    ],
+    config=types.GenerateContentConfig(
+        response_mime_type=&quot;application/json&quot;,
+        response_schema=schema,
+        temperature=0.1
+    )
+)
 
-<span class="cm"># Upload audio file (mp3, wav, ogg, etc.)</span>
-audio_file = genai.upload_file(<span class="st">"interview.mp3"</span>, mime_type=<span class="st">"audio/mp3"</span>)
-<span class="kw">print</span>(<span class="st">f"Uploaded: {audio_file.uri}"</span>)
+print(response.text)</pre></div>
 
-model = genai.GenerativeModel(<span class="st">"gemini-1.5-pro"</span>)
+    <h2>How to prompt multimodal systems well</h2>
+    <ol>
+        <li><strong>Name the task precisely.</strong> “Summarize this image” is weak. “Extract vendor, invoice number, currency, and total” is much stronger.</li>
+        <li><strong>Describe the evidence source.</strong> Tell the model whether the answer should come from the image, the caption, the PDF text layer, or all of them.</li>
+        <li><strong>Require uncertainty reporting.</strong> A confidence note or evidence note is often more useful than forced certainty.</li>
+        <li><strong>Post-validate structured fields.</strong> Currency, dates, IDs, and totals should still be checked with deterministic code.</li>
+    </ol>
 
-<span class="cm"># Transcribe</span>
-response = model.generate_content([
-    audio_file,
-    <span class="st">"Transcribe this audio verbatim. Include speaker labels if there are multiple speakers."</span>
-])
-<span class="kw">print</span>(response.text)
+    <div class="code-block"><div class="code-block-label"><span>Python — PDF + question prompt for contract review</span><button class="copy-btn">Copy</button></div><pre>from google import genai
+from google.genai import types
+import os
 
-<span class="cm"># Summarize instead</span>
-summary = model.generate_content([
-    audio_file,
-    <span class="st">"Summarize the key points discussed in this audio in bullet points."</span>
-])
-<span class="kw">print</span>(summary.text)
+client = genai.Client(api_key=os.environ[&quot;GEMINI_API_KEY&quot;])
+pdf_bytes = open(&quot;msa.pdf&quot;, &quot;rb&quot;).read()
 
-<span class="cm"># Clean up uploaded file</span>
-genai.delete_file(audio_file.name)</pre></div>
-            <h2>Video Analysis</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — analyze video file</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> time
+response = client.models.generate_content(
+    model=&quot;gemini-1.5-pro&quot;,
+    contents=[
+        types.Part.from_bytes(data=pdf_bytes, mime_type=&quot;application/pdf&quot;),
+        &quot;Find the renewal clause, payment terms, and termination notice period. Quote the exact section titles if possible.&quot;
+    ],
+    config=types.GenerateContentConfig(temperature=0.1)
+)
 
-<span class="cm"># Upload video (supports mp4, mov, avi, etc.)</span>
-video_file = genai.upload_file(<span class="st">"demo.mp4"</span>, mime_type=<span class="st">"video/mp4"</span>)
+print(response.text)</pre></div>
 
-<span class="cm"># Wait for processing</span>
-<span class="kw">while</span> video_file.state.name == <span class="st">"PROCESSING"</span>:
-    <span class="kw">print</span>(<span class="st">"Processing..."</span>)
-    time.sleep(<span class="nu">5</span>)
-    video_file = genai.get_file(video_file.name)
+    <div class="tip-box"><div class="tip-box-title">💡 Mixed-input discipline</div><p>When image understanding matters, ask the model to report <strong>what evidence it relied on</strong>. That gives your UI a way to show whether the answer came from visible text, layout interpretation, or broader reasoning.</p></div>
 
-<span class="kw">if</span> video_file.state.name == <span class="st">"FAILED"</span>:
-    <span class="kw">raise</span> ValueError(<span class="st">"Video processing failed"</span>)
+    <h2>Failure patterns to expect</h2>
+    <ul>
+        <li><strong>Blurry or cropped inputs:</strong> the model invents details because the prompt did not allow uncertainty.</li>
+        <li><strong>Hidden assumptions:</strong> teams ask for totals, dates, or IDs without specifying formatting or validation rules.</li>
+        <li><strong>No fallback path:</strong> when the image is unreadable, the app should route to manual review or OCR escalation.</li>
+        <li><strong>Massive inputs:</strong> large PDFs and many images increase latency. Chunk documents or pre-select relevant pages before calling the model.</li>
+    </ul>
 
-model = genai.GenerativeModel(<span class="st">"gemini-1.5-pro"</span>)
+    <h2>Hands-on exercise</h2>
+    <p>Create a <strong>receipt review assistant</strong>. It should accept an image or PDF receipt, extract merchant, purchase date, category, and amount, then return a JSON object and a short evidence note. Add two safeguards: one for missing totals and one for unreadable dates.</p>
 
-response = model.generate_content([
-    video_file,
-    <span class="st">"Describe what happens in this video. Include timestamps for key moments."</span>
-])
-<span class="kw">print</span>(response.text)
+    <h2>Real-world use case</h2>
+    <p>Operations teams often need to process invoices, shipping labels, screenshots, contracts, and support attachments. A good Gemini multimodal workflow lets the model interpret the visual artifact, but the application still owns validation, escalation, and auditability. That is what turns a clever demo into a dependable document pipeline.</p>
 
-genai.delete_file(video_file.name)</pre></div><div class="tip-box"><div class="tip-box-title">💡 Context Window</div><p>Gemini 1.5 Pro has a 2M token context window - enough for ~2 hours of video, ~22 hours of audio, or 2,000 pages of text in a single call.</p></div>
-        </div><nav class="lesson-nav">
+    <div class="info-box"><div class="info-box-title">Continue the advanced path</div><p>Next, go to <a href="advanced-features.html">Gemini Advanced Features</a> to combine multimodal inputs with JSON mode and caching, or use <a href="../../tutorials/rag/document-loading.html">Document Loading</a> and <a href="../playbooks/enterprise.html">Enterprise Playbook</a> if you are designing a document-heavy system.</p></div>
+</div>
+        <nav class="lesson-nav">
         <a href="getting-started.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Getting Started</div></a>
         <a href="chat.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Multi-turn Chat</div></a>
     </nav>
@@ -202,17 +180,17 @@ genai.delete_file(video_file.name)</pre></div><div class="tip-box"><div class="t
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LangChain Complete Course — Full Course | AI Coding Academy</title>
-    <meta name="description" content="Build LLM pipelines with LCEL, RAG, agents, and memory in LangChain.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LangChain Course | AI Coding Academy</title>
+<meta content="Learn LangChain through a focused course covering setup, prompt wiring, and chain building, then connect it to RAG and agent routes." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -62,34 +63,53 @@
         .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
+
+<style id="phase2-course-support">
+.course-support{padding:0 var(--space-xl) var(--space-4xl)}
+.course-support-container{max-width:1080px;margin:0 auto;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:clamp(1.25rem,2vw,2rem);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.support-intro{max-width:760px;margin-bottom:1.5rem}
+.support-kicker{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(0,255,170,.28);background:rgba(0,255,170,.08);border-radius:999px;padding:.35rem .75rem;color:var(--accent-primary);font-size:.8rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.support-intro h2{margin:.85rem 0 .55rem;font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.5rem);line-height:1.08}
+.support-intro p{color:var(--text-secondary);font-size:1rem;line-height:1.7;margin:0}
+.support-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+.support-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1rem 1.1rem}
+.support-card h3{margin:0 0 .85rem;font-size:1.05rem}
+.support-list{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+.support-list li{padding:.8rem .85rem;border-radius:var(--radius-md);background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
+.support-list a{color:var(--text-primary);font-weight:600;text-decoration:none}
+.support-list a:hover{color:var(--accent-primary)}
+.support-list p{margin:.25rem 0 0;color:var(--text-muted);font-size:.92rem;line-height:1.6}
+.support-band{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.35rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)}
+@media (max-width:900px){.support-grid{grid-template-columns:1fr}}
+</style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../tutorials/index.html" class="nav-link">Tutorials</a></li>
-                <li><a href="../courses/index.html" class="nav-link active">Courses</a></li>
-                <li><a href="../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <style>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link" href="../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link active" href="../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search courses..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../tutorials/langchain/getting-started.html">Start First Lesson</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<style>
         .course-hero { padding: calc(140px + var(--space-2xl)) var(--space-xl) var(--space-2xl); text-align: center; }
         .course-icon { font-size: 4rem; margin-bottom: var(--space-lg); }
         .course-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: var(--space-lg); }
@@ -113,95 +133,110 @@
         .lesson-desc { display: block; font-size: 0.82rem; color: var(--text-muted); }
         .lesson-time { font-size: 0.8rem; color: var(--text-muted); flex-shrink: 0; }
     </style>
-    <div class="course-hero">
-        <div class="course-icon">🦜</div>
-        <div class="lesson-meta" style="justify-content:center; margin-bottom: var(--space-lg);">
-            <span class="badge badge-intermediate">Intermediate</span>
-        </div>
-        <h1 class="course-title">LangChain Complete Course</h1>
-        <p class="course-subtitle">Build LLM pipelines with LCEL, RAG, agents, and memory in LangChain.</p>
-        <div class="course-stats">
-            <div class="stat"><div class="stat-num">6</div><div class="stat-label">Lessons</div></div>
-            <div class="stat"><div class="stat-num">2</div><div class="stat-label">Modules</div></div>
-            <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Cost</div></div>
-        </div>
+<div class="course-hero">
+<div class="course-icon">🦜</div>
+<div class="lesson-meta" style="justify-content:center; margin-bottom: var(--space-lg);">
+<span class="badge badge-intermediate">Intermediate</span>
+</div>
+<h1 class="course-title">LangChain Complete Course</h1>
+<p class="course-subtitle">Build LLM pipelines with LCEL, RAG, agents, and memory in LangChain.</p>
+<div class="course-stats">
+<div class="stat"><div class="stat-num">6</div><div class="stat-label">Lessons</div></div>
+<div class="stat"><div class="stat-num">2</div><div class="stat-label">Modules</div></div>
+<div class="stat"><div class="stat-num">Free</div><div class="stat-label">Cost</div></div>
+</div>
+</div>
+<div class="modules-container">
+<div class="module-card">
+<div class="module-header">
+<div class="module-num">01</div>
+<div><h3 class="module-title">LangChain Basics</h3><p class="module-desc">Install, connect providers, and build your first chain.</p></div>
+</div>
+<ul class="lesson-list"><li><a class="lesson-link" href="../tutorials/langchain/getting-started.html">
+<span class="lesson-num">1.1</span>
+<span class="lesson-info">
+<span class="lesson-name">Getting Started</span>
+<span class="lesson-desc">Install, LLM providers, LCEL pipe operator</span>
+</span>
+<span class="lesson-time">30 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/langchain/chains.html">
+<span class="lesson-num">1.2</span>
+<span class="lesson-info">
+<span class="lesson-name">Chains</span>
+<span class="lesson-desc">Sequential, router, document, and parallel chains</span>
+</span>
+<span class="lesson-time">35 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/langchain/prompts.html">
+<span class="lesson-num">1.3</span>
+<span class="lesson-info">
+<span class="lesson-name">Prompt Engineering</span>
+<span class="lesson-desc">Templates, few-shot, partial, pipeline composition</span>
+</span>
+<span class="lesson-time">25 min</span>
+</a></li></ul>
+</div><div class="module-card">
+<div class="module-header">
+<div class="module-num">02</div>
+<div><h3 class="module-title">RAG with LangChain</h3><p class="module-desc">Build retrieval-augmented generation pipelines.</p></div>
+</div>
+<ul class="lesson-list"><li><a class="lesson-link" href="../tutorials/rag/document-loading.html">
+<span class="lesson-num">2.1</span>
+<span class="lesson-info">
+<span class="lesson-name">Document Loading</span>
+<span class="lesson-desc">PDF, web, Word, code, custom loaders</span>
+</span>
+<span class="lesson-time">25 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/rag/text-splitting.html">
+<span class="lesson-num">2.2</span>
+<span class="lesson-info">
+<span class="lesson-name">Text Splitting</span>
+<span class="lesson-desc">Recursive, semantic, token, code-aware splitting</span>
+</span>
+<span class="lesson-time">25 min</span>
+</a></li><li><a class="lesson-link" href="../tutorials/rag/introduction.html">
+<span class="lesson-num">2.3</span>
+<span class="lesson-info">
+<span class="lesson-name">Vector Stores &amp; Retrieval</span>
+<span class="lesson-desc">FAISS, Chroma, retrieval strategies</span>
+</span>
+<span class="lesson-time">30 min</span>
+</a></li></ul>
+</div>
+</div>
+
+<section class="course-support">
+  <div class="course-support-container">
+    <div class="support-intro">
+      <span class="support-kicker">Next routes</span>
+      <h2>Connect LangChain to bigger system work</h2>
+      <p>LangChain becomes most useful when it is tied to retrieval, memory, and end-to-end builds. These routes make that jump easier.</p>
     </div>
-    <div class="modules-container">
-        <div class="module-card">
-            <div class="module-header">
-                <div class="module-num">01</div>
-                <div><h3 class="module-title">LangChain Basics</h3><p class="module-desc">Install, connect providers, and build your first chain.</p></div>
-            </div>
-            <ul class="lesson-list"><li><a href="../tutorials/langchain/getting-started.html" class="lesson-link">
-                <span class="lesson-num">1.1</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Getting Started</span>
-                    <span class="lesson-desc">Install, LLM providers, LCEL pipe operator</span>
-                </span>
-                <span class="lesson-time">30 min</span>
-            </a></li><li><a href="../tutorials/langchain/chains.html" class="lesson-link">
-                <span class="lesson-num">1.2</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Chains</span>
-                    <span class="lesson-desc">Sequential, router, document, and parallel chains</span>
-                </span>
-                <span class="lesson-time">35 min</span>
-            </a></li><li><a href="../tutorials/langchain/prompts.html" class="lesson-link">
-                <span class="lesson-num">1.3</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Prompt Engineering</span>
-                    <span class="lesson-desc">Templates, few-shot, partial, pipeline composition</span>
-                </span>
-                <span class="lesson-time">25 min</span>
-            </a></li></ul>
-        </div><div class="module-card">
-            <div class="module-header">
-                <div class="module-num">02</div>
-                <div><h3 class="module-title">RAG with LangChain</h3><p class="module-desc">Build retrieval-augmented generation pipelines.</p></div>
-            </div>
-            <ul class="lesson-list"><li><a href="../tutorials/rag/document-loading.html" class="lesson-link">
-                <span class="lesson-num">2.1</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Document Loading</span>
-                    <span class="lesson-desc">PDF, web, Word, code, custom loaders</span>
-                </span>
-                <span class="lesson-time">25 min</span>
-            </a></li><li><a href="../tutorials/rag/text-splitting.html" class="lesson-link">
-                <span class="lesson-num">2.2</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Text Splitting</span>
-                    <span class="lesson-desc">Recursive, semantic, token, code-aware splitting</span>
-                </span>
-                <span class="lesson-time">25 min</span>
-            </a></li><li><a href="../tutorials/rag/introduction.html" class="lesson-link">
-                <span class="lesson-num">2.3</span>
-                <span class="lesson-info">
-                    <span class="lesson-name">Vector Stores & Retrieval</span>
-                    <span class="lesson-desc">FAISS, Chroma, retrieval strategies</span>
-                </span>
-                <span class="lesson-time">30 min</span>
-            </a></li></ul>
-        </div>
+    <div class="support-grid"><article class="support-card"><h3>Study before production</h3><ul class="support-list"><li><a href="../tutorials/langchain/getting-started.html">LangChain setup</a><p>Lock down the core package structure and first chain before going wider.</p></li><li><a href="../tutorials/langchain/chains.html">Chains</a><p>Practice composing repeatable application flows instead of one-off calls.</p></li><li><a href="../tutorials/langchain/prompts.html">Prompt templates</a><p>Keep prompt wiring explicit before memory and retrieval complicate the stack.</p></li></ul></article><article class="support-card"><h3>When LangChain systems break</h3><ul class="support-list"><li><a href="../debugging/memory.html">Memory failures</a><p>Trace context pollution, stale state, and session confusion.</p></li><li><a href="../debugging/vectordb.html">Vector DB failures</a><p>Debug retrieval setup before blaming the orchestration layer.</p></li><li><a href="../debugging/deployment.html">Deployment issues</a><p>Repair packaging and environment drift once the chain leaves local dev.</p></li></ul></article><article class="support-card"><h3>Build next with LangChain</h3><ul class="support-list"><li><a href="../courses/rag.html">Continue to RAG</a><p>Use LangChain inside a fuller retrieval pipeline.</p></li><li><a href="../projects/workflow-automation.html">Workflow automation project</a><p>Turn chain logic into a reusable task flow.</p></li><li><a href="../projects/research-crew.html">Research crew project</a><p>See orchestration, retrieval, and multi-step prompting in one build.</p></li></ul></article></div>
+    <div class="support-band">
+      <a class="btn btn-primary" href="../courses/rag.html">Continue to RAG</a>
+      <a class="btn btn-outline" href="../projects/workflow-automation.html">Build Workflow Automation</a>
     </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/donation-widget.js" defer></script>
-    <script>
+  </div>
+</section>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>A structured AI coding platform for lessons, debugging, and practical builds.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../tutorials/index.html">All Tutorials</a></li><li><a href="../courses/index.html">Courses</a></li><li><a href="../projects/index.html">Projects</a></li><li><a href="../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li><li><a href="../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../assets/js/main.js"></script>
+<script defer="" src="../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

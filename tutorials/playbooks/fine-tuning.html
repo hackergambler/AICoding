@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-Tuning &amp; Custom Training Playbook | AI Coding Academy</title>
+    <meta name="description" content="Use the local-model and evaluation lessons in the academy as the base for more advanced adaptation work.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    
+    <style>
+        .playbook-container{max-width:1080px;margin:0 auto;padding:calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl)}
+        .playbook-hero{margin-bottom:var(--space-3xl)}
+        .playbook-hero p{font-size:1.1rem;color:var(--text-secondary);max-width:860px;line-height:1.8}
+        .hero-badge-inline{display:inline-flex;gap:10px;align-items:center;padding:10px 16px;border-radius:999px;background:rgba(0,255,170,.12);border:1px solid rgba(0,255,170,.18);color:var(--accent-primary);font-weight:700;margin-bottom:var(--space-lg)}
+        .quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-md);margin:var(--space-2xl) 0 var(--space-3xl)}
+        .quick-links a{display:block;background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius-lg);padding:var(--space-lg);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .quick-links a:hover{border-color:var(--accent-primary);transform:translateY(-2px)}
+        .quick-links strong{display:block;margin-bottom:6px}
+        .quick-links span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .topic-section{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl);margin-bottom:var(--space-xl)}
+        .topic-section h2{font-family:var(--font-display);font-size:1.8rem;margin-bottom:var(--space-md)}
+        .topic-section p{color:var(--text-secondary);line-height:1.8}
+        .topic-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-xl);margin-top:var(--space-xl)}
+        .topic-card-list,.practice-card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-lg);padding:var(--space-xl)}
+        .topic-card-list h3,.practice-card h3{font-size:1.05rem;margin-bottom:var(--space-md)}
+        .resource-list{display:grid;gap:var(--space-md)}
+        .resource-item{display:block;padding:14px 16px;border-radius:var(--radius-md);background:rgba(0,255,170,.05);border:1px solid rgba(0,255,170,.14);text-decoration:none;color:var(--text-primary);transition:var(--transition-base)}
+        .resource-item:hover{transform:translateY(-1px);border-color:rgba(0,255,170,.3)}
+        .resource-item strong{display:block;margin-bottom:4px}
+        .resource-item span{color:var(--text-muted);font-size:.92rem;line-height:1.5}
+        .practice-card ul{padding-left:1.1rem;color:var(--text-secondary);line-height:1.8}
+        .playbook-footer-cta{margin-top:var(--space-3xl);background:linear-gradient(135deg, rgba(0,255,170,.12), rgba(0,212,255,.10));border:1px solid rgba(0,255,170,.18);border-radius:var(--radius-2xl);padding:var(--space-2xl)}
+        .playbook-footer-cta p{max-width:760px}
+        .path-list{display:grid;gap:var(--space-xl)}
+        .path-card{background:var(--bg-card);border:1px solid rgba(255,255,255,.05);border-radius:var(--radius-xl);padding:var(--space-2xl)}
+        .path-card ol{padding-left:1.2rem;color:var(--text-secondary);line-height:1.8}
+        .path-card li+li{margin-top:8px}
+        @media(max-width:860px){.topic-grid{grid-template-columns:1fr}}
+    </style>
+
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container">
+        <div class="top-bar-links">
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+        </div>
+        <div class="top-bar-right">Part of MYRQAI Network</div>
+    </div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
+            <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
+            <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
+            <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
+        </ul>
+        <div class="nav-actions">
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
+            <a href="../../tutorials/index.html" class="btn btn-primary">All Tutorials</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    
+    <main class="playbook-container">
+        <div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../advanced.html">Advanced</a><span class="separator">/</span><span>Fine-Tuning &amp; Custom Training Playbook</span></div>
+        <header class="playbook-hero">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h1 class="lesson-title">Fine-Tuning &amp; Custom Training Playbook</h1>
+            <p>Use the local-model and evaluation lessons in the academy as the base for more advanced adaptation work.</p>
+        </header>
+        <section class="quick-links"><a href="#lora-fine-tuning-masterclass"><strong>LoRA Fine-Tuning Masterclass</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#qlora-quantized-fine-tuning"><strong>QLoRA: Quantized Fine-Tuning</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#rlhf-implementation-guide"><strong>RLHF Implementation Guide</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#dataset-curation-and-cleaning"><strong>Dataset Curation &amp; Cleaning</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#evaluation-frameworks"><strong>Evaluation Frameworks</strong><span>Jump to the recommended lessons and practice routes.</span></a><a href="#domain-specific-fine-tuning"><strong>Domain-Specific Fine-Tuning</strong><span>Jump to the recommended lessons and practice routes.</span></a></section>
+        
+        <section class="topic-section" id="lora-fine-tuning-masterclass">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>LoRA Fine-Tuning Masterclass</h2>
+            <p>Master Low-Rank Adaptation for efficient fine-tuning of large language models with minimal compute.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/local-llms/fine-tuning.html"><strong>Fine-Tuning Local Models</strong><span>This is the clearest practical entry into adaptation workflows.</span></a><a class="resource-item" href="../../tutorials/local-llms/huggingface-local.html"><strong>Hugging Face Local Models</strong><span>Move from local experimentation to broader open-model workflows.</span></a><a class="resource-item" href="../../tutorials/rag/rag-evaluation.html"><strong>RAG Evaluation</strong><span>Measure whether your tuning is actually improving task quality.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="qlora-quantized-fine-tuning">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>QLoRA: Quantized Fine-Tuning</h2>
+            <p>Fine-tune larger models on consumer hardware using low-bit quantization.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/local-llms/fine-tuning.html"><strong>Fine-Tuning Local Models</strong><span>Begin with the practical setup before adding quantized variants.</span></a><a class="resource-item" href="../../tutorials/local-llms/llama-cpp.html"><strong>llama.cpp Local Inference</strong><span>Understand the serving constraints that make QLoRA attractive.</span></a><a class="resource-item" href="../../tutorials/local-llms/ollama.html"><strong>Running Ollama</strong><span>A good baseline for testing local hardware assumptions.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="rlhf-implementation-guide">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>RLHF Implementation Guide</h2>
+            <p>Build preference data, reward modeling, and policy improvement loops for aligned behavior.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/prompting/advanced-techniques.html"><strong>Advanced Prompting Techniques</strong><span>Use this to separate prompt wins from actual model adaptation needs.</span></a><a class="resource-item" href="../../tutorials/agents/self-reflection.html"><strong>Self-Reflection</strong><span>A useful stepping stone for reasoning about feedback loops and iterative improvement.</span></a><a class="resource-item" href="../../tutorials/rag/rag-evaluation.html"><strong>RAG Evaluation</strong><span>Ground your reward ideas in measurable outcomes.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="dataset-curation-and-cleaning">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>Dataset Curation &amp; Cleaning</h2>
+            <p>Prepare domain data that is clean, representative, and safe to train on.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../debugging/data.html"><strong>Data Debugging</strong><span>Start with the data hygiene problems that ruin downstream training.</span></a><a class="resource-item" href="../../tutorials/rag/document-loading.html"><strong>Document Loading</strong><span>Build clean ingestion pipelines for text-heavy corpora.</span></a><a class="resource-item" href="../../tutorials/rag/text-splitting.html"><strong>Text Splitting</strong><span>Normalize and structure training inputs more carefully.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="evaluation-frameworks">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>Evaluation Frameworks</h2>
+            <p>Create repeatable evaluation suites to validate whether tuning changes are worthwhile.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/rag/rag-evaluation.html"><strong>RAG Evaluation</strong><span>The strongest existing evaluation lesson in the project.</span></a><a class="resource-item" href="../../tutorials/agents/unit-testing-agents.html"><strong>Unit Testing Agents</strong><span>Make evaluation repeatable and automation-friendly.</span></a><a class="resource-item" href="../../tutorials/agents/trajectory-evaluation.html"><strong>Trajectory Evaluation</strong><span>Add behavior-level analysis for multi-step systems.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="topic-section" id="domain-specific-fine-tuning">
+            <div class="hero-badge-inline">🎯 Advanced Playbook</div>
+            <h2>Domain-Specific Fine-Tuning</h2>
+            <p>Adapt models for finance, legal, healthcare, or internal enterprise knowledge.</p>
+            <div class="topic-grid">
+                <div class="topic-card-list">
+                    <h3>Best next pages in this project</h3>
+                    <div class="resource-list"><a class="resource-item" href="../../tutorials/local-llms/huggingface-local.html"><strong>Hugging Face Local Models</strong><span>A strong bridge into open-weight, domain-focused experimentation.</span></a><a class="resource-item" href="../../tutorials/local-llms/fine-tuning.html"><strong>Fine-Tuning Local Models</strong><span>Build the adaptation loop first.</span></a><a class="resource-item" href="../../projects/personal-assistant.html"><strong>Personal Assistant Project</strong><span>Use a concrete application target for domain-specific behavior.</span></a></div>
+                </div>
+                <aside class="practice-card">
+                    <h3>How to use this playbook</h3>
+                    <ul><li>Start with one recommended lesson and take notes on the production trade-offs it surfaces.</li><li>Add one debugging guide before you build, so the operational layer stays grounded.</li><li>Use a project or lab page as the place to apply the pattern instead of stopping at theory.</li></ul>
+                </aside>
+            </div>
+        </section>
+        
+        <section class="playbook-footer-cta">
+            <h2>Start with Fine-Tuning Local Models</h2>
+            <p>It gives you the best currently available foundation before deeper specialization.</p>
+            <a class="btn btn-primary" href="../../tutorials/local-llms/fine-tuning.html">Open recommended starting page</a>
+        </section>
+    </main>
+    
+    <footer><div class="footer-container"><div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+            <p>The most practical AI coding learning platform for real tutorials, debugging, and build-ready projects.</p>
+        </div>
+        <div class="footer-column"><h4>Learn</h4><ul>
+            <li><a href="../../tutorials/index.html">All Tutorials</a></li>
+            <li><a href="../../courses/index.html">Courses</a></li>
+            <li><a href="../../projects/index.html">Projects</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Support</h4><ul>
+            <li><a href="../../docs.html">Docs</a></li>
+            <li><a href="../../faq.html">FAQ</a></li>
+            <li><a href="../../contact.html">Contact</a></li>
+        </ul></div>
+        <div class="footer-column"><h4>Company</h4><ul>
+            <li><a href="../../about.html">About</a></li>
+            <li><a href="../../privacy.html">Privacy</a></li>
+            <li><a href="../../terms.html">Terms</a></li>
+        </ul></div>
+    </div></div></footer>
+    <script src="../../assets/js/main.js"></script>
+</body>
+</html>

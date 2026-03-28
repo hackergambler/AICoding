@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG Text Splitting — Chunk Size, Overlap & Strategies | AI Coding Academy</title>
-    <meta name="description" content="Master text splitting for RAG: recursive, semantic, token-based, and code-aware splitting.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAG Text Splitting — Chunk Size, Overlap &amp; Strategies | AI Coding Academy</title>
+<meta content="Learn how to split text for RAG, choose chunk size and overlap, inspect chunk quality, and debug the mistakes that hurt retrieval." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,217 +64,162 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>Text Splitting</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 25 min</span>
-            </div>
-            <h1 class="lesson-title">Text Splitting Strategies</h1>
-            <p class="lesson-description">Choose the right splitting strategy for your RAG pipeline: recursive, character, semantic, token-aware, and code-specific splitters.</p>
-        </header>
-        <div class="lesson-content">
-            <h2>Why Splitting Matters</h2>
-            <p>If chunks are too large → they use too many context tokens and contain irrelevant text. Too small → they lose context and meaning. The right chunk size for your use case is the single biggest factor in RAG quality.</p>
-<div class="tip-box"><div class="tip-box-title">💡 Rule of Thumb</div><p>Start with chunk_size=1000, chunk_overlap=200. For technical docs, smaller (500/100) works better. For narrative text, larger (1500/300) preserves more context.</p></div>
-            <h2>RecursiveCharacterTextSplitter</h2>
-            <p>The go-to splitter. Tries to split on paragraphs → sentences → words → characters in that order, keeping chunks as semantically intact as possible.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python — recursive text splitting</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>Text Splitting</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 31 min</span>
+</div>
+<h1 class="lesson-title">Text Splitting Strategies</h1>
+<p class="lesson-description">Choose chunk size and overlap by document type, inspect chunks before indexing, and turn text splitting into an evaluated engineering decision.</p>
+</header>
+<div class="lesson-content">
+<h2>1. Splitting is one of the highest-leverage decisions in RAG</h2>
+<p>Chunking decides what the retriever is allowed to find. If chunks are too broad, the system retrieves vague evidence. If they are too small, important relationships get broken apart. Great RAG apps often look “smart” because the chunking strategy is disciplined.</p>
+<div class="tip-box"><div class="tip-box-title">Rule before rules of thumb</div><p>Do not memorize one universal chunk size. Split based on how your users ask questions and how your source documents are structured.</p></div>
+<h2>2. Choose chunking strategy by content type</h2>
+<ul>
+<li><strong>API docs</strong>: smaller chunks, often around headings, endpoints, parameters, and examples.</li>
+<li><strong>tutorials and guides</strong>: medium chunks that keep explanation and code together.</li>
+<li><strong>narrative or policy documents</strong>: larger chunks can preserve argument flow better.</li>
+<li><strong>tables or structured records</strong>: split by logical rows or sections, not just character count.</li>
+</ul>
+<p>The right chunking strategy follows the document’s structure instead of flattening everything into uniform slices.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — recursive splitter baseline</span><button class="copy-btn">Copy</button></div><pre>from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=<span class="nu">1000</span>,        <span class="cm"># target chunk size in characters</span>
-    chunk_overlap=<span class="nu">200</span>,       <span class="cm"># overlap to preserve context between chunks</span>
-    length_function=len,      <span class="cm"># or use token counting (see below)</span>
-    separators=[<span class="st">"\n\n"</span>, <span class="st">"\n"</span>, <span class="st">". "</span>, <span class="st">" "</span>, <span class="st">""</span>],  <span class="cm"># split hierarchy</span>
-    add_start_index=<span class="kw">True</span>,    <span class="cm"># add char offset to metadata</span>
-    strip_whitespace=<span class="kw">True</span>,
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len,
 )
 
-<span class="cm"># Split documents</span>
-<span class="kw">from</span> langchain_core.documents <span class="kw">import</span> Document
-doc = Document(page_content=<span class="st">"..."</span> * <span class="nu">100</span>)  <span class="cm"># your long doc</span>
-chunks = splitter.split_documents([doc])
-<span class="kw">print</span>(<span class="st">f"{len(chunks)} chunks created"</span>)
-<span class="kw">for</span> chunk <span class="kw">in</span> chunks[:3]:
-    <span class="kw">print</span>(<span class="st">f"  [{chunk.metadata.get('start_index',0)}] {len(chunk.page_content)} chars"</span>)</pre>
+chunks = splitter.split_text(long_text)
+print(len(chunks))
+print(chunks[0][:200])
+</pre></div>
+<h2>3. Use token-aware thinking, not only character counts</h2>
+<p>Character counts are a practical approximation, but what really matters is how much context fits in the answer stage later. If your retrieval system returns five chunks that each look reasonable in characters but explode in token count, your answer prompt will still bloat.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — inspect chunk token sizes</span><button class="copy-btn">Copy</button></div><pre>import tiktoken
+
+enc = tiktoken.get_encoding("cl100k_base")
+
+def token_len(text: str) -&gt; int:
+    return len(enc.encode(text))
+
+for chunk in chunks[:5]:
+    print(token_len(chunk))
+</pre></div>
+<p>That is why good chunking is always connected to prompt budgeting and answer-generation design.</p>
+<h2>4. Keep metadata and hierarchy when you split</h2>
+<p>When a document is split into chunks, preserve the context around each chunk:</p>
+<ul>
+<li>document title,</li>
+<li>section heading,</li>
+<li>page or file path,</li>
+<li>and a stable chunk index.</li>
+</ul>
+<p>This makes retrieval more interpretable and helps you rebuild a larger parent section when needed.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — attach chunk metadata</span><button class="copy-btn">Copy</button></div><pre>chunk_records = []
+
+for idx, chunk in enumerate(chunks):
+    chunk_records.append(
+        {
+            "id": f"doc-12-chunk-{idx}",
+            "text": chunk,
+            "metadata": {
+                "title": "Caching Guide",
+                "section": "Invalidation",
+                "chunk_index": idx,
+            },
+        }
+    )
+</pre></div>
+<h2>5. Evaluate chunking with real retrieval tests</h2>
+<p>Do not trust chunking because it “looks sensible.” Create a small query set and compare outcomes across chunk sizes and overlap settings.</p>
+<ul>
+<li>Measure whether the relevant chunk appears in the top results.</li>
+<li>Inspect whether the chunk is complete enough to answer the question.</li>
+<li>Look for duplicate or near-duplicate retrievals.</li>
+<li>Track how many tokens the final answer prompt consumes.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Experiment grid — one variable at a time</span><button class="copy-btn">Copy</button></div><pre>experiments = [
+    {"chunk_size": 500, "overlap": 100},
+    {"chunk_size": 800, "overlap": 120},
+    {"chunk_size": 1200, "overlap": 200},
+]
+</pre></div>
+<div class="tip-box"><div class="tip-box-title">What “good” looks like</div><p>The best chunking setup is the one that retrieves complete, specific evidence while keeping the final prompt small enough for the answer model to use well.</p></div>
+<h2>6. Next routes after chunking</h2>
+<ul>
+<li><a href="hybrid-search.html">Combine vector retrieval with keyword search</a></li>
+<li><a href="rag-evaluation.html">Evaluate RAG quality more rigorously</a></li>
+<li><a href="../../debugging/vectordb.html">Fix retrieval and indexing issues</a></li>
+<li><a href="../../debugging/memory.html">Control context growth in long-answer systems</a></li>
+<li><a href="../../projects/research-crew.html">Apply chunking inside a real research project</a></li>
+</ul>
 </div>
-            <h2>Token-Based Splitting</h2>
-            <p>Split by actual token count (not characters). Critical for staying within model context limits.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python — token-aware splitting</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> tiktoken
-<span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter
-
-<span class="cm"># Use OpenAI's tokenizer</span>
-enc = tiktoken.encoding_for_model(<span class="st">"gpt-4o"</span>)
-
-<span class="kw">def</span> <span class="fn">token_count</span>(text: str) -> int:
-    <span class="kw">return</span> len(enc.encode(text))
-
-token_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=<span class="nu">512</span>,          <span class="cm"># 512 tokens per chunk</span>
-    chunk_overlap=<span class="nu">64</span>,         <span class="cm"># 64 token overlap</span>
-    length_function=token_count,
-)
-
-<span class="cm"># Or use the built-in TokenTextSplitter</span>
-<span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> TokenTextSplitter
-token_splitter2 = TokenTextSplitter(
-    model_name=<span class="st">"gpt-4o"</span>,
-    chunk_size=<span class="nu">512</span>,
-    chunk_overlap=<span class="nu">64</span>
-)</pre>
+<nav class="lesson-nav">
+<a class="prev" href="document-loading.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Document Loading</div>
+</a>
+<a class="next" href="hybrid-search.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Hybrid Search</div>
+</a>
+</nav>
 </div>
-            <h2>Code-Aware Splitting</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — language-aware code splitting</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_text_splitters <span class="kw">import</span> RecursiveCharacterTextSplitter, Language
-
-<span class="cm"># Python-aware: splits on class/function boundaries first</span>
-python_splitter = RecursiveCharacterTextSplitter.from_language(
-    language=Language.PYTHON,
-    chunk_size=<span class="nu">1000</span>,
-    chunk_overlap=<span class="nu">100</span>
-)
-
-python_code = <span class="st">&#34;&#34;&#34;
-class DataProcessor:
-    def __init__(self, data):
-        self.data = data
-
-    def process(self):
-        return [x * 2 for x in self.data]
-
-    def filter_evens(self):
-        return [x for x in self.data if x % 2 == 0]
-
-def standalone_function(x, y):
-    return x + y
-&#34;&#34;&#34;</span>
-
-chunks = python_splitter.create_documents([python_code])
-<span class="kw">for</span> chunk <span class="kw">in</span> chunks:
-    <span class="kw">print</span>(<span class="st">"---"</span>)
-    <span class="kw">print</span>(chunk.page_content)
-
-<span class="cm"># Other supported languages</span>
-js_splitter = RecursiveCharacterTextSplitter.from_language(Language.JS, chunk_size=<span class="nu">500</span>)
-md_splitter = RecursiveCharacterTextSplitter.from_language(Language.MARKDOWN, chunk_size=<span class="nu">800</span>)
-html_splitter = RecursiveCharacterTextSplitter.from_language(Language.HTML, chunk_size=<span class="nu">600</span>)</pre>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
 </div>
-            <h2>Semantic Splitting</h2>
-            <p>Split based on semantic similarity, keeping related sentences together even across paragraph breaks.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python — semantic chunking with embeddings</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> langchain_experimental.text_splitter <span class="kw">import</span> SemanticChunker
-<span class="kw">from</span> langchain_openai <span class="kw">import</span> OpenAIEmbeddings
-
-<span class="cm"># Splits when semantic similarity drops below threshold</span>
-semantic_splitter = SemanticChunker(
-    OpenAIEmbeddings(),
-    breakpoint_threshold_type=<span class="st">"percentile"</span>,  <span class="cm"># or "standard_deviation", "interquartile"</span>
-    breakpoint_threshold_amount=<span class="nu">95</span>             <span class="cm"># 95th percentile breakpoints</span>
-)
-
-long_text = <span class="st">&#34;&#34;&#34;Python is a versatile programming language known for its readability.
-It was created by Guido van Rossum and first released in 1991.
-
-Machine learning is transforming how we build software.
-Models like GPT-4 can write code, analyze data, and answer questions.
-
-The solar system contains eight planets. Mars is the fourth planet from the Sun.&#34;&#34;&#34;</span>
-
-chunks = semantic_splitter.create_documents([long_text])
-<span class="kw">print</span>(<span class="st">f"{len(chunks)} semantic chunks"</span>)
-<span class="kw">for</span> c <span class="kw">in</span> chunks:
-    <span class="kw">print</span>(<span class="st">f"\n[Chunk] {c.page_content[:100]}"</span>)</pre>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
 </div>
-            <h2>Metadata Enrichment</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python — adding metadata to chunks</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">def</span> <span class="fn">enrich_chunks</span>(docs, splitter, source_name: str) -> list:
-    <span class="st">&#34;&#34;&#34;Split docs and add rich metadata to each chunk.&#34;&#34;&#34;</span>
-    chunks = splitter.split_documents(docs)
-    <span class="kw">for</span> i, chunk <span class="kw">in</span> enumerate(chunks):
-        chunk.metadata.update({
-            <span class="st">"chunk_id"</span>: i,
-            <span class="st">"source"</span>: source_name,
-            <span class="st">"chunk_size"</span>: len(chunk.page_content),
-            <span class="st">"total_chunks"</span>: len(chunks),
-        })
-    <span class="kw">return</span> chunks
-
-<span class="kw">from</span> langchain_community.document_loaders <span class="kw">import</span> PyPDFLoader
-loader = PyPDFLoader(<span class="st">"manual.pdf"</span>)
-docs = loader.load()
-chunks = enrich_chunks(docs, splitter, <span class="st">"product_manual"</span>)
-<span class="kw">print</span>(chunks[<span class="nu">0</span>].metadata)</pre>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="document-loading.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Document Loading</div>
-            </a>
-            <a href="../../tutorials/openai/getting-started.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">OpenAI Getting Started</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li><li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li><li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

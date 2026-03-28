@@ -49,9 +49,9 @@
 <body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -65,7 +65,7 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
@@ -78,60 +78,109 @@
         <header class="lesson-header">
             <div class="lesson-meta">
                 <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 25 min</span>
+                <span class="lesson-meta-item">⏱️ 34 min</span>
             </div>
             <h1 class="lesson-title">Function Calling Basics</h1>
             <p class="lesson-description">Learn Function Calling Basics in the AI Agents course. Practical Python code and real-world examples.</p>
         </header>
-        <div class="lesson-content">
-<h2>What Is Function Calling?</h2>
-<p>Function calling (also called "tool use") is how LLMs request external code execution. Instead of hallucinating an answer, the model can say: "I need to call <code>get_weather(city='Tokyo')</code>". Your code executes it, sends the result back, and the model continues.</p>
-<div class="code-block">
-<div class="code-block-label"><span>Python - function calling lifecycle</span><button class="copy-btn">Copy</button></div>
-<pre><span class="cm"># Step 1: Define what tools the LLM can call</span>
-tools = [{{
-    <span class="st">"type"</span>: <span class="st">"function"</span>,
-    <span class="st">"function"</span>: {{
-        <span class="st">"name"</span>: <span class="st">"get_weather"</span>,
-        <span class="st">"description"</span>: <span class="st">"Get current weather for a location."</span>,
-        <span class="st">"parameters"</span>: {{
-            <span class="st">"type"</span>: <span class="st">"object"</span>,
-            <span class="st">"properties"</span>: {{
-                <span class="st">"city"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>}},
-                <span class="st">"units"</span>: {{<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"enum"</span>: [<span class="st">"celsius"</span>, <span class="st">"fahrenheit"</span>]}}
-            }},
-            <span class="st">"required"</span>: [<span class="st">"city"</span>]
-        }}
-    }}
-}}]
+        <div class="lesson-content"><h2>What function calling solves</h2>
+<p>Function calling gives an agent a safe bridge from language to software. Instead of pretending it knows the answer, the model can ask your application to run a specific function with structured arguments.</p>
+<ul>
+    <li><strong>Good for</strong> search, databases, calculators, tickets, notifications, and workflow actions</li>
+    <li><strong>Bad for</strong> arbitrary shell access, free-form SQL, or unlimited side effects without checks</li>
+</ul>
 
-<span class="cm"># Step 2: First LLM call - it may request a tool</span>
-resp = client.chat.completions.create(
+<h2>1. The lifecycle of a tool call</h2>
+<p>Every function-calling system follows the same shape:</p>
+<ol>
+    <li>You define the tool schema</li>
+    <li>The model decides whether to call it</li>
+    <li>Your code validates and executes the call</li>
+    <li>You append the tool result</li>
+    <li>The model uses that result to answer the user</li>
+</ol>
+<div class="code-block"><div class="code-block-label"><span>Python - function calling lifecycle</span><button class="copy-btn">Copy</button></div><pre>tools = [{
+    <span class="st">"type"</span>: <span class="st">"function"</span>,
+    <span class="st">"function"</span>: {
+        <span class="st">"name"</span>: <span class="st">"get_weather"</span>,
+        <span class="st">"description"</span>: <span class="st">"Get current weather for a city."</span>,
+        <span class="st">"parameters"</span>: {
+            <span class="st">"type"</span>: <span class="st">"object"</span>,
+            <span class="st">"properties"</span>: {
+                <span class="st">"city"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>},
+                <span class="st">"units"</span>: {<span class="st">"type"</span>: <span class="st">"string"</span>, <span class="st">"enum"</span>: [<span class="st">"celsius"</span>, <span class="st">"fahrenheit"</span>]}
+            },
+            <span class="st">"required"</span>: [<span class="st">"city"</span>]
+        }
+    }
+}]</pre></div>
+
+<h2>2. Write schemas that are easy to validate</h2>
+<p>The model can only call tools as well as you define them. Strong schemas use explicit types, enums, and required fields. They avoid overloaded tools and vague descriptions.</p>
+<ul>
+    <li>Prefer <code>city</code> over <code>location_text</code></li>
+    <li>Use enums for known choices like <code>sort_order</code> or <code>units</code></li>
+    <li>Keep tool names action-oriented: <code>search_orders</code>, <code>create_ticket</code>, <code>send_email</code></li>
+    <li>Return small structured payloads, not giant raw dumps</li>
+</ul>
+<div class="tip-box"><div class="tip-box-title">💡 Tool descriptions are prompt engineering</div><p>The model reads your schema text as instructions. A good description often fixes wrong tool selection faster than swapping models.</p></div>
+
+<h2>3. Validate before you execute</h2>
+<p>The model is proposing arguments, not granting itself authority. Your code still owns execution safety.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - validate arguments first</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> json
+
+<span class="kw">def</span> <span class="fn">validate_get_weather</span>(raw_args):
+    args = json.loads(raw_args)
+    city = args.get(<span class="st">"city"</span>, <span class="st">""</span>).strip()
+    units = args.get(<span class="st">"units"</span>, <span class="st">"celsius"</span>)
+
+    <span class="kw">if</span> <span class="kw">not</span> city:
+        <span class="kw">raise</span> ValueError(<span class="st">"city is required"</span>)
+    <span class="kw">if</span> units <span class="kw">not</span> <span class="kw">in</span> {<span class="st">"celsius"</span>, <span class="st">"fahrenheit"</span>}:
+        <span class="kw">raise</span> ValueError(<span class="st">"invalid units"</span>)
+
+    <span class="kw">return</span> {<span class="st">"city"</span>: city, <span class="st">"units"</span>: units}</pre></div>
+
+<h2>4. Complete the loop correctly</h2>
+<p>Many beginners stop after the model requests a tool. The real pattern is two calls: first to get the tool request, second to let the model turn the result into a user-facing answer.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - complete execution loop</span><button class="copy-btn">Copy</button></div><pre>resp = client.chat.completions.create(
     model=<span class="st">"gpt-4o-mini"</span>,
-    messages=[{{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What's the weather in Tokyo?"</span>}}],
-    tools=tools, tool_choice=<span class="st">"auto"</span>
+    messages=[{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is the weather in Tokyo?"</span>}],
+    tools=tools,
+    tool_choice=<span class="st">"auto"</span>
 )
 
-msg = resp.choices[0].message
-print(<span class="st">f"Finish reason: {{resp.choices[0].finish_reason}}"</span>)  <span class="cm"># "tool_calls"</span>
-print(<span class="st">f"Tool called: {{msg.tool_calls[0].function.name}}"</span>)   <span class="cm"># "get_weather"</span>
-print(<span class="st">f"Args: {{msg.tool_calls[0].function.arguments}}"</span>)     <span class="cm"># '{{"city":"Tokyo"}}'</span>
+msg = resp.choices[<span class="nu">0</span>].message
+tool_call = msg.tool_calls[<span class="nu">0</span>]
+args = validate_get_weather(tool_call.function.arguments)
+result = get_weather(**args)
 
-<span class="cm"># Step 3: Execute the tool yourself</span>
-<span class="kw">import</span> json
-tc = msg.tool_calls[0]
-args = json.loads(tc.function.arguments)
-weather_result = get_weather(**args)  <span class="cm"># your real function</span>
-
-<span class="cm"># Step 4: Send result back, get final answer</span>
 messages = [
-    {{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What's the weather in Tokyo?"</span>}},
-    msg,  <span class="cm"># the assistant's tool_call message</span>
-    {{<span class="st">"role"</span>: <span class="st">"tool"</span>, <span class="st">"tool_call_id"</span>: tc.id, <span class="st">"content"</span>: json.dumps(weather_result)}}
+    {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"What is the weather in Tokyo?"</span>},
+    msg,
+    {
+        <span class="st">"role"</span>: <span class="st">"tool"</span>,
+        <span class="st">"tool_call_id"</span>: tool_call.id,
+        <span class="st">"content"</span>: json.dumps(result)
+    }
 ]
+
 final = client.chat.completions.create(model=<span class="st">"gpt-4o-mini"</span>, messages=messages)
-print(final.choices[0].message.content)</pre></div>
-<div class="info-box"><div class="info-box-title">ℹ️ finish_reason</div><p>When the model calls a tool, <code>finish_reason</code> is <code>tool_calls</code>. When it's done and giving a text answer, it's <code>stop</code>. Always check this in your loop.</p></div></div>
+<span class="kw">print</span>(final.choices[<span class="nu">0</span>].message.content)</pre></div>
+
+<h2>5. Security boundaries for real systems</h2>
+<p>As soon as tools can change data, send messages, or trigger workflows, you need boundaries:</p>
+<ul>
+    <li>Read-only tools and write tools should be separate</li>
+    <li>High-risk actions should require confirmation or a human check</li>
+    <li>Never pass raw shell commands or SQL directly from model output</li>
+    <li>Log every tool call with arguments and result previews</li>
+</ul>
+<div class="info-box"><div class="info-box-title">ℹ️ Safe progression</div><p>Build read-only tools first. Add state-changing tools only after the validation and logging path is solid.</p></div>
+
+<h2>6. Best routes after this lesson</h2>
+<p>Function calling is the backbone of most useful agents. From here, continue to <a href="first-agent.html">Build Your First Agent</a>, the OpenAI-specific <a href="../openai/function-calling.html">OpenAI Function Calling</a> lesson, or the provider comparison in <a href="../gemini/function-calling.html">Gemini Function Calling</a>. For implementation bugs, use <a href="../../debugging/configuration.html">configuration debugging</a>.</p></div>
+
         <nav class="lesson-nav">
             <a href="first-agent.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Build Your First Agent</div></a>
             <a href="openai-functions.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">OpenAI Function Calling</div></a>
@@ -149,17 +198,17 @@ print(final.choices[0].message.content)</pre></div>
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary)">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>

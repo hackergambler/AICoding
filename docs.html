@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Documentation Hub | AI Coding Academy</title>
+<meta content="A practical index to the main learning areas inside AI Coding Academy." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/style.css" rel="stylesheet"/>
+<style>
+.utility-hero{padding:clamp(2.5rem,5vw,4.5rem) 0 2rem;background:linear-gradient(180deg,rgba(123,92,255,.16),rgba(123,92,255,0) 70%)}
+.utility-shell{padding-bottom:4rem}
+.utility-grid{display:grid;grid-template-columns:2fr 1fr;gap:1.5rem;align-items:start}
+.utility-card,.utility-side{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.utility-card{padding:clamp(1.25rem,2vw,2rem)}
+.utility-side{padding:1.25rem;position:sticky;top:96px}
+.utility-kicker{display:inline-flex;align-items:center;gap:.5rem;border:1px solid rgba(123,92,255,.35);background:rgba(123,92,255,.1);border-radius:999px;padding:.4rem .8rem;color:var(--accent-primary);font-size:.82rem;font-weight:600;letter-spacing:.02em;text-transform:uppercase}
+.utility-hero h1{margin:.9rem 0 .75rem;font-size:clamp(2rem,4vw,3.3rem);line-height:1.05}
+.utility-hero p{max-width:760px;font-size:1.05rem;color:var(--text-secondary)}
+.utility-lead{font-size:1.03rem;color:var(--text-secondary)}
+.utility-sections{display:grid;gap:1rem;margin-top:1.5rem}
+.utility-section{padding:1rem 1.1rem;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-md);background:rgba(255,255,255,.02)}
+.utility-section h2{margin:0 0 .45rem;font-size:1.05rem}
+.utility-section p,.utility-section li{color:var(--text-secondary)}
+.utility-links{display:grid;gap:.75rem;margin-top:1rem}
+.utility-link{display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:.9rem 1rem;border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);color:var(--text-primary)}
+.utility-link:hover{border-color:rgba(123,92,255,.35);transform:translateY(-1px)}
+.utility-meta{display:grid;gap:.75rem;margin-top:1rem}
+.utility-meta-item{padding:.8rem .9rem;border-radius:var(--radius-md);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)}
+.utility-meta-item strong{display:block;margin-bottom:.2rem}
+.utility-actions{display:flex;gap:.9rem;flex-wrap:wrap;margin-top:1.5rem}
+.utility-list{margin:.6rem 0 0 1.1rem;padding:0}
+.utility-list li{margin:.35rem 0}
+@media (max-width:900px){.utility-grid{grid-template-columns:1fr}.utility-side{position:static}}
+</style>
+</head>
+<body>
+<header class="site-header">
+<div class="nav-container">
+<a class="nav-logo" href="index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<nav class="main-nav">
+<ul class="nav-links">
+<li><a class="nav-link" href="tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="projects/index.html">Projects</a></li>
+</ul>
+</nav>
+<div class="nav-actions"><a class="btn btn-primary btn-sm" href="tutorials/index.html">Start Learning</a></div>
+</div>
+</header>
+<section class="utility-hero">
+<div class="container">
+<span class="utility-kicker">Documentation hub</span>
+<h1>Documentation Hub</h1>
+<p>A practical index to the main learning areas inside AI Coding Academy.</p>
+</div>
+</section>
+<main class="utility-shell">
+<div class="container utility-grid">
+<article class="utility-card">
+<p class="utility-lead">This page acts as a documentation-style map of the product. Use it when you want the fastest route into lessons, project builds, debugging systems, or API-specific pathways without hopping through generic landing pages.</p>
+<div class="utility-sections"><section class="utility-section"><h2>Learning pathways</h2><p>Use the tutorials and courses sections when you want structured topic progression, prerequisites, and guided exploration across a subject area.</p></section><section class="utility-section"><h2>Applied practice</h2><p>Use projects when you want to build end-to-end systems. Use debugging when you want to understand failures, repair patterns, and production mistakes.</p></section><section class="utility-section"><h2>Dynamic lesson pages</h2><p>Individual lesson and project detail pages are generated from the project data and link the learning library together into a navigable training experience.</p></section><section class="utility-section"><h2>Best route by goal</h2><ul class="utility-list"><li>Learn a topic from zero → Tutorials and course pages</li><li>Fix a broken build → Debugging routes</li><li>Practice a real implementation → Projects</li><li>Compare provider/API learning paths → API Reference</li></ul></section></div>
+<div class="utility-actions">
+<a class="btn btn-primary" href="tutorials/index.html">Explore Tutorials</a>
+<a class="btn btn-outline" href="api-reference.html">Open API Reference</a>
+</div>
+</article>
+<aside class="utility-side">
+<h2 style="margin-top:0;">Quick links</h2>
+<div class="utility-links"><a class="utility-link" href="tutorials/index.html"><span>Tutorial index</span><span>→</span></a><a class="utility-link" href="courses/index.html"><span>Course directory</span><span>→</span></a><a class="utility-link" href="debugging/index.html"><span>Debugging index</span><span>→</span></a><a class="utility-link" href="projects/index.html"><span>Project library</span><span>→</span></a></div>
+<div class="utility-meta"><div class="utility-meta-item"><strong>Best first stop</strong><span>Start here when you know the kind of work you want to do but not the exact page yet.</span></div><div class="utility-meta-item"><strong>Strongest routes</strong><span>Tutorials for learning, debugging for repairs, projects for synthesis, API reference for provider-focused study.</span></div></div>
+</aside>
+</div>
+</main>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>A structured AI coding platform with lessons, debugging labs, and real-world projects.</p>
+<div style="margin-top: var(--space-md);">
+<a href="https://myrqai.com" style="color: var(--accent-primary); font-size: 0.85rem;" target="_blank">Part of MYRQAI Network →</a>
+</div>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul>
+<li><a href="tutorials/index.html">All Tutorials</a></li>
+<li><a href="courses/index.html">Courses</a></li>
+<li><a href="projects/index.html">Projects</a></li>
+<li><a href="debugging/index.html">Debugging</a></li>
+</ul></div>
+<div class="footer-column"><h4>Resources</h4><ul>
+<li><a href="docs.html">Documentation</a></li>
+<li><a href="api-reference.html">API Reference</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="blog.html">Editorial Notes</a></li>
+</ul></div>
+<div class="footer-column"><h4>Company</h4><ul>
+<li><a href="about.html">About</a></li>
+<li><a href="careers.html">Careers</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="press.html">Press</a></li>
+</ul></div>
+<div class="footer-column"><h4>Legal</h4><ul>
+<li><a href="privacy.html">Privacy Policy</a></li>
+<li><a href="terms.html">Terms of Service</a></li>
+<li><a href="faq.html">FAQ</a></li>
+</ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+<div class="footer-links">
+<a href="privacy.html">Privacy</a>
+<span>•</span>
+<a href="terms.html">Terms</a>
+<span>•</span>
+<a href="contact.html">Contact</a>
+<span>•</span>
+<a href="faq.html">FAQ</a>
+</div>
+</div>
+</div>
+</footer>
+<script src="assets/js/main.js"></script>
+<script defer="" src="assets/js/donation-widget.js"></script>
+</body>
+</html>

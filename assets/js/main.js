@@ -48,7 +48,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Search functionality (keyboard shortcut)
+// Search functionality (keyboard shortcut + Enter to search)
 document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -58,6 +58,25 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+const navSearchInputEl = document.querySelector('.nav-search input');
+if (navSearchInputEl) {
+    navSearchInputEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            // If already on the tutorials page, let the inline script handle in-place filtering
+            if (window.location.pathname.includes('/tutorials/index')) return;
+            const query = navSearchInputEl.value.trim();
+            // Find the tutorials nav link to get the correct relative path
+            const tutorialsLink = document.querySelector('a[href*="tutorials/index.html"]');
+            const base = tutorialsLink ? tutorialsLink.href : 'tutorials/index.html';
+            const tutorialsUrl = new URL(base);
+            if (query) {
+                tutorialsUrl.searchParams.set('q', query);
+            }
+            window.location.href = tutorialsUrl.toString();
+        }
+    });
+}
 
 // Mobile menu toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');

@@ -5,7 +5,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Multi-Agent Systems | AI Coding Academy</title>
-    <meta name="description" content="Build systems where multiple AI agents collaborate: orchestrators, workers, handoffs, and CrewAI patterns.">
+    <meta name="description" content="Build multi-agent systems with bounded roles, shared state, hand-off contracts, and evaluation loops instead of letting agents talk endlessly.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -49,9 +49,9 @@
 </head><body>
     <div class="top-bar"><div class="top-bar-container">
         <div class="top-bar-links">
-            <a href="https://www.library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-            <a href="https://www.ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-            <a href="https://www.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+            <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+            <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+            <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
         </div>
         <div class="top-bar-right">Part of MYRQAI Network</div>
     </div></div>
@@ -64,101 +64,71 @@
             <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
         </ul>
         <div class="nav-actions">
-            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search..."><kbd>⌘K</kbd></div>
+            <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
             <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
         </div>
         <button class="mobile-menu-btn">☰</button>
     </div></nav>
     <div class="lesson-container"><div class="breadcrumb"><a href="../../index.html">Home</a><span class="separator">/</span><a href="../index.html">Tutorials</a><span class="separator">/</span><a href="../../courses/agents.html">Agents</a><span class="separator">/</span><span>Multi-Agent Systems</span></div>
         <header class="lesson-header">
-            <div class="lesson-meta"><span class="badge badge-advanced">Advanced</span><span class="lesson-meta-item">⏱️ 40 min</span><span class="lesson-meta-item">📚 Lesson 3</span></div>
+            <div class="lesson-meta"><span class="badge badge-advanced">Advanced</span><span class="lesson-meta-item">⏱️ 60 min</span><span class="lesson-meta-item">📚 Lesson 3</span></div>
             <h1 class="lesson-title">Multi-Agent Systems</h1>
-            <p class="lesson-description">Coordinate multiple specialized AI agents: orchestrator-worker patterns, agent handoffs, parallel execution, and building a complete research team.</p>
+            <p class="lesson-description">Build multi-agent systems with bounded roles, shared state, hand-off contracts, and evaluation loops instead of letting agents talk endlessly.</p>
         </header>
         <div class="lesson-content">
-            <h2>Orchestrator-Worker Pattern</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - orchestrator delegates to specialist agents</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
-<span class="kw">from</span> typing <span class="kw">import</span> Callable
-<span class="kw">import</span> json
+<h2>Why Use More Than One Agent?</h2>
+<p>Multiple agents help when one role benefits from a different prompt, tool set, or success metric than another. The point is not to create a conference room of bots. The point is to separate responsibilities so complex work becomes more inspectable and controllable.</p>
+<div class="tip-box"><div class="tip-box-title">Use multi-agent only when it earns its keep</div><p>If a single agent with good tools can do the job, prefer the simpler design. Multi-agent systems add state, latency, and failure points.</p></div>
+<h2>Three Reliable Patterns</h2>
+<h3>1. Orchestrator → workers</h3>
+<p>A central planner breaks the task into sub-jobs and sends them to specialized workers. Great for research, extraction, and code-review style workflows.</p>
+<h3>2. Reviewer loop</h3>
+<p>One agent drafts, another critiques, and the first revises. Useful when quality control matters more than raw speed.</p>
+<h3>3. Router pattern</h3>
+<p>A small controller picks the best worker based on task type, input shape, or confidence.</p>
+<div class="code-block"><div class="code-block-label"><span>Python - multi-agent hand-off contract</span><button class="copy-btn">Copy</button></div><pre>crew_state = {
+    &quot;goal&quot;: &quot;Write a source-backed industry brief&quot;,
+    &quot;tasks&quot;: [],
+    &quot;artifacts&quot;: [],
+    &quot;open_questions&quot;: [],
+    &quot;final_status&quot;: &quot;planning&quot;,
+}
 
-client = OpenAI()
-
-<span class="kw">class</span> <span class="cl">Agent</span>:
-    <span class="kw">def</span> <span class="fn">__init__</span>(self, name: str, system: str, tools: list = <span class="kw">None</span>):
-        self.name = name
-        self.system = system
-        self.tools = tools <span class="kw">or</span> []
-
-    <span class="kw">def</span> <span class="fn">run</span>(self, task: str) -> str:
-        resp = client.chat.completions.create(
-            model=<span class="st">"gpt-4o-mini"</span>,
-            messages=[
-                {<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: self.system},
-                {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task}
-            ]
-        )
-        <span class="kw">return</span> resp.choices[<span class="nu">0</span>].message.content
-
-<span class="cm"># Specialist agents</span>
-researcher = Agent(<span class="st">"Researcher"</span>, <span class="st">"You find and summarize factual information concisely."</span>)
-writer = Agent(<span class="st">"Writer"</span>, <span class="st">"You turn research notes into polished, engaging prose."</span>)
-critic = Agent(<span class="st">"Critic"</span>, <span class="st">"You review content for accuracy, clarity, and quality. Be specific."</span>)
-
-<span class="cm"># Orchestrator coordinates them</span>
-orchestrator = Agent(<span class="st">"Orchestrator"</span>, <span class="st">&#34;&#34;&#34;You coordinate a team of specialists.
-When given a topic, output a JSON plan: 
-{"steps": [{"agent": "Researcher|Writer|Critic", "task": "..."}]}&#34;&#34;&#34;</span>)
-
-<span class="kw">def</span> <span class="fn">run_pipeline</span>(topic: str) -> str:
-    <span class="cm"># Get plan from orchestrator</span>
-    plan_raw = orchestrator.run(<span class="st">f"Create a plan to write a blog post about: {topic}"</span>)
-    plan = json.loads(plan_raw)
-
-    context = <span class="st">f"Topic: {topic}"</span>
-    agents_map = {<span class="st">"Researcher"</span>: researcher, <span class="st">"Writer"</span>: writer, <span class="st">"Critic"</span>: critic}
-
-    <span class="kw">for</span> step <span class="kw">in</span> plan[<span class="st">"steps"</span>]:
-        agent = agents_map[step[<span class="st">"agent"</span>]]
-        task = <span class="st">f"{step['task']}\n\nContext so far:\n{context}"</span>
-        result = agent.run(task)
-        context += <span class="st">f"\n\n[{agent.name}]:\n{result}"</span>
-        <span class="kw">print</span>(<span class="st">f"✓ {agent.name} complete"</span>)
-
-    <span class="kw">return</span> context
-
-result = run_pipeline(<span class="st">"The future of AI agents in software development"</span>)
-<span class="kw">print</span>(result)</pre></div>
-            <h2>Parallel Agent Execution</h2>
-<div class="code-block">
-<div class="code-block-label"><span>Python - run agents in parallel with asyncio</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">import</span> asyncio
-<span class="kw">from</span> openai <span class="kw">import</span> AsyncOpenAI
-
-async_client = AsyncOpenAI()
-
-<span class="kw">async def</span> <span class="fn">agent_task</span>(name: str, system: str, task: str) -> tuple[str, str]:
-    resp = <span class="kw">await</span> async_client.chat.completions.create(
-        model=<span class="st">"gpt-4o-mini"</span>,
-        messages=[{<span class="st">"role"</span>: <span class="st">"system"</span>, <span class="st">"content"</span>: system}, {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: task}]
-    )
-    <span class="kw">return</span> name, resp.choices[<span class="nu">0</span>].message.content
-
-<span class="kw">async def</span> <span class="fn">parallel_research</span>(topic: str) -> dict:
-    tasks = [
-        agent_task(<span class="st">"Market Analyst"</span>, <span class="st">"Analyze market trends and business impact."</span>, topic),
-        agent_task(<span class="st">"Tech Expert"</span>, <span class="st">"Explain technical implementation details."</span>, topic),
-        agent_task(<span class="st">"Risk Assessor"</span>, <span class="st">"Identify risks and mitigation strategies."</span>, topic),
-    ]
-    results = <span class="kw">await</span> asyncio.gather(*tasks)
-    <span class="kw">return</span> dict(results)
-
-<span class="cm"># Run all agents in parallel — 3x faster than sequential</span>
-results = asyncio.run(parallel_research(<span class="st">"Implementing LLMs in healthcare"</span>))
-<span class="kw">for</span> agent_name, output <span class="kw">in</span> results.items():
-    <span class="kw">print</span>(<span class="st">f"\n=== {agent_name} ===\n{output}"</span>)</pre></div>
-        </div><nav class="lesson-nav">
+handoff = {
+    &quot;from&quot;: &quot;searcher&quot;,
+    &quot;to&quot;: &quot;synthesizer&quot;,
+    &quot;artifact_ids&quot;: [&quot;src_14&quot;, &quot;src_22&quot;],
+    &quot;next_action&quot;: &quot;draft_claims&quot;,
+    &quot;stop_if&quot;: [&quot;citations missing&quot;, &quot;sources older than 30 days&quot;]
+}</pre></div>
+<h2>Shared State Design</h2>
+<p>The biggest hidden problem in multi-agent systems is not prompt quality. It is messy shared state. If each agent hands off a giant prose blob, the pipeline becomes impossible to debug. Use structured state: tasks, artifacts, claims, scores, and unresolved questions.</p>
+<h2>Bound the Conversation</h2>
+<ul>
+  <li>Set a maximum number of turns per hand-off.</li>
+  <li>Require every worker to emit a structured artifact.</li>
+  <li>Give each worker a stop condition, not an open-ended chat.</li>
+  <li>Escalate when workers disagree instead of forcing endless debate.</li>
+</ul>
+<div class="warn-box"><div class="warn-box-title">Common failure pattern</div><p>Agents keep talking because nothing defines completion. Bounded turns and structured artifacts are what make multi-agent systems practical.</p></div>
+<h2>Where This Shows Up in Real Builds</h2>
+<ul>
+  <li><a href="../../projects/research-crew.html">Research Crew Agent</a> — searcher, reader, synthesizer, editor.</li>
+  <li><a href="../../projects/dev-agent.html">Coding Agent</a> — planner, executor, reviewer loops.</li>
+  <li><a href="langgraph-basics.html">LangGraph Basics</a> — stateful orchestration for repeatable control flow.</li>
+  <li><a href="agent-monitoring.html">Agent Monitoring</a> — observe hand-off quality and bottlenecks.</li>
+</ul>
+<h2>Evaluation Questions</h2>
+<p>Measure whether multi-agent actually helped:</p>
+<ul>
+  <li>Did answer quality improve compared with a strong single-agent baseline?</li>
+  <li>Where did latency increase the most?</li>
+  <li>Which hand-off produced the most rework or uncertainty?</li>
+  <li>Could any worker be collapsed back into code or a simpler prompt?</li>
+</ul>
+<h2>Practice Exercise</h2>
+<p>Build a tiny two-worker system: one agent extracts facts from a document, the second drafts a summary. Use a structured hand-off object. Then compare it against a single-agent baseline and note when the extra complexity actually helped.</p></div>
+        <nav class="lesson-nav">
         <a href="tool-design.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Tool Design</div></a>
         <a href="../../courses/agents.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Back to Agents Course</div></a>
     </nav>
@@ -174,17 +144,17 @@ results = asyncio.run(parallel_research(<span class="st">"Implementing LLMs in h
             <li><a href="../../debugging/index.html">Debugging</a></li>
         </ul></div>
         <div class="footer-column"><h4>MYRQAI Network</h4><ul>
-            <li><a href="https://www.library.myrqai.com" target="_blank">AI Library</a></li>
-            <li><a href="https://www.ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
-            <li><a href="https://www.myrqai.com" target="_blank">MYRQAI Home</a></li>
+            <li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li>
+            <li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li>
+            <li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li>
         </ul></div>
         <div class="footer-column"><h4>Legal</h4><ul>
-            <li><a href="https://www.myrqai.com/admin/privacy" target="_blank">Privacy Policy</a></li>
-            <li><a href="https://www.myrqai.com/admin/terms" target="_blank">Terms of Service</a></li>
-            <li><a href="https://www.myrqai.com/admin/contact" target="_blank">Contact Us</a></li>
+            <li><a href="../../privacy.html">Privacy Policy</a></li>
+            <li><a href="../../terms.html">Terms of Service</a></li>
+            <li><a href="../../contact.html">Contact Us</a></li>
         </ul></div>
     </div>
-    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://www.myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
+    <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color:var(--accent-primary);">MYRQAI</a>. All rights reserved.</p></div>
     </div></footer>
     <script src="../../assets/js/main.js"></script>
     <script src="../../assets/js/donation-widget.js" defer></script>
