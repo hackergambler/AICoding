@@ -1214,7 +1214,7 @@
           "duration": "22 min",
           "badge": "Intermediate",
           "prev": "python-decorators-ai",
-          "next": null,
+          "next": "pydantic-validation-ai",
           "sections": [
             {
               "h2": "Why Testing AI Code Is Different",
@@ -1264,7 +1264,283 @@
             }
           ]
         }
-      ]
+      ,
+        {
+          "id": "pydantic-validation-ai",
+          "title": "Pydantic for AI Apps: Validate Inputs, Outputs and Settings",
+          "desc": "Use Pydantic models to validate prompts, tool arguments, structured outputs, and environment-backed settings so AI apps fail early and read cleanly.",
+          "duration": "28 min",
+          "badge": "Beginner",
+          "sections": [
+            {
+              "h2": "Why validation matters in AI code",
+              "body": "Most AI bugs are boring bugs disguised as model bugs: missing keys, wrong types, empty strings, or malformed JSON. Pydantic moves those failures to the edge of the system. Use it for request payloads, tool schemas, structured responses, and environment-backed settings. Real-world use case: validating inbound webhook events before they ever reach your agent loop.",
+              "tip": "Treat Pydantic models as your internal API. Once the boundaries are typed, the rest of the app gets simpler.",
+              "code": {
+                "label": "Python - model request and response contracts",
+                "src": "from pydantic import BaseModel, Field\nfrom typing import Literal\n\nclass ChatRequest(BaseModel):\n    model: str = \"gpt-4o-mini\"\n    user_id: str = Field(min_length=3)\n    prompt: str = Field(min_length=1, max_length=4000)\n    temperature: float = Field(default=0.2, ge=0, le=2)\n\nclass ToolResult(BaseModel):\n    tool: Literal['search', 'calendar', 'notes']\n    ok: bool\n    output: str\n\nreq = ChatRequest(user_id='u_123', prompt='Summarize this meeting')\nprint(req.model_dump())\nprint(ToolResult(tool='notes', ok=True, output='Saved'))"
+              }
+            },
+            {
+              "h2": "Settings management with BaseSettings",
+              "body": "Step by step: 1) keep secrets in environment variables, 2) map them into a settings object once, 3) inject that object into your clients, and 4) validate at startup instead of during the first request. This is especially useful for provider keys, model defaults, timeout values, and feature flags.",
+              "code": {
+                "label": "Python - validated configuration object",
+                "src": "from pydantic_settings import BaseSettings, SettingsConfigDict\n\nclass AppSettings(BaseSettings):\n    openai_api_key: str\n    redis_url: str = 'redis://localhost:6379/0'\n    default_model: str = 'gpt-4o-mini'\n    request_timeout_s: int = 30\n\n    model_config = SettingsConfigDict(env_file='.env', env_prefix='APP_')\n\nsettings = AppSettings()\nprint(settings.default_model)\nprint(settings.request_timeout_s)"
+              },
+              "exercise": {
+                "title": "Add a validated settings layer",
+                "description": "Wrap your current AI script in a settings object so missing secrets or invalid timeout values fail fast.",
+                "steps": [
+                  "Create <code>AppSettings</code> with API key, model, timeout, and environment name fields.",
+                  "Replace raw <code>os.getenv</code> calls with a single settings instance.",
+                  "Add a field constraint so negative timeout values throw a validation error.",
+                  "Print a sanitized startup summary without leaking secrets."
+                ],
+                "hint": "Start with just three fields. Once it works, move every magic string into the settings object."
+              }
+            },
+            {
+              "h2": "Structured outputs and tool arguments",
+              "body": "When the model must return structure, validate the final object after generation. This gives you a safe place to retry, repair, or ask the model for a corrected response. The same pattern works for function calling: validate the arguments before executing the tool. Production use case: reject malformed search filters instead of hitting a database with nonsense.",
+              "tip": "Validation is not anti-model. It is the bridge between probabilistic output and deterministic systems.",
+              "code": {
+                "label": "Python - validate model output before using it",
+                "src": "from pydantic import BaseModel, ValidationError\n\nclass ArticleSummary(BaseModel):\n    title: str\n    bullets: list[str]\n    sentiment: str\n\nraw = {\n    'title': 'Chip stocks rally',\n    'bullets': ['Nvidia up', 'Broadcom strong'],\n    'sentiment': 'positive'\n}\n\ntry:\n    summary = ArticleSummary.model_validate(raw)\n    print(summary.bullets)\nexcept ValidationError as exc:\n    print('Retry with repair prompt:', exc)"
+              }
+            },
+            {
+              "h2": "Common failure patterns",
+              "body": "Watch for over-validating too early, silently coercing bad input, and mixing transport models with domain models. Keep a small input model, a small output model, and a separate domain object when the app grows. If validation fails often, fix your prompt or tool contract rather than scattering try/except everywhere.",
+              "code": {
+                "label": "Python - targeted validation error reporting",
+                "src": "from pydantic import BaseModel, ValidationError\n\nclass SearchArgs(BaseModel):\n    query: str\n    top_k: int\n\ndef validate_tool_args(payload: dict) -> dict:\n    try:\n        return SearchArgs.model_validate(payload).model_dump()\n    except ValidationError as exc:\n        return {'error': 'invalid_tool_args', 'details': exc.errors()}\n\nprint(validate_tool_args({'query': 'RAG evals', 'top_k': 'three'}))"
+              }
+            }
+          ],
+          "prev": "python-testing-ai",
+          "next": "config-management-yaml"
+        },
+        {
+          "id": "config-management-yaml",
+          "title": "Config Management for AI Apps: YAML, TOML and Environment Layers",
+          "desc": "Design configuration that scales from a local notebook to a production agent service using YAML/TOML files, environment overlays, and explicit merge order.",
+          "duration": "26 min",
+          "badge": "Beginner",
+          "sections": [
+            {
+              "h2": "The configuration hierarchy",
+              "body": "A reliable AI app separates code from settings. A strong pattern is: default file → environment-specific override → environment variables → runtime flags. This keeps local experiments fast while letting production change providers, prompts, or rate limits without editing code. Real-world use case: switching from OpenAI to a local model in staging through config only.",
+              "tip": "Document merge order in the repo. Hidden precedence rules create painful debugging later.",
+              "code": {
+                "label": "Python - read layered YAML config",
+                "src": "import os, yaml\nfrom copy import deepcopy\n\ndef deep_merge(base: dict, override: dict) -> dict:\n    merged = deepcopy(base)\n    for k, v in override.items():\n        if isinstance(v, dict) and isinstance(base.get(k), dict):\n            merged[k] = deep_merge(base[k], v)\n        else:\n            merged[k] = v\n    return merged\n\nbase = yaml.safe_load(open('config/base.yaml'))\nstaging = yaml.safe_load(open('config/staging.yaml'))\nconfig = deep_merge(base, staging)\nconfig['model']['name'] = os.getenv('APP_MODEL', config['model']['name'])\nprint(config)"
+              }
+            },
+            {
+              "h2": "What belongs in config vs code",
+              "body": "Put provider names, model IDs, retry budgets, feature flags, prompt template names, and storage URLs in config. Keep algorithmic logic and validation code in Python. Step by step: 1) list every magic value in your project, 2) group them by domain, 3) move them into files, 4) validate on startup.",
+              "code": {
+                "label": "YAML - a practical AI app config",
+                "src": "app:\n  name: ai-coding-academy\n  env: local\nmodel:\n  provider: openai\n  name: gpt-4o-mini\n  timeout_s: 30\nretrieval:\n  chunk_size: 800\n  overlap: 120\n  top_k: 5\nfeatures:\n  enable_citations: true\n  enable_rerank: false"
+              },
+              "exercise": {
+                "title": "Convert magic constants into config",
+                "description": "Take an existing tutorial or app page and move the hard-coded operational values into YAML or TOML.",
+                "steps": [
+                  "Create a base config with model, retrieval, and feature sections.",
+                  "Create a second file for local overrides.",
+                  "Merge them and print the final config at startup.",
+                  "Add one environment variable override for the active model."
+                ],
+                "hint": "If a value changes between local and production, it probably belongs in config."
+              }
+            },
+            {
+              "h2": "Safer rollouts with feature flags",
+              "body": "Configuration is not just convenience; it is rollout control. Use flags for expensive features like reranking, multi-agent mode, or image generation. This lets you test one capability at a time and roll back without redeploying. That pattern is especially useful for free sites where cost must stay predictable.",
+              "code": {
+                "label": "Python - feature flag gate",
+                "src": "def answer_question(query: str, cfg: dict) -> str:\n    passages = retrieve(query, top_k=cfg['retrieval']['top_k'])\n    if cfg['features'].get('enable_rerank'):\n        passages = rerank(query, passages)\n    return generate_answer(query, passages, model=cfg['model']['name'])"
+              }
+            },
+            {
+              "h2": "Config mistakes to avoid",
+              "body": "Do not keep secrets in YAML committed to git. Do not scatter config loading across files. Do not encode environment-specific paths in lessons or tests. A single startup config load plus one validated config object beats dozens of ad hoc lookups.",
+              "code": {
+                "label": "Python - freeze config into a typed object",
+                "src": "from dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass RetrievalConfig:\n    chunk_size: int\n    overlap: int\n    top_k: int\n\nretrieval_cfg = RetrievalConfig(**config['retrieval'])\nprint(retrieval_cfg.top_k)"
+              }
+            }
+          ],
+          "prev": "pydantic-validation-ai",
+          "next": "jsonl-parquet-datasets"
+        },
+        {
+          "id": "jsonl-parquet-datasets",
+          "title": "AI Data Formats: JSONL, CSV and Parquet for Training Pipelines",
+          "desc": "Choose the right dataset format for prompts, logs, retrieval corpora, and batch jobs. Learn when to use JSONL, CSV, and Parquet in real AI workflows.",
+          "duration": "30 min",
+          "badge": "Beginner",
+          "sections": [
+            {
+              "h2": "Pick the format for the job",
+              "body": "JSONL is ideal for prompt-response datasets, chat histories, and streaming logs because each row is a self-contained object. CSV is convenient for light tabular work but weak for nested structures. Parquet is excellent for large analytics and evaluation data because it compresses well and loads fast column by column. Real-world use case: store raw conversations in JSONL and aggregated eval metrics in Parquet.",
+              "code": {
+                "label": "Python - write JSONL safely",
+                "src": "import json\nrows = [\n    {'id': 1, 'prompt': 'Summarize this email', 'label': 'brief'},\n    {'id': 2, 'prompt': 'Extract invoice number', 'label': 'structured'}\n]\nwith open('train.jsonl', 'w', encoding='utf-8') as f:\n    for row in rows:\n        f.write(json.dumps(row, ensure_ascii=False) + '\\n')"
+              }
+            },
+            {
+              "h2": "Design a row schema before you scale",
+              "body": "Step by step: 1) define the row keys, 2) decide which fields are required, 3) include IDs and timestamps, 4) add source metadata, and 5) document how rows are filtered into train, validation, and test. Small schema discipline prevents huge cleanup work later.",
+              "code": {
+                "label": "Python - normalize records into a training schema",
+                "src": "def normalize_chat_row(item: dict) -> dict:\n    return {\n        'id': item['id'],\n        'source': item.get('source', 'unknown'),\n        'messages': item['messages'],\n        'target': item['target'],\n        'lang': item.get('lang', 'en')\n    }\n\nnormalized = [normalize_chat_row(x) for x in raw_rows]\nprint(normalized[0].keys())"
+              },
+              "exercise": {
+                "title": "Create a reusable dataset schema",
+                "description": "Build a schema for one AI workflow you already care about: summarization, classification, extraction, or retrieval.",
+                "steps": [
+                  "Write down the minimum required fields for one row.",
+                  "Create five example rows in JSONL.",
+                  "Add a split field or generate a deterministic split by hash.",
+                  "Validate every row before writing it to disk."
+                ],
+                "hint": "A row without an ID or source field becomes painful to debug later."
+              }
+            },
+            {
+              "h2": "Parquet for evaluation and analytics",
+              "body": "Parquet shines once you collect many runs, prompts, scores, or traces. You can filter one model or one date range without loading every column. That is perfect for offline eval dashboards, regression tracking, and answer-quality analysis.",
+              "code": {
+                "label": "Python - save eval rows to Parquet",
+                "src": "import pandas as pd\n\ndf = pd.DataFrame([\n    {'run_id': 'r1', 'model': 'gpt-4o-mini', 'latency_ms': 820, 'score': 0.91},\n    {'run_id': 'r2', 'model': 'llama3.1', 'latency_ms': 540, 'score': 0.84}\n])\ndf.to_parquet('eval_runs.parquet', index=False)\nprint(pd.read_parquet('eval_runs.parquet').groupby('model')['score'].mean())"
+              }
+            },
+            {
+              "h2": "Failure modes in AI datasets",
+              "body": "The dangerous mistakes are mixed encodings, partial rows, inconsistent timestamp formats, and train/test leakage from duplicate content. Add validation and lightweight profiling before training or evaluating anything. A great model cannot save a broken dataset.",
+              "tip": "Always version datasets by date or hash. Otherwise you will never know what changed between runs.",
+              "code": {
+                "label": "Python - detect duplicate or empty rows",
+                "src": "import pandas as pd\n\ndf = pd.read_json('train.jsonl', lines=True)\ndf['prompt_norm'] = df['prompt'].str.strip().str.lower()\nissues = df[df['prompt_norm'].eq('') | df['prompt_norm'].duplicated()]\nprint(issues[['id', 'prompt']])"
+              }
+            }
+          ],
+          "prev": "config-management-yaml",
+          "next": "cli-tools-for-ai"
+        },
+        {
+          "id": "cli-tools-for-ai",
+          "title": "CLI Tools for AI Engineers: Build Fast Workflows with Typer",
+          "desc": "Turn one-off scripts into reusable AI developer tools with Typer, good defaults, structured arguments, and output that fits both humans and pipelines.",
+          "duration": "24 min",
+          "badge": "Beginner",
+          "sections": [
+            {
+              "h2": "Why CLIs matter in AI work",
+              "body": "A good CLI compresses repetitive work: summarize a file, batch-run prompts, compare models, or inspect eval traces. The key is to make it reproducible. A CLI with explicit flags beats a notebook cell that nobody can rerun. Real-world use case: a command that scores 200 prompts against two providers and exports a CSV.",
+              "code": {
+                "label": "Python - first Typer command",
+                "src": "import typer\n\napp = typer.Typer(help='AI utility CLI')\n\n@app.command()\ndef summarize(path: str, model: str = 'gpt-4o-mini'):\n    text = open(path, 'r', encoding='utf-8').read()\n    print(f'Summarizing {len(text)} chars with {model}')\n\nif __name__ == '__main__':\n    app()"
+              }
+            },
+            {
+              "h2": "Design commands for real usage",
+              "body": "Step by step: 1) start with one command per workflow, 2) make the defaults safe, 3) support quiet machine-readable output, and 4) log enough metadata to reproduce the run. AI CLIs are most valuable when they can be chained from cron, GitHub Actions, or another script.",
+              "code": {
+                "label": "Python - structured output mode",
+                "src": "import json, typer\n\n@app.command()\ndef score(prompt: str, json_out: bool = False):\n    result = {'prompt': prompt, 'model': 'gpt-4o-mini', 'score': 0.88}\n    if json_out:\n        print(json.dumps(result))\n    else:\n        print(f\"score={result['score']} model={result['model']}\")"
+              },
+              "exercise": {
+                "title": "Wrap an existing script as a CLI",
+                "description": "Take one script you already use and make it callable from the terminal with documented arguments.",
+                "steps": [
+                  "Create one Typer command with two required arguments and one optional flag.",
+                  "Return JSON when <code>--json-out</code> is passed.",
+                  "Add error handling for missing files or invalid model names.",
+                  "Print the final command example in the help text."
+                ],
+                "hint": "Good CLIs make success easy and misuse obvious."
+              }
+            },
+            {
+              "h2": "Batch processing and exit codes",
+              "body": "If your CLI will run in automation, exit codes matter. Return non-zero status for failed jobs, and include enough context to debug which item failed. Batch commands should support input files, limits, and dry-run mode.",
+              "code": {
+                "label": "Python - batch command skeleton",
+                "src": "from pathlib import Path\n\n@app.command()\ndef batch(input_dir: str, limit: int = 50, dry_run: bool = False):\n    files = list(Path(input_dir).glob('*.txt'))[:limit]\n    for path in files:\n        if dry_run:\n            print({'path': str(path), 'status': 'would_process'})\n            continue\n        print({'path': str(path), 'status': 'processed'})"
+              }
+            },
+            {
+              "h2": "Common CLI mistakes",
+              "body": "Do not hide defaults. Do not print verbose prose when automation expects JSON. Do not silently ignore failures in batch mode. And do not couple your CLI to hard-coded local paths if you want teammates to use it.",
+              "code": {
+                "label": "Shell - useful invocation patterns",
+                "src": "python ai_cli.py summarize docs/spec.txt --model gpt-4o-mini\npython ai_cli.py score \"Rate this response\" --json-out\npython ai_cli.py batch data/inbox --limit 10 --dry-run"
+              }
+            }
+          ],
+          "prev": "jsonl-parquet-datasets",
+          "next": "docker-basics-for-ai"
+        },
+        {
+          "id": "docker-basics-for-ai",
+          "title": "Docker for AI Developers: Reproducible Environments and Services",
+          "desc": "Containerize AI scripts and APIs so dependencies, system packages, and runtime behavior stay predictable from laptop to server.",
+          "duration": "32 min",
+          "badge": "Intermediate",
+          "sections": [
+            {
+              "h2": "Why containerize AI code",
+              "body": "AI projects break when Python versions, OS libraries, or GPU-related packages drift. Docker solves environment drift by packaging the runtime with the code. Even for a free educational site, containers make testing, deployment, and rollback safer. Real-world use case: package a FastAPI inference service so staging and production behave the same.",
+              "tip": "Slim images reduce attack surface and build time, but make sure your native dependencies still compile.",
+              "code": {
+                "label": "Dockerfile - simple Python AI service",
+                "src": "FROM python:3.11-slim\nWORKDIR /app\nCOPY requirements.txt .\nRUN pip install --no-cache-dir -r requirements.txt\nCOPY . .\nENV PYTHONUNBUFFERED=1\nCMD [\"python\", \"app.py\"]"
+              }
+            },
+            {
+              "h2": "Build a good image step by step",
+              "body": "1) start from a small base image, 2) copy dependency files first so builds cache well, 3) install only what you need, 4) copy source code, 5) set clear entrypoints. For model-serving images, separate downloading weights from running the API when possible.",
+              "code": {
+                "label": "Docker - build and run commands",
+                "src": "docker build -t ai-service:local .\ndocker run --rm -p 8000:8000 --env-file .env ai-service:local\n# mount local files for experiments\ndocker run --rm -v $(pwd)/data:/app/data ai-service:local python batch_eval.py"
+              },
+              "exercise": {
+                "title": "Containerize one AI workflow",
+                "description": "Take a local script or API and make it runnable through Docker with a reproducible command.",
+                "steps": [
+                  "Create a Dockerfile and build the image locally.",
+                  "Move secrets into an <code>.env</code> file or runtime environment variables.",
+                  "Run the same command twice and verify outputs are identical.",
+                  "Write down the exact <code>docker run</code> command in your README."
+                ],
+                "hint": "Start with CPU-only images unless you truly need CUDA."
+              }
+            },
+            {
+              "h2": "Compose, services, and local stacks",
+              "body": "Most real AI apps are not one process. You may need an API service, Redis, a vector store, and a worker. Docker Compose is the easiest way to make that stack reproducible. It also forces you to think about ports, volumes, and startup order.",
+              "tip": "Keep local stacks small. Bring in only the pieces needed to learn or debug the system.",
+              "code": {
+                "label": "YAML - small local AI stack",
+                "src": "services:\n  api:\n    build: .\n    ports: ['8000:8000']\n    env_file: .env\n    depends_on: [redis]\n  redis:\n    image: redis:7\n    ports: ['6379:6379']"
+              }
+            },
+            {
+              "h2": "Container pitfalls in AI systems",
+              "body": "Big images, baked-in secrets, root users, and hidden downloads at startup all create pain. Also watch for model caches filling disks unexpectedly. A clean container story includes clear volumes, health checks, and a documented startup path.",
+              "code": {
+                "label": "Dockerfile - safer production touches",
+                "src": "RUN useradd -ms /bin/bash appuser\nUSER appuser\nHEALTHCHECK CMD python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\" || exit 1"
+              }
+            }
+          ],
+          "prev": "cli-tools-for-ai",
+          "next": null
+        }]
     },
     {
       "id": "ml-core",
@@ -2437,7 +2713,7 @@
           "duration": "35 min",
           "badge": "Intermediate",
           "prev": "lightgbm-catboost",
-          "next": null,
+          "next": "data-leakage-prevention",
           "sections": [
             {
               "h2": "Why Active Learning Matters",
@@ -2471,7 +2747,278 @@
             }
           ]
         }
-      ]
+      ,
+        {
+          "id": "data-leakage-prevention",
+          "title": "Data Leakage Prevention: Keep Evaluation Honest",
+          "desc": "Learn how leakage sneaks into features, splits, preprocessing, and time-based datasets — and how to design pipelines that stop it before it invalidates your metrics.",
+          "duration": "30 min",
+          "badge": "Intermediate",
+          "sections": [
+            {
+              "h2": "Leakage is a systems bug, not a modeling trick",
+              "body": "A model that looks brilliant because it saw the future is not a good model. Leakage happens when information from validation or production-only fields bleeds into training. Common sources: target-encoded features built before splitting, scalers fit on the full dataset, and temporal datasets shuffled randomly. Real-world use case: churn or fraud models that accidentally include post-outcome signals.",
+              "code": {
+                "label": "Python - the wrong way vs the right way",
+                "src": "from sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)\n\n# Wrong: fitting on full data leaks test distribution\nscaler = StandardScaler().fit(X)\n\n# Right: fit only on train\nscaler = StandardScaler().fit(X_train)\nX_train_scaled = scaler.transform(X_train)\nX_test_scaled = scaler.transform(X_test)"
+              }
+            },
+            {
+              "h2": "How to design leakage-proof pipelines",
+              "body": "Step by step: 1) split first, 2) fit transformers only on train, 3) preserve time order when the task is temporal, 4) keep feature generation inside a pipeline, and 5) review every column for information that would not exist at inference time.",
+              "code": {
+                "label": "Python - pipeline keeps preprocessing honest",
+                "src": "from sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.ensemble import RandomForestClassifier\n\npreprocess = ColumnTransformer([\n    ('num', Pipeline([('impute', SimpleImputer()), ('scale', StandardScaler())]), num_cols),\n    ('cat', Pipeline([('impute', SimpleImputer(strategy='most_frequent'))]), cat_cols)\n])\n\nmodel = Pipeline([('prep', preprocess), ('clf', RandomForestClassifier())])\nmodel.fit(X_train, y_train)"
+              },
+              "exercise": {
+                "title": "Audit a dataset for leakage",
+                "description": "Pick one supervised dataset and try to break its evaluation by hunting for leakage.",
+                "steps": [
+                  "List columns that might only exist after the target event happens.",
+                  "Check whether scaling or imputation happened before splitting.",
+                  "If the data is time-based, build a chronological split.",
+                  "Document one column you will ban from the model and why."
+                ],
+                "hint": "Ask one question for every column: would I know this value at prediction time?"
+              }
+            },
+            {
+              "h2": "Time series and grouped leakage",
+              "body": "Chronological data needs chronological validation. User-level data often needs grouped splits so the same user does not appear in both train and test. Otherwise the model memorizes identity instead of learning the task.",
+              "code": {
+                "label": "Python - group-aware split idea",
+                "src": "from sklearn.model_selection import GroupShuffleSplit\n\nsplitter = GroupShuffleSplit(n_splits=1, test_size=0.2, random_state=42)\ntrain_idx, test_idx = next(splitter.split(X, y, groups=user_ids))\nX_train, X_test = X.iloc[train_idx], X.iloc[test_idx]"
+              }
+            },
+            {
+              "h2": "Leakage warning signs",
+              "body": "If a weak model suddenly scores impossibly high, if metrics collapse in production, or if feature importance points to suspicious operational columns, assume leakage first. Great ML teams have a leakage checklist the same way backend teams have deployment checklists.",
+              "code": {
+                "label": "Python - quick leakage probe with permutation",
+                "src": "import pandas as pd\n\nimportance = pd.Series(model.named_steps['clf'].feature_importances_, index=feature_names)\nprint(importance.sort_values(ascending=False).head(10))\n# investigate suspicious columns near the top"
+              }
+            }
+          ],
+          "prev": "active-learning",
+          "next": "probability-calibration"
+        },
+        {
+          "id": "probability-calibration",
+          "title": "Probability Calibration and Thresholding for ML Decisions",
+          "desc": "Go beyond accuracy by calibrating model probabilities, choosing thresholds from business costs, and measuring whether confidence scores actually mean what they claim.",
+          "duration": "28 min",
+          "badge": "Intermediate",
+          "sections": [
+            {
+              "h2": "Scores are not always probabilities",
+              "body": "A classifier can rank examples well and still produce poor probabilities. That matters when the decision threshold is tied to money, risk, or human review. Real-world use case: triaging support tickets or fraud alerts where a score above 0.9 means 'send to analysts now'.",
+              "code": {
+                "label": "Python - inspect raw predicted probabilities",
+                "src": "probs = model.predict_proba(X_valid)[:, 1]\nprint(probs[:5])\n# a value like 0.92 only matters if the model is calibrated"
+              }
+            },
+            {
+              "h2": "Calibrate with held-out data",
+              "body": "Step by step: 1) train on train, 2) calibrate on validation, 3) evaluate on test, and 4) never calibrate on the same data used to fit the model. Isotonic regression is flexible but can overfit; sigmoid calibration is simpler and often strong.",
+              "code": {
+                "label": "Python - sklearn calibration",
+                "src": "from sklearn.calibration import CalibratedClassifierCV\nfrom sklearn.metrics import brier_score_loss\n\ncalibrated = CalibratedClassifierCV(model, method='isotonic', cv='prefit')\ncalibrated.fit(X_valid, y_valid)\ncal_probs = calibrated.predict_proba(X_test)[:, 1]\nprint('Brier:', brier_score_loss(y_test, cal_probs))"
+              },
+              "exercise": {
+                "title": "Compare raw vs calibrated confidence",
+                "description": "Train a model you already know and see how its confidence changes after calibration.",
+                "steps": [
+                  "Measure log loss or Brier score before calibration.",
+                  "Calibrate on a held-out validation set.",
+                  "Plot a reliability curve or bucketed accuracy table.",
+                  "Choose one operating threshold for a real business action."
+                ],
+                "hint": "Calibration only helps if the model is already learning something useful."
+              }
+            },
+            {
+              "h2": "Thresholding is a business decision",
+              "body": "The best threshold depends on your error costs. A high recall triage system may tolerate more false positives, while an auto-reject workflow must minimize them. Put the threshold discussion next to the workflow, not buried in the notebook.",
+              "code": {
+                "label": "Python - sweep thresholds",
+                "src": "import numpy as np\nfrom sklearn.metrics import precision_score, recall_score\n\nfor t in np.arange(0.1, 1.0, 0.1):\n    pred = (cal_probs >= t).astype(int)\n    print(round(t, 1), precision_score(y_test, pred), recall_score(y_test, pred))"
+              }
+            },
+            {
+              "h2": "Operational patterns",
+              "body": "Production systems often use multiple bands instead of one threshold: low scores auto-pass, high scores auto-escalate, and the middle band goes to humans. That is often safer than pretending a single threshold solves the whole workflow.",
+              "code": {
+                "label": "Python - three-band decision policy",
+                "src": "def route(score: float) -> str:\n    if score >= 0.9:\n        return 'auto_escalate'\n    if score <= 0.2:\n        return 'auto_clear'\n    return 'human_review'"
+              }
+            }
+          ],
+          "prev": "data-leakage-prevention",
+          "next": "uncertainty-estimation"
+        },
+        {
+          "id": "uncertainty-estimation",
+          "title": "Uncertainty Estimation: Know When Your Model Should Abstain",
+          "desc": "Measure confidence more carefully with ensembles, prediction intervals, and conformal-style reasoning so your ML system knows when not to trust itself.",
+          "duration": "30 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Why uncertainty matters",
+              "body": "A prediction without uncertainty is often incomplete. Ranking, triage, forecasting, and anomaly detection all benefit when the model can signal low confidence. Real-world use case: route uncertain medical document classifications or support ticket tags to human review instead of forcing a brittle automatic choice.",
+              "code": {
+                "label": "Python - entropy as simple uncertainty proxy",
+                "src": "import numpy as np\n\nprobs = model.predict_proba(X_test)\nentropy = -(probs * np.log(probs + 1e-12)).sum(axis=1)\nprint(entropy[:5])  # higher means less certain"
+              }
+            },
+            {
+              "h2": "Practical ways to estimate uncertainty",
+              "body": "Step by step, start simple: 1) inspect max probability and entropy, 2) use calibration, 3) try ensembles or bagging, 4) add prediction intervals for regression, and 5) build an abstain policy. You do not need fancy Bayesian methods to become safer and more useful.",
+              "code": {
+                "label": "Python - ensemble spread for regression",
+                "src": "preds = np.column_stack([m.predict(X_test) for m in models])\nmean_pred = preds.mean(axis=1)\nstd_pred = preds.std(axis=1)\nlow = mean_pred - 2 * std_pred\nhigh = mean_pred + 2 * std_pred\nprint(list(zip(mean_pred[:3], low[:3], high[:3])))"
+              },
+              "exercise": {
+                "title": "Add an abstain option",
+                "description": "Take one classifier and add a rule that sends uncertain examples to manual review.",
+                "steps": [
+                  "Choose one uncertainty signal such as entropy or max probability.",
+                  "Define a threshold for abstention.",
+                  "Measure coverage: what percent of examples are auto-decided?",
+                  "Measure accuracy only on the auto-decided subset."
+                ],
+                "hint": "A smaller but more reliable auto-decision set is often a win."
+              }
+            },
+            {
+              "h2": "Intervals and conformal intuition",
+              "body": "Prediction intervals answer a different question from point predictions: what range is plausible? Conformal reasoning adds a practical guarantee mindset by calibrating uncertainty on held-out data. Even if you do not implement full conformal prediction, the habit of validating uncertainty on unseen data is extremely valuable.",
+              "code": {
+                "label": "Python - interval coverage check",
+                "src": "covered = ((y_test >= low) & (y_test <= high)).mean()\nprint('coverage', covered)\n# compare target coverage like 0.9 with observed coverage"
+              }
+            },
+            {
+              "h2": "Use uncertainty in product decisions",
+              "body": "Uncertainty should change the workflow. It can decide whether to auto-act, whether to retrieve more data, or whether to ask a human. Without an action policy, uncertainty stays as a dashboard metric instead of helping users.",
+              "code": {
+                "label": "Python - route by confidence",
+                "src": "def decision(pred, uncertainty):\n    if uncertainty > 0.5:\n        return 'needs_review'\n    return pred"
+              }
+            }
+          ],
+          "prev": "probability-calibration",
+          "next": "learning-to-rank"
+        },
+        {
+          "id": "learning-to-rank",
+          "title": "Learning to Rank: Build Better Search and Recommendation Orderings",
+          "desc": "Understand pointwise, pairwise, and listwise ranking so you can optimize ordering quality for search, retrieval, and recommendations instead of only classification accuracy.",
+          "duration": "34 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Ranking is a different problem",
+              "body": "When users see the top of a list, ordering matters more than raw classification accuracy. Search, recommendations, retrieval, and feed ranking all care about which items rise to the top. Real-world use case: reranking retrieved documents for a RAG system or product results for an e-commerce search page.",
+              "tip": "Ranking datasets usually need query-group awareness. Do not randomly shuffle away the group structure.",
+              "code": {
+                "label": "Python - pointwise ranking framing",
+                "src": "import pandas as pd\n\ntrain = pd.DataFrame({\n    'query': ['q1', 'q1', 'q1', 'q2', 'q2'],\n    'doc_id': [1, 2, 3, 4, 5],\n    'bm25': [12.2, 4.4, 9.1, 3.3, 7.7],\n    'freshness': [0.8, 0.2, 0.5, 0.9, 0.1],\n    'label': [3, 0, 2, 1, 0]\n})\nprint(train)"
+              }
+            },
+            {
+              "h2": "Three learning-to-rank mindsets",
+              "body": "Pointwise predicts a relevance score per item. Pairwise learns which of two items should rank higher. Listwise optimizes the whole ordered list. Step by step: start pointwise for simplicity, move to pairwise or listwise when ordering quality becomes critical.",
+              "code": {
+                "label": "Python - compute nDCG style ranking gain",
+                "src": "import math\n\ndef dcg(labels):\n    return sum((2**rel - 1) / math.log2(i + 2) for i, rel in enumerate(labels))\n\nlabels = [3, 2, 0]\nprint('dcg', round(dcg(labels), 3))"
+              },
+              "exercise": {
+                "title": "Measure ranking quality",
+                "description": "Build a tiny ranking example and compute a quality metric that actually matches the ordering problem.",
+                "steps": [
+                  "Create a query with at least five items and relevance labels.",
+                  "Sort by one naive score such as BM25 only.",
+                  "Compute DCG or nDCG for the ranking.",
+                  "Change one feature and compare the metric again."
+                ],
+                "hint": "If your product shows ordered results, use a ranking metric somewhere in the workflow."
+              }
+            },
+            {
+              "h2": "Features that make ranking work",
+              "body": "Ranking often combines lexical match, semantic similarity, freshness, popularity, authority, and user-specific context. The trick is not to add every feature but to add features that correlate with satisfaction. In RAG, that may mean combining BM25, embedding similarity, source quality, and citation freshness.",
+              "code": {
+                "label": "Python - combine retrieval features",
+                "src": "def rerank_score(row):\n    return 0.45 * row['bm25'] + 0.35 * row['semantic'] + 0.2 * row['quality']\n\nrows = [\n    {'doc': 'a', 'bm25': 10, 'semantic': 0.85, 'quality': 0.90},\n    {'doc': 'b', 'bm25': 6, 'semantic': 0.95, 'quality': 0.70},\n]\nfor row in rows:\n    row['score'] = rerank_score(row)\nprint(sorted(rows, key=lambda x: x['score'], reverse=True))"
+              }
+            },
+            {
+              "h2": "Common ranking pitfalls",
+              "body": "Do not optimize click-through blindly if it rewards clickbait. Do not mix labels with different meanings without documenting them. And do not evaluate ranking with random splits when queries or users overlap heavily between train and test.",
+              "code": {
+                "label": "Python - group-preserving split sketch",
+                "src": "query_ids = train['query']\n# ensure validation keeps whole queries together before ranking evaluation"
+              }
+            }
+          ],
+          "prev": "uncertainty-estimation",
+          "next": "feature-stores-ml-systems"
+        },
+        {
+          "id": "feature-stores-ml-systems",
+          "title": "Feature Stores and Serving Skew in ML Systems",
+          "desc": "Learn why training-serving skew happens, how feature stores help, and how to design feature pipelines that stay consistent between offline training and online prediction.",
+          "duration": "30 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Why feature systems break in production",
+              "body": "Models often fail because the features at inference time do not match the features used during training. That mismatch is called training-serving skew. Feature stores are one response: define features once, materialize them consistently, and monitor freshness. Real-world use case: a recommendation model trained on one aggregation logic but served with a subtly different online SQL query.",
+              "code": {
+                "label": "Python - one feature definition function",
+                "src": "def user_activity_features(events):\n    return {\n        'events_7d': sum(e['days_ago'] <= 7 for e in events),\n        'events_30d': sum(e['days_ago'] <= 30 for e in events),\n        'avg_session_min': round(sum(e['session_min'] for e in events) / max(len(events), 1), 2)\n    }"
+              }
+            },
+            {
+              "h2": "Offline vs online feature thinking",
+              "body": "Step by step: 1) define the feature logic once, 2) materialize historical values for training, 3) make the online path compute the same logic, 4) track timestamps and freshness, and 5) compare offline and online values regularly. That discipline matters more than whether you use a famous feature-store product.",
+              "code": {
+                "label": "SQL - time-aware aggregation idea",
+                "src": "SELECT user_id,\n       COUNT(*) FILTER (WHERE event_time >= NOW() - INTERVAL '7 days') AS events_7d,\n       AVG(session_minutes) AS avg_session_min\nFROM app_events\nGROUP BY user_id;"
+              },
+              "exercise": {
+                "title": "Write down one feature contract",
+                "description": "Choose a model feature you care about and define it precisely enough that two engineers would implement it the same way.",
+                "steps": [
+                  "Name the feature and describe the source tables or events.",
+                  "Define the exact time window or aggregation logic.",
+                  "State how nulls, missing users, or delayed events are handled.",
+                  "Explain how you will test offline vs online consistency."
+                ],
+                "hint": "The clearer the contract, the smaller the skew risk."
+              }
+            },
+            {
+              "h2": "Feature freshness and backfills",
+              "body": "A feature is not only a value; it also has time semantics. Some features must be near real time, while others can update daily. Backfills are useful, but backfilled features can create leakage if you pretend they existed earlier than they really did.",
+              "code": {
+                "label": "Python - freshness check",
+                "src": "from datetime import datetime, timedelta\n\ndef is_fresh(feature_ts: datetime, max_age_min: int = 30) -> bool:\n    return datetime.utcnow() - feature_ts <= timedelta(minutes=max_age_min)"
+              }
+            },
+            {
+              "h2": "What a feature store should give you",
+              "body": "Whether homegrown or external, a good feature system gives discoverability, reusable definitions, backfill workflows, lineage, and validation. The goal is not vendor complexity. The goal is consistent, inspectable features that keep models trustworthy.",
+              "code": {
+                "label": "Python - compare offline and online snapshots",
+                "src": "for feature_name in offline_row:\n    if offline_row[feature_name] != online_row[feature_name]:\n        print('mismatch', feature_name, offline_row[feature_name], online_row[feature_name])"
+              }
+            }
+          ],
+          "prev": "learning-to-rank",
+          "next": null
+        }]
     },
     {
       "id": "deep-learning",
@@ -3618,7 +4165,7 @@
           "duration": "45 min",
           "badge": "Advanced",
           "prev": "model-interpretability",
-          "next": null,
+          "next": "backpropagation-from-scratch",
           "sections": [
             {
               "h2": "The Adversarial Vulnerability Problem",
@@ -3659,7 +4206,277 @@
             }
           ]
         }
-      ]
+      ,
+        {
+          "id": "backpropagation-from-scratch",
+          "title": "Backpropagation from Scratch: Gradients Without Magic",
+          "desc": "Implement forward and backward passes by hand so gradient flow, chain rule, and parameter updates become intuitive instead of mystical.",
+          "duration": "34 min",
+          "badge": "Intermediate",
+          "sections": [
+            {
+              "h2": "The mental model behind backprop",
+              "body": "Backpropagation is just repeated application of the chain rule through a computation graph. Once you see activations, loss, and gradients as flowing values, neural nets become easier to debug. Real-world use case: understanding why a model does not learn, explodes, or saturates.",
+              "code": {
+                "label": "Python - one neuron forward pass",
+                "src": "import numpy as np\n\nx = np.array([0.5, -1.2])\nw = np.array([0.8, -0.4])\nb = 0.1\n\nz = x @ w + b\ny_hat = max(0, z)  # ReLU\ny = 1.0\nloss = (y_hat - y) ** 2\nprint(z, y_hat, loss)"
+              }
+            },
+            {
+              "h2": "Differentiate step by step",
+              "body": "Step by step: 1) compute the forward pass, 2) differentiate the loss with respect to the output, 3) move backward through the activation, 4) get gradients for weights and bias, and 5) update parameters. When you can do this for a tiny network, autograd feels much less opaque.",
+              "code": {
+                "label": "Python - manual gradients for one ReLU neuron",
+                "src": "dloss_dyhat = 2 * (y_hat - y)\ndyhat_dz = 1.0 if z > 0 else 0.0\ndloss_dz = dloss_dyhat * dyhat_dz\ndloss_dw = dloss_dz * x\ndloss_db = dloss_dz\n\nlr = 0.1\nw = w - lr * dloss_dw\nb = b - lr * dloss_db\nprint(w, b)"
+              },
+              "exercise": {
+                "title": "Train a tiny network by hand",
+                "description": "Implement one or two gradient steps manually and confirm the loss decreases.",
+                "steps": [
+                  "Create a tiny dataset with two inputs and one target.",
+                  "Run a forward pass and compute MSE loss.",
+                  "Write the gradients by hand.",
+                  "Update parameters and compare the new loss."
+                ],
+                "hint": "If the loss goes up, inspect the sign of each gradient before changing the learning rate."
+              }
+            },
+            {
+              "h2": "Why gradients vanish or explode",
+              "body": "Gradients shrink when many small derivatives multiply, and they explode when large derivatives chain together. That is why initialization, normalization, activation choice, and residual paths matter so much in deep networks.",
+              "code": {
+                "label": "Python - observe repeated multiplication",
+                "src": "grad = 1.0\nfor scale in [0.5, 0.5, 0.5, 0.5, 0.5]:\n    grad *= scale\nprint('vanishing', grad)\n\ngrad = 1.0\nfor scale in [1.8, 1.5, 1.4, 1.7]:\n    grad *= scale\nprint('exploding', grad)"
+              }
+            },
+            {
+              "h2": "From scratch to frameworks",
+              "body": "PyTorch handles the bookkeeping, but the physics stay the same. When a training loop stalls, thinking in terms of forward values, gradients, and parameter updates is often faster than staring at framework code.",
+              "code": {
+                "label": "Python - same idea with autograd",
+                "src": "import torch\n\nx = torch.tensor([[0.5, -1.2]], dtype=torch.float32)\nw = torch.tensor([[0.8], [-0.4]], requires_grad=True)\nb = torch.tensor([0.1], requires_grad=True)\ny = torch.tensor([[1.0]])\n\ny_hat = torch.relu(x @ w + b)\nloss = ((y_hat - y) ** 2).mean()\nloss.backward()\nprint(w.grad, b.grad)"
+              }
+            }
+          ],
+          "prev": "adversarial-training",
+          "next": "activation-functions-initialization"
+        },
+        {
+          "id": "activation-functions-initialization",
+          "title": "Activation Functions and Weight Initialization for Stable Training",
+          "desc": "Connect ReLU, GELU, tanh, and initialization schemes like Xavier and He to the gradient behavior you actually observe during training.",
+          "duration": "28 min",
+          "badge": "Intermediate",
+          "sections": [
+            {
+              "h2": "Why activations and initialization travel together",
+              "body": "Activation functions shape gradient flow, and initialization determines how those gradients start their journey. ReLU pairs naturally with He initialization, while tanh and sigmoid often prefer Xavier-style scaling. Real-world use case: fixing a network that never gets off the ground because half its neurons die immediately.",
+              "code": {
+                "label": "Python - compare common activations",
+                "src": "import numpy as np\n\nx = np.linspace(-3, 3, 7)\nrelu = np.maximum(0, x)\ntanh = np.tanh(x)\ngel = 0.5 * x * (1 + np.tanh(np.sqrt(2/np.pi) * (x + 0.044715 * x**3)))\nprint(relu)\nprint(tanh.round(3))\nprint(gel.round(3))"
+              }
+            },
+            {
+              "h2": "Initialization rules of thumb",
+              "body": "Step by step: 1) choose the activation, 2) pick the matching initialization, 3) inspect early-layer activation statistics, and 4) tune learning rate after that. Initialization is not just theory; it is a practical control over whether the first gradients are usable.",
+              "code": {
+                "label": "Python - Xavier vs He scaling",
+                "src": "fan_in = 512\nfan_out = 256\nhe_std = (2 / fan_in) ** 0.5\nxavier_std = (2 / (fan_in + fan_out)) ** 0.5\nprint('He:', round(he_std, 4))\nprint('Xavier:', round(xavier_std, 4))"
+              },
+              "exercise": {
+                "title": "Probe activation statistics",
+                "description": "Create a small MLP and measure activation mean and std after the first forward pass with different initialization schemes.",
+                "steps": [
+                  "Build a two-layer network.",
+                  "Initialize once with Xavier and once with He.",
+                  "Feed random inputs through the model.",
+                  "Compare activation variance and training stability."
+                ],
+                "hint": "Huge activation magnitudes on the first batch usually mean the initialization is fighting you."
+              }
+            },
+            {
+              "h2": "Symptoms to watch during training",
+              "body": "Dead ReLUs, saturated tanh, unstable loss, and wildly different layer norms are usually visible quickly if you look. Logging layer statistics is not overkill — it is how you catch initialization problems before burning hours of GPU time.",
+              "code": {
+                "label": "Python - log activation distribution",
+                "src": "import torch\n\ndef log_stats(name, tensor):\n    print(name, 'mean=', round(tensor.mean().item(), 4), 'std=', round(tensor.std().item(), 4))"
+              }
+            },
+            {
+              "h2": "Modern defaults",
+              "body": "Transformers often use GELU with layer normalization and carefully scaled residual streams. CNNs and MLPs frequently use ReLU family activations. The best default is the one that matches your architecture and has a clear debugging story when training becomes unstable.",
+              "code": {
+                "label": "Python - simple PyTorch init hook",
+                "src": "import torch.nn as nn\n\ndef init_relu(module):\n    if isinstance(module, nn.Linear):\n        nn.init.kaiming_normal_(module.weight, nonlinearity='relu')\n        nn.init.zeros_(module.bias)"
+              }
+            }
+          ],
+          "prev": "backpropagation-from-scratch",
+          "next": "residual-connections-layernorm"
+        },
+        {
+          "id": "residual-connections-layernorm",
+          "title": "Residual Connections and LayerNorm: Why Deep Models Keep Working",
+          "desc": "Understand how skip connections and layer normalization stabilize deep networks, especially transformers, by preserving signal and controlling activation scale.",
+          "duration": "30 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "The role of residual paths",
+              "body": "Residual connections let layers learn corrections instead of whole transformations. That makes optimization easier and preserves a clean route for gradients. Real-world use case: transformer blocks where attention and feed-forward layers each sit inside a residual wrapper.",
+              "code": {
+                "label": "Python - the residual pattern",
+                "src": "def residual_block(x, f):\n    return x + f(x)\n\n# rather than learning y = g(x) directly, the layer learns a delta"
+              }
+            },
+            {
+              "h2": "LayerNorm vs BatchNorm",
+              "body": "BatchNorm uses batch statistics and works well in many vision pipelines. LayerNorm normalizes across features within one example, which makes it a better fit for sequence models and transformers. Step by step, residuals keep information moving while normalization keeps scale under control.",
+              "code": {
+                "label": "Python - toy LayerNorm",
+                "src": "import numpy as np\n\ndef layer_norm(x, eps=1e-5):\n    mean = x.mean(axis=-1, keepdims=True)\n    var = x.var(axis=-1, keepdims=True)\n    return (x - mean) / np.sqrt(var + eps)\n\nx = np.array([[1.0, 2.0, 3.0]])\nprint(layer_norm(x))"
+              },
+              "exercise": {
+                "title": "Trace a transformer block",
+                "description": "Write down the order of operations for a modern transformer block and explain where residuals and LayerNorm are applied.",
+                "steps": [
+                  "Start from token embeddings.",
+                  "Add self-attention with a residual path.",
+                  "Apply LayerNorm in the placement your chosen architecture uses.",
+                  "Repeat for the feed-forward block."
+                ],
+                "hint": "Naming the order clearly is the first step to debugging bad implementations."
+              }
+            },
+            {
+              "h2": "Pre-norm and post-norm tradeoffs",
+              "body": "Pre-norm transformers normalize before the sublayer and often train more stably at depth. Post-norm can work well too, but is more sensitive. Understanding that distinction helps when comparing papers, codebases, and training behavior.",
+              "code": {
+                "label": "Python - pre-norm style sketch",
+                "src": "def transformer_block(x):\n    x = x + self_attention(layer_norm(x))\n    x = x + feed_forward(layer_norm(x))\n    return x"
+              }
+            },
+            {
+              "h2": "Failure patterns",
+              "body": "If a deep model diverges, check residual scaling, normalization placement, and activation magnitudes before assuming the optimizer is the only issue. Many 'optimizer bugs' are actually architecture or normalization bugs.",
+              "code": {
+                "label": "Python - monitor activation scale across blocks",
+                "src": "for i, hidden in enumerate(hidden_states):\n    print(i, hidden.norm(dim=-1).mean().item())"
+              }
+            }
+          ],
+          "prev": "activation-functions-initialization",
+          "next": "flash-attention-kv-cache"
+        },
+        {
+          "id": "flash-attention-kv-cache",
+          "title": "Flash Attention and KV Cache: Faster Transformer Inference",
+          "desc": "Learn the practical inference optimizations that matter most for long-context transformer serving: fused attention kernels and key-value caching.",
+          "duration": "32 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Where transformer inference time goes",
+              "body": "Long prompts make attention expensive because every new token attends over a growing history. Two ideas help a lot: Flash Attention improves the kernel implementation, and KV cache prevents recomputing past keys and values during generation. Real-world use case: serving chatbots or coding assistants with long conversation histories.",
+              "code": {
+                "label": "Python - intuition for cached states",
+                "src": "sequence_length = 4096\nnew_tokens = 128\n# without cache, you repeatedly recompute past representations\n# with cache, you only compute keys/values for the new token step"
+              }
+            },
+            {
+              "h2": "KV cache explained step by step",
+              "body": "1) encode the prompt once, 2) store keys and values per layer, 3) on each next-token step compute only the new query/key/value for the appended token, and 4) attend against the cached history. This is one of the main reasons chat generation can stay responsive.",
+              "code": {
+                "label": "Python - simple cache shape sketch",
+                "src": "batch = 1\nheads = 32\nseq = 4096\nd_head = 128\nkv_cache_shape = (batch, heads, seq, d_head)\nprint(kv_cache_shape)"
+              },
+              "exercise": {
+                "title": "Explain the speedup path",
+                "description": "Write a short note comparing next-token generation with and without KV caching.",
+                "steps": [
+                  "Describe what work is repeated without the cache.",
+                  "Describe what is reused with the cache.",
+                  "State one tradeoff: memory usage.",
+                  "Connect the idea to long-context chat apps."
+                ],
+                "hint": "The speedup is trading extra memory for less repeated compute."
+              }
+            },
+            {
+              "h2": "Flash Attention intuition",
+              "body": "Flash Attention is not a new model. It is a more memory-efficient way to compute attention that reduces expensive reads and writes. For many workloads, that makes large-context inference and training much more practical.",
+              "code": {
+                "label": "Python - runtime config sketch",
+                "src": "config = {\n    'attn_implementation': 'flash_attention_2',\n    'use_cache': True,\n    'torch_dtype': 'bfloat16'\n}\nprint(config)"
+              }
+            },
+            {
+              "h2": "Serving tradeoffs",
+              "body": "The big choices are latency, throughput, context length, and memory headroom. KV cache makes generation faster but grows memory use with context length and concurrent sessions. That is why production serving often combines cache policies, batching, and quantization.",
+              "code": {
+                "label": "Python - capacity planning sketch",
+                "src": "sessions = 200\ncache_mb_per_session = 180\nprint('estimated cache GB', round((sessions * cache_mb_per_session) / 1024, 2))"
+              }
+            }
+          ],
+          "prev": "residual-connections-layernorm",
+          "next": "seq2seq-transformers"
+        },
+        {
+          "id": "seq2seq-transformers",
+          "title": "Sequence-to-Sequence Transformers: Translation, Summarization and Beyond",
+          "desc": "Learn encoder-decoder transformers through the tasks they shine at, and understand how they differ from decoder-only LLMs used in chat and code generation.",
+          "duration": "30 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Encoder-decoder vs decoder-only",
+              "body": "Decoder-only models generate from a single stream of context, which is great for chat and coding. Sequence-to-sequence transformers use an encoder to build a source representation and a decoder to generate the target sequence. Real-world use case: translation, summarization, grammatical correction, and many structured transformation tasks.",
+              "code": {
+                "label": "Python - task framing examples",
+                "src": "pairs = [\n    {'source': 'translate English to French: Hello world', 'target': 'Bonjour le monde'},\n    {'source': 'summarize: A long article...', 'target': 'Short summary'}\n]\nprint(pairs[0])"
+              }
+            },
+            {
+              "h2": "Cross-attention is the key difference",
+              "body": "Step by step: 1) the encoder reads the full input, 2) the decoder generates one token at a time, 3) decoder self-attention handles generated history, and 4) cross-attention lets the decoder look back at the encoded source. That is why seq2seq models are so strong at controlled transformations.",
+              "code": {
+                "label": "Python - conceptual block order",
+                "src": "def seq2seq_block(source_tokens, target_tokens):\n    enc = encoder(source_tokens)\n    dec = decoder_self_attention(target_tokens)\n    return cross_attention(dec, enc)"
+              },
+              "exercise": {
+                "title": "Choose the right architecture",
+                "description": "Take three tasks and decide whether seq2seq or decoder-only modeling fits better.",
+                "steps": [
+                  "List one transformation task like translation.",
+                  "List one free-form generation task like chat.",
+                  "List one extraction task and justify your choice.",
+                  "Write one sentence explaining the role of cross-attention."
+                ],
+                "hint": "If the source-target boundary is central to the task, seq2seq is often a strong fit."
+              }
+            },
+            {
+              "h2": "Training and evaluation patterns",
+              "body": "Teacher forcing, token-level losses, and task-specific metrics like BLEU or ROUGE commonly appear in seq2seq work. Evaluation should match the task, not just generic loss. A great summarizer may need factuality checks in addition to ROUGE.",
+              "code": {
+                "label": "Python - preprocess source and target text",
+                "src": "def build_example(source: str, target: str) -> dict:\n    return {'input_text': source.strip(), 'target_text': target.strip()}"
+              }
+            },
+            {
+              "h2": "Where seq2seq still matters",
+              "body": "Even in the age of giant decoder-only LLMs, encoder-decoder models remain attractive for focused transformation tasks where efficiency, controllability, or multilingual quality matter.",
+              "code": {
+                "label": "Python - simple generation options sketch",
+                "src": "gen_cfg = {'max_new_tokens': 128, 'num_beams': 4, 'length_penalty': 0.9}\nprint(gen_cfg)"
+              }
+            }
+          ],
+          "prev": "flash-attention-kv-cache",
+          "next": null
+        }]
     },
     {
       "id": "modern-ai",
@@ -4784,7 +5601,7 @@
           "duration": "50 min",
           "badge": "Advanced",
           "prev": "retrieval-augmented-generation",
-          "next": null,
+          "next": "human-in-the-loop-agents",
           "sections": [
             {
               "h2": "Why Full Fine-Tuning Is Expensive",
@@ -4822,7 +5639,277 @@
             }
           ]
         }
-      ]
+      ,
+        {
+          "id": "human-in-the-loop-agents",
+          "title": "Human-in-the-Loop Agents: Approval Gates, Review Queues and Safe Autonomy",
+          "desc": "Design agent systems that ask for human approval at the right moments instead of pretending full autonomy is always desirable.",
+          "duration": "28 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Autonomy should be earned",
+              "body": "Many high-value agent tasks include irreversible actions: emailing customers, changing records, shipping code, or publishing content. Human-in-the-loop design inserts approvals where the cost of a bad action is high. Real-world use case: a research agent drafts an answer but an editor approves publication.",
+              "code": {
+                "label": "Python - action envelope for review",
+                "src": "proposal = {\n    'task_id': 't_123',\n    'action': 'send_email',\n    'target': 'client@example.com',\n    'summary': 'Follow-up after meeting',\n    'risk': 'medium',\n    'requires_approval': True\n}\nprint(proposal)"
+              }
+            },
+            {
+              "h2": "Where to place approval gates",
+              "body": "Step by step: 1) classify actions by risk, 2) let low-risk actions run automatically, 3) hold medium/high-risk actions for approval, and 4) log who approved what. The right question is not 'can the agent do it?' but 'should it do it without oversight?'.",
+              "code": {
+                "label": "Python - simple approval policy",
+                "src": "HIGH_RISK = {'delete_record', 'send_external_email', 'deploy_to_prod'}\n\ndef needs_human(action: str, confidence: float) -> bool:\n    return action in HIGH_RISK or confidence < 0.8"
+              },
+              "exercise": {
+                "title": "Design a review queue",
+                "description": "Sketch the approval system for one agent workflow you would trust more with a human gate.",
+                "steps": [
+                  "List the actions the agent can take.",
+                  "Mark each as low, medium, or high risk.",
+                  "Define which actions require approval and what metadata reviewers need.",
+                  "State what happens when no reviewer responds in time."
+                ],
+                "hint": "Review queues work best when the reviewer sees the evidence, not just a yes/no button."
+              }
+            },
+            {
+              "h2": "Reviewer experience matters",
+              "body": "If the human sees only raw output, approvals become random. Show the plan, the evidence, the intended action, and the fallback. Good HITL systems reduce cognitive load rather than dumping the whole trace on the reviewer.",
+              "code": {
+                "label": "Python - reviewer payload",
+                "src": "review_payload = {\n    'plan': ['search docs', 'draft answer', 'cite sources'],\n    'evidence': ['policy.pdf p12', 'runbook.md section 4'],\n    'proposed_action': 'publish answer',\n    'fallback': 'save draft only'\n}"
+              }
+            },
+            {
+              "h2": "Measure more than approval rate",
+              "body": "Track time-to-approval, overturn rate, correction rate, and how often humans edit the plan. Those metrics tell you whether the agent is genuinely helping or just creating more review work.",
+              "code": {
+                "label": "Python - approval metrics sketch",
+                "src": "metrics = {'approved': 82, 'edited': 24, 'rejected': 11, 'avg_review_s': 53}\nprint(metrics)"
+              }
+            }
+          ],
+          "prev": "lora-qlora-finetuning",
+          "next": "prompt-versioning-release-management"
+        },
+        {
+          "id": "prompt-versioning-release-management",
+          "title": "Prompt Versioning and Release Management for LLM Systems",
+          "desc": "Treat prompts like production assets with versions, changelogs, regression checks, and rollback strategy instead of editing strings in place.",
+          "duration": "26 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Prompts are operational assets",
+              "body": "A prompt change can alter cost, latency, safety behavior, and answer quality. That makes prompt edits release events, not copy edits. Real-world use case: a support automation system whose latest prompt silently stops asking clarifying questions after a rushed edit.",
+              "code": {
+                "label": "YAML - versioned prompt registry entry",
+                "src": "name: support_triage\nversion: 2026-03-29\nowner: ai-platform\nmodel: gpt-4o-mini\nintent: classify incoming support tickets\nrollback_to: 2026-03-20\nnotes:\n  - tightened output schema\n  - added missing-language handling"
+              }
+            },
+            {
+              "h2": "How to manage prompt releases",
+              "body": "Step by step: 1) give prompts names and versions, 2) keep changelogs, 3) run regression examples before release, 4) ship behind a flag or percentage rollout, and 5) make rollback one command away. This brings LLM work closer to mature software delivery.",
+              "code": {
+                "label": "Python - load prompts by version",
+                "src": "PROMPTS = {\n    ('support_triage', '2026-03-20'): 'Classify this ticket...',\n    ('support_triage', '2026-03-29'): 'Classify this ticket. Return JSON...'}\n\ndef get_prompt(name, version):\n    return PROMPTS[(name, version)]"
+              },
+              "exercise": {
+                "title": "Version one real prompt",
+                "description": "Take a prompt you already use and give it the release mechanics it deserves.",
+                "steps": [
+                  "Assign it a stable name and version.",
+                  "Write two or three regression examples that must keep working.",
+                  "Document one rollback version.",
+                  "Add a note describing what changed and why."
+                ],
+                "hint": "If you cannot describe the change, you cannot evaluate it properly."
+              }
+            },
+            {
+              "h2": "Regression suites keep teams sane",
+              "body": "Prompt regressions are often subtle: tone drifts, schema breaks, or tool selection worsens. A tiny, high-quality regression set catches those failures much faster than vague impressions from manual testing.",
+              "code": {
+                "label": "Python - regression case format",
+                "src": "cases = [\n    {'input': 'refund request', 'must_include': ['billing'], 'must_not_include': ['technical']},\n    {'input': 'VPN keeps disconnecting', 'must_include': ['technical']}\n]\nprint(cases[0])"
+              }
+            },
+            {
+              "h2": "Release metrics and rollback",
+              "body": "Monitor quality, refusal rate, latency, token usage, and escalation rate by prompt version. The moment a version degrades key metrics, revert. Fast rollback is what makes experimentation safe.",
+              "code": {
+                "label": "Python - compare versions",
+                "src": "summary = [\n    {'version': '2026-03-20', 'quality': 0.84, 'latency_ms': 910},\n    {'version': '2026-03-29', 'quality': 0.88, 'latency_ms': 980},\n]\nprint(summary)"
+              }
+            }
+          ],
+          "prev": "human-in-the-loop-agents",
+          "next": "tool-routing-policy-engines"
+        },
+        {
+          "id": "tool-routing-policy-engines",
+          "title": "Tool Routing and Policy Engines for Agents",
+          "desc": "Decide which tool an agent may call, when it may call it, and under what constraints by separating routing logic from the language model itself.",
+          "duration": "30 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "Why routing and policy belong outside the model",
+              "body": "An LLM can suggest a tool, but the system should enforce capability boundaries. Routing answers 'which tool is appropriate?' and policy answers 'is this tool allowed right now?'. Real-world use case: allow note lookup for every user, but allow billing changes only for authenticated sessions with human approval.",
+              "code": {
+                "label": "Python - tool registry with policy metadata",
+                "src": "TOOLS = {\n    'search_docs': {'risk': 'low', 'requires_auth': False},\n    'change_billing': {'risk': 'high', 'requires_auth': True},\n    'send_email': {'risk': 'medium', 'requires_auth': True},\n}\nprint(TOOLS)"
+              }
+            },
+            {
+              "h2": "Route in two stages",
+              "body": "Step by step: 1) use the model or a rules layer to shortlist candidate tools, 2) run policy checks against user/session state, 3) execute only allowed tools, and 4) return clear denial reasons when blocked. This separates intelligence from enforcement.",
+              "code": {
+                "label": "Python - simple router + policy gate",
+                "src": "def choose_tool(intent: str) -> str:\n    if 'invoice' in intent:\n        return 'change_billing'\n    if 'docs' in intent or 'guide' in intent:\n        return 'search_docs'\n    return 'send_email'\n\ndef allowed(tool: str, session: dict) -> bool:\n    meta = TOOLS[tool]\n    return (not meta['requires_auth']) or session.get('authenticated', False)"
+              },
+              "exercise": {
+                "title": "Design a capability map",
+                "description": "Create the tool policy for one agent or assistant you actually want to ship.",
+                "steps": [
+                  "List each tool and its risk level.",
+                  "State which tools require authentication.",
+                  "Define one tool that always needs human approval.",
+                  "Write the fallback answer when the policy denies a tool."
+                ],
+                "hint": "A denied tool should lead to a safe alternative, not a silent failure."
+              }
+            },
+            {
+              "h2": "Policy engines reduce prompt burden",
+              "body": "Without a policy layer, teams stuff fragile rules into prompts: never do this, only do that, ask first, stop if sensitive. A policy engine turns those soft instructions into enforceable checks, which is safer and easier to audit.",
+              "code": {
+                "label": "Python - denial message",
+                "src": "def denial_reason(tool: str) -> str:\n    return f'Tool {tool} blocked by policy; route to human or ask user to authenticate.'"
+              }
+            },
+            {
+              "h2": "Evaluate routing separately",
+              "body": "Measure tool selection accuracy, blocked-call rate, policy violations prevented, and fallback quality. That tells you whether the system is improving because the model is smarter or because the control plane is stronger.",
+              "code": {
+                "label": "Python - routing event log",
+                "src": "event = {'intent': 'update card on file', 'tool': 'change_billing', 'allowed': False, 'reason': 'missing_auth'}\nprint(event)"
+              }
+            }
+          ],
+          "prev": "prompt-versioning-release-management",
+          "next": "session-memory-compaction"
+        },
+        {
+          "id": "session-memory-compaction",
+          "title": "Session Memory Compaction: Keep Long Conversations Useful",
+          "desc": "Prevent long agent sessions from turning into bloated context windows by summarizing, compressing, and retaining the parts of memory that still matter.",
+          "duration": "28 min",
+          "badge": "Advanced",
+          "sections": [
+            {
+              "h2": "More context is not always better",
+              "body": "Long conversations accumulate noise. Repeating every message forever increases cost and often hurts reasoning. Memory compaction keeps the session usable by distilling decisions, facts, preferences, and unresolved tasks into a smaller representation. Real-world use case: a personal assistant that remembers commitments without dragging the whole conversation into every call.",
+              "code": {
+                "label": "Python - split memory into buckets",
+                "src": "memory = {\n    'facts': ['user prefers concise answers'],\n    'tasks': ['send weekly report draft'],\n    'decisions': ['use Claude for long-form writing'],\n    'ephemeral': ['small talk about weather']\n}\nprint(memory)"
+              }
+            },
+            {
+              "h2": "Compaction strategy step by step",
+              "body": "1) keep the most recent turns verbatim, 2) summarize older resolved discussion, 3) preserve stable user preferences, and 4) delete or archive noise. The key is to compress meaning, not just truncate tokens blindly.",
+              "code": {
+                "label": "Python - compact a conversation window",
+                "src": "def compact_session(turns, summary):\n    recent = turns[-6:]\n    return {'summary': summary, 'recent_turns': recent}\n\nturns = ['t1', 't2', 't3', 't4', 't5', 't6', 't7']\nprint(compact_session(turns, 'User wants a weekly newsletter summary'))"
+              },
+              "exercise": {
+                "title": "Design a memory policy",
+                "description": "Write a compaction policy for one assistant or agent flow.",
+                "steps": [
+                  "Decide how many recent turns stay verbatim.",
+                  "List what facts should survive forever.",
+                  "List what can be summarized or dropped.",
+                  "Define when the summary should be refreshed."
+                ],
+                "hint": "Compaction should protect unresolved tasks and user preferences first."
+              }
+            },
+            {
+              "h2": "What to store in long-term memory",
+              "body": "Store durable preferences, verified facts, and persistent tasks. Do not store every transient sentence. Good memory systems distinguish semantic memory from conversation history and from raw logs.",
+              "code": {
+                "label": "Python - memory write gate",
+                "src": "def should_store(item: dict) -> bool:\n    return item.get('verified', False) and item.get('kind') in {'preference', 'fact', 'task'}"
+              }
+            },
+            {
+              "h2": "How to tell compaction is working",
+              "body": "Watch answer relevance, token usage, retrieval precision, and correction rate after long conversations. If the model forgets key preferences or starts repeating stale context, the compaction policy needs work.",
+              "code": {
+                "label": "Python - compare before vs after token budget",
+                "src": "before_tokens = 7800\nafter_tokens = 2300\nprint('saved', before_tokens - after_tokens, 'tokens')"
+              }
+            }
+          ],
+          "prev": "tool-routing-policy-engines",
+          "next": "eval-flywheel-release-gates"
+        },
+        {
+          "id": "eval-flywheel-release-gates",
+          "title": "Evaluation Flywheels and Release Gates for AI Systems",
+          "desc": "Turn ad hoc testing into a continuous evaluation loop with golden sets, failure buckets, release thresholds, and post-launch feedback.",
+          "duration": "32 min",
+          "badge": "Expert",
+          "sections": [
+            {
+              "h2": "Evaluation is a loop, not an event",
+              "body": "The best AI products improve because every failure becomes a future test case. That loop is the eval flywheel: collect failures, label them, add them to a dataset, fix the system, and verify the fix before release. Real-world use case: a customer support agent whose regression set grows every time users hit an edge case.",
+              "code": {
+                "label": "Python - simple eval case format",
+                "src": "eval_case = {\n    'id': 'missing-citation-001',\n    'input': 'Explain policy with sources',\n    'expected': 'must include citations',\n    'severity': 'high'\n}\nprint(eval_case)"
+              }
+            },
+            {
+              "h2": "Build release gates step by step",
+              "body": "1) define core metrics, 2) separate high-severity from low-severity cases, 3) require passing scores before release, and 4) track drift after release. A release gate does not need 100 metrics. It needs a few trustworthy ones that reflect real user pain.",
+              "code": {
+                "label": "Python - release gate function",
+                "src": "def release_allowed(metrics: dict) -> bool:\n    return (\n        metrics['quality_score'] >= 0.87 and\n        metrics['hallucination_rate'] <= 0.03 and\n        metrics['schema_pass_rate'] >= 0.98\n    )\n\nprint(release_allowed({'quality_score': 0.9, 'hallucination_rate': 0.02, 'schema_pass_rate': 0.99}))"
+              },
+              "exercise": {
+                "title": "Define one release gate",
+                "description": "Write the minimum metrics your AI feature should meet before you would ship it.",
+                "steps": [
+                  "Pick two or three metrics you trust.",
+                  "Set a threshold for each.",
+                  "Add one blocker metric for severe failures.",
+                  "Describe what happens if the gate fails."
+                ],
+                "hint": "Release gates work best when they are easy to explain and hard to game."
+              }
+            },
+            {
+              "h2": "Failure buckets make fixes sharper",
+              "body": "Not every miss is the same. Bucket failures into issues like retrieval miss, schema break, unsafe action proposal, poor citation grounding, or latency timeout. That turns vague disappointment into an engineering roadmap.",
+              "code": {
+                "label": "Python - bucket failures",
+                "src": "buckets = {'retrieval_miss': 14, 'schema_break': 3, 'unsafe_action': 2, 'latency_timeout': 5}\nprint(sorted(buckets.items(), key=lambda x: x[1], reverse=True))"
+              }
+            },
+            {
+              "h2": "Close the loop after launch",
+              "body": "Ship with monitoring, sample real traces, audit the misses, and add them back into the eval set. That is how systems keep improving instead of drifting slowly into disappointment.",
+              "code": {
+                "label": "Python - turn a production miss into a test case",
+                "src": "def to_regression_case(trace):\n    return {\n        'input': trace['user_query'],\n        'expected': trace['reviewer_fix'],\n        'failure_type': trace['bucket']\n    }"
+              }
+            }
+          ],
+          "prev": "session-memory-compaction",
+          "next": null
+        }]
     }
   ]
 }

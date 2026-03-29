@@ -86,6 +86,17 @@ function ensureDiscoverNavLink() {
     });
 }
 
+function loadOptionalEnhancementScript(relativePath, marker) {
+    if (document.querySelector(`script[data-ai-enhancement="${marker}"]`)) return;
+    const script = document.createElement('script');
+    script.src = getRootPrefix() + relativePath;
+    script.defer = true;
+    script.dataset.aiEnhancement = marker;
+    document.head.appendChild(script);
+}
+
+loadOptionalEnhancementScript('assets/js/conversion.js', 'conversion-pass-v1');
+
 document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
@@ -1155,4 +1166,285 @@ document.addEventListener('DOMContentLoaded', () => {
         LearningRetention.injectPageActions();
         LearningRetention.attachCompletionHooks();
     }, 850);
+});
+
+
+
+/* === CURRICULUM DEPTH EXPANSION PASS === */
+const CurriculumDepthExpansion = (() => {
+    const TRACK_EXTRA = {
+        foundations: ['pydantic-validation-ai', 'config-management-yaml', 'jsonl-parquet-datasets', 'cli-tools-for-ai', 'docker-basics-for-ai'],
+        'ml-core': ['data-leakage-prevention', 'probability-calibration', 'uncertainty-estimation', 'learning-to-rank', 'feature-stores-ml-systems'],
+        'deep-learning': ['backpropagation-from-scratch', 'activation-functions-initialization', 'residual-connections-layernorm', 'flash-attention-kv-cache', 'seq2seq-transformers'],
+        'modern-ai': ['human-in-the-loop-agents', 'prompt-versioning-release-management', 'tool-routing-policy-engines', 'session-memory-compaction', 'eval-flywheel-release-gates']
+    };
+
+    const TRACK_PAGE_MAP = {
+        'courses/foundations.html': 'foundations',
+        'courses/ml-core.html': 'ml-core',
+        'courses/deep-learning.html': 'deep-learning',
+        'courses/modern-ai.html': 'modern-ai'
+    };
+
+    const HUB_CONTEXT = {
+        'index.html': {
+            title: 'Curriculum depth upgrade',
+            copy: 'The roadmap now goes deeper across every major AI track. Use these new packs to move from surface familiarity into stronger engineering judgment.',
+            items: ['pydantic-validation-ai', 'data-leakage-prevention', 'backpropagation-from-scratch', 'human-in-the-loop-agents']
+        },
+        'tutorials/index.html': {
+            title: 'New depth lessons across the roadmap',
+            copy: 'These new lessons strengthen the exact places learners usually outgrow the basics: validation, evaluation honesty, deep learning intuition, and safe agent systems.',
+            items: ['config-management-yaml', 'probability-calibration', 'activation-functions-initialization', 'prompt-versioning-release-management']
+        },
+        'courses/index.html': {
+            title: 'Fresh expansion packs for every core track',
+            copy: 'Each core track now has new depth modules. Open the track pages or jump directly into one of the strongest new lessons below.',
+            items: ['jsonl-parquet-datasets', 'uncertainty-estimation', 'residual-connections-layernorm', 'tool-routing-policy-engines']
+        },
+        'discover.html': {
+            title: 'High-signal additions worth searching first',
+            copy: 'Discovery is stronger when the catalog has better depth. These new additions are high-leverage starting points across foundations, ML systems, deep learning, and modern agent design.',
+            items: ['docker-basics-for-ai', 'feature-stores-ml-systems', 'flash-attention-kv-cache', 'eval-flywheel-release-gates']
+        },
+        'debugging/index.html': {
+            title: 'Study packs that make debugging easier',
+            copy: 'A lot of bugs are really knowledge gaps. These new lessons strengthen validation, leakage detection, gradient intuition, and release gates so the debugging lab connects to deeper learning.',
+            items: ['pydantic-validation-ai', 'data-leakage-prevention', 'backpropagation-from-scratch', 'eval-flywheel-release-gates']
+        },
+        'projects/index.html': {
+            title: 'Build-support lessons for real projects',
+            copy: 'The project layer is more useful when the supporting study path is obvious. These additions help with environments, ML system design, inference efficiency, and safe agent operations.',
+            items: ['docker-basics-for-ai', 'feature-stores-ml-systems', 'flash-attention-kv-cache', 'human-in-the-loop-agents']
+        },
+        'tutorials/beginner.html': {
+            title: 'Beginner depth picks',
+            copy: 'Start adding operational discipline early: validation, config, dataset formats, and simple tooling make later AI work much easier.',
+            items: ['pydantic-validation-ai', 'config-management-yaml', 'jsonl-parquet-datasets', 'cli-tools-for-ai']
+        },
+        'tutorials/intermediate.html': {
+            title: 'Intermediate depth picks',
+            copy: 'These additions tighten the bridge from working code to trustworthy systems.',
+            items: ['docker-basics-for-ai', 'data-leakage-prevention', 'probability-calibration', 'backpropagation-from-scratch']
+        },
+        'tutorials/advanced.html': {
+            title: 'Advanced depth picks',
+            copy: 'These lessons go deeper on architecture, serving efficiency, and agent control surfaces.',
+            items: ['uncertainty-estimation', 'residual-connections-layernorm', 'flash-attention-kv-cache', 'tool-routing-policy-engines']
+        },
+        'tutorials/expert.html': {
+            title: 'Expert depth picks',
+            copy: 'Use these lessons to strengthen production evaluation, release control, and human oversight at the system level.',
+            items: ['learning-to-rank', 'seq2seq-transformers', 'session-memory-compaction', 'eval-flywheel-release-gates']
+        }
+    };
+
+    let libraryPromise = null;
+
+    function currentPath() {
+        const raw = (window.location.pathname || '/').replace(/^\/+/, '');
+        if (!raw) return 'index.html';
+        if (raw.endsWith('/')) return `${raw.replace(/\/$/, '')}/index.html`;
+        const parts = raw.split('/');
+        const last = parts[parts.length - 1];
+        if (!last.includes('.')) return `${raw}/index.html`;
+        return raw;
+    }
+
+    function rel(path) {
+        return `${getRootPrefix()}${path}`;
+    }
+
+    function lessonHref(id) {
+        return `${rel('learn/lesson.html')}?id=${encodeURIComponent(id)}&type=lesson`;
+    }
+
+    function courseHref(trackId) {
+        return rel(`courses/${trackId}.html`);
+    }
+
+    function escapeHtml(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function ensureStyles() {
+        if (document.getElementById('curriculum-depth-style')) return;
+        const style = document.createElement('style');
+        style.id = 'curriculum-depth-style';
+        style.textContent = `
+        .depth-pass-wrap{padding:0 var(--space-xl) var(--space-4xl)}
+        .depth-pass-container{max-width:1200px;margin:0 auto}
+        .depth-pass-section{margin-top:var(--space-3xl);background:linear-gradient(135deg,rgba(0,255,170,.045),rgba(123,92,255,.05));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:var(--space-2xl);box-shadow:0 18px 50px rgba(0,0,0,.18)}
+        .depth-pass-kicker{display:inline-flex;align-items:center;gap:.55rem;padding:.45rem .95rem;border-radius:999px;background:rgba(0,255,170,.09);border:1px solid rgba(0,255,170,.18);font-family:var(--font-mono);font-size:.76rem;color:var(--accent-primary);margin-bottom:var(--space-md)}
+        .depth-pass-head{display:flex;justify-content:space-between;gap:var(--space-lg);align-items:flex-end;flex-wrap:wrap;margin-bottom:var(--space-xl)}
+        .depth-pass-head h2{font-family:var(--font-heading);font-size:1.75rem;margin:0 0 .45rem}
+        .depth-pass-head p{margin:0;max-width:780px;color:var(--text-secondary);line-height:1.75}
+        .depth-pass-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--space-lg)}
+        .depth-pass-grid.depth-track-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+        .depth-pass-card{display:flex;flex-direction:column;gap:.9rem;background:rgba(8,13,22,.76);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:var(--space-xl);text-decoration:none;color:inherit;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+        .depth-pass-card:hover{transform:translateY(-3px);border-color:rgba(0,255,170,.26);box-shadow:0 18px 40px rgba(0,0,0,.22)}
+        .depth-pass-meta{display:flex;justify-content:space-between;gap:.65rem;align-items:center;flex-wrap:wrap;color:var(--text-muted);font-size:.75rem;font-family:var(--font-mono)}
+        .depth-pass-track{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.05);padding:.25rem .55rem;border-radius:999px}
+        .depth-pass-card h3{margin:0;font-family:var(--font-heading);font-size:1.08rem;line-height:1.35;color:var(--text-primary)}
+        .depth-pass-card p{margin:0;color:var(--text-secondary);font-size:.92rem;line-height:1.75}
+        .depth-pass-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+        .depth-pass-tag{display:inline-flex;align-items:center;padding:.24rem .55rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono)}
+        .depth-pass-cta{margin-top:auto;color:var(--accent-primary);font-weight:700;font-size:.85rem}
+        .depth-pass-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+        .depth-pass-stats{display:flex;gap:var(--space-lg);flex-wrap:wrap}
+        .depth-pass-stat{min-width:120px;padding:.85rem 1rem;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
+        .depth-pass-stat-value{font-family:var(--font-heading);font-size:1.5rem;color:var(--accent-primary)}
+        .depth-pass-stat-label{font-size:.76rem;color:var(--text-muted);font-family:var(--font-mono)}
+        @media (max-width: 1100px){.depth-pass-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media (max-width: 780px){.depth-pass-wrap{padding:0 var(--space-md) var(--space-3xl)}.depth-pass-grid,.depth-pass-grid.depth-track-grid{grid-template-columns:1fr}.depth-pass-section{padding:var(--space-xl)}}
+        `;
+        document.head.appendChild(style);
+    }
+
+    async function loadLibrary() {
+        if (!libraryPromise) {
+            libraryPromise = fetch(rel('assets/data/MasterLibrary.json')).then((response) => {
+                if (!response.ok) throw new Error(`Failed to load MasterLibrary.json: ${response.status}`);
+                return response.json();
+            });
+        }
+        return libraryPromise;
+    }
+
+    function findLesson(library, id) {
+        for (const track of library.tracks || []) {
+            const lesson = (track.lessons || []).find((item) => item.id === id);
+            if (lesson) {
+                return { ...lesson, trackId: track.id, trackTitle: track.title, trackTier: track.tier, trackIcon: track.icon };
+            }
+        }
+        return null;
+    }
+
+    function buildCard(item) {
+        return `
+        <a class="depth-pass-card reveal" href="${lessonHref(item.id)}">
+            <div class="depth-pass-meta">
+                <span class="depth-pass-track">${escapeHtml(item.trackIcon || '📘')} ${escapeHtml(item.trackTitle || 'Track')}</span>
+                <span>${escapeHtml(item.duration || '30 min')}</span>
+            </div>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.desc)}</p>
+            <div class="depth-pass-tags">
+                <span class="depth-pass-tag">${escapeHtml(item.badge || 'Lesson')}</span>
+                <span class="depth-pass-tag">Track ${escapeHtml(item.trackTier || '')}</span>
+            </div>
+            <div class="depth-pass-cta">Open lesson →</div>
+        </a>`;
+    }
+
+    function appendSection(target, html) {
+        if (!target || document.querySelector('[data-depth-pass-mounted="true"]')) return;
+        const wrap = document.createElement('section');
+        wrap.className = 'depth-pass-wrap';
+        wrap.dataset.depthPassMounted = 'true';
+        wrap.innerHTML = `<div class="depth-pass-container">${html}</div>`;
+        target.parentNode.insertBefore(wrap, target);
+    }
+
+    function buildHubSection(context, lessons) {
+        return `
+        <div class="depth-pass-section">
+            <div class="depth-pass-kicker">🚀 Depth expansion</div>
+            <div class="depth-pass-head">
+                <div>
+                    <h2>${escapeHtml(context.title)}</h2>
+                    <p>${escapeHtml(context.copy)}</p>
+                </div>
+                <div class="depth-pass-actions">
+                    <a class="btn btn-outline" href="${courseHref('foundations')}">Open core roadmap →</a>
+                </div>
+            </div>
+            <div class="depth-pass-grid">${lessons.map(buildCard).join('')}</div>
+        </div>`;
+    }
+
+    function buildTrackSection(track, lessons) {
+        return `
+        <div class="depth-pass-section">
+            <div class="depth-pass-kicker">📈 New depth modules</div>
+            <div class="depth-pass-head">
+                <div>
+                    <h2>${escapeHtml(track.title)} just got deeper</h2>
+                    <p>These new lessons were appended to strengthen the track without rewriting the locked lessons you already had. Use them to go further on the topics that usually decide whether code stays toy-level or becomes production-ready.</p>
+                </div>
+                <div class="depth-pass-stats">
+                    <div class="depth-pass-stat"><div class="depth-pass-stat-value">${track.lessons.length}</div><div class="depth-pass-stat-label">Track lessons</div></div>
+                    <div class="depth-pass-stat"><div class="depth-pass-stat-value">${lessons.length}</div><div class="depth-pass-stat-label">New modules</div></div>
+                </div>
+            </div>
+            <div class="depth-pass-grid depth-track-grid">${lessons.map(buildCard).join('')}</div>
+        </div>`;
+    }
+
+    function updateTrackCounts(library) {
+        const tierCounts = new Map((library.tracks || []).map((track) => [track.tier, (track.lessons || []).length]));
+        document.querySelectorAll('[data-stat="tier-1"]').forEach((el) => el.textContent = tierCounts.get(1) || el.textContent);
+        document.querySelectorAll('[data-stat="tier-2"]').forEach((el) => el.textContent = tierCounts.get(2) || el.textContent);
+        document.querySelectorAll('[data-stat="tier-3"]').forEach((el) => el.textContent = tierCounts.get(3) || el.textContent);
+        document.querySelectorAll('[data-stat="tier-4"]').forEach((el) => el.textContent = tierCounts.get(4) || el.textContent);
+
+        const current = currentPath();
+        if (current === 'courses/index.html') {
+            const lookup = {
+                foundations: 1,
+                'ml-core': 2,
+                'deep-learning': 3,
+                'modern-ai': 4
+            };
+            Object.entries(lookup).forEach(([trackId, tier]) => {
+                const card = document.querySelector(`a[href="${trackId}.html"] .course-stat-value`);
+                if (card) card.textContent = String(tierCounts.get(tier) || card.textContent);
+            });
+        }
+
+        const trackId = TRACK_PAGE_MAP[current];
+        if (trackId) {
+            const track = (library.tracks || []).find((item) => item.id === trackId);
+            if (track) {
+                const countEl = document.querySelector('.stats-grid .stat-card:first-child .stat-value');
+                if (countEl) countEl.textContent = String(track.lessons.length);
+            }
+        }
+    }
+
+    async function render() {
+        ensureStyles();
+        const library = await loadLibrary();
+        updateTrackCounts(library);
+        const footer = document.querySelector('footer');
+        const current = currentPath();
+
+        const hubConfig = HUB_CONTEXT[current];
+        if (hubConfig && footer) {
+            const lessons = hubConfig.items.map((id) => findLesson(library, id)).filter(Boolean);
+            if (lessons.length) appendSection(footer, buildHubSection(hubConfig, lessons));
+        }
+
+        const trackId = TRACK_PAGE_MAP[current];
+        if (trackId) {
+            const track = (library.tracks || []).find((item) => item.id === trackId);
+            if (track) {
+                const lessons = (TRACK_EXTRA[trackId] || []).map((id) => findLesson(library, id)).filter(Boolean);
+                const footerEl = document.querySelector('footer');
+                if (footerEl && lessons.length) appendSection(footerEl, buildTrackSection(track, lessons));
+            }
+        }
+    }
+
+    return { init: () => render().catch((error) => console.warn('[CurriculumDepthExpansion]', error)) };
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+    CurriculumDepthExpansion.init();
 });

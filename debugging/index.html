@@ -84,6 +84,147 @@
 .dbg-guide-card p { margin: .45rem 0 0; color: var(--text-secondary); font-size: .8rem; line-height: 1.65; }
 .dbg-guide-card code { font-family: var(--font-mono); font-size: .74rem; color: var(--accent-secondary); }
 
+
+/* ── Category overview ── */
+.dbg-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+  padding: 1rem 1.5rem 1.15rem;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  background: linear-gradient(180deg, rgba(0,212,255,.02), transparent);
+}
+.dbg-overview-card {
+  position: relative;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 18px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.dbg-overview-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0,255,170,.25);
+  background: rgba(255,255,255,.03);
+}
+.dbg-overview-card.active {
+  border-color: rgba(0,255,170,.35);
+  background: linear-gradient(180deg, rgba(0,255,170,.08), rgba(255,255,255,.02));
+  box-shadow: 0 0 0 1px rgba(0,255,170,.1) inset;
+}
+.dbg-overview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .6rem;
+}
+.dbg-overview-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .28rem .62rem;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.04);
+  color: var(--text-secondary);
+  font-size: .7rem;
+  font-family: var(--font-mono);
+}
+.dbg-overview-icon {
+  font-size: 1.1rem;
+}
+.dbg-overview-total {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+.dbg-overview-label {
+  font-family: var(--font-heading);
+  font-size: .94rem;
+  color: var(--text-primary);
+}
+.dbg-overview-meta {
+  margin-top: .65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  color: var(--text-muted);
+}
+.dbg-overview-desc {
+  color: var(--text-secondary);
+  font-size: .8rem;
+  line-height: 1.65;
+}
+
+/* ── Active bug bar ── */
+.dbg-active-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .85rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));
+}
+.dbg-active-main {
+  min-width: 0;
+}
+.dbg-active-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .68rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-bottom: .38rem;
+}
+.dbg-active-title {
+  font-family: var(--font-heading);
+  font-size: .92rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dbg-active-sub {
+  margin-top: .35rem;
+  font-size: .78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dbg-active-actions {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  flex-shrink: 0;
+}
+.dbg-nav-btn {
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: .72rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all .18s;
+}
+.dbg-nav-btn:hover:not(:disabled) {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+.dbg-nav-btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
 /* ── IDE layout ── */
 .ide-wrap {
   display: grid;
@@ -255,11 +396,49 @@
 @keyframes tBlink { 50% { opacity: 0; } }
 
 /* Mobile */
+@media (max-width: 1100px) {
+  .dbg-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 900px) {
-  .ide-wrap      { grid-template-columns: 1fr; height: auto; }
-  .bug-panel     { height: 220px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .dbg-hero { padding-left: 1rem; padding-right: 1rem; }
+  .dbg-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-inline: 1rem;
+    scrollbar-width: none;
+  }
+  .dbg-filter::-webkit-scrollbar { display: none; }
+  .dbg-guide,
+  .dbg-overview {
+    grid-template-columns: 1fr;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .dbg-active-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .75rem;
+  }
+  .dbg-active-actions {
+    justify-content: space-between;
+  }
+  .ide-wrap      { grid-template-columns: 1fr; height: auto; min-height: 0; }
+  .bug-panel     { height: 260px; border-right: none; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .ide-tabs {
+    flex-wrap: wrap;
+    gap: .25rem;
+    padding-bottom: .25rem;
+  }
+  .ide-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-end;
+    padding: 0 .75rem .35rem;
+  }
   .editors-wrap  { grid-template-columns: 1fr; }
   .ed-pane + .ed-pane { border-left: none; border-top: 1px solid rgba(255,255,255,.06); }
+  .terminal-pane { height: 210px; }
 }
 </style>
 </head>
@@ -348,6 +527,8 @@
     </div>
   </div>
 
+  <div class="dbg-overview" id="dbg-overview"></div>
+
   <!-- IDE -->
   <div class="ide-wrap">
 
@@ -361,6 +542,18 @@
 
     <!-- Right IDE pane -->
     <div class="ide-right">
+
+      <div class="dbg-active-bar">
+        <div class="dbg-active-main">
+          <div class="dbg-active-kicker"><span id="active-cat-chip">⚡ async</span><span id="active-position">Bug 1 / 50</span></div>
+          <div class="dbg-active-title" id="active-title">Select a bug to start debugging</div>
+          <div class="dbg-active-sub" id="active-sub">Compare the broken code, run the fixed version, and study the root cause.</div>
+        </div>
+        <div class="dbg-active-actions">
+          <button class="dbg-nav-btn" id="btn-prev-bug" onclick="navigateBug(-1)">← Prev</button>
+          <button class="dbg-nav-btn" id="btn-next-bug" onclick="navigateBug(1)">Next →</button>
+        </div>
+      </div>
 
       <!-- Tabs -->
       <div class="ide-tabs">
@@ -1028,6 +1221,17 @@ const BUGS = [
    of:['Answer: "asyncio.gather() is available in Python 3.12 [Source 1]"','✓ Source 1: docs/asyncio.md verifiable']}
 ];
 
+const CATEGORY_META = {
+  all:    { icon: '🧪', label: 'All bug sets', desc: 'Scan the whole lab when you want variety or a senior-level mixed practice loop.', tip: 'Best for broad review' },
+  async:  { icon: '⚡', label: 'Async systems', desc: 'Event loops, awaits, concurrency, and task orchestration issues that quietly break AI apps.', tip: 'Loops, awaits, gather' },
+  config: { icon: '⚙️', label: 'Config and secrets', desc: 'Environment variables, missing keys, and wrong runtime defaults that stop apps before they start.', tip: 'Env, keys, setup' },
+  data:   { icon: '📊', label: 'Data and parsing', desc: 'JSON, schemas, truncation, validation, and conversion bugs around LLM input and output.', tip: 'Parsing, validation' },
+  memory: { icon: '🧠', label: 'Memory and retrieval', desc: 'Embedding, vector index, cache, and persistence failures that hurt retrieval quality.', tip: 'State, vectors, cache' },
+  network:{ icon: '🌐', label: 'Network and infra', desc: 'Timeouts, SSL, pools, webhooks, and remote execution failures under real traffic.', tip: 'Timeouts, retries' },
+  agent:  { icon: '🤖', label: 'Agents and tools', desc: 'Tool calls, loops, schema mismatches, and bounded-execution issues in agent systems.', tip: 'Tools, loops, control' },
+  rag:    { icon: '🔍', label: 'RAG pipelines', desc: 'Chunking, indexing, freshness, dimensions, and retrieval drift inside RAG stacks.', tip: 'Indexing, retrieval' }
+};
+
 /* ── STATE ─────────────────────────────────────────────── */
 let current  = null;
 let split    = true;
@@ -1040,22 +1244,13 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeroStats();
   renderFilterCounts();
   if (!current && BUGS.length) current = BUGS[0];
+  renderCategoryOverview();
   renderList();
   if (current) syncSelectedBug();
   updateSolvedStat();
 
   document.querySelectorAll('.filt-btn').forEach(b => {
-    b.addEventListener('click', () => {
-      document.querySelectorAll('.filt-btn').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      filter = b.dataset.f;
-      const filtered = getFilteredBugs();
-      if (!filtered.some(item => item.id === current?.id)) {
-        current = filtered[0] || null;
-      }
-      renderList();
-      if (current) syncSelectedBug();
-    });
+    b.addEventListener('click', () => setFilter(b.dataset.f));
   });
 
   const bugSearch = document.getElementById('bug-search');
@@ -1075,6 +1270,93 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getFilteredBugs() {
   return filter === 'all' ? BUGS : BUGS.filter(b => b.cat === filter);
+}
+
+function getVisibleCounts() {
+  const base = BUGS.reduce((acc, bug) => {
+    acc[bug.cat] = (acc[bug.cat] || 0) + 1;
+    return acc;
+  }, {});
+  const solvedByCat = BUGS.reduce((acc, bug) => {
+    if (solved[bug.id]) acc[bug.cat] = (acc[bug.cat] || 0) + 1;
+    return acc;
+  }, {});
+  return { base, solvedByCat };
+}
+
+function renderCategoryOverview() {
+  const mount = document.getElementById('dbg-overview');
+  if (!mount) return;
+  const { base, solvedByCat } = getVisibleCounts();
+  const cards = ['async','config','data','memory','network','agent','rag'].map(key => {
+    const meta = CATEGORY_META[key];
+    const total = base[key] || 0;
+    const solvedTotal = solvedByCat[key] || 0;
+    return `<button class="dbg-overview-card ${filter === key ? 'active' : ''}" type="button" onclick="setFilter('${key}')">
+      <div class="dbg-overview-top">
+        <span class="dbg-overview-chip"><span class="dbg-overview-icon">${meta.icon}</span>${meta.label}</span>
+        <span class="dbg-overview-total">${total}</span>
+      </div>
+      <div class="dbg-overview-label">${solvedTotal}/${total} solved</div>
+      <div class="dbg-overview-desc">${meta.desc}</div>
+      <div class="dbg-overview-meta"><span>${meta.tip}</span><span>Open set →</span></div>
+    </button>`;
+  }).join('');
+  mount.innerHTML = cards;
+}
+
+function setFilter(nextFilter) {
+  filter = nextFilter;
+  document.querySelectorAll('.filt-btn').forEach(x => x.classList.toggle('active', x.dataset.f === nextFilter));
+  const filtered = getFilteredBugs();
+  if (!filtered.some(item => item.id === current?.id)) {
+    current = filtered[0] || null;
+  }
+  renderCategoryOverview();
+  renderList();
+  if (current) syncSelectedBug();
+}
+
+function getCurrentFilteredIndex() {
+  const filtered = getFilteredBugs();
+  return filtered.findIndex(item => item.id === current?.id);
+}
+
+function navigateBug(direction) {
+  const filtered = getFilteredBugs();
+  if (!filtered.length) return;
+  const currentIndex = getCurrentFilteredIndex();
+  const nextIndex = currentIndex < 0 ? 0 : Math.max(0, Math.min(filtered.length - 1, currentIndex + direction));
+  current = filtered[nextIndex];
+  renderList();
+  syncSelectedBug();
+}
+
+function updateActiveBar() {
+  const title = document.getElementById('active-title');
+  const sub = document.getElementById('active-sub');
+  const chip = document.getElementById('active-cat-chip');
+  const pos = document.getElementById('active-position');
+  const prev = document.getElementById('btn-prev-bug');
+  const next = document.getElementById('btn-next-bug');
+  const filtered = getFilteredBugs();
+  const idx = filtered.findIndex(item => item.id === current?.id);
+  if (!current) {
+    if (title) title.textContent = 'Select a bug to start debugging';
+    if (sub) sub.textContent = 'Compare the broken code, run the fixed version, and study the root cause.';
+    if (chip) chip.textContent = '🧪 lab';
+    if (pos) pos.textContent = '0 bugs';
+    if (prev) prev.disabled = true;
+    if (next) next.disabled = true;
+    return;
+  }
+  const meta = CATEGORY_META[current.cat] || { icon: '🧪', label: current.cat };
+  if (title) title.textContent = current.title;
+  if (sub) sub.textContent = current.error;
+  if (chip) chip.textContent = `${meta.icon} ${meta.label}`;
+  if (pos) pos.textContent = `Bug ${idx + 1} / ${filtered.length}`;
+  if (prev) prev.disabled = idx <= 0;
+  if (next) next.disabled = idx >= filtered.length - 1;
 }
 
 function applySearchFilter() {
@@ -1097,6 +1379,7 @@ function updateSolvedStat() {
   const solvedCount = Object.keys(solved).length;
   const stat = document.getElementById('stat-solved');
   if (stat) stat.textContent = solvedCount;
+  renderCategoryOverview();
 }
 
 function updateHeroStats() {
@@ -1149,12 +1432,18 @@ function renderList() {
     panel.insertAdjacentHTML('beforeend', `<div class="ide-placeholder" style="display:none;height:220px" id="bug-empty-state"><span style="font-size:1.8rem">🧪</span><span>No bugs match this search</span></div>`);
   }
   applySearchFilter();
+  const activeRow = panel.querySelector('.bug-row.active');
+  activeRow?.scrollIntoView({ block: 'nearest' });
 }
 
 function syncSelectedBug() {
-  if (!current) return;
+  if (!current) {
+    updateActiveBar();
+    return;
+  }
   document.getElementById('fn-buggy').textContent = current.file;
   document.getElementById('fn-fixed').textContent = 'fixed_' + current.file;
+  updateActiveBar();
   switchTab(activeTab);
   showBuggyTerminal();
 }
@@ -1325,7 +1614,7 @@ function hl(src) {
 }
 function numbered(code) {
   return code.split('\n').map((l, i) =>
-    `<span class="ln-row"><span class="ln">${i+1}</span>${l}</span>`
+    `<span class="ln-row"><span class="ln-num">${i+1}</span>${l}</span>`
   ).join('\n');
 }
 </script>
