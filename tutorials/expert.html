@@ -10,6 +10,208 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/css/style.css" rel="stylesheet"/>
+<style>
+    .tutorials-content {
+        padding: 0 0 var(--space-4xl);
+    }
+    .tutorials-content > .container {
+        display: grid;
+        grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+        gap: var(--space-2xl);
+        align-items: start;
+        padding-top: var(--space-2xl);
+    }
+    .tutorials-main {
+        min-width: 0;
+        display: grid;
+        gap: var(--space-3xl);
+    }
+    .tutorial-section {
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-xl);
+        padding: var(--space-2xl);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+    .tutorial-section .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: var(--space-lg);
+        text-align: left;
+        margin-bottom: var(--space-md);
+    }
+    .tutorial-count {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(0,255,170,0.1);
+        border: 1px solid rgba(0,255,170,0.2);
+        color: var(--accent-primary);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+    .section-desc {
+        color: var(--text-secondary);
+        margin-bottom: var(--space-xl);
+        max-width: 70ch;
+    }
+    .tutorial-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-xl);
+    }
+    .tutorial-card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+        height: 100%;
+        background: var(--bg-card);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xl);
+        transition: var(--transition-base);
+    }
+    .tutorial-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(0,255,170,0.18);
+        box-shadow: var(--shadow-glow);
+    }
+    .card-header,
+    .card-footer,
+    .hero-stats {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-md);
+    }
+    .card-footer { margin-top: auto; }
+    .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+    .difficulty,
+    .diff-dots {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+    .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.12);
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+    .dot.filled {
+        background: var(--accent-primary);
+        border-color: rgba(0,255,170,0.35);
+        box-shadow: 0 0 12px rgba(0,255,170,0.25);
+    }
+    .level-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.38rem 0.8rem;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.76rem;
+        font-weight: 600;
+    }
+    .hero-subtitle {
+        color: var(--text-secondary);
+        max-width: 70ch;
+        margin: var(--space-md) 0 var(--space-xl);
+    }
+    .sidebar-section h3 {
+        font-family: var(--font-heading);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--text-muted);
+        margin-bottom: var(--space-md);
+        padding: 0 var(--space-md);
+    }
+    .prereq-list,
+    .cert-progress {
+        display: grid;
+        gap: var(--space-sm);
+    }
+    .prereq-item,
+    .cert-item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        padding: var(--space-md);
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: var(--radius-md);
+    }
+    .prereq-item:hover {
+        border-color: rgba(0,255,170,0.18);
+    }
+    .prereq-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 92px;
+        padding: 0.4rem 0.7rem;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 600;
+    }
+    .cert-item.completed .cert-icon {
+        color: var(--accent-primary);
+    }
+    .cert-item.current {
+        border-color: rgba(123, 92, 255, 0.32);
+        background: rgba(123, 92, 255, 0.08);
+    }
+    .load-more {
+        display: grid;
+        place-items: center;
+        gap: var(--space-md);
+        padding: var(--space-xl);
+        border: 1px dashed rgba(255,255,255,0.12);
+        border-radius: var(--radius-xl);
+        background: rgba(255,255,255,0.02);
+    }
+    .load-more .btn {
+        pointer-events: none;
+        opacity: 0.85;
+    }
+    .load-more-text {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+    }
+    @media (max-width: 1200px) {
+        .tutorials-content > .container {
+            grid-template-columns: 1fr;
+        }
+        .tutorial-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+    @media (max-width: 900px) {
+        .tutorial-grid {
+            grid-template-columns: 1fr;
+        }
+        .tutorial-section .section-header,
+        .card-header,
+        .card-footer,
+        .hero-stats {
+            align-items: flex-start;
+        }
+        .tutorial-section .section-header {
+            flex-direction: column;
+        }
+    }
+</style>
 </head>
 <body>
 <div class="top-bar">

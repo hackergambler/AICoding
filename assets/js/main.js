@@ -64,7 +64,7 @@ function buildSiteUrl(relativePath) {
 }
 
 function ensureDiscoverNavLink() {
-    document.querySelectorAll('.nav-menu').forEach(menu => {
+    document.querySelectorAll('.nav-menu, .nav-links').forEach(menu => {
         const hasDiscover = Array.from(menu.querySelectorAll('a')).some(a => /discover\.html/.test(a.getAttribute('href') || ''));
         if (hasDiscover) return;
         const item = document.createElement('li');
@@ -124,7 +124,7 @@ if (navSearchInputEl) {
 
 // Mobile menu toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-const navMenu = document.querySelector('.nav-menu');
+const navMenu = document.querySelector('.nav-menu, .nav-links');
 
 if (mobileMenuBtn && navMenu) {
     mobileMenuBtn.addEventListener('click', () => {
