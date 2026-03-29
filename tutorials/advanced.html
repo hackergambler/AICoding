@@ -16,7 +16,85 @@
             .tutorials-grid,
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
         }
-    </style>
+    
+
+    .tutorials-main .container.advanced-layout {
+        display: grid;
+        grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+        gap: var(--space-2xl);
+        align-items: start;
+    }
+    .advanced-sidebar {
+        position: sticky;
+        top: calc(42px + 84px + var(--space-lg));
+        display: grid;
+        gap: var(--space-lg);
+    }
+    .sidebar-card {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+    .sidebar-card h3 {
+        margin-bottom: var(--space-md);
+        font-family: var(--font-heading);
+        font-size: 0.95rem;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+    }
+    .sidebar-card p { color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--space-md); }
+    .advanced-nav, .advanced-checklist { display: grid; gap: .6rem; padding: 0; margin: 0; list-style: none; }
+    .advanced-nav a {
+        display: flex; justify-content: space-between; align-items: center;
+        gap: .75rem; text-decoration: none; color: var(--text-primary);
+        padding: .7rem .85rem; border-radius: var(--radius-md);
+        background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+        transition: var(--transition-base);
+    }
+    .advanced-nav a:hover { border-color: rgba(0,255,170,0.2); transform: translateX(2px); }
+    .advanced-main { min-width: 0; display: grid; gap: var(--space-2xl); }
+    .tutorials-main .section-title, .tutorials-main .section-subtitle { text-align: left; }
+    .category-block {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: var(--radius-xl);
+        padding: var(--space-2xl);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+    }
+    .category-header { display:flex; align-items:flex-start; justify-content:space-between; gap: var(--space-lg); margin-bottom: var(--space-xl); }
+    .category-info { display:flex; gap: var(--space-md); align-items:flex-start; }
+    .category-icon { width: 52px; height: 52px; display:grid; place-items:center; border-radius:16px; background: rgba(168,85,247,0.12); font-size: 1.35rem; }
+    .tutorials-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl); }
+    .tutorial-card { display:flex; flex-direction:column; gap: var(--space-md); min-height: 100%; background: var(--bg-card); border:1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); padding: var(--space-xl); }
+    .tutorial-card:hover { transform: translateY(-4px); border-color: rgba(0,255,170,0.18); box-shadow: var(--shadow-glow); }
+    .card-meta { display:flex; flex-wrap:wrap; gap: var(--space-md); color: var(--text-muted); }
+    .category-subcategories { margin-top: var(--space-xl); padding-top: var(--space-xl); border-top: 1px solid rgba(255,255,255,0.08); }
+    .category-subcategories h5 { margin-bottom: var(--space-md); font-family: var(--font-heading); }
+    .subcategory-tags { display:flex; flex-wrap:wrap; gap: var(--space-sm); }
+    .subcategory-tags .tag { display:inline-flex; align-items:center; padding:.45rem .8rem; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); text-decoration:none; color: var(--text-secondary); }
+    .subcategory-tags .tag:hover { color: var(--text-primary); border-color: rgba(0,255,170,0.2); }
+    .readiness-card { background: linear-gradient(135deg, rgba(123,92,255,0.12), rgba(0,255,170,0.08)); }
+    .advanced-checklist li { display:flex; gap:.7rem; align-items:flex-start; color: var(--text-secondary); }
+    .advanced-checklist li::before { content:'✓'; color: var(--accent-primary); font-weight:700; }
+    .advanced-sidebar .btn { width: 100%; justify-content: center; }
+    .paths-section .container, .next-level-section .container { max-width: 1280px; }
+    .paths-grid { display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-xl); }
+    .path-card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015)); border:1px solid rgba(255,255,255,0.08); border-radius: var(--radius-xl); padding: var(--space-2xl); box-shadow: 0 18px 40px rgba(0,0,0,0.16); }
+    .path-header, .path-footer { display:flex; justify-content:space-between; gap: var(--space-md); align-items:flex-start; }
+    .path-modules { display:flex; flex-wrap:wrap; gap: var(--space-sm); margin: var(--space-lg) 0; }
+    .path-modules .module { padding:.4rem .75rem; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 1200px) {
+        .tutorials-main .container.advanced-layout { grid-template-columns: 1fr; }
+        .advanced-sidebar { position: static; }
+    }
+    @media (max-width: 900px) {
+        .tutorials-grid, .paths-grid { grid-template-columns: 1fr; }
+        .category-header, .path-header, .path-footer { flex-direction: column; }
+    }
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -226,7 +304,33 @@
 </section>
 <!-- Main Tutorial Categories -->
 <section class="section tutorials-main">
-<div class="container">
+<div class="container advanced-layout"><aside class="advanced-sidebar">
+<div class="sidebar-card readiness-card">
+<h3>Advanced route map</h3>
+<p>Use this page like a senior-level roadmap: pick one system domain, build one real implementation, then support it with the matching playbook and debugging route.</p>
+<a class="btn btn-primary btn-sm" href="playbooks/roles.html">Open role paths</a>
+</div>
+<div class="sidebar-card">
+<h3>Jump to category</h3>
+<ul class="advanced-nav">
+<li><a href="#multi-agent"><span>🤖 Multi-agent systems</span><span>→</span></a></li>
+<li><a href="#architecture"><span>🏗️ Architecture</span><span>→</span></a></li>
+<li><a href="#performance"><span>⚡ Performance</span><span>→</span></a></li>
+<li><a href="#security"><span>🔒 Security</span><span>→</span></a></li>
+<li><a href="#mlops"><span>🔄 MLOps</span><span>→</span></a></li>
+<li><a href="#fine-tuning"><span>🎯 Fine-tuning</span><span>→</span></a></li>
+</ul>
+</div>
+<div class="sidebar-card">
+<h3>How to use this level</h3>
+<ul class="advanced-checklist">
+<li>Open one category and complete two playbooks end to end.</li>
+<li>Pair each build with one debugging route before you move on.</li>
+<li>Capture metrics: latency, cost, reliability, and eval score.</li>
+<li>Finish with a role path so the knowledge becomes job-shaped.</li>
+</ul>
+</div>
+</aside><div class="advanced-main">
 <h2 class="section-title">Tutorial Categories</h2>
 <p class="section-subtitle">Deep-dive into advanced AI development across 8 comprehensive domains</p>
 <!-- Category 1: Multi-Agent Systems -->
@@ -1091,7 +1195,7 @@
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
 <!-- Learning Paths Section -->
 <section class="section paths-section">

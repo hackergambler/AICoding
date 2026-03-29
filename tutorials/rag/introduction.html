@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG Introduction — Retrieval-Augmented Generation | AI Coding Academy</title>
-    <meta name="description" content="Understand how RAG works: embeddings, vector stores, retrieval, and generation pipeline.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAG Introduction — Retrieval-Augmented Generation | AI Coding Academy</title>
+<meta content="Understand how RAG works: embeddings, vector stores, retrieval, and generation pipeline." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,73 +64,71 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>Introduction</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 30 min</span>
-                <span class="lesson-meta-item">📚 Module 4 · Lesson 1</span>
-            </div>
-            <h1 class="lesson-title">RAG — Retrieval-Augmented Generation</h1>
-            <p class="lesson-description">Learn why RAG exists, how it works end-to-end, and build a complete RAG pipeline from scratch with embeddings, vector stores, and LLMs.</p>
-        </header>
-        <div class="toc"><h3>📋 Table of Contents</h3><ol>
-            <li><a href="#why">Why RAG?</a></li>
-            <li><a href="#how">How RAG Works</a></li>
-            <li><a href="#embeddings">Embeddings & Similarity</a></li>
-            <li><a href="#vectorstore">Vector Stores</a></li>
-            <li><a href="#pipeline">Complete RAG Pipeline</a></li>
-            <li><a href="#evaluation">Evaluating RAG Quality</a></li>
-        </ol></div>
-
-        <div class="lesson-content" id="why">
-            <h2 id="how">1. Why RAG?</h2>
-            <p>LLMs have a knowledge cutoff and can't access private data. RAG (Retrieval-Augmented Generation) solves this by retrieving relevant documents at query time and injecting them into the prompt — giving the model up-to-date, domain-specific knowledge without fine-tuning.</p>
-            <ul>
-                <li>✅ No training required — add documents any time</li>
-                <li>✅ Cites sources — traceable and auditable answers</li>
-                <li>✅ Works with private data — never leaves your system</li>
-                <li>✅ Cheaper than fine-tuning — no GPU costs</li>
-                <li>❌ Quality depends on retrieval quality</li>
-                <li>❌ Limited by context window size</li>
-            </ul>
-        </div>
-
-        <div class="lesson-content" id="embeddings">
-            <h2>2. Embeddings & Similarity</h2>
-            <p>An embedding is a vector (array of floats) representing the semantic meaning of text. Similar meanings → similar vectors → high cosine similarity.</p>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>Introduction</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-beginner">Beginner</span>
+<span class="lesson-meta-item">⏱️ 30 min</span>
+<span class="lesson-meta-item">📚 Module 4 · Lesson 1</span>
+</div>
+<h1 class="lesson-title">RAG — Retrieval-Augmented Generation</h1>
+<p class="lesson-description">Learn why RAG exists, how it works end-to-end, and build a complete RAG pipeline from scratch with embeddings, vector stores, and LLMs.</p>
+</header>
+<div class="toc"><h3>📋 Table of Contents</h3><ol>
+<li><a href="#why">Why RAG?</a></li>
+<li><a href="#how">How RAG Works</a></li>
+<li><a href="#embeddings">Embeddings &amp; Similarity</a></li>
+<li><a href="#vectorstore">Vector Stores</a></li>
+<li><a href="#pipeline">Complete RAG Pipeline</a></li>
+<li><a href="#evaluation">Evaluating RAG Quality</a></li>
+</ol></div>
+<div class="lesson-content" id="why">
+<h2 id="how">1. Why RAG?</h2>
+<p>LLMs have a knowledge cutoff and can't access private data. RAG (Retrieval-Augmented Generation) solves this by retrieving relevant documents at query time and injecting them into the prompt — giving the model up-to-date, domain-specific knowledge without fine-tuning.</p>
+<ul>
+<li>✅ No training required — add documents any time</li>
+<li>✅ Cites sources — traceable and auditable answers</li>
+<li>✅ Works with private data — never leaves your system</li>
+<li>✅ Cheaper than fine-tuning — no GPU costs</li>
+<li>❌ Quality depends on retrieval quality</li>
+<li>❌ Limited by context window size</li>
+</ul>
+</div>
+<div class="lesson-content" id="embeddings">
+<h2>2. Embeddings &amp; Similarity</h2>
+<p>An embedding is a vector (array of floats) representing the semantic meaning of text. Similar meanings → similar vectors → high cosine similarity.</p>
 <div class="code-block">
 <div class="code-block-label"><span>Python — compute embeddings and similarity</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> openai <span class="kw">import</span> OpenAI
@@ -137,11 +136,11 @@
 
 client = OpenAI()
 
-<span class="kw">def</span> <span class="fn">embed</span>(text: str) -> np.ndarray:
+<span class="kw">def</span> <span class="fn">embed</span>(text: str) -&gt; np.ndarray:
     res = client.embeddings.create(model=<span class="st">"text-embedding-3-small"</span>, input=text)
     <span class="kw">return</span> np.array(res.data[<span class="nu">0</span>].embedding)
 
-<span class="kw">def</span> <span class="fn">cosine_similarity</span>(a: np.ndarray, b: np.ndarray) -> float:
+<span class="kw">def</span> <span class="fn">cosine_similarity</span>(a: np.ndarray, b: np.ndarray) -&gt; float:
     <span class="kw">return</span> np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
 <span class="cm"># Test semantic similarity</span>
@@ -156,11 +155,10 @@ embeddings = [embed(s) <span class="kw">for</span> s <span class="kw">in</span> 
 <span class="kw">print</span>(<span class="st">f"Same topic:  {cosine_similarity(embeddings[0], embeddings[1]):.3f}"</span>)  <span class="cm"># ~0.95</span>
 <span class="kw">print</span>(<span class="st">f"Diff topic:  {cosine_similarity(embeddings[0], embeddings[2]):.3f}"</span>)  <span class="cm"># ~0.20</span></pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="vectorstore">
-            <h2>3. Vector Stores</h2>
-            <p>A vector store indexes embeddings for fast nearest-neighbor search. Common options: FAISS (local), Chroma (local), Pinecone (cloud), Weaviate (cloud).</p>
+</div>
+<div class="lesson-content" id="vectorstore">
+<h2>3. Vector Stores</h2>
+<p>A vector store indexes embeddings for fast nearest-neighbor search. Common options: FAISS (local), Chroma (local), Pinecone (cloud), Weaviate (cloud).</p>
 <div class="code-block">
 <div class="code-block-label"><span>Python — FAISS vector store from scratch</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">import</span> faiss
@@ -198,10 +196,9 @@ scores, indices = index.search(q_vec, k=<span class="nu">2</span>)
 <span class="kw">for</span> score, idx <span class="kw">in</span> zip(scores[<span class="nu">0</span>], indices[<span class="nu">0</span>]):
     <span class="kw">print</span>(<span class="st">f"[{score:.3f}] {documents[idx]}"</span>)</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="pipeline">
-            <h2>4. Complete RAG Pipeline</h2>
+</div>
+<div class="lesson-content" id="pipeline">
+<h2>4. Complete RAG Pipeline</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — end-to-end RAG with LangChain</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI, OpenAIEmbeddings
@@ -225,13 +222,13 @@ vectorstore = FAISS.from_documents(docs, embeddings)
 retriever = vectorstore.as_retriever(search_kwargs={<span class="st">"k"</span>: <span class="nu">3</span>})
 
 <span class="cm"># 3. RAG prompt</span>
-prompt = ChatPromptTemplate.from_template(<span class="st">&#34;&#34;&#34;Answer using ONLY the provided context.
+prompt = ChatPromptTemplate.from_template(<span class="st">"""Answer using ONLY the provided context.
 If the answer is not in the context, say "I do not have that information."
 
 Context:
 {context}
 
-Question: {question}&#34;&#34;&#34;</span>)
+Question: {question}"""</span>)
 
 <span class="cm"># 4. Build the chain</span>
 llm = ChatOpenAI(model=<span class="st">"gpt-4o-mini"</span>)
@@ -253,25 +250,24 @@ rag_chain = (
 answer = rag_chain.invoke(<span class="st">"How do I run a FastAPI app?"</span>)
 <span class="kw">print</span>(answer)</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="evaluation">
-            <h2>5. Evaluating RAG Quality</h2>
+</div>
+<div class="lesson-content" id="evaluation">
+<h2>5. Evaluating RAG Quality</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — faithfulness and relevance scores</span><button class="copy-btn">Copy</button></div>
-<pre><span class="kw">def</span> <span class="fn">evaluate_rag</span>(question: str, context: str, answer: str) -> dict:
-    <span class="st">&#34;&#34;&#34;Evaluate RAG output on faithfulness and relevance.&#34;&#34;&#34;</span>
+<pre><span class="kw">def</span> <span class="fn">evaluate_rag</span>(question: str, context: str, answer: str) -&gt; dict:
+    <span class="st">"""Evaluate RAG output on faithfulness and relevance."""</span>
     llm = ChatOpenAI(model=<span class="st">"gpt-4o-mini"</span>)
 
-    faithfulness_prompt = <span class="st">f&#34;&#34;&#34;Is this answer supported by the context?
+    faithfulness_prompt = <span class="st">f"""Is this answer supported by the context?
 Context: {context}
 Answer: {answer}
-Reply with a score 1-5 and one sentence reason. Format: SCORE: X | REASON: ...&#34;&#34;&#34;</span>
+Reply with a score 1-5 and one sentence reason. Format: SCORE: X | REASON: ..."""</span>
 
-    relevance_prompt = <span class="st">f&#34;&#34;&#34;Does this answer actually address the question?
+    relevance_prompt = <span class="st">f"""Does this answer actually address the question?
 Question: {question}
 Answer: {answer}
-Reply with a score 1-5 and one sentence reason. Format: SCORE: X | REASON: ...&#34;&#34;&#34;</span>
+Reply with a score 1-5 and one sentence reason. Format: SCORE: X | REASON: ..."""</span>
 
     faith_result = llm.invoke(faithfulness_prompt).content
     rel_result = llm.invoke(relevance_prompt).content
@@ -285,37 +281,64 @@ ans = rag_chain.invoke(q)
 scores = evaluate_rag(q, ctx, ans)
 <span class="kw">print</span>(scores)</pre>
 </div>
-        </div>
-        <nav class="lesson-nav">
-            <a href="../../tutorials/langchain/prompts.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Prompt Engineering</div>
-            </a>
-            <a href="document-loading.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Document Loading</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+</div>
+
+<div class="lesson-content lesson-expansion">
+<h2>Practice mission</h2>
+<p>Use this lesson in a mini retrieval app with 10–20 documents. Measure what improved, what broke, and whether the retrieved context actually changed the final answer quality.</p>
+<ol>
+<li>Implement the lesson in a clean file or route with explicit input and output contracts.</li>
+<li>Add one logging line for latency, one for failures, and one for the final output or trace ID.</li>
+<li>Test the happy path plus two edge cases that would matter in a real Rag workflow.</li>
+<li>Write down what you would monitor before calling this production-ready.</li>
+</ol>
+<div class="tip-box"><div class="tip-box-title">💡 What “done” looks like</div><p>You should be able to explain why the approach works, show one working run, name the top failure mode, and point to the next place in the stack where you would add safeguards.</p></div>
+<h2>Production checklist</h2>
+<ul>
+<li>Validate and sanitize inputs before they reach the model or tool layer.</li>
+<li>Keep logs or traces for the full run, not just the final answer.</li>
+<li>Add at least one regression example you can rerun after refactors.</li>
+<li>Document the fallback behaviour when the model, retriever, or tool fails.</li>
+<li>Record the next metric to improve: latency, groundedness, cost, or reliability.</li>
+</ul>
+<h2>Where to go next</h2>
+<ul>
+<li><a href="../../discover.html">Use Discover to find the next lesson in this track</a></li>
+<li><a href="../../projects/index.html">Open a project build and apply the concept end to end</a></li>
+<li><a href="../../debugging/index.html">Practice the debugging routes that match this lesson</a></li>
+<li><a href="../../courses/index.html">Return to the course hubs for a deeper progression path</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="../../tutorials/langchain/prompts.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Prompt Engineering</div>
+</a>
+<a class="next" href="document-loading.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Document Loading</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

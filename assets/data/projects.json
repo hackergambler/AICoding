@@ -281,6 +281,47 @@
     ]
   },
   {
+    "id": "p-grammar-checker",
+    "tier": 1,
+    "title": "Grammar Checker & Rewrite Assistant",
+    "difficulty": "Beginner",
+    "duration": "30 min",
+    "category": "Foundations",
+    "stack": [
+      "Python",
+      "OpenAI",
+      "FastAPI",
+      "HTML"
+    ],
+    "desc": "Build a grammar correction assistant that rewrites text, explains what changed, and returns a clean diff-friendly response for the user.",
+    "sections": [
+      {
+        "h2": "Prompt contract for grammar fixes",
+        "body": "Make the model return corrected text plus a short list of edits so the user can learn from the output instead of only receiving a rewrite.",
+        "code": {
+          "label": "Python - grammar prompt helper",
+          "src": "from openai import OpenAI\nclient = OpenAI()\n\ndef fix_grammar(text: str) -> str:\n    resp = client.chat.completions.create(\n        model='gpt-4o-mini',\n        messages=[\n            {'role':'system','content':'Correct grammar and clarity. Return corrected_text and key_edits.'},\n            {'role':'user','content': text}\n        ],\n        response_format={'type':'json_object'}\n    )\n    return resp.choices[0].message.content"
+        }
+      },
+      {
+        "h2": "FastAPI endpoint",
+        "body": "Expose a small endpoint that accepts raw text and returns corrected text, edits, and a confidence note for review-heavy use cases.",
+        "code": {
+          "label": "Python - api.py",
+          "src": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nfrom src.grammar import fix_grammar\n\napp = FastAPI()\n\nclass Payload(BaseModel):\n    text: str\n\n@app.post('/grammar-check')\ndef grammar_check(payload: Payload):\n    return {'result': fix_grammar(payload.text)}"
+        }
+      },
+      {
+        "h2": "Improve trust with edit explanations",
+        "body": "Show a short explanation for the most important corrections: tense, agreement, punctuation, and clarity. This turns the tool into a learning aid rather than a black-box rewrite.",
+        "code": {
+          "label": "JSON - expected response shape",
+          "src": "{\n  \"corrected_text\": \"Your corrected paragraph\",\n  \"key_edits\": [\n    \"Changed verb tense for consistency\",\n    \"Fixed subject-verb agreement\",\n    \"Improved punctuation in the second sentence\"\n  ]\n}"
+        }
+      }
+    ]
+  },
+  {
     "id": "p-meeting-notes",
     "tier": 1,
     "title": "Meeting Transcript Summarizer",

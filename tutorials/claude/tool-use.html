@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Tool Use & Function Calling | AI Coding Academy</title>
-    <meta name="description" content="Master Claude's tool use API: define tools, parse tool calls, execute functions, multi-tool workflows, and real-world agents.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Claude Tool Use &amp; Function Calling | AI Coding Academy</title>
+<meta content="Master Claude's tool use API: define tools, parse tool calls, execute functions, multi-tool workflows, and real-world agents." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,78 +64,75 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/claude.html">Claude API</a><span class="separator">/</span>
-            <span>Tool Use</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 35 min</span>
-                <span class="lesson-meta-item">📚 Module 1 · Lesson 3</span>
-            </div>
-            <h1 class="lesson-title">Tool Use & Function Calling</h1>
-            <p class="lesson-description">Give Claude the ability to call your code. Define tools, parse tool requests, execute functions, and build multi-step agentic workflows.</p>
-        </header>
-
-        <div class="toc">
-            <h3>📋 Table of Contents</h3>
-            <ol>
-                <li><a href="#concept">How Tool Use Works</a></li>
-                <li><a href="#define">Defining Tools (JSON Schema)</a></li>
-                <li><a href="#basic">Basic Tool Call Loop</a></li>
-                <li><a href="#multi">Multi-Tool Workflows</a></li>
-                <li><a href="#parallel">Parallel Tool Calls</a></li>
-                <li><a href="#realworld">Real-World Tool Examples</a></li>
-                <li><a href="#errors">Error Handling in Tool Results</a></li>
-                <li><a href="#agent">Building a Simple Agent</a></li>
-            </ol>
-        </div>
-
-        <div class="lesson-content" id="concept">
-            <h2 id="multi">1. How Tool Use Works</h2>
-            <p>Tool use is a 3-step loop: <strong>(1)</strong> Claude decides to call a tool and returns a <code>tool_use</code> block. <strong>(2)</strong> Your code executes the tool. <strong>(3)</strong> You send the result back as a <code>tool_result</code> message. Repeat until Claude returns <code>end_turn</code>.</p>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/claude.html">Claude API</a><span class="separator">/</span>
+<span>Tool Use</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 35 min</span>
+<span class="lesson-meta-item">📚 Module 1 · Lesson 3</span>
+</div>
+<h1 class="lesson-title">Tool Use &amp; Function Calling</h1>
+<p class="lesson-description">Give Claude the ability to call your code. Define tools, parse tool requests, execute functions, and build multi-step agentic workflows.</p>
+</header>
+<div class="toc">
+<h3>📋 Table of Contents</h3>
+<ol>
+<li><a href="#concept">How Tool Use Works</a></li>
+<li><a href="#define">Defining Tools (JSON Schema)</a></li>
+<li><a href="#basic">Basic Tool Call Loop</a></li>
+<li><a href="#multi">Multi-Tool Workflows</a></li>
+<li><a href="#parallel">Parallel Tool Calls</a></li>
+<li><a href="#realworld">Real-World Tool Examples</a></li>
+<li><a href="#errors">Error Handling in Tool Results</a></li>
+<li><a href="#agent">Building a Simple Agent</a></li>
+</ol>
+</div>
+<div class="lesson-content" id="concept">
+<h2 id="multi">1. How Tool Use Works</h2>
+<p>Tool use is a 3-step loop: <strong>(1)</strong> Claude decides to call a tool and returns a <code>tool_use</code> block. <strong>(2)</strong> Your code executes the tool. <strong>(3)</strong> You send the result back as a <code>tool_result</code> message. Repeat until Claude returns <code>end_turn</code>.</p>
 <div class="info-box"><div class="info-box-title">ℹ️ Stop Reason</div><p>When Claude wants to call a tool, <code>stop_reason</code> is <code>"tool_use"</code>. When it's done, <code>stop_reason</code> is <code>"end_turn"</code>. Always check this.</p></div>
-        </div>
-
-        <div class="lesson-content" id="define">
-            <h2>2. Defining Tools (JSON Schema)</h2>
+</div>
+<div class="lesson-content" id="define">
+<h2>2. Defining Tools (JSON Schema)</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — tool definition structure</span><button class="copy-btn">Copy</button></div>
 <pre>tools = [
     {
         <span class="st">"name"</span>: <span class="st">"get_weather"</span>,
-        <span class="st">"description"</span>: <span class="st">&#34;&#34;&#34;Get current weather for a city.
-Returns temperature in Celsius and conditions.&#34;&#34;&#34;</span>,
+        <span class="st">"description"</span>: <span class="st">"""Get current weather for a city.
+Returns temperature in Celsius and conditions."""</span>,
         <span class="st">"input_schema"</span>: {
             <span class="st">"type"</span>: <span class="st">"object"</span>,
             <span class="st">"properties"</span>: {
@@ -167,10 +165,9 @@ Returns temperature in Celsius and conditions.&#34;&#34;&#34;</span>,
     }
 ]</pre>
 </div><div class="tip-box"><div class="tip-box-title">💡 Tool Descriptions Matter</div><p>Claude reads your tool descriptions to decide when and how to call them. Be specific. Include units, formats, and limitations. A good description is worth more than a complex schema.</p></div>
-        </div>
-
-        <div class="lesson-content" id="basic">
-            <h2>3. Basic Tool Call Loop</h2>
+</div>
+<div class="lesson-content" id="basic">
+<h2>3. Basic Tool Call Loop</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — complete tool call loop</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">import</span> json, anthropic
@@ -178,11 +175,11 @@ Returns temperature in Celsius and conditions.&#34;&#34;&#34;</span>,
 client = anthropic.Anthropic()
 
 <span class="cm"># Your real tool implementations</span>
-<span class="kw">def</span> <span class="fn">get_weather</span>(city: str, units: str = <span class="st">"celsius"</span>) -> dict:
+<span class="kw">def</span> <span class="fn">get_weather</span>(city: str, units: str = <span class="st">"celsius"</span>) -&gt; dict:
     <span class="cm"># In production: call a real weather API</span>
     <span class="kw">return</span> {<span class="st">"city"</span>: city, <span class="st">"temp"</span>: <span class="nu">22</span>, <span class="st">"condition"</span>: <span class="st">"Partly cloudy"</span>, <span class="st">"units"</span>: units}
 
-<span class="kw">def</span> <span class="fn">calculate</span>(expression: str) -> dict:
+<span class="kw">def</span> <span class="fn">calculate</span>(expression: str) -&gt; dict:
     <span class="kw">try</span>:
         result = eval(expression, {<span class="st">"__builtins__"</span>: {}})  <span class="cm"># safe eval</span>
         <span class="kw">return</span> {<span class="st">"result"</span>: result}
@@ -191,7 +188,7 @@ client = anthropic.Anthropic()
 
 TOOLS_MAP = {<span class="st">"get_weather"</span>: get_weather, <span class="st">"calculate"</span>: calculate}
 
-<span class="kw">def</span> <span class="fn">run_agent</span>(user_message: str) -> str:
+<span class="kw">def</span> <span class="fn">run_agent</span>(user_message: str) -&gt; str:
     messages = [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: user_message}]
 
     <span class="kw">while True</span>:
@@ -230,16 +227,15 @@ TOOLS_MAP = {<span class="st">"get_weather"</span>: get_weather, <span class="st
 
 <span class="kw">print</span>(run_agent(<span class="st">"What's the weather in Tokyo? Also, what is 144 * 12?"</span>))</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="parallel">
-            <h2>4. Parallel Tool Calls</h2>
-            <p>Claude can request multiple tools at once. Your code should run them in parallel for efficiency.</p>
+</div>
+<div class="lesson-content" id="parallel">
+<h2>4. Parallel Tool Calls</h2>
+<p>Claude can request multiple tools at once. Your code should run them in parallel for efficiency.</p>
 <div class="code-block">
 <div class="code-block-label"><span>Python — parallel execution with asyncio</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">import</span> asyncio, json, anthropic
 
-<span class="kw">async def</span> <span class="fn">execute_tools_parallel</span>(tool_blocks: list) -> list:
+<span class="kw">async def</span> <span class="fn">execute_tools_parallel</span>(tool_blocks: list) -&gt; list:
     <span class="kw">async def</span> <span class="fn">run_one</span>(block):
         fn = TOOLS_MAP.get(block.name)
         result = fn(**block.input) <span class="kw">if</span> fn <span class="kw">else</span> {<span class="st">"error"</span>: <span class="st">"not found"</span>}
@@ -250,16 +246,15 @@ TOOLS_MAP = {<span class="st">"get_weather"</span>: get_weather, <span class="st
         }
     <span class="kw">return</span> <span class="kw">await</span> asyncio.gather(*[run_one(b) <span class="kw">for</span> b <span class="kw">in</span> tool_blocks <span class="kw">if</span> b.type == <span class="st">"tool_use"</span>])</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="realworld">
-            <h2>5. Real-World Tool Examples</h2>
+</div>
+<div class="lesson-content" id="realworld">
+<h2>5. Real-World Tool Examples</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — database query tool</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">import</span> sqlite3
 
-<span class="kw">def</span> <span class="fn">query_database</span>(sql: str, params: list = <span class="kw">None</span>) -> dict:
-    <span class="st">&#34;&#34;&#34;Execute a read-only SQL query and return results.&#34;&#34;&#34;</span>
+<span class="kw">def</span> <span class="fn">query_database</span>(sql: str, params: list = <span class="kw">None</span>) -&gt; dict:
+    <span class="st">"""Execute a read-only SQL query and return results."""</span>
     <span class="kw">if not</span> sql.strip().upper().startswith(<span class="st">"SELECT"</span>):
         <span class="kw">return</span> {<span class="st">"error"</span>: <span class="st">"Only SELECT queries are allowed"</span>}
     <span class="kw">try</span>:
@@ -290,8 +285,8 @@ db_tool = {
 <pre><span class="kw">import</span> httpx
 <span class="kw">from</span> bs4 <span class="kw">import</span> BeautifulSoup
 
-<span class="kw">def</span> <span class="fn">fetch_webpage</span>(url: str, selector: str = <span class="st">"body"</span>) -> dict:
-    <span class="st">&#34;&#34;&#34;Fetch and extract text from a webpage.&#34;&#34;&#34;</span>
+<span class="kw">def</span> <span class="fn">fetch_webpage</span>(url: str, selector: str = <span class="st">"body"</span>) -&gt; dict:
+    <span class="st">"""Fetch and extract text from a webpage."""</span>
     <span class="kw">try</span>:
         r = httpx.get(url, timeout=<span class="nu">10</span>, headers={<span class="st">"User-Agent"</span>: <span class="st">"Mozilla/5.0"</span>})
         soup = BeautifulSoup(r.text, <span class="st">"html.parser"</span>)
@@ -301,17 +296,16 @@ db_tool = {
     <span class="kw">except Exception</span> <span class="kw">as</span> e:
         <span class="kw">return</span> {<span class="st">"error"</span>: str(e)}</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="errors">
-            <h2>6. Error Handling in Tool Results</h2>
+</div>
+<div class="lesson-content" id="errors">
+<h2>6. Error Handling in Tool Results</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — returning errors as tool results</span><button class="copy-btn">Copy</button></div>
 <pre><span class="cm"># Never raise exceptions inside tool logic.
 # Always return a dict with an "error" key.
 # Claude will read the error and decide what to do.</span>
 
-<span class="kw">def</span> <span class="fn">safe_tool</span>(param: str) -> dict:
+<span class="kw">def</span> <span class="fn">safe_tool</span>(param: str) -&gt; dict:
     <span class="kw">try</span>:
         <span class="cm"># ... do work ...</span>
         <span class="kw">return</span> {<span class="st">"result"</span>: <span class="st">"success"</span>}
@@ -328,10 +322,9 @@ tool_results.append({
     <span class="st">"is_error"</span>: <span class="st">"error"</span> <span class="kw">in</span> result
 })</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="agent">
-            <h2>7. Building a Simple Research Agent</h2>
+</div>
+<div class="lesson-content" id="agent">
+<h2>7. Building a Simple Research Agent</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — research agent with web + calculator tools</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">import</span> json, httpx, anthropic
@@ -339,13 +332,13 @@ tool_results.append({
 
 client = anthropic.Anthropic()
 
-<span class="kw">def</span> <span class="fn">web_search</span>(query: str) -> dict:
-    r = httpx.get(<span class="st">f"https://api.duckduckgo.com/?q={query}&format=json"</span>, timeout=<span class="nu">8</span>)
+<span class="kw">def</span> <span class="fn">web_search</span>(query: str) -&gt; dict:
+    r = httpx.get(<span class="st">f"https://api.duckduckgo.com/?q={query}&amp;format=json"</span>, timeout=<span class="nu">8</span>)
     data = r.json()
     abstract = data.get(<span class="st">"AbstractText"</span>, <span class="st">""</span>)
     <span class="kw">return</span> {<span class="st">"summary"</span>: abstract[:<span class="nu">500</span>] <span class="kw">if</span> abstract <span class="kw">else</span> <span class="st">"No results found."</span>}
 
-<span class="kw">def</span> <span class="fn">calculate</span>(expr: str) -> dict:
+<span class="kw">def</span> <span class="fn">calculate</span>(expr: str) -&gt; dict:
     <span class="kw">try</span>: <span class="kw">return</span> {<span class="st">"result"</span>: eval(expr, {<span class="st">"__builtins__"</span>: {}})}
     <span class="kw">except Exception</span> <span class="kw">as</span> e: <span class="kw">return</span> {<span class="st">"error"</span>: str(e)}
 
@@ -357,7 +350,7 @@ TOOLS = [
 ]
 FN = {<span class="st">"web_search"</span>: web_search, <span class="st">"calculate"</span>: calculate}
 
-<span class="kw">def</span> <span class="fn">research_agent</span>(question: str, max_steps: int = <span class="nu">10</span>) -> str:
+<span class="kw">def</span> <span class="fn">research_agent</span>(question: str, max_steps: int = <span class="nu">10</span>) -&gt; str:
     msgs = [{<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: question}]
     <span class="kw">for</span> _ <span class="kw">in</span> range(max_steps):
         resp = client.messages.create(model=<span class="st">"claude-opus-4-5"</span>, max_tokens=<span class="nu">1024</span>, tools=TOOLS, messages=msgs)
@@ -371,38 +364,64 @@ FN = {<span class="st">"web_search"</span>: web_search, <span class="st">"calcul
 
 <span class="kw">print</span>(research_agent(<span class="st">"What is the population of Japan? Calculate how many people that is per square km (area 377,975 km²)."</span>))</pre>
 </div>
-        </div>
+</div>
 
-        <nav class="lesson-nav">
-            <a href="messages-api.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Messages API Deep Dive</div>
-            </a>
-            <a href="prompt-caching.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Prompt Caching</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<div class="lesson-content lesson-expansion">
+<h2>Practice mission</h2>
+<p>Wrap this Claude concept in a small script or route and compare prompt structure, streaming, and tool behaviour with at least three real inputs from your own domain.</p>
+<ol>
+<li>Implement the lesson in a clean file or route with explicit input and output contracts.</li>
+<li>Add one logging line for latency, one for failures, and one for the final output or trace ID.</li>
+<li>Test the happy path plus two edge cases that would matter in a real Claude workflow.</li>
+<li>Write down what you would monitor before calling this production-ready.</li>
+</ol>
+<div class="tip-box"><div class="tip-box-title">💡 What “done” looks like</div><p>You should be able to explain why the approach works, show one working run, name the top failure mode, and point to the next place in the stack where you would add safeguards.</p></div>
+<h2>Production checklist</h2>
+<ul>
+<li>Validate and sanitize inputs before they reach the model or tool layer.</li>
+<li>Keep logs or traces for the full run, not just the final answer.</li>
+<li>Add at least one regression example you can rerun after refactors.</li>
+<li>Document the fallback behaviour when the model, retriever, or tool fails.</li>
+<li>Record the next metric to improve: latency, groundedness, cost, or reliability.</li>
+</ul>
+<h2>Where to go next</h2>
+<ul>
+<li><a href="../../discover.html">Use Discover to find the next lesson in this track</a></li>
+<li><a href="../../projects/index.html">Open a project build and apply the concept end to end</a></li>
+<li><a href="../../debugging/index.html">Practice the debugging routes that match this lesson</a></li>
+<li><a href="../../courses/index.html">Return to the course hubs for a deeper progression path</a></li>
+</ul>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="messages-api.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Messages API Deep Dive</div>
+</a>
+<a class="next" href="prompt-caching.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Prompt Caching</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

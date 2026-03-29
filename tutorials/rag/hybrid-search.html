@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hybrid Search for RAG | AI Coding Academy</title>
-    <meta name="description" content="Learn how to combine lexical and semantic retrieval for stronger RAG systems. Covers score fusion, evaluation, failure modes, and implementation patterns.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hybrid Search for RAG | AI Coding Academy</title>
+<meta content="Learn how to combine lexical and semantic retrieval for stronger RAG systems. Covers score fusion, evaluation, failure modes, and implementation patterns." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -65,90 +66,85 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .compare-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>Hybrid Search</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 42 min</span>
-            </div>
-            <h1 class="lesson-title">Hybrid Search: BM25 + Vector Retrieval</h1>
-            <p class="lesson-description">Combine keyword and embedding retrieval the right way so your RAG system stops missing exact terms while still understanding semantic intent.</p>
-        </header>
-
-        <div class="adsense-container">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8668540803235423" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-        <nav class="toc">
-            <h3>In This Lesson</h3>
-            <ol>
-                <li><a href="#why-hybrid">Why Pure Vector Search Falls Short</a></li>
-                <li><a href="#bm25">BM25 Keyword Search</a></li>
-                <li><a href="#ensemble">EnsembleRetriever in LangChain</a></li>
-                <li><a href="#rrf">Reciprocal Rank Fusion</a></li>
-                <li><a href="#pinecone">Hybrid Search with Pinecone</a></li>
-                <li><a href="#exercise">Hands-on Exercise</a></li>
-            </ol>
-        </nav>
-
-        
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>Hybrid Search</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 42 min</span>
+</div>
+<h1 class="lesson-title">Hybrid Search: BM25 + Vector Retrieval</h1>
+<p class="lesson-description">Combine keyword and embedding retrieval the right way so your RAG system stops missing exact terms while still understanding semantic intent.</p>
+</header>
+<div class="adsense-container">
+<ins class="adsbygoogle" data-ad-client="ca-pub-8668540803235423" data-ad-format="auto" data-ad-slot="auto" data-full-width-responsive="true" style="display:block"></ins>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<nav class="toc">
+<h3>In This Lesson</h3>
+<ol>
+<li><a href="#why-hybrid">Why Pure Vector Search Falls Short</a></li>
+<li><a href="#bm25">BM25 Keyword Search</a></li>
+<li><a href="#ensemble">EnsembleRetriever in LangChain</a></li>
+<li><a href="#rrf">Reciprocal Rank Fusion</a></li>
+<li><a href="#pinecone">Hybrid Search with Pinecone</a></li>
+<li><a href="#exercise">Hands-on Exercise</a></li>
+</ol>
+</nav>
 <div class="lesson-content">
-    <h2>Objective &amp; why hybrid search matters</h2>
-    <p>Dense retrieval is great at semantic similarity, but it can miss rare tokens, SKUs, legal clause names, or product IDs. Lexical retrieval is excellent at exact matches, but often misses paraphrases. <strong>Hybrid search</strong> combines both so the system can recover precise evidence <em>and</em> broader meaning.</p>
-    <ul>
-        <li><strong>Lexical retrieval</strong> catches exact words, abbreviations, and high-signal terms.</li>
-        <li><strong>Dense retrieval</strong> catches paraphrases and conceptually related passages.</li>
-        <li><strong>Fusion</strong> merges the candidate lists into one ranked result set.</li>
-    </ul>
-
-    <div class="code-block"><div class="code-block-label"><span>Python — hybrid retrieval with BM25 + embeddings</span><button class="copy-btn">Copy</button></div><pre>from rank_bm25 import BM25Okapi
+<h2 id="why-hybrid">Objective &amp; why hybrid search matters</h2>
+<p>Dense retrieval is great at semantic similarity, but it can miss rare tokens, SKUs, legal clause names, or product IDs. Lexical retrieval is excellent at exact matches, but often misses paraphrases. <strong>Hybrid search</strong> combines both so the system can recover precise evidence <em>and</em> broader meaning.</p>
+<ul>
+<li><strong>Lexical retrieval</strong> catches exact words, abbreviations, and high-signal terms.</li>
+<li><strong>Dense retrieval</strong> catches paraphrases and conceptually related passages.</li>
+<li><strong>Fusion</strong> merges the candidate lists into one ranked result set.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — hybrid retrieval with BM25 + embeddings</span><button class="copy-btn">Copy</button></div><pre>from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
 chunks = [
-    &quot;The invoice dispute workflow starts in the billing queue.&quot;,
-    &quot;Account lockouts should be escalated to identity support.&quot;,
-    &quot;Refunds for duplicate charges require finance approval.&quot;,
+    "The invoice dispute workflow starts in the billing queue.",
+    "Account lockouts should be escalated to identity support.",
+    "Refunds for duplicate charges require finance approval.",
 ]
 
 tokenized = [chunk.lower().split() for chunk in chunks]
 bm25 = BM25Okapi(tokenized)
-encoder = SentenceTransformer(&quot;all-MiniLM-L6-v2&quot;)
+encoder = SentenceTransformer("all-MiniLM-L6-v2")
 chunk_vectors = encoder.encode(chunks, normalize_embeddings=True)
 
 
@@ -164,64 +160,58 @@ def hybrid_search(query: str, k: int = 3):
     ranked_ids = np.argsort(fused)[::-1][:k]
     return [(chunks[i], float(fused[i])) for i in ranked_ids]
 
-print(hybrid_search(&quot;How do duplicate-charge refunds get handled?&quot;))</pre></div>
-
-    <h2>How score fusion works</h2>
-    <ol>
-        <li><strong>Generate two candidate sets.</strong> Run lexical and dense retrieval independently.</li>
-        <li><strong>Normalize the score spaces.</strong> BM25 and cosine scores are not directly comparable.</li>
-        <li><strong>Fuse with a simple weighted sum or reciprocal-rank fusion.</strong> Start simple before inventing complex rankers.</li>
-        <li><strong>Evaluate by query type.</strong> Product-ID queries and conceptual questions often need different weights.</li>
-    </ol>
-
-    <div class="tip-box"><div class="tip-box-title">💡 A practical default</div><p>When you do not yet have strong evaluation data, use hybrid search as the safer starting point for enterprise RAG. Exact terminology matters too much in support, compliance, finance, and internal documentation to rely on dense retrieval alone.</p></div>
-
-    <h2>Failure patterns</h2>
-    <ul>
-        <li><strong>No normalization:</strong> one scorer dominates simply because its scale is larger.</li>
-        <li><strong>Bad chunking:</strong> fusion cannot rescue passages that were split in ways that destroy meaning.</li>
-        <li><strong>No query analysis:</strong> all queries are treated the same, even when some are clearly keyword-heavy.</li>
-        <li><strong>Only top-1 evaluation:</strong> hybrid search is often valuable because it improves candidate recall before reranking.</li>
-    </ul>
-
-    <h2>Hands-on exercise</h2>
-    <p>Take 25 real questions from your docs or product knowledge base. Label each as <em>keyword-heavy</em>, <em>semantic</em>, or <em>mixed</em>. Compare dense-only, BM25-only, and hybrid retrieval using precision@5. Then test whether a reranker on top of hybrid beats the simple fusion baseline.</p>
-
-    <h2>Real-world use case</h2>
-    <p>An internal support assistant often needs to retrieve answers containing exact names like billing codes, escalation queues, product SKUs, and environment variables. Hybrid search works well because those exact tokens matter, but users still phrase their questions naturally. That is exactly the gap fusion closes.</p>
-
-    <div class="info-box"><div class="info-box-title">Best follow-on routes</div><p>Continue with <a href="rag-evaluation.html">RAG Evaluation</a> to measure whether your fusion logic helped, then study <a href="../../tutorials/agents/tool-design.html">Tool Design</a> and the <a href="../playbooks/performance.html">Performance Playbook</a> if you want to turn retrieval into a production subsystem.</p></div>
+print(hybrid_search("How do duplicate-charge refunds get handled?"))</pre></div><h3 id="bm25">BM25 keyword search</h3><p>BM25 still matters because many enterprise queries contain exact entity names, ticket IDs, table names, policy codes, and product SKUs. Pure vector search often misses these lexical matches even when the user clearly expects them. A strong hybrid retriever keeps both signals: lexical precision and semantic recall.</p>
+<h2 id="fusion">How score fusion works</h2>
+<ol>
+<li><strong>Generate two candidate sets.</strong> Run lexical and dense retrieval independently.</li>
+<li><strong>Normalize the score spaces.</strong> BM25 and cosine scores are not directly comparable.</li>
+<li><strong>Fuse with a simple weighted sum or reciprocal-rank fusion.</strong> Start simple before inventing complex rankers.</li>
+<li><strong>Evaluate by query type.</strong> Product-ID queries and conceptual questions often need different weights.</li>
+</ol>
+<div class="tip-box"><div class="tip-box-title">💡 A practical default</div><p>When you do not yet have strong evaluation data, use hybrid search as the safer starting point for enterprise RAG. Exact terminology matters too much in support, compliance, finance, and internal documentation to rely on dense retrieval alone.</p></div><h3 id="pinecone">Hybrid search with Pinecone</h3><p>When your vector database supports hybrid queries, push lexical and vector scoring closer to the index so you can keep latency under control while still returning better first-page candidates.</p><h3 id="rrf">Reciprocal Rank Fusion</h3><p>RRF works well when two retrieval systems return very different score ranges. Instead of trusting raw scores, it merges rankings. That makes it a solid default when vendor-specific vector scores are hard to compare.</p><h3 id="ensemble">EnsembleRetriever in LangChain</h3><p>LangChain lets you weight keyword and vector retrievers together. Start with simple weights such as 0.4 for BM25 and 0.6 for embeddings, then move the balance after you evaluate on real queries.</p>
+<h2 id="failures">Failure patterns</h2>
+<ul>
+<li><strong>No normalization:</strong> one scorer dominates simply because its scale is larger.</li>
+<li><strong>Bad chunking:</strong> fusion cannot rescue passages that were split in ways that destroy meaning.</li>
+<li><strong>No query analysis:</strong> all queries are treated the same, even when some are clearly keyword-heavy.</li>
+<li><strong>Only top-1 evaluation:</strong> hybrid search is often valuable because it improves candidate recall before reranking.</li>
+</ul>
+<h2 id="exercise">Hands-on exercise</h2>
+<p>Take 25 real questions from your docs or product knowledge base. Label each as <em>keyword-heavy</em>, <em>semantic</em>, or <em>mixed</em>. Compare dense-only, BM25-only, and hybrid retrieval using precision@5. Then test whether a reranker on top of hybrid beats the simple fusion baseline.</p>
+<h2 id="use-case">Real-world use case</h2>
+<p>An internal support assistant often needs to retrieve answers containing exact names like billing codes, escalation queues, product SKUs, and environment variables. Hybrid search works well because those exact tokens matter, but users still phrase their questions naturally. That is exactly the gap fusion closes.</p>
+<div class="info-box"><div class="info-box-title">Best follow-on routes</div><p>Continue with <a href="rag-evaluation.html">RAG Evaluation</a> to measure whether your fusion logic helped, then study <a href="../../tutorials/agents/tool-design.html">Tool Design</a> and the <a href="../playbooks/performance.html">Performance Playbook</a> if you want to turn retrieval into a production subsystem.</p></div>
 </div>
-        <nav class="lesson-nav">
-            <a href="text-splitting.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Text Splitting</div>
-            </a>
-            <a href="rag-evaluation.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">RAG Evaluation</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<nav class="lesson-nav">
+<a class="prev" href="text-splitting.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Text Splitting</div>
+</a>
+<a class="next" href="rag-evaluation.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">RAG Evaluation</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

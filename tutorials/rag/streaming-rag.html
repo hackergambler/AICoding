@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Streaming RAG — Fast Answers with Citations | AI Coding Academy</title>
-    <meta name="description" content="Build streaming RAG systems that return answers incrementally while preserving citations, retrieval quality, and production observability.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Streaming RAG — Fast Answers with Citations | AI Coding Academy</title>
+<meta content="Build streaming RAG systems that return answers incrementally while preserving citations, retrieval quality, and production observability." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -58,76 +59,71 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>Streaming RAG</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 36 min</span>
-            </div>
-            <h1 class="lesson-title">Streaming RAG: Real-Time Answer Generation</h1>
-            <p class="lesson-description">Learn how to stream RAG answers without losing citation fidelity, retrieval context, or the ability to debug the full generation path.</p>
-        </header>
-
-        <div class="adsense-container">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8668540803235423" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-        <nav class="toc">
-            <h3>In This Lesson</h3>
-            <ol>
-                <li><a href="#why-stream">Why Stream RAG Answers?</a></li>
-                <li><a href="#langchain-stream">Streaming with LangChain</a></li>
-                <li><a href="#openai-stream">Streaming with OpenAI SDK Directly</a></li>
-                <li><a href="#fastapi-sse">Serving Streams via FastAPI + SSE</a></li>
-                <li><a href="#exercise">Hands-on Exercise</a></li>
-            </ol>
-        </nav>
-
-        
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>Streaming RAG</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 36 min</span>
+</div>
+<h1 class="lesson-title">Streaming RAG: Real-Time Answer Generation</h1>
+<p class="lesson-description">Learn how to stream RAG answers without losing citation fidelity, retrieval context, or the ability to debug the full generation path.</p>
+</header>
+<div class="adsense-container">
+<ins class="adsbygoogle" data-ad-client="ca-pub-8668540803235423" data-ad-format="auto" data-ad-slot="auto" data-full-width-responsive="true" style="display:block"></ins>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<nav class="toc">
+<h3>In This Lesson</h3>
+<ol>
+<li><a href="#why-stream">Why Stream RAG Answers?</a></li>
+<li><a href="#langchain-stream">Streaming with LangChain</a></li>
+<li><a href="#openai-stream">Streaming with OpenAI SDK Directly</a></li>
+<li><a href="#fastapi-sse">Serving Streams via FastAPI + SSE</a></li>
+<li><a href="#exercise">Hands-on Exercise</a></li>
+</ol>
+</nav>
 <div class="lesson-content">
-    <h2>Objective &amp; why streaming changes the product experience</h2>
-    <p>Streaming is a UX decision as much as an inference decision. Users feel a system is faster when the first useful token arrives early, but a good streaming RAG system still needs <strong>retrieval discipline</strong>, <strong>citation control</strong>, and <strong>stable partial rendering</strong>.</p>
-    <ul>
-        <li><strong>Retrieve first</strong> so the answer starts from known context.</li>
-        <li><strong>Stream the generation</strong> so users see progress instead of waiting on a blank screen.</li>
-        <li><strong>Attach citations carefully</strong> so partial output does not overclaim before evidence is finalized.</li>
-    </ul>
-
-    <div class="code-block"><div class="code-block-label"><span>Python — FastAPI streaming RAG endpoint</span><button class="copy-btn">Copy</button></div><pre>from fastapi import FastAPI
+<h2 id="why-stream">Objective &amp; why streaming changes the product experience</h2>
+<p>Streaming is a UX decision as much as an inference decision. Users feel a system is faster when the first useful token arrives early, but a good streaming RAG system still needs <strong>retrieval discipline</strong>, <strong>citation control</strong>, and <strong>stable partial rendering</strong>.</p>
+<ul>
+<li><strong>Retrieve first</strong> so the answer starts from known context.</li>
+<li><strong>Stream the generation</strong> so users see progress instead of waiting on a blank screen.</li>
+<li><strong>Attach citations carefully</strong> so partial output does not overclaim before evidence is finalized.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — FastAPI streaming RAG endpoint</span><button class="copy-btn">Copy</button></div><pre>from fastapi import FastAPI
 from fastapi.responses import StreamingResponse
 from openai import OpenAI
 
@@ -137,101 +133,95 @@ client = OpenAI()
 
 def retrieve(question: str):
     return [
-        {&quot;source&quot;: &quot;policy-12&quot;, &quot;text&quot;: &quot;Invoices can be disputed within 30 days.&quot;},
-        {&quot;source&quot;: &quot;policy-18&quot;, &quot;text&quot;: &quot;Priority accounts receive same-day review.&quot;},
+        {"source": "policy-12", "text": "Invoices can be disputed within 30 days."},
+        {"source": "policy-18", "text": "Priority accounts receive same-day review."},
     ]
 
 
 def stream_rag(question: str):
     chunks = retrieve(question)
-    context = &quot;
+    context = "
 
-&quot;.join(f&quot;[{c[&#x27;source&#x27;]}] {c[&#x27;text&#x27;]}&quot; for c in chunks)
-    prompt = f&quot;Use only the provided context. Add citations like [policy-12].
+".join(f"[{c['source']}] {c['text']}" for c in chunks)
+    prompt = f"Use only the provided context. Add citations like [policy-12].
 
 Context:
 {context}
 
-Question: {question}&quot;
+Question: {question}"
 
     stream = client.chat.completions.create(
-        model=&quot;gpt-4o-mini&quot;,
-        messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt}],
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}],
         stream=True,
         temperature=0.2,
     )
 
     for event in stream:
-        delta = event.choices[0].delta.content or &quot;&quot;
+        delta = event.choices[0].delta.content or ""
         if delta:
             yield delta
 
-@app.get(&quot;/ask&quot;)
+@app.get("/ask")
 def ask(question: str):
-    return StreamingResponse(stream_rag(question), media_type=&quot;text/plain&quot;)</pre></div>
-
-    <h2>Streaming design choices</h2>
-    <ol>
-        <li><strong>Fetch retrieval context before the first token.</strong> Otherwise the model starts answering before evidence is known.</li>
-        <li><strong>Use a citation style that survives partial output.</strong> Inline source markers or a final references block are both valid, but they need consistent rendering logic.</li>
-        <li><strong>Stream status separately from answer text.</strong> In the UI, show “retrieving”, “answering”, and “finalizing citations” as distinct states.</li>
-        <li><strong>Log the exact context.</strong> If a streamed answer looks wrong later, you need the retrieval snapshot that produced it.</li>
-    </ol>
-
-    <div class="tip-box"><div class="tip-box-title">💡 Stream thoughtfully</div><p>Streaming is not always better. For short deterministic answers, the added complexity may not pay off. It shines most when answers are moderately long and users benefit from visible progress.</p></div>
-
-    <h2>Failure patterns</h2>
-    <ul>
-        <li><strong>Tokens arrive before evidence:</strong> the model starts confidently and citations are patched in later.</li>
-        <li><strong>UI cannot handle partial markdown:</strong> code blocks, tables, or lists render badly while tokens are still arriving.</li>
-        <li><strong>No cancel path:</strong> users need a stop button and the backend must honor it.</li>
-        <li><strong>Missing traceability:</strong> streamed output feels fast but becomes impossible to debug if retrieval snapshots are not stored.</li>
-    </ul>
-
-    <h2>Hands-on exercise</h2>
-    <p>Build a small streaming docs assistant that:</p>
-    <ul>
-        <li>retrieves top-3 chunks before generation</li>
-        <li>streams the answer token by token</li>
-        <li>renders citations inline</li>
-        <li>records the final retrieved sources and latency metrics for each request</li>
-    </ul>
-
-    <h2>Real-world use case</h2>
-    <p>Streaming RAG is a good fit for internal search, support copilots, and research assistants where answers are longer than a few sentences and users want to start reading immediately. The win is not just speed — it is that the product feels alive while still grounding the response in retrieved evidence.</p>
-
-    <div class="info-box"><div class="info-box-title">Next routes</div><p>Pair this with <a href="rag-evaluation.html">RAG Evaluation</a> so your faster interface stays measurable, and use the <a href="../playbooks/observability.html">Observability Playbook</a> plus <a href="../../debugging/async.html">Async Debugging</a> when your streaming pipeline becomes harder to reason about.</p></div>
+    return StreamingResponse(stream_rag(question), media_type="text/plain")</pre></div><h3 id="openai-stream">Streaming with OpenAI SDK directly</h3><p>Direct SDK streaming is often the simplest path when your app only needs one retriever and one model call. It reduces abstraction layers and makes performance debugging easier.</p><h3 id="langchain-stream">Streaming with LangChain</h3><p>LangChain is useful when you already have a retrieval and generation pipeline assembled as a chain and want callbacks or event hooks without writing the loop yourself.</p>
+<h2 id="design">Streaming design choices</h2>
+<ol>
+<li><strong>Fetch retrieval context before the first token.</strong> Otherwise the model starts answering before evidence is known.</li>
+<li><strong>Use a citation style that survives partial output.</strong> Inline source markers or a final references block are both valid, but they need consistent rendering logic.</li>
+<li><strong>Stream status separately from answer text.</strong> In the UI, show “retrieving”, “answering”, and “finalizing citations” as distinct states.</li>
+<li><strong>Log the exact context.</strong> If a streamed answer looks wrong later, you need the retrieval snapshot that produced it.</li>
+</ol>
+<div class="tip-box"><div class="tip-box-title">💡 Stream thoughtfully</div><p>Streaming is not always better. For short deterministic answers, the added complexity may not pay off. It shines most when answers are moderately long and users benefit from visible progress.</p></div><h3 id="fastapi-sse">Serving streams via FastAPI + SSE</h3><p>Server-sent events work very well for browser UIs that only need one-way token updates. They are simpler than WebSockets for many RAG products and integrate cleanly with retry logic.</p>
+<h2 id="failures">Failure patterns</h2>
+<ul>
+<li><strong>Tokens arrive before evidence:</strong> the model starts confidently and citations are patched in later.</li>
+<li><strong>UI cannot handle partial markdown:</strong> code blocks, tables, or lists render badly while tokens are still arriving.</li>
+<li><strong>No cancel path:</strong> users need a stop button and the backend must honor it.</li>
+<li><strong>Missing traceability:</strong> streamed output feels fast but becomes impossible to debug if retrieval snapshots are not stored.</li>
+</ul>
+<h2 id="exercise">Hands-on exercise</h2>
+<p>Build a small streaming docs assistant that:</p>
+<ul>
+<li>retrieves top-3 chunks before generation</li>
+<li>streams the answer token by token</li>
+<li>renders citations inline</li>
+<li>records the final retrieved sources and latency metrics for each request</li>
+</ul>
+<h2 id="use-case">Real-world use case</h2>
+<p>Streaming RAG is a good fit for internal search, support copilots, and research assistants where answers are longer than a few sentences and users want to start reading immediately. The win is not just speed — it is that the product feels alive while still grounding the response in retrieved evidence.</p>
+<div class="info-box"><div class="info-box-title">Next routes</div><p>Pair this with <a href="rag-evaluation.html">RAG Evaluation</a> so your faster interface stays measurable, and use the <a href="../playbooks/observability.html">Observability Playbook</a> plus <a href="../../debugging/async.html">Async Debugging</a> when your streaming pipeline becomes harder to reason about.</p></div>
 </div>
-        <nav class="lesson-nav">
-            <a href="rag-evaluation.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">RAG Evaluation</div>
-            </a>
-            <a href="../../tutorials/openai/getting-started.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">OpenAI Getting Started</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<nav class="lesson-nav">
+<a class="prev" href="rag-evaluation.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">RAG Evaluation</div>
+</a>
+<a class="next" href="../../tutorials/openai/getting-started.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">OpenAI Getting Started</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

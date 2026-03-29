@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LangChain Getting Started — Chains, LLMs & LCEL | AI Coding Academy</title>
-    <meta name="description" content="Install LangChain, connect to OpenAI/Claude, build your first chain with LCEL, and understand the core abstractions.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LangChain Getting Started — Chains, LLMs &amp; LCEL | AI Coding Academy</title>
+<meta content="Install LangChain, connect to OpenAI/Claude, build your first chain with LCEL, and understand the core abstractions." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -63,62 +64,60 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/langchain.html">LangChain</a><span class="separator">/</span>
-            <span>Getting Started</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-beginner">Beginner</span>
-                <span class="lesson-meta-item">⏱️ 30 min</span>
-                <span class="lesson-meta-item">📚 Module 3 · Lesson 1</span>
-            </div>
-            <h1 class="lesson-title">Getting Started with LangChain</h1>
-            <p class="lesson-description">Install LangChain, wire up LLM providers, build chains with the LCEL pipe operator, and understand prompts, parsers, and memory.</p>
-        </header>
-
-        <div class="toc"><h3>📋 Table of Contents</h3><ol>
-            <li><a href="#install">Installation & Setup</a></li>
-            <li><a href="#llms">Connecting LLM Providers</a></li>
-            <li><a href="#prompts">Prompt Templates</a></li>
-            <li><a href="#lcel">LCEL — The Pipe Operator</a></li>
-            <li><a href="#parsers">Output Parsers</a></li>
-            <li><a href="#memory">Conversation Memory</a></li>
-            <li><a href="#streaming">Streaming with LangChain</a></li>
-            <li><a href="#debug">Debugging with LangSmith</a></li>
-        </ol></div>
-
-        <div class="lesson-content" id="install">
-            <h2 id="debug" id="streaming">1. Installation & Setup</h2>
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div> <nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/langchain.html">LangChain</a><span class="separator">/</span>
+<span>Getting Started</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-beginner">Beginner</span>
+<span class="lesson-meta-item">⏱️ 30 min</span>
+<span class="lesson-meta-item">📚 Module 3 · Lesson 1</span>
+</div>
+<h1 class="lesson-title">Getting Started with LangChain</h1>
+<p class="lesson-description">Install LangChain, wire up LLM providers, build chains with the LCEL pipe operator, and understand prompts, parsers, and memory.</p>
+</header>
+<div class="toc"><h3>📋 Table of Contents</h3><ol>
+<li><a href="#install">Installation &amp; Setup</a></li>
+<li><a href="#llms">Connecting LLM Providers</a></li>
+<li><a href="#prompts">Prompt Templates</a></li>
+<li><a href="#lcel">LCEL — The Pipe Operator</a></li>
+<li><a href="#parsers">Output Parsers</a></li>
+<li><a href="#memory">Conversation Memory</a></li>
+<li><a href="#streaming">Streaming with LangChain</a></li>
+<li><a href="#debug">Debugging with LangSmith</a></li>
+</ol></div>
+<div class="lesson-content" id="install">
+<h2 id="install">1. Installation &amp; Setup</h2>
 <div class="code-block">
 <div class="code-block-label"><span>bash</span><button class="copy-btn">Copy</button></div>
 <pre><span class="cm"># Core LangChain</span>
@@ -147,11 +146,10 @@ load_dotenv()
 <span class="kw">import</span> os
 api_key = os.getenv(<span class="st">"OPENAI_API_KEY"</span>)</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="llms">
-            <h2>2. Connecting LLM Providers</h2>
-            <p>LangChain abstracts all LLM providers behind a unified interface. Swap providers by changing one import.</p>
+</div>
+<div class="lesson-content" id="llms">
+<h2 id="llms">2. Connecting LLM Providers</h2>
+<p>LangChain abstracts all LLM providers behind a unified interface. Swap providers by changing one import.</p>
 <div class="code-block">
 <div class="code-block-label"><span>Python — multiple providers</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI
@@ -175,10 +173,9 @@ msg = HumanMessage(content=<span class="st">"What is 2+2?"</span>)
 <span class="kw">print</span>(claude.invoke([msg]).content)
 <span class="kw">print</span>(gemini.invoke([msg]).content)</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="prompts">
-            <h2>3. Prompt Templates</h2>
+</div>
+<div class="lesson-content" id="prompts">
+<h2 id="prompts">3. Prompt Templates</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — ChatPromptTemplate</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
@@ -216,11 +213,10 @@ final_prompt = ChatPromptTemplate.from_messages([
     (<span class="st">"system"</span>, <span class="st">"Classify sentiment."</span>), few_shot, (<span class="st">"human"</span>, <span class="st">"{input}"</span>)
 ])</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="lcel">
-            <h2>4. LCEL — The Pipe Operator</h2>
-            <p>LangChain Expression Language (LCEL) uses the <code>|</code> pipe operator to chain components. Each component's output becomes the next component's input.</p>
+</div>
+<div class="lesson-content" id="lcel">
+<h2 id="lcel">4. LCEL — The Pipe Operator</h2>
+<p>LangChain Expression Language (LCEL) uses the <code>|</code> pipe operator to chain components. Each component's output becomes the next component's input.</p>
 <div class="code-block">
 <div class="code-block-label"><span>Python — LCEL chains</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI
@@ -271,10 +267,9 @@ router = RunnableBranch(
 
 full_chain = {<span class="st">"topic"</span>: classify_chain, <span class="st">"code"</span>: RunnablePassthrough()} | router</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="parsers">
-            <h2>5. Output Parsers</h2>
+</div>
+<div class="lesson-content" id="parsers">
+<h2 id="parsers">5. Output Parsers</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — JSON and Pydantic parsers</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_core.output_parsers <span class="kw">import</span> JsonOutputParser
@@ -299,10 +294,9 @@ chain = prompt | llm | parser
 recipe = chain.invoke({<span class="st">"dish"</span>: <span class="st">"pasta carbonara"</span>})
 <span class="kw">print</span>(recipe[<span class="st">"name"</span>], <span class="st">"-"</span>, recipe[<span class="st">"time_minutes"</span>], <span class="st">"min"</span>)</pre>
 </div>
-        </div>
-
-        <div class="lesson-content" id="memory">
-            <h2>6. Conversation Memory</h2>
+</div>
+<div class="lesson-content" id="memory">
+<h2 id="memory">6. Conversation Memory</h2>
 <div class="code-block">
 <div class="code-block-label"><span>Python — conversation with history</span><button class="copy-btn">Copy</button></div>
 <pre><span class="kw">from</span> langchain_community.chat_message_histories <span class="kw">import</span> ChatMessageHistory
@@ -311,7 +305,7 @@ recipe = chain.invoke({<span class="st">"dish"</span>: <span class="st">"pasta c
 
 store = {}
 
-<span class="kw">def</span> <span class="fn">get_session_history</span>(session_id: str) -> BaseChatMessageHistory:
+<span class="kw">def</span> <span class="fn">get_session_history</span>(session_id: str) -&gt; BaseChatMessageHistory:
     <span class="kw">if</span> session_id <span class="kw">not in</span> store:
         store[session_id] = ChatMessageHistory()
     <span class="kw">return</span> store[session_id]
@@ -333,38 +327,92 @@ config = {<span class="st">"configurable"</span>: {<span class="st">"session_id"
 <span class="kw">print</span>(with_history.invoke({<span class="st">"input"</span>: <span class="st">"What is a decorator?"</span>}, config=config))
 <span class="kw">print</span>(with_history.invoke({<span class="st">"input"</span>: <span class="st">"Show me an example."</span>}, config=config))</pre>
 </div>
-        </div>
+</div>
+<div class="lesson-content lesson-expansion">
+<h2>Practice mission</h2>
+<p>Rebuild this lesson as a small LangChain pipeline with logging, retries, and one deliberate failure case. The point is to understand the chain behaviour, not just copy the API calls.</p>
+<ol>
+<li>Implement the lesson in a clean file or route with explicit input and output contracts.</li>
+<li>Add one logging line for latency, one for failures, and one for the final output or trace ID.</li>
+<li>Test the happy path plus two edge cases that would matter in a real Langchain workflow.</li>
+<li>Write down what you would monitor before calling this production-ready.</li>
+</ol>
+<div class="tip-box"><div class="tip-box-title">💡 What “done” looks like</div><p>You should be able to explain why the approach works, show one working run, name the top failure mode, and point to the next place in the stack where you would add safeguards.</p></div>
+<h2>Production checklist</h2>
+<ul>
+<li>Validate and sanitize inputs before they reach the model or tool layer.</li>
+<li>Keep logs or traces for the full run, not just the final answer.</li>
+<li>Add at least one regression example you can rerun after refactors.</li>
+<li>Document the fallback behaviour when the model, retriever, or tool fails.</li>
+<li>Record the next metric to improve: latency, groundedness, cost, or reliability.</li>
+</ul>
+<h2>Where to go next</h2>
+<ul>
+<li><a href="../../discover.html">Use Discover to find the next lesson in this track</a></li>
+<li><a href="../../projects/index.html">Open a project build and apply the concept end to end</a></li>
+<li><a href="../../debugging/index.html">Practice the debugging routes that match this lesson</a></li>
+<li><a href="../../courses/index.html">Return to the course hubs for a deeper progression path</a></li>
+</ul>
+</div>
 
-        <nav class="lesson-nav">
-            <a href="../../tutorials/claude/vision.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Claude Vision</div>
-            </a>
-            <a href="chains.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">LangChain Chains</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<div class="lesson-content" id="streaming">
+<h2 id="streaming-heading">7. Streaming with LangChain</h2>
+<p>Streaming is one of the easiest ways to make LangChain apps feel fast even when the answer is still being generated. In real products you stream only user-facing text, keep the final full response for logging, and surface tool progress separately.</p>
+<div class="code-block"><div class="code-block-label"><span>Python — streaming tokens from an LCEL chain</span><button class="copy-btn">Copy</button></div><pre><span class="kw">from</span> langchain_openai <span class="kw">import</span> ChatOpenAI
+<span class="kw">from</span> langchain_core.prompts <span class="kw">import</span> ChatPromptTemplate
+
+llm = ChatOpenAI(model=<span class="st">"gpt-4o-mini"</span>, streaming=<span class="kw">True</span>)
+prompt = ChatPromptTemplate.from_template(<span class="st">"Explain {topic} like a tech lead."</span>)
+chain = prompt | llm
+
+<span class="kw">for</span> chunk <span class="kw">in</span> chain.stream({<span class="st">"topic"</span>: <span class="st">"LangChain callbacks"</span>}):
+    <span class="kw">print</span>(chunk.content, end=<span class="st">""</span>, flush=<span class="kw">True</span>)</pre></div>
+</div>
+<div class="lesson-content" id="debug">
+<h2 id="debug-heading">8. Debugging with LangSmith</h2>
+<p>Trace every run when you change prompts, parsers, retrievers, or memory. LangSmith is most valuable when you compare failing runs against known-good runs and inspect the exact intermediate inputs that changed.</p>
+<ul>
+<li>Capture latency, token count, and failure bucket for each run.</li>
+<li>Keep golden prompts so you can compare regressions after refactors.</li>
+<li>Link application logs to the same request ID used in LangSmith.</li>
+<li>Review tool-call outputs, not just the final model answer.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — enable tracing</span><button class="copy-btn">Copy</button></div><pre><span class="kw">import</span> os
+os.environ[<span class="st">"LANGCHAIN_TRACING_V2"</span>] = <span class="st">"true"</span>
+os.environ[<span class="st">"LANGCHAIN_PROJECT"</span>] = <span class="st">"academy-langchain-basics"</span>
+
+<span class="cm"># Now run your chain — each invocation will be visible in LangSmith.</span></pre></div>
+</div>
+<nav class="lesson-nav">
+<a class="prev" href="../../tutorials/claude/vision.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Claude Vision</div>
+</a>
+<a class="next" href="chains.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">LangChain Chains</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');

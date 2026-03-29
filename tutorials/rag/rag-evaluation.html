@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RAG Evaluation — Retrieval, Groundedness & Failure Analysis | AI Coding Academy</title>
-    <meta name="description" content="Evaluate RAG systems with retrieval metrics, grounded-answer checks, error buckets, and practical offline test sets.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <style>
+<meta charset="utf-8"/>
+<script async="" crossorigin="anonymous" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423"></script>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RAG Evaluation — Retrieval, Groundedness &amp; Failure Analysis | AI Coding Academy</title>
+<meta content="Evaluate RAG systems with retrieval metrics, grounded-answer checks, error buckets, and practical offline test sets." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Playfair+Display:wght@600;700;800;900&amp;family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/style.css" rel="stylesheet"/>
+<style>
         .lesson-container { max-width: 900px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl); }
         .lesson-header { margin-bottom: var(--space-3xl); }
         .lesson-meta { display: flex; gap: var(--space-lg); margin-bottom: var(--space-lg); flex-wrap: wrap; }
@@ -67,77 +68,72 @@
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .metrics-grid { grid-template-columns: 1fr; } }
     </style>
 </head><body>
-    <div class="top-bar">
-        <div class="top-bar-container">
-            <div class="top-bar-links">
-                <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
-                <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
-                <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
-            </div>
-            <div class="top-bar-right">Part of MYRQAI Network</div>
-        </div>
-    </div>
-    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
-    <nav class="nav">
-        <div class="nav-container">
-            <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-            <ul class="nav-menu">
-                <li><a href="../../tutorials/index.html" class="nav-link active">Tutorials</a></li>
-                <li><a href="../../courses/index.html" class="nav-link">Courses</a></li>
-                <li><a href="../../debugging/index.html" class="nav-link">Debugging</a></li>
-                <li><a href="../../projects/index.html" class="nav-link">Projects</a></li>
-            </ul>
-            <div class="nav-actions">
-                <div class="nav-search"><span>🔍</span><input type="text" placeholder="Search tutorials..."><kbd>⌘K</kbd></div>
-                <a href="../../tutorials/index.html" class="btn btn-primary">Start Free</a>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
-    <div class="lesson-container">
-        <div class="breadcrumb">
-            <a href="../../index.html">Home</a><span class="separator">/</span>
-            <a href="../index.html">Tutorials</a><span class="separator">/</span>
-            <a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
-            <span>RAG Evaluation</span>
-        </div>
-        <header class="lesson-header">
-            <div class="lesson-meta">
-                <span class="badge badge-intermediate">Intermediate</span>
-                <span class="lesson-meta-item">⏱️ 44 min</span>
-            </div>
-            <h1 class="lesson-title">RAG Evaluation: RAGAS, Faithfulness & Answer Relevancy</h1>
-            <p class="lesson-description">Learn how to evaluate a RAG pipeline end to end instead of guessing whether retrieval, chunking, or generation is the real problem.</p>
-        </header>
-
-        <div class="adsense-container">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8668540803235423" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        </div>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-        <nav class="toc">
-            <h3>In This Lesson</h3>
-            <ol>
-                <li><a href="#why-eval">Why RAG Evaluation Matters</a></li>
-                <li><a href="#metrics">The Four Core RAGAS Metrics</a></li>
-                <li><a href="#ragas-setup">Running RAGAS Evaluation</a></li>
-                <li><a href="#without-ground-truth">Evaluating Without Ground Truth</a></li>
-                <li><a href="#tracing">Tracing with LangSmith</a></li>
-                <li><a href="#exercise">Hands-on Exercise</a></li>
-            </ol>
-        </nav>
-
-        
+<div class="top-bar">
+<div class="top-bar-container">
+<div class="top-bar-links">
+<a href="https://library.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+<a href="https://ailadder.myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+<a href="https://myrqai.com" rel="noopener" target="_blank"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+</div>
+<div class="top-bar-right">Part of MYRQAI Network</div>
+</div>
+</div>
+<div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+<nav class="nav">
+<div class="nav-container">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<ul class="nav-menu">
+<li><a class="nav-link active" href="../../tutorials/index.html">Tutorials</a></li>
+<li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+<li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+<li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+</ul>
+<div class="nav-actions">
+<div class="nav-search"><span>🔍</span><input placeholder="Search tutorials..." type="text"/><kbd>⌘K</kbd></div>
+<a class="btn btn-primary" href="../../tutorials/index.html">Start Free</a>
+</div>
+<button class="mobile-menu-btn">☰</button>
+</div>
+</nav>
+<div class="lesson-container">
+<div class="breadcrumb">
+<a href="../../index.html">Home</a><span class="separator">/</span>
+<a href="../index.html">Tutorials</a><span class="separator">/</span>
+<a href="../../courses/rag.html">RAG</a><span class="separator">/</span>
+<span>RAG Evaluation</span>
+</div>
+<header class="lesson-header">
+<div class="lesson-meta">
+<span class="badge badge-intermediate">Intermediate</span>
+<span class="lesson-meta-item">⏱️ 44 min</span>
+</div>
+<h1 class="lesson-title">RAG Evaluation: RAGAS, Faithfulness &amp; Answer Relevancy</h1>
+<p class="lesson-description">Learn how to evaluate a RAG pipeline end to end instead of guessing whether retrieval, chunking, or generation is the real problem.</p>
+</header>
+<div class="adsense-container">
+<ins class="adsbygoogle" data-ad-client="ca-pub-8668540803235423" data-ad-format="auto" data-ad-slot="auto" data-full-width-responsive="true" style="display:block"></ins>
+</div>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+<nav class="toc">
+<h3>In This Lesson</h3>
+<ol>
+<li><a href="#why-eval">Why RAG Evaluation Matters</a></li>
+<li><a href="#metrics">The Four Core RAGAS Metrics</a></li>
+<li><a href="#ragas-setup">Running RAGAS Evaluation</a></li>
+<li><a href="#without-ground-truth">Evaluating Without Ground Truth</a></li>
+<li><a href="#tracing">Tracing with LangSmith</a></li>
+<li><a href="#exercise">Hands-on Exercise</a></li>
+</ol>
+</nav>
 <div class="lesson-content">
-    <h2>Objective &amp; evaluation layers</h2>
-    <p>RAG quality is not one number. A bad answer can come from the retriever, the chunker, the prompt, the model, or the evaluation set itself. A strong evaluation stack separates these concerns so teams know <strong>what broke</strong> instead of only seeing “the answer looked wrong.”</p>
-    <ul>
-        <li><strong>Retrieval metrics</strong> check whether the right evidence was fetched.</li>
-        <li><strong>Groundedness metrics</strong> check whether the answer stays supported by the retrieved context.</li>
-        <li><strong>Task success metrics</strong> check whether the answer was actually useful for the user outcome.</li>
-    </ul>
-
-    <div class="code-block"><div class="code-block-label"><span>Python — simple offline RAG evaluation harness</span><button class="copy-btn">Copy</button></div><pre>from dataclasses import dataclass
+<h2 id="why-eval">Objective &amp; evaluation layers</h2>
+<p>RAG quality is not one number. A bad answer can come from the retriever, the chunker, the prompt, the model, or the evaluation set itself. A strong evaluation stack separates these concerns so teams know <strong>what broke</strong> instead of only seeing “the answer looked wrong.”</p>
+<ul>
+<li><strong>Retrieval metrics</strong> check whether the right evidence was fetched.</li>
+<li><strong>Groundedness metrics</strong> check whether the answer stays supported by the retrieved context.</li>
+<li><strong>Task success metrics</strong> check whether the answer was actually useful for the user outcome.</li>
+</ul>
+<div class="code-block"><div class="code-block-label"><span>Python — simple offline RAG evaluation harness</span><button class="copy-btn">Copy</button></div><pre>from dataclasses import dataclass
 from typing import List
 
 @dataclass
@@ -164,83 +160,76 @@ def grounded_answer(case: EvalCase) -&gt; bool:
     answer = case.generated_answer.lower()
     context = case.retrieved_context.lower()
     key_terms = [term for term in answer.split() if len(term) &gt; 5]
-    return sum(term in context for term in key_terms) &gt;= 3</pre></div>
-
-    <h2>How to build a useful eval set</h2>
-    <ol>
-        <li><strong>Start with real user questions.</strong> Synthetic queries can help bootstrap, but production RAG fails on the messy questions users actually ask.</li>
-        <li><strong>Label supporting sources.</strong> At least for a seed set, identify the document or chunk IDs that should support the answer.</li>
-        <li><strong>Create error buckets.</strong> Tag failures as retrieval miss, chunking issue, unsupported answer, stale document, or poor final synthesis.</li>
-        <li><strong>Compare by slice.</strong> Long questions, acronym-heavy questions, and multi-document questions usually fail differently.</li>
-    </ol>
-
-    <div class="code-block"><div class="code-block-label"><span>Python — record failure buckets so you can improve the right layer</span><button class="copy-btn">Copy</button></div><pre>from collections import Counter
+    return sum(term in context for term in key_terms) &gt;= 3</pre></div><h3 id="metrics">The four core RAGAS metrics</h3><p>Track faithfulness, answer relevance, context precision, and context recall separately. Each one points to a different failure layer: grounding, generation quality, retrieval noise, or missing evidence.</p>
+<h2 id="dataset">How to build a useful eval set</h2>
+<ol>
+<li><strong>Start with real user questions.</strong> Synthetic queries can help bootstrap, but production RAG fails on the messy questions users actually ask.</li>
+<li><strong>Label supporting sources.</strong> At least for a seed set, identify the document or chunk IDs that should support the answer.</li>
+<li><strong>Create error buckets.</strong> Tag failures as retrieval miss, chunking issue, unsupported answer, stale document, or poor final synthesis.</li>
+<li><strong>Compare by slice.</strong> Long questions, acronym-heavy questions, and multi-document questions usually fail differently.</li>
+</ol>
+<div class="code-block"><div class="code-block-label"><span>Python — record failure buckets so you can improve the right layer</span><button class="copy-btn">Copy</button></div><pre>from collections import Counter
 
 failures = Counter()
 
 for case in eval_cases:
     if recall_at_k(case.retrieved_doc_ids, case.gold_doc_ids, k=5) == 0:
-        failures[&quot;retrieval_miss&quot;] += 1
+        failures["retrieval_miss"] += 1
     elif not grounded_answer(case):
-        failures[&quot;unsupported_answer&quot;] += 1
+        failures["unsupported_answer"] += 1
     else:
-        failures[&quot;other&quot;] += 1
+        failures["other"] += 1
 
 print(failures)</pre></div>
-
-    <div class="tip-box"><div class="tip-box-title">💡 Measure before prompt-tuning</div><p>Teams often spend days changing prompts when the real issue is chunking or retrieval. If your gold document is never retrieved, no answer prompt will fix the system.</p></div>
-
-    <h2>Common evaluation mistakes</h2>
-    <ul>
-        <li><strong>Only judging final answers:</strong> you lose visibility into which subsystem failed.</li>
-        <li><strong>No negative queries:</strong> good eval sets include “I do not know” cases, not only answerable questions.</li>
-        <li><strong>Too little slice coverage:</strong> a tiny eval set can hide failures on code docs, policy docs, tables, or long documents.</li>
-        <li><strong>Manual review without structure:</strong> reviewers need a rubric or results become noisy and hard to compare across experiments.</li>
-    </ul>
-
-    <h2>Hands-on exercise</h2>
-    <p>Create a 30-question eval set for one knowledge base. Label the supporting sources for at least 15 of the questions. Compare two chunking strategies and two retrieval strategies. Report:</p>
-    <ul>
-        <li>precision@5 and recall@5</li>
-        <li>unsupported-answer rate</li>
-        <li>the top three failure buckets you observed</li>
-    </ul>
-
-    <h2>Real-world use case</h2>
-    <p>In a policy assistant or internal docs assistant, the business risk is not just a wrong answer. The risk is a confident answer not supported by the approved documents. A good evaluation framework shows whether the system found the right policy, quoted it accurately, and stayed grounded under pressure.</p>
-
-    <div class="info-box"><div class="info-box-title">Best next routes</div><p>After evaluation, return to <a href="hybrid-search.html">Hybrid Search</a> to improve candidate quality, or continue to <a href="streaming-rag.html">Streaming RAG</a> for user-facing delivery. The <a href="../playbooks/observability.html">Observability Playbook</a> is the right next step when you want experiment traces and live monitoring.</p></div>
+<div class="tip-box"><div class="tip-box-title">💡 Measure before prompt-tuning</div><p>Teams often spend days changing prompts when the real issue is chunking or retrieval. If your gold document is never retrieved, no answer prompt will fix the system.</p></div><h3 id="without-ground-truth">Evaluating without ground truth</h3><p>When you do not have labelled answers yet, use synthetic evals, human review, and trace-based heuristics. This is still better than shipping blind and hoping the answer “looks right”.</p><h3 id="ragas-setup">Running RAGAS evaluation</h3><p>Start with a small offline eval set and automate it in CI. Even 25–50 carefully chosen examples can reveal regressions much faster than manual spot-checking.</p>
+<h2 id="mistakes">Common evaluation mistakes</h2>
+<ul>
+<li><strong>Only judging final answers:</strong> you lose visibility into which subsystem failed.</li>
+<li><strong>No negative queries:</strong> good eval sets include “I do not know” cases, not only answerable questions.</li>
+<li><strong>Too little slice coverage:</strong> a tiny eval set can hide failures on code docs, policy docs, tables, or long documents.</li>
+<li><strong>Manual review without structure:</strong> reviewers need a rubric or results become noisy and hard to compare across experiments.</li>
+</ul><h3 id="tracing">Tracing with LangSmith</h3><p>Evaluation results are far more useful when they link back to traces. Review the exact retrieved chunks, tool calls, and prompts that produced a low-scoring answer.</p>
+<h2 id="exercise">Hands-on exercise</h2>
+<p>Create a 30-question eval set for one knowledge base. Label the supporting sources for at least 15 of the questions. Compare two chunking strategies and two retrieval strategies. Report:</p>
+<ul>
+<li>precision@5 and recall@5</li>
+<li>unsupported-answer rate</li>
+<li>the top three failure buckets you observed</li>
+</ul>
+<h2 id="use-case">Real-world use case</h2>
+<p>In a policy assistant or internal docs assistant, the business risk is not just a wrong answer. The risk is a confident answer not supported by the approved documents. A good evaluation framework shows whether the system found the right policy, quoted it accurately, and stayed grounded under pressure.</p>
+<div class="info-box"><div class="info-box-title">Best next routes</div><p>After evaluation, return to <a href="hybrid-search.html">Hybrid Search</a> to improve candidate quality, or continue to <a href="streaming-rag.html">Streaming RAG</a> for user-facing delivery. The <a href="../playbooks/observability.html">Observability Playbook</a> is the right next step when you want experiment traces and live monitoring.</p></div>
 </div>
-        <nav class="lesson-nav">
-            <a href="hybrid-search.html" class="prev">
-                <div class="lesson-nav-label">← Previous</div>
-                <div class="lesson-nav-title">Hybrid Search</div>
-            </a>
-            <a href="streaming-rag.html" class="next">
-                <div class="lesson-nav-label">Next →</div>
-                <div class="lesson-nav-title">Streaming RAG</div>
-            </a>
-        </nav>
-    </div>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
-                    <p>The most comprehensive AI coding learning platform.</p>
-                </div>
-                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
-                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
-                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-    <script src="../../assets/js/main.js"></script>
-    <script src="../../assets/js/donation-widget.js" defer></script>
-    <script>
+<nav class="lesson-nav">
+<a class="prev" href="hybrid-search.html">
+<div class="lesson-nav-label">← Previous</div>
+<div class="lesson-nav-title">Hybrid Search</div>
+</a>
+<a class="next" href="streaming-rag.html">
+<div class="lesson-nav-label">Next →</div>
+<div class="lesson-nav-title">Streaming RAG</div>
+</a>
+</nav>
+</div>
+<footer>
+<div class="footer-container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+<p>The most comprehensive AI coding learning platform.</p>
+</div>
+<div class="footer-column"><h4>Learn</h4><ul><li><a href="../../tutorials/index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+<div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+<div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+</div>
+<div class="footer-bottom">
+<p>© 2026 AI Coding Academy by <a href="https://myrqai.com" style="color: var(--accent-primary);" target="_blank">MYRQAI</a>. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+<script defer="" src="../../assets/js/donation-widget.js"></script>
+<script>
     document.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const pre = this.closest('.code-block').querySelector('pre');
