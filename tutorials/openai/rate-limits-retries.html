@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenAI Rate Limits, Retries, and Resilient Clients | AI Coding Academy</title>
+    <meta name="description" content="Learn exponential backoff, idempotency, timeout strategy, concurrency limits, and safe retries for OpenAI production systems.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container {max-width: 920px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl);} 
+        .lesson-header {margin-bottom: var(--space-3xl);} 
+        .lesson-meta {display:flex; gap:var(--space-lg); margin-bottom:var(--space-lg); flex-wrap:wrap;} 
+        .lesson-meta-item {display:flex; align-items:center; gap:var(--space-xs); font-size:.9rem; color:var(--text-muted);} 
+        .lesson-title {font-family:var(--font-display); font-size:clamp(2rem, 4vw, 3rem); line-height:1.15; margin-bottom:var(--space-lg);} 
+        .lesson-description {font-size:1.16rem; color:var(--text-secondary); line-height:1.75; max-width:760px;} 
+        .lesson-content {background:var(--bg-card); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-2xl); margin-bottom:var(--space-2xl);} 
+        .lesson-content h2 {font-family:var(--font-heading); font-size:1.5rem; margin:var(--space-2xl) 0 var(--space-lg); color:var(--accent-primary);} 
+        .lesson-content h2:first-child {margin-top:0;} 
+        .lesson-content h3 {font-family:var(--font-heading); font-size:1.1rem; margin:var(--space-xl) 0 var(--space-md);} 
+        .lesson-content p, .lesson-content li {color:var(--text-secondary); line-height:1.8;} 
+        .lesson-content ul, .lesson-content ol {padding-left:var(--space-xl); margin-bottom:var(--space-lg);} 
+        .lesson-content li {margin-bottom:var(--space-sm);} 
+        .code-block {background:#0d1117; border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-md); padding:var(--space-lg); margin:var(--space-lg) 0; overflow-x:auto;} 
+        .code-block pre {margin:0; font-family:var(--font-mono); font-size:.9rem; line-height:1.65; color:#e6edf3;} 
+        .code-block-label {display:flex; justify-content:space-between; align-items:center; gap:var(--space-md); margin-bottom:var(--space-sm); color:#9fb3c8; font-size:.82rem;} 
+        .comment { color:#8b949e; } .keyword { color:#ff7b72; } .string { color:#a5d6ff; } .function { color:#d2a8ff; } .variable { color:#ffa657; }
+        .tip-box, .warning-box, .info-box {border-radius:var(--radius-md); padding:var(--space-lg); margin:var(--space-lg) 0;} 
+        .tip-box {background:rgba(0,255,170,.08); border:1px solid rgba(0,255,170,.18);} 
+        .warning-box {background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.18);} 
+        .info-box {background:rgba(96,165,250,.08); border:1px solid rgba(96,165,250,.18);} 
+        .tip-box-title, .warning-box-title, .info-box-title {font-family:var(--font-heading); font-weight:600; margin-bottom:var(--space-sm);} 
+        .tip-box-title {color:var(--accent-primary);} .warning-box-title {color:var(--accent-warning);} .info-box-title {color:#93c5fd;} 
+        .toc {background:var(--bg-secondary); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-xl); margin-bottom:var(--space-2xl);} 
+        .toc-title {font-family:var(--font-heading); font-weight:600; margin-bottom:var(--space-md);} 
+        .toc-list {list-style:none; padding:0; margin:0;} 
+        .toc-list li {padding:var(--space-xs) 0;} 
+        .toc-list a {color:var(--text-secondary); text-decoration:none;} 
+        .toc-list a:hover {color:var(--accent-primary);} 
+        .lesson-nav {display:flex; justify-content:space-between; gap:var(--space-lg); margin-top:var(--space-3xl);} 
+        .lesson-nav a {flex:1; background:var(--bg-card); border:1px solid rgba(255,255,255,.05); border-radius:var(--radius-lg); padding:var(--space-lg); text-decoration:none; transition:var(--transition-base);} 
+        .lesson-nav a:hover {border-color:var(--accent-primary); transform:translateY(-2px);} 
+        .lesson-nav-label {font-size:.82rem; color:var(--text-muted); margin-bottom:var(--space-xs);} 
+        .lesson-nav-title {font-family:var(--font-heading); font-weight:600; color:var(--text-primary);} 
+        .lesson-nav .next {text-align:right;} 
+        @media (max-width:768px){ .lesson-nav {flex-direction:column;} .lesson-nav .next{text-align:left;} }
+</style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container"><div class="top-bar-links">
+        <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+        <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+        <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+    </div><div class="top-bar-right">Part of MYRQAI Network</div></div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a class="nav-link" href="../index.html">Tutorials</a></li>
+            <li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+            <li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+            <li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+        </ul>
+        <div class="nav-actions"><div class="nav-search"><span>🔍</span><input placeholder="Search lessons and projects..." type="text"><kbd>⌘K</kbd></div><a class="btn btn-primary" href="../../courses/openai.html">Track Overview</a></div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <div class="lesson-meta-item">📚 <span>OpenAI</span></div>
+                <div class="lesson-meta-item">🎯 <span>Intermediate</span></div>
+                <div class="lesson-meta-item">⏱️ <span>26 min</span></div>
+                <div class="lesson-meta-item">🚀 <span>Premium Expansion</span></div>
+            </div>
+            <h1 class="lesson-title">OpenAI Rate Limits, Retries, and Resilient Clients</h1>
+            <p class="lesson-description">Learn exponential backoff, idempotency, timeout strategy, concurrency limits, and safe retries for OpenAI production systems.</p>
+        </header>
+        <aside class="toc"><div class="toc-title">In this lesson</div><ul class="toc-list"><li><a href="#objective">Title &amp; Objective</a></li><li><a href="#concept">Concept Explanation</a></li><li><a href="#code">Code Example</a></li><li><a href="#breakdown">Step-by-step breakdown</a></li><li><a href="#exercise">Hands-on Exercise</a></li><li><a href="#use-case">Real-world use case</a></li><li><a href="#difficulty">Difficulty + Next Steps</a></li></ul></aside>
+        <article class="lesson-content">
+<h2 id="objective">1. Title & Objective</h2>
+<p>This lesson upgrades a prototype into a client that survives traffic spikes, transient failures, and slow upstream calls. The objective is to create request logic that is fast when things go well and safe when things go wrong.</p>
+<h2 id="concept">2. Concept Explanation</h2>
+<p>Retry logic is dangerous when applied blindly. If you retry everything, you can amplify load, double-charge downstream actions, and turn a transient provider issue into an internal outage. A production-grade client needs three things: a timeout budget, backoff with jitter, and a clear rule for which actions can safely be retried.</p>
+<ul>
+<li><strong>Timeout budget:</strong> decide how long the user or job can wait end-to-end.</li>
+<li><strong>Retry budget:</strong> cap total attempts; do not retry forever.</li>
+<li><strong>Idempotency:</strong> ensure the same job does not trigger duplicate writes or emails.</li>
+<li><strong>Concurrency control:</strong> slow down before the provider forces you to.</li>
+</ul>
+<h2 id="code">3. Code Example</h2>
+<div class="code-block"><div class="code-block-label"><span>Python · resilient OpenAI wrapper</span><button class="copy-btn">Copy</button></div><pre><span class="keyword">import</span> random, time
+<span class="keyword">from</span> openai <span class="keyword">import</span> OpenAI
+
+client = OpenAI()
+
+<span class="keyword">def</span> <span class="function">call_openai_with_backoff</span>(messages, model=<span class="string">"gpt-4o-mini"</span>, max_attempts=4):
+    base_delay = 0.75
+    <span class="keyword">for</span> attempt <span class="keyword">in</span> <span class="function">range</span>(1, max_attempts + 1):
+        <span class="keyword">try</span>:
+            started = time.time()
+            response = client.chat.completions.create(
+                model=model,
+                messages=messages,
+                timeout=25,
+            )
+            latency = time.time() - started
+            <span class="keyword">return</span> {
+                <span class="string">"ok"</span>: <span class="keyword">True</span>,
+                <span class="string">"latency_s"</span>: round(latency, 2),
+                <span class="string">"content"</span>: response.choices[0].message.content,
+                <span class="string">"usage"</span>: response.usage.total_tokens,
+            }
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:
+            retriable = any(tag <span class="keyword">in</span> <span class="function">str</span>(exc).lower() <span class="keyword">for</span> tag <span class="keyword">in</span> [<span class="string">"rate"</span>, <span class="string">"timeout"</span>, <span class="string">"connection"</span>, <span class="string">"503"</span>])
+            <span class="keyword">if</span> (not retriable) <span class="keyword">or</span> attempt == max_attempts:
+                <span class="keyword">return</span> {<span class="string">"ok"</span>: <span class="keyword">False</span>, <span class="string">"error"</span>: <span class="function">str</span>(exc), <span class="string">"attempts"</span>: attempt}
+            jitter = random.uniform(0.2, 0.9)
+            delay = min(base_delay * (2 ** (attempt - 1)) + jitter, 8)
+            time.sleep(delay)</pre></div>
+<h2 id="breakdown">4. Step-by-step breakdown</h2>
+<ol>
+<li>Use a small initial delay so transient failures recover quickly.</li>
+<li>Apply exponential growth so repeated failures reduce provider pressure.</li>
+<li>Add jitter so many workers do not retry at the exact same moment.</li>
+<li>Separate retriable errors from permanent ones like invalid parameters or bad auth.</li>
+<li>Return rich metadata so dashboards can track latency, failures, and retries.</li>
+</ol>
+<div class="warning-box"><div class="warning-box-title">⚠️ Common production mistake</div><p>If the model call triggers a downstream side effect such as sending email or charging a customer, store a job ID first. Retries must reuse that job ID so only one final action is committed.</p></div>
+<h2 id="exercise">5. Hands-on Exercise</h2>
+<p>Create a queue worker that summarizes support tickets. Add:</p>
+<ol>
+<li>a unique <code>job_id</code>,</li>
+<li>a retry counter,</li>
+<li>a dead-letter bucket after max retries,</li>
+<li>latency logging and token logging.</li>
+</ol>
+<p>Then simulate slow responses and random failures. Your goal is to show that no job is processed twice and that failed jobs remain inspectable.</p>
+<h2 id="use-case">6. Real-world use case</h2>
+<p>Reliable retries matter for chat backends, batch summarization, moderation pipelines, extraction queues, and scheduled agents. The teams that get this right early usually move faster later because debugging becomes measurable instead of mysterious.</p>
+<h2 id="difficulty">7. Difficulty + Next Steps</h2>
+<p><strong>Difficulty:</strong> Intermediate. Pair this with <a href="../../debugging/network.html">network debugging</a>, <a href="../../debugging/api-keys.html">API key triage</a>, and the <a href="../../projects/workflow-automation.html">Workflow Automation capstone</a> to practice queue-safe AI execution.</p>
+</article>
+        <nav class="lesson-nav">
+            <a href="structured-outputs.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Structured Outputs</div></a>
+            <a href="../../projects/workflow-automation.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Workflow Automation Project</div></a>
+        </nav>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p><div class="footer-links"><a href="../../privacy.html">Privacy</a><span>•</span><a href="../../terms.html">Terms</a><span>•</span><a href="../../contact.html">Contact</a></div></div>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+</body>
+</html>

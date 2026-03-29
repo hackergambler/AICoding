@@ -63,7 +63,6 @@
         .example-card p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
         @media (max-width: 768px) { .lesson-nav { flex-direction: column; } .lesson-nav .next { text-align: left; } .example-grid { grid-template-columns: 1fr; } }
     </style>
-
 <style id="phase2-course-support">
 .course-support{padding:0 var(--space-xl) var(--space-4xl)}
 .course-support-container{max-width:1080px;margin:0 auto;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:clamp(1.25rem,2vw,2rem);box-shadow:0 20px 50px rgba(0,0,0,.18)}
@@ -81,6 +80,25 @@
 .support-list p{margin:.25rem 0 0;color:var(--text-muted);font-size:.92rem;line-height:1.6}
 .support-band{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:1.35rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.08)}
 @media (max-width:900px){.support-grid{grid-template-columns:1fr}}
+</style>
+<style id="phase5-premium-expansion">
+.premium-expansion{padding:0 var(--space-xl) var(--space-4xl)}
+.premium-expansion .container,.premium-expansion-container{max-width:1120px;margin:0 auto}
+.premium-expansion-shell{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:clamp(1.25rem,2vw,2rem);box-shadow:0 20px 50px rgba(0,0,0,.16)}
+.premium-expansion-kicker{display:inline-flex;align-items:center;gap:.45rem;border-radius:999px;padding:.4rem .8rem;border:1px solid rgba(0,255,170,.24);background:rgba(0,255,170,.08);color:var(--accent-primary);font-size:.78rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.premium-expansion h2{margin:.9rem 0 .55rem;font-family:var(--font-display);font-size:clamp(1.75rem,3.5vw,2.6rem);line-height:1.08}
+.premium-expansion p.lead{max-width:760px;color:var(--text-secondary);line-height:1.75;margin:0 0 1.4rem}
+.premium-expansion-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.premium-lesson-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:.85rem}
+.premium-lesson-meta{display:flex;flex-wrap:wrap;gap:.55rem;font-size:.8rem;color:var(--text-muted)}
+.premium-lesson-meta span{padding:.3rem .6rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
+.premium-lesson-card h3{margin:0;font-size:1.18rem;line-height:1.25}
+.premium-lesson-card p{margin:0;color:var(--text-secondary);line-height:1.7}
+.premium-lesson-highlights{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+.premium-lesson-highlights li{padding:.68rem .8rem;border-radius:var(--radius-md);background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);line-height:1.55}
+.premium-lesson-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:auto}
+.premium-lesson-actions .btn{min-width:160px;justify-content:center}
+@media (max-width:860px){.premium-expansion-grid{grid-template-columns:1fr}}
 </style>
 </head><body>
 <div class="top-bar">
@@ -141,8 +159,8 @@
 <h1 class="course-title">OpenAI API Complete Course</h1>
 <p class="course-subtitle">Master GPT-4o, embeddings, function calling, vision, and streaming.</p>
 <div class="course-stats">
-<div class="stat"><div class="stat-num">8</div><div class="stat-label">Lessons</div></div>
-<div class="stat"><div class="stat-num">3</div><div class="stat-label">Modules</div></div>
+<div class="stat"><div class="stat-num">10</div><div class="stat-label">Lessons</div></div>
+<div class="stat"><div class="stat-num">4</div><div class="stat-label">Modules</div></div>
 <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Cost</div></div>
 </div>
 </div>
@@ -223,21 +241,21 @@
 </a></li></ul>
 </div>
 </div>
-
 <section class="course-support">
-  <div class="course-support-container">
-    <div class="support-intro">
-      <span class="support-kicker">Next routes</span>
-      <h2>Turn the OpenAI course into real builds</h2>
-      <p>Use these routes to move from API basics into production behavior, debugging, and project work.</p>
-    </div>
-    <div class="support-grid"><article class="support-card"><h3>Study before production</h3><ul class="support-list"><li><a href="../tutorials/openai/streaming.html">Streaming patterns</a><p>Handle token-by-token output before you wire the API into live interfaces.</p></li><li><a href="../tutorials/openai/function-calling.html">Function calling</a><p>Move from plain chat to tool-driven workflows and action-taking systems.</p></li><li><a href="../tutorials/prompting/basics.html">Prompt basics</a><p>Tighten instructions and outputs before you blame the model or the SDK.</p></li></ul></article><article class="support-card"><h3>When OpenAI flows break</h3><ul class="support-list"><li><a href="../debugging/api-keys.html">API key failures</a><p>Fix auth, quota, and provider configuration mistakes fast.</p></li><li><a href="../debugging/async.html">Async bugs</a><p>Untangle retries, concurrency bugs, and hanging streams.</p></li><li><a href="../debugging/network.html">Network failures</a><p>Trace rate limits, timeouts, and flaky upstream behavior.</p></li></ul></article><article class="support-card"><h3>Build next with this stack</h3><ul class="support-list"><li><a href="../projects/personal-assistant.html">Personal assistant project</a><p>Use OpenAI fundamentals inside a real assistant workflow.</p></li><li><a href="../projects/dev-agent.html">Developer agent project</a><p>Push function calling and tool use into a more serious build.</p></li><li><a href="../courses/agents.html">Continue to agents</a><p>Layer planning, memory, and orchestration on top of API basics.</p></li></ul></article></div>
-    <div class="support-band">
-      <a class="btn btn-primary" href="../projects/personal-assistant.html">Build the Personal Assistant</a>
-      <a class="btn btn-outline" href="../courses/agents.html">Continue to Agents</a>
-    </div>
-  </div>
+<div class="course-support-container">
+<div class="support-intro">
+<span class="support-kicker">Next routes</span>
+<h2>Turn the OpenAI course into real builds</h2>
+<p>Use these routes to move from API basics into production behavior, debugging, and project work.</p>
+</div>
+<div class="support-grid"><article class="support-card"><h3>Study before production</h3><ul class="support-list"><li><a href="../tutorials/openai/streaming.html">Streaming patterns</a><p>Handle token-by-token output before you wire the API into live interfaces.</p></li><li><a href="../tutorials/openai/function-calling.html">Function calling</a><p>Move from plain chat to tool-driven workflows and action-taking systems.</p></li><li><a href="../tutorials/prompting/basics.html">Prompt basics</a><p>Tighten instructions and outputs before you blame the model or the SDK.</p></li></ul></article><article class="support-card"><h3>When OpenAI flows break</h3><ul class="support-list"><li><a href="../debugging/api-keys.html">API key failures</a><p>Fix auth, quota, and provider configuration mistakes fast.</p></li><li><a href="../debugging/async.html">Async bugs</a><p>Untangle retries, concurrency bugs, and hanging streams.</p></li><li><a href="../debugging/network.html">Network failures</a><p>Trace rate limits, timeouts, and flaky upstream behavior.</p></li></ul></article><article class="support-card"><h3>Build next with this stack</h3><ul class="support-list"><li><a href="../projects/personal-assistant.html">Personal assistant project</a><p>Use OpenAI fundamentals inside a real assistant workflow.</p></li><li><a href="../projects/dev-agent.html">Developer agent project</a><p>Push function calling and tool use into a more serious build.</p></li><li><a href="../courses/agents.html">Continue to agents</a><p>Layer planning, memory, and orchestration on top of API basics.</p></li></ul></article></div>
+<div class="support-band">
+<a class="btn btn-primary" href="../projects/personal-assistant.html">Build the Personal Assistant</a>
+<a class="btn btn-outline" href="../courses/agents.html">Continue to Agents</a>
+</div>
+</div>
 </section>
+<section class="premium-expansion"><div class="container premium-expansion-container"><div class="premium-expansion-shell"><span class="premium-expansion-kicker">✨ Phase 5 premium expansion</span><h2>New deep-dive lessons in this track</h2><p class="lead">This pass adds practical, production-minded lessons so the OpenAI API Complete Course path covers more of the patterns teams actually ship. Use these to deepen reliability, system design, and real-world build quality.</p><div class="premium-expansion-grid"><article class="premium-lesson-card"><div class="premium-lesson-meta"><span>New lesson</span><span>Intermediate</span><span>28 min</span></div><h3>Structured Outputs with OpenAI</h3><p>Design schema-safe OpenAI responses with JSON mode, typed validation, retries, and production-grade contracts.</p><ul class="premium-lesson-highlights"><li>Schema-first JSON responses</li><li>Pydantic validation and repair loops</li><li>Fallback strategy when model output drifts</li></ul><div class="premium-lesson-actions"><a class="btn btn-outline" href="../tutorials/openai/structured-outputs.html">Open lesson →</a></div></article><article class="premium-lesson-card"><div class="premium-lesson-meta"><span>New lesson</span><span>Intermediate</span><span>26 min</span></div><h3>OpenAI Rate Limits, Retries, and Resilient Clients</h3><p>Learn exponential backoff, idempotency, timeout strategy, concurrency limits, and safe retries for OpenAI production systems.</p><ul class="premium-lesson-highlights"><li>Exponential backoff with jitter</li><li>Idempotent request design</li><li>Timeout budgets and safe concurrency</li></ul><div class="premium-lesson-actions"><a class="btn btn-outline" href="../tutorials/openai/rate-limits-retries.html">Open lesson →</a></div></article></div></div></div></section>
 <footer>
 <div class="footer-container">
 <div class="footer-grid">

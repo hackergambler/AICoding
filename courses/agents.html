@@ -11,6 +11,25 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Instrument+Sans:ital,wght@0,400..700;1,400..700&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Playfair+Display:ital,opsz,wght@0,5..1200,400..900;1,5..1200,400..900&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/css/style.css" rel="stylesheet"/>
+<style id="phase5-premium-expansion">
+.premium-expansion{padding:0 var(--space-xl) var(--space-4xl)}
+.premium-expansion .container,.premium-expansion-container{max-width:1120px;margin:0 auto}
+.premium-expansion-shell{background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-xl);padding:clamp(1.25rem,2vw,2rem);box-shadow:0 20px 50px rgba(0,0,0,.16)}
+.premium-expansion-kicker{display:inline-flex;align-items:center;gap:.45rem;border-radius:999px;padding:.4rem .8rem;border:1px solid rgba(0,255,170,.24);background:rgba(0,255,170,.08);color:var(--accent-primary);font-size:.78rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+.premium-expansion h2{margin:.9rem 0 .55rem;font-family:var(--font-display);font-size:clamp(1.75rem,3.5vw,2.6rem);line-height:1.08}
+.premium-expansion p.lead{max-width:760px;color:var(--text-secondary);line-height:1.75;margin:0 0 1.4rem}
+.premium-expansion-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.premium-lesson-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:1rem 1rem 1.1rem;display:flex;flex-direction:column;gap:.85rem}
+.premium-lesson-meta{display:flex;flex-wrap:wrap;gap:.55rem;font-size:.8rem;color:var(--text-muted)}
+.premium-lesson-meta span{padding:.3rem .6rem;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)}
+.premium-lesson-card h3{margin:0;font-size:1.18rem;line-height:1.25}
+.premium-lesson-card p{margin:0;color:var(--text-secondary);line-height:1.7}
+.premium-lesson-highlights{list-style:none;padding:0;margin:0;display:grid;gap:.55rem}
+.premium-lesson-highlights li{padding:.68rem .8rem;border-radius:var(--radius-md);background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);line-height:1.55}
+.premium-lesson-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:auto}
+.premium-lesson-actions .btn{min-width:160px;justify-content:center}
+@media (max-width:860px){.premium-expansion-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -63,14 +82,14 @@
 <div class="course-hero-text">
 <div class="course-badge">
 <span class="badge badge-expert">Expert</span>
-<span class="badge badge-outline">56 Lessons</span>
+<span class="badge badge-outline">58 Lessons</span>
 </div>
 <h1>AI Agents Mastery</h1>
 <p class="course-description">Build autonomous AI agents that reason, plan, use tools, and accomplish complex tasks. Master ReAct, function calling, multi-agent systems, and production deployment.</p>
 <div class="course-meta">
 <div class="meta-item">
 <span class="meta-icon">📚</span>
-<span>14 Modules</span>
+<span>15 Modules</span>
 </div>
 <div class="meta-item">
 <span class="meta-icon">⏱️</span>
@@ -822,6 +841,7 @@ result = agent.invoke({
 </div>
 </section>
 </main>
+<section class="premium-expansion"><div class="container premium-expansion-container"><div class="premium-expansion-shell"><span class="premium-expansion-kicker">✨ Phase 5 premium expansion</span><h2>New deep-dive lessons in this track</h2><p class="lead">This pass adds practical, production-minded lessons so the AI Agents Mastery path covers more of the patterns teams actually ship. Use these to deepen reliability, system design, and real-world build quality.</p><div class="premium-expansion-grid"><article class="premium-lesson-card"><div class="premium-lesson-meta"><span>New lesson</span><span>Advanced</span><span>30 min</span></div><h3>Agent Handoffs and Supervisor Patterns</h3><p>Design multi-agent systems with bounded handoffs, specialist roles, supervisor control, and clean state transfer.</p><ul class="premium-lesson-highlights"><li>Supervisor-controlled delegation</li><li>Specialist agents with bounded context</li><li>State transfer without chaos</li></ul><div class="premium-lesson-actions"><a class="btn btn-outline" href="../tutorials/agents/handoffs-and-supervisors.html">Open lesson →</a></div></article><article class="premium-lesson-card"><div class="premium-lesson-meta"><span>New lesson</span><span>Advanced</span><span>28 min</span></div><h3>Scheduled Agents, Cron Workflows, and Human Approval</h3><p>Build reviewable scheduled agents with cron triggers, job state, approval queues, retries, and summary reporting.</p><ul class="premium-lesson-highlights"><li>Cron-triggered agents with checkpoints</li><li>Approval gates before external side effects</li><li>Run summaries and failure review</li></ul><div class="premium-lesson-actions"><a class="btn btn-outline" href="../tutorials/agents/scheduled-agents.html">Open lesson →</a></div></article></div></div></div></section>
 <footer class="footer">
 <div class="container">
 <div class="footer-grid">

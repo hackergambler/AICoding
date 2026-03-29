@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8668540803235423" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Versioning, Releases, and Rollbacks | AI Coding Academy</title>
+    <meta name="description" content="Version prompts like production assets with changelogs, rollback plans, approval gates, and measurable release criteria.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        .lesson-container {max-width: 920px; margin: 0 auto; padding: calc(140px + var(--space-xl)) var(--space-xl) var(--space-4xl);} 
+        .lesson-header {margin-bottom: var(--space-3xl);} 
+        .lesson-meta {display:flex; gap:var(--space-lg); margin-bottom:var(--space-lg); flex-wrap:wrap;} 
+        .lesson-meta-item {display:flex; align-items:center; gap:var(--space-xs); font-size:.9rem; color:var(--text-muted);} 
+        .lesson-title {font-family:var(--font-display); font-size:clamp(2rem, 4vw, 3rem); line-height:1.15; margin-bottom:var(--space-lg);} 
+        .lesson-description {font-size:1.16rem; color:var(--text-secondary); line-height:1.75; max-width:760px;} 
+        .lesson-content {background:var(--bg-card); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-2xl); margin-bottom:var(--space-2xl);} 
+        .lesson-content h2 {font-family:var(--font-heading); font-size:1.5rem; margin:var(--space-2xl) 0 var(--space-lg); color:var(--accent-primary);} 
+        .lesson-content h2:first-child {margin-top:0;} 
+        .lesson-content h3 {font-family:var(--font-heading); font-size:1.1rem; margin:var(--space-xl) 0 var(--space-md);} 
+        .lesson-content p, .lesson-content li {color:var(--text-secondary); line-height:1.8;} 
+        .lesson-content ul, .lesson-content ol {padding-left:var(--space-xl); margin-bottom:var(--space-lg);} 
+        .lesson-content li {margin-bottom:var(--space-sm);} 
+        .code-block {background:#0d1117; border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius-md); padding:var(--space-lg); margin:var(--space-lg) 0; overflow-x:auto;} 
+        .code-block pre {margin:0; font-family:var(--font-mono); font-size:.9rem; line-height:1.65; color:#e6edf3;} 
+        .code-block-label {display:flex; justify-content:space-between; align-items:center; gap:var(--space-md); margin-bottom:var(--space-sm); color:#9fb3c8; font-size:.82rem;} 
+        .comment { color:#8b949e; } .keyword { color:#ff7b72; } .string { color:#a5d6ff; } .function { color:#d2a8ff; } .variable { color:#ffa657; }
+        .tip-box, .warning-box, .info-box {border-radius:var(--radius-md); padding:var(--space-lg); margin:var(--space-lg) 0;} 
+        .tip-box {background:rgba(0,255,170,.08); border:1px solid rgba(0,255,170,.18);} 
+        .warning-box {background:rgba(251,191,36,.08); border:1px solid rgba(251,191,36,.18);} 
+        .info-box {background:rgba(96,165,250,.08); border:1px solid rgba(96,165,250,.18);} 
+        .tip-box-title, .warning-box-title, .info-box-title {font-family:var(--font-heading); font-weight:600; margin-bottom:var(--space-sm);} 
+        .tip-box-title {color:var(--accent-primary);} .warning-box-title {color:var(--accent-warning);} .info-box-title {color:#93c5fd;} 
+        .toc {background:var(--bg-secondary); border:1px solid rgba(255,255,255,0.05); border-radius:var(--radius-lg); padding:var(--space-xl); margin-bottom:var(--space-2xl);} 
+        .toc-title {font-family:var(--font-heading); font-weight:600; margin-bottom:var(--space-md);} 
+        .toc-list {list-style:none; padding:0; margin:0;} 
+        .toc-list li {padding:var(--space-xs) 0;} 
+        .toc-list a {color:var(--text-secondary); text-decoration:none;} 
+        .toc-list a:hover {color:var(--accent-primary);} 
+        .lesson-nav {display:flex; justify-content:space-between; gap:var(--space-lg); margin-top:var(--space-3xl);} 
+        .lesson-nav a {flex:1; background:var(--bg-card); border:1px solid rgba(255,255,255,.05); border-radius:var(--radius-lg); padding:var(--space-lg); text-decoration:none; transition:var(--transition-base);} 
+        .lesson-nav a:hover {border-color:var(--accent-primary); transform:translateY(-2px);} 
+        .lesson-nav-label {font-size:.82rem; color:var(--text-muted); margin-bottom:var(--space-xs);} 
+        .lesson-nav-title {font-family:var(--font-heading); font-weight:600; color:var(--text-primary);} 
+        .lesson-nav .next {text-align:right;} 
+        @media (max-width:768px){ .lesson-nav {flex-direction:column;} .lesson-nav .next{text-align:left;} }
+</style>
+</head>
+<body>
+    <div class="top-bar"><div class="top-bar-container"><div class="top-bar-links">
+        <a href="https://library.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">📚</span><span class="link-text">AI Library</span></a>
+        <a href="https://ailadder.myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🪜</span><span class="link-text">AI Ladder</span></a>
+        <a href="https://myrqai.com" target="_blank" rel="noopener"><span class="link-icon">🏠</span><span class="link-text">MYRQAI</span></a>
+    </div><div class="top-bar-right">Part of MYRQAI Network</div></div></div>
+    <div class="bg-pattern"><div class="bg-grid"></div><div class="bg-radial"></div></div>
+    <nav class="nav"><div class="nav-container">
+        <a class="nav-logo" href="../../index.html"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a>
+        <ul class="nav-menu">
+            <li><a class="nav-link" href="../index.html">Tutorials</a></li>
+            <li><a class="nav-link" href="../../courses/index.html">Courses</a></li>
+            <li><a class="nav-link" href="../../debugging/index.html">Debugging</a></li>
+            <li><a class="nav-link" href="../../projects/index.html">Projects</a></li>
+        </ul>
+        <div class="nav-actions"><div class="nav-search"><span>🔍</span><input placeholder="Search lessons and projects..." type="text"><kbd>⌘K</kbd></div><a class="btn btn-primary" href="../../courses/prompting.html">Track Overview</a></div>
+        <button class="mobile-menu-btn">☰</button>
+    </div></nav>
+    <div class="lesson-container">
+        <header class="lesson-header">
+            <div class="lesson-meta">
+                <div class="lesson-meta-item">📚 <span>Prompting</span></div>
+                <div class="lesson-meta-item">🎯 <span>Intermediate</span></div>
+                <div class="lesson-meta-item">⏱️ <span>22 min</span></div>
+                <div class="lesson-meta-item">🚀 <span>Premium Expansion</span></div>
+            </div>
+            <h1 class="lesson-title">Prompt Versioning, Releases, and Rollbacks</h1>
+            <p class="lesson-description">Version prompts like production assets with changelogs, rollback plans, approval gates, and measurable release criteria.</p>
+        </header>
+        <aside class="toc"><div class="toc-title">In this lesson</div><ul class="toc-list"><li><a href="#objective">Title &amp; Objective</a></li><li><a href="#concept">Concept Explanation</a></li><li><a href="#code">Code Example</a></li><li><a href="#steps">Step-by-step breakdown</a></li><li><a href="#exercise">Hands-on Exercise</a></li><li><a href="#real-world">Real-world use case</a></li><li><a href="#difficulty">Difficulty + Next Steps</a></li></ul></aside>
+        <article class="lesson-content">
+<h2 id="objective">1. Title & Objective</h2>
+<p>The objective is to give prompts a real release process. If a prompt influences customer-facing or operational decisions, you need version IDs, changelogs, and rollback behavior.</p>
+<h2 id="concept">2. Concept Explanation</h2>
+<p>A prompt release is a behavioral release. Changing one instruction can alter tone, extraction format, tool selection, or safety posture. Versioning lets you compare outputs, diagnose regressions, and roll back when a change hurts quality.</p>
+<h2 id="code">3. Code Example</h2>
+<div class="code-block"><div class="code-block-label"><span>YAML · simple prompt registry entry</span><button class="copy-btn">Copy</button></div><pre>id: support_triage_v4
+owner: ai-platform
+model: gpt-4o-mini
+updated_at: 2026-03-29
+change_summary: |
+  Added escalation rule for payment-related complaints.
+  Tightened output to 4 required JSON fields.
+rollout:
+  strategy: canary
+  traffic_percent: 10
+rollback_to: support_triage_v3</pre></div>
+<h2 id="steps">4. Step-by-step breakdown</h2>
+<ol>
+<li>Assign every production prompt a stable ID.</li>
+<li>Store the prompt body, expected output contract, and release notes.</li>
+<li>Ship new versions behind a canary or limited audience when possible.</li>
+<li>Track metrics and golden-set performance before full rollout.</li>
+<li>Keep rollback easy and documented.</li>
+</ol>
+<div class="warning-box"><div class="warning-box-title">⚠️ Release anti-pattern</div><p>Do not change the prompt, model, parser, and post-processing all at once unless you want impossible debugging. Isolate variables.</p></div>
+<h2 id="exercise">5. Hands-on Exercise</h2>
+<p>Create three prompt versions for a document-summarization workflow. Write a changelog for each, define a release criterion, and explain when you would roll back.</p>
+<h2 id="real-world">6. Real-world use case</h2>
+<p>Prompt versioning is crucial in regulated or customer-facing systems where AI behavior changes need traceability, reproducibility, and accountability.</p>
+<h2 id="difficulty">7. Difficulty + Next Steps</h2>
+<p><strong>Difficulty:</strong> Intermediate. Pair this with <a href="prompt-testing.html">prompt testing</a> and <a href="../../tutorials/agents/trajectory-evaluation.html">trajectory evaluation</a> for a stronger release discipline.</p>
+</article>
+        <nav class="lesson-nav">
+            <a href="prompt-testing.html" class="prev"><div class="lesson-nav-label">← Previous</div><div class="lesson-nav-title">Prompt Testing</div></a>
+            <a href="../../projects/workflow-automation.html" class="next"><div class="lesson-nav-label">Next →</div><div class="lesson-nav-title">Workflow Automation Project</div></a>
+        </nav>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand"><a href="../../index.html" class="nav-logo"><div class="logo-mark">&lt;/&gt;</div><div class="logo-text">AI <span>Coding</span></div></a><p>The most comprehensive AI coding learning platform.</p></div>
+                <div class="footer-column"><h4>Learn</h4><ul><li><a href="../index.html">All Tutorials</a></li><li><a href="../../courses/index.html">Courses</a></li><li><a href="../../projects/index.html">Projects</a></li><li><a href="../../debugging/index.html">Debugging</a></li></ul></div>
+                <div class="footer-column"><h4>MYRQAI Network</h4><ul><li><a href="https://library.myrqai.com" target="_blank">AI Library</a></li><li><a href="https://ailadder.myrqai.com" target="_blank">AI Ladder</a></li><li><a href="https://myrqai.com" target="_blank">MYRQAI Home</a></li></ul></div>
+                <div class="footer-column"><h4>Legal</h4><ul><li><a href="../../privacy.html">Privacy Policy</a></li><li><a href="../../terms.html">Terms of Service</a></li><li><a href="../../contact.html">Contact Us</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 AI Coding Academy by <a href="https://myrqai.com" target="_blank" style="color: var(--accent-primary);">MYRQAI</a>. All rights reserved.</p><div class="footer-links"><a href="../../privacy.html">Privacy</a><span>•</span><a href="../../terms.html">Terms</a><span>•</span><a href="../../contact.html">Contact</a></div></div>
+        </div>
+    </footer>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/donation-widget.js" defer></script>
+</body>
+</html>
